@@ -17,7 +17,8 @@ class SubscriberResponse(
     var deleted: Boolean,
     var createdAt: String,
     var updatedAt: String,
-    val channels: List<Channel>? = null,
+    var channels: List<Channel>? = null,
+    var locale: Any,
     var __v: BigInteger,
     var isOnline: Boolean,
     var lastOnlineAt: String

@@ -1,10 +1,12 @@
 package co.novu
 
+import co.novu.api.ChangesApi
 import co.novu.api.EventsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
+import co.novu.extensions.getSubscriber
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -27,6 +29,9 @@ class Novu(
 
     internal val topicsApi =
         RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(TopicsApi::class.java)
+
+    internal val changesApi =
+        RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(ChangesApi::class.java)
     fun trigger(body: TriggerEventRequest) = runBlocking {
         eventsApi.triggerEvent(body)
             .body()
@@ -54,7 +59,8 @@ class Novu(
 fun main(args: Array<String>) {
     println("Hello World!")
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
+    val novu = Novu(apiKey = "aeaf31aa1834b3a317dcf6970d028dae")
+    val response = novu.getSubscriber("")
+    logger.info(response.toString())
     println("Program arguments: ${args.joinToString()}")
 }
