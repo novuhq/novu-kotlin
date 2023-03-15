@@ -1,15 +1,16 @@
 
-import co.novu.api.NotificationsApi
+import co.novu.Novu
+import co.novu.NovuConfig
 import co.novu.dto.response.NotificationGraphStatsResponse
 import co.novu.dto.response.NotificationStatsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
-import co.novu.helpers.RetrofitHelper
+import co.novu.extensions.getNotificationGraphStats
+import co.novu.extensions.getNotificationsStats
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.math.BigInteger
@@ -18,64 +19,54 @@ import java.util.UUID
 @OptIn(ExperimentalCoroutinesApi::class)
 class NotificationApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNotificationsApi = RetrofitHelper(apiKey = "1234", baseUrl = mockWebServer.url("/")).getInstance().create(NotificationsApi::class.java)
-
-    @AfterEach
-    fun shutdown() {
-        mockWebServer.shutdown()
-    }
+    private val mockNovu = Novu(
+        apiKey = "1245",
+        NovuConfig(backendUrl = mockWebServer.url("/")),
+    )
 
     @Test
     @DisplayName("Get Notification Stats")
     fun testGetNotificationStats() = runTest {
+        val responseBody = NotificationStatsResponse(
+            BigInteger.ONE,
+            BigInteger.ONE,
+            BigInteger.ONE,
+        )
         mockWebServer.enqueue(
-            MockResponse().setBody(
-                Gson().toJson(
-                    NotificationStatsResponse(
-                        BigInteger.ONE,
-                        BigInteger.ONE,
-                        BigInteger.ONE,
-                    ),
-                ),
-            ).setResponseCode(200),
+            MockResponse()
+                .setBody(Gson().toJson(responseBody))
+                .setResponseCode(200),
         )
 
-        val result = mockNotificationsApi.getNotificationsStats()
+        val result = mockNovu.getNotificationsStats()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/notifications/stats")
         assert(request.method == "GET")
-        assert(result.code() == 200)
-        assert(result.errorBody() == null)
-        assert(result.body() != null)
+        assert(responseBody == result)
     }
 
     @Test
     fun testGetNotificationGraphStats() = runTest {
+        val responseBody = PaginatedResponseWrapper<NotificationGraphStatsResponse>(
+            page = BigInteger.ONE,
+            data = listOf(
+                NotificationGraphStatsResponse(
+                    _id = UUID.randomUUID().toString(),
+                    count = BigInteger.TEN,
+                    templates = listOf("email"),
+                    channels = emptyList(),
+                ),
+            ),
+            totalCount = BigInteger.TEN,
+        )
         val response = MockResponse()
             .setResponseCode(200)
-            .setBody(
-                Gson().toJson(
-                    PaginatedResponseWrapper<NotificationGraphStatsResponse>(
-                        page = BigInteger.ONE,
-                        data = listOf(
-                            NotificationGraphStatsResponse(
-                                _id = UUID.randomUUID().toString(),
-                                count = BigInteger.TEN,
-                                templates = listOf("email"),
-                                channels = emptyList(),
-                            ),
-                        ),
-                        totalCount = BigInteger.TEN,
-                    ),
-                ),
-            )
+            .setBody(Gson().toJson(responseBody))
         mockWebServer.enqueue(response)
-        val result = mockNotificationsApi.getNotificationGraphStats()
+        val result = mockNovu.getNotificationGraphStats()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/notifications/graph/stats")
         assert(request.method == "GET")
-        assert(result.code() == 200)
-        assert(result.errorBody() == null)
-        assert(result.body() != null)
+        assert(responseBody == result)
     }
 }
