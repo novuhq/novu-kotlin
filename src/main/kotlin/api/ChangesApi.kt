@@ -10,7 +10,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.math.BigInteger
 
-interface ChangesApi {
+public interface ChangesApi {
 
     @GET("changes")
     suspend fun getChanges(@Query("page") page: BigInteger, @Query("limit") limit: BigInteger, @Query("promoted") promoted: String): Response<PaginatedResponseWrapper<ChangesResponse>>

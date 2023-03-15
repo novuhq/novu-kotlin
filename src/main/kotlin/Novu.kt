@@ -1,37 +1,42 @@
 package co.novu
 
-import co.novu.api.ChangesApi
-import co.novu.api.EventsApi
-import co.novu.api.SubscribersApi
-import co.novu.api.TopicsApi
+import co.novu.api.*
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
-import co.novu.extensions.getSubscriber
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
-import retrofit2.create
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 private val logger = KotlinLogging.logger {}
 
-data class NovuConfig(var backendUrl: String = "https://api.novu.co/v1/")
+data class NovuConfig(var backendUrl: HttpUrl = "https://api.novu.co/v1/".toHttpUrlOrNull()!!)
 
 class Novu(
     apiKey: String,
     config: NovuConfig = NovuConfig(),
 ) {
+    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance()
 
-    private val eventsApi =
-        RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(EventsApi::class.java)
+    private val eventsApi = retrofitInstance.create(EventsApi::class.java)
 
-    internal val subscribersApi =
-        RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(SubscribersApi::class.java)
+    internal val subscribersApi = retrofitInstance.create(SubscribersApi::class.java)
 
-    internal val topicsApi =
-        RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(TopicsApi::class.java)
+    internal val topicsApi = retrofitInstance.create(TopicsApi::class.java)
 
-    internal val changesApi =
-        RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance().create(ChangesApi::class.java)
+    internal val changesApi = retrofitInstance.create(ChangesApi::class.java)
+
+    internal val integrationsApi = retrofitInstance.create(IntegrationsApi::class.java)
+
+    internal val executionDetailsApi = retrofitInstance.create(ExcecutionDetailsApi::class.java)
+
+    internal val feedsApi = retrofitInstance.create(FeedsApi::class.java)
+
+    internal val messagesApi = retrofitInstance.create(MessagesApi::class.java)
+
+    internal val notificationsApi = retrofitInstance.create(NotificationsApi::class.java)
+
     fun trigger(body: TriggerEventRequest) = runBlocking {
         eventsApi.triggerEvent(body)
             .body()
@@ -58,9 +63,5 @@ class Novu(
 }
 fun main(args: Array<String>) {
     println("Hello World!")
-
-    val novu = Novu(apiKey = "aeaf31aa1834b3a317dcf6970d028dae")
-    val response = novu.getSubscriber("")
-    logger.info(response.toString())
     println("Program arguments: ${args.joinToString()}")
 }

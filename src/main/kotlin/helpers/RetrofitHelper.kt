@@ -1,6 +1,10 @@
 package co.novu.helpers
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.stream.JsonReader
 import mu.KotlinLogging
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,14 +13,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 private val logger = KotlinLogging.logger {}
 
 class RetrofitHelper(
-    private val baseUrl: String,
+    private val baseUrl: HttpUrl,
     private val apiKey: String,
-    private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
+    private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
 ) {
 
     fun getInstance(): Retrofit {
-
-
         val httpClient = OkHttpClient.Builder()
 
         httpClient
@@ -28,13 +30,9 @@ class RetrofitHelper(
             }
             .addInterceptor(HttpLoggingInterceptor().setLevel(loggerLevel))
             .build()
-
-
+        val gson = GsonBuilder().setLenient().create()
         return Retrofit.Builder().client(httpClient.build()).baseUrl(baseUrl)
-
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
-
-
 }

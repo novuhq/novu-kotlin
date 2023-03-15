@@ -18,14 +18,14 @@ interface IntegrationsApi {
     suspend fun createIntegration(@Body request: IntegrationRequest): Response<IntegrationReponse>
 
     @GET("integrations/active")
-    suspend fun getActiveIntegrations(): List<IntegrationReponse>
+    suspend fun getActiveIntegrations(): Response<List<IntegrationReponse>>
 
     @GET("integrations/webhook/provider/{providerId}/status")
-    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Any
+    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Response<Any>
 
     @PUT("integrations/{integrationId}")
-    suspend fun updateIntegrations(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): IntegrationReponse
+    suspend fun updateIntegrations(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): Response<IntegrationReponse>
 
     @DELETE("integrations/{integrationId}")
-    suspend fun deleteIntegrations(@Path("integrationId") integrationId: String): IntegrationReponse
+    suspend fun deleteIntegrations(@Path("integrationId") integrationId: String): Response<IntegrationReponse>
 }

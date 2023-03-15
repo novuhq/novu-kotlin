@@ -6,8 +6,7 @@ abstract class BaseEventRequest {
     private lateinit var name: String
     private var payload: Map<String, Any> = mapOf()
 
-
-    //Optional fields
+    // Optional fields
     private var overrides: Map<String, Any>? = null
     private var transactionId: String? = null
 
@@ -15,9 +14,8 @@ abstract class BaseEventRequest {
         _name: String,
         _payload: Map<String, Any>,
         _overrides: Map<String, Any>? = null,
-        _transactionId: String? = null
+        _transactionId: String? = null,
     ): BaseEventRequest {
-
         return this.apply {
             this.name = _name
             this.payload = _payload
@@ -25,5 +23,4 @@ abstract class BaseEventRequest {
             this.transactionId = _transactionId
         }
     }
-
 }

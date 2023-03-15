@@ -20,12 +20,12 @@ interface NotificationsApi {
         @Query("transactionId") transactionId: String,
     ): Response<PaginatedResponseWrapper<Any>>
 
-    @GET("notification/stats")
+    @GET("notifications/stats")
     suspend fun getNotificationsStats(): Response<NotificationStatsResponse>
 
-    @GET("notification/graph/stats")
+    @GET("notifications/graph/stats")
     suspend fun getNotificationGraphStats(): Response<PaginatedResponseWrapper<NotificationGraphStatsResponse>>
 
-    @GET("notification/{notificationId}")
-    suspend fun getNotification(@Path("notificationId") path: String): Response<Any>
+    @GET("notifications/{notificationId}")
+    suspend fun getNotification(@Path("notificationId") notificationId: String): Response<Any>
 }
