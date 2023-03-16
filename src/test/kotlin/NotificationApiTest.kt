@@ -5,6 +5,7 @@ import co.novu.dto.response.NotificationGraphStatsResponse
 import co.novu.dto.response.NotificationStatsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.extensions.getNotificationGraphStats
+import co.novu.extensions.getNotifications
 import co.novu.extensions.getNotificationsStats
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,7 +48,7 @@ class NotificationApiTest {
 
     @Test
     fun testGetNotificationGraphStats() = runTest {
-        val responseBody = PaginatedResponseWrapper<NotificationGraphStatsResponse>(
+        val responseBody = PaginatedResponseWrapper(
             page = BigInteger.ONE,
             data = listOf(
                 NotificationGraphStatsResponse(
@@ -68,5 +69,30 @@ class NotificationApiTest {
         assert(request.path == "/notifications/graph/stats")
         assert(request.method == "GET")
         assert(responseBody == result)
+    }
+
+    @Test
+    fun testGetNotifications() = runTest {
+        val responseBody = PaginatedResponseWrapper<Any>(
+            data = emptyList(),
+            page = BigInteger.ONE,
+            pageSize = BigInteger.TEN,
+            totalCount = BigInteger.TEN,
+        )
+        val response = MockResponse()
+            .setResponseCode(200)
+            .setBody(Gson().toJson(responseBody))
+
+        mockWebServer.enqueue(response)
+        val result = mockNovu.getNotifications(emptyList(), emptyList(), emptyList(), "search")
+        val request = mockWebServer.takeRequest()
+        assert(request.path == "/notifications")
+        assert(request.method == "GET")
+        assert(responseBody == result)
+    }
+
+    @Test
+    fun testGetNotification() = runTest {
+        TODO()
     }
 }

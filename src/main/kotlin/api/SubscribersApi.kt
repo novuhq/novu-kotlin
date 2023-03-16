@@ -2,11 +2,12 @@ package co.novu.api
 
 import co.novu.dto.request.MarkAsRequest
 import co.novu.dto.request.subscribers.SubscriberRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberRequest
 import co.novu.dto.request.subscribers.UpdateSubscriberOnlineStatusRequest
+import co.novu.dto.request.subscribers.UpdateSubscriberRequest
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.subscribers.SubscriberDeleteResponse
+import co.novu.dto.response.subscribers.SubscriberNotificationResponse
 import co.novu.dto.response.subscribers.SubscriberPreferenceResponse
 import co.novu.dto.response.subscribers.SubscriberResponse
 import retrofit2.Response
@@ -38,7 +39,7 @@ interface SubscribersApi {
     suspend fun deleteSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<SubscriberDeleteResponse>>
 
     @PUT("subscribers/{subscriberId}/credentials")
-    suspend fun updateSubscriberCredentials(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<Any>>
+    suspend fun updateSubscriberCredentials(@Path("subscriberId") subscriberId: String, @Body request: UpdateSubscriberOnlineStatusRequest): Response<ResponseWrapper<SubscriberResponse>>
 
     @PATCH("subscribers/{subscriberId}/online-status")
     suspend fun updateSubscriberOnlineStatus(@Path("subscriberId")subscriberId: String, @Body request: UpdateSubscriberOnlineStatusRequest): Response<ResponseWrapper<SubscriberResponse>>
@@ -53,21 +54,21 @@ interface SubscribersApi {
     ): Response<Any>
 
     @GET("subscribers/{subscriberId}/notifications/feed")
-    suspend fun getNotificationsForSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<Any>>
+    suspend fun getNotificationFeedForSubscriber(@Path("subscriberId") subscriberId: String): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
 
     @GET("subscribers/{subscriberId}/notifications/unseen")
-    suspend fun getUnseenNotificationsForSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<Any>>
+    suspend fun getUnseenNotificationsCountForSubscriber(@Path("subscriberId") subscriberId: String): Response<BigInteger>
 
     @POST("subscribers/{subscriberId}/messages/markAs")
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
         @Body request: MarkAsRequest,
-    ): Response<ResponseWrapper<Any>>
+    ): Response<SubscriberNotificationResponse>
 
     @POST("subscribers/{subscriberId}/messages/{messageId}/action/{type}")
     suspend fun markActionAsSeen(
         @Path("subscriberId") subscriberId: String,
         @Path("messageId") messageId: String,
         @Path("type") type: String,
-    ): Response<ResponseWrapper<Any>>
+    ): Response<SubscriberNotificationResponse>
 }

@@ -16,8 +16,8 @@ interface NotificationsApi {
         @Query("templates") templates: List<String>,
         @Query("emails") emails: List<String>,
         @Query("search") search: String,
-        @Query("page") page: String,
-        @Query("transactionId") transactionId: String,
+        @Query("page") page: String?,
+        @Query("transactionId") transactionId: String?,
     ): Response<PaginatedResponseWrapper<Any>>
 
     @GET("notifications/stats")

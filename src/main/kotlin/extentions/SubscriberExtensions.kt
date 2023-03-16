@@ -63,13 +63,13 @@ fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String) =
 }
 
 fun Novu.getNotificationsForSubscriber(subscriberId: String) = runBlocking {
-    subscribersApi.getNotificationsForSubscriber(subscriberId)
+    subscribersApi.getNotificationFeedForSubscriber(subscriberId)
         .body()
         .apply { logger.info { this } }
 }
 
 fun Novu.getUnseenNotificationsForSubscriber(subscriberId: String) = runBlocking {
-    subscribersApi.getUnseenNotificationsForSubscriber(subscriberId)
+    subscribersApi.getUnseenNotificationsCountForSubscriber(subscriberId)
         .body()
         .apply { logger.info { this } }
 }
