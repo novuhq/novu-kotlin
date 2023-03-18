@@ -16,7 +16,7 @@ interface EventsApi {
     suspend fun triggerEvent(@Body body: TriggerEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
     @POST("events/trigger/bulk")
-    suspend fun bulkTriggerEvent(@Body body: List<TriggerEventRequest>): Response<ResponseWrapper<List<TriggerResponse>>>
+    suspend fun bulkTriggerEvent(@Body body: List<TriggerEventRequest>): Response<ResponseWrapper<TriggerResponse>>
 
     @POST("events/trigger/broadcast")
     suspend fun broadcastEvent(@Body body: BroadcastEventRequest): Response<ResponseWrapper<TriggerResponse>>
