@@ -21,6 +21,6 @@ public interface ChangesApi {
     @POST("changes/bulk/apply")
     suspend fun applyChanges(): Response<ResponseWrapper<List<ChangesResponse>>>
 
-    @POST("changes/{changeId}/apply")
-    suspend fun applychange(@Path("changedId") changedId: String): Response<ResponseWrapper<ChangesResponse>>
+    @POST("changes/{changedId}/apply")
+    suspend fun applyChange(@Path("changedId") changedId: String): Response<ResponseWrapper<ChangesResponse>>
 }

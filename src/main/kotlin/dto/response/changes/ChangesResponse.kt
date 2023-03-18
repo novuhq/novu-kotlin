@@ -1,14 +1,14 @@
 package co.novu.dto.response.changes
 
 data class ChangesResponse(
-    var _id: String?,
-    var _creatorId: String?,
-    var _environmentId: String?,
-    var _organizationId: String?,
-    var _entityId: String?,
-    var enabled: Boolean?,
-    var type: String,
-    var change: Any,
-    var createdAt: String,
-    var _parentId: String
+    var _id: String? = null,
+    var _creatorId: String? = null,
+    var _environmentId: String? = null,
+    var _organizationId: String? = null,
+    var _entityId: String? = null,
+    var enabled: Boolean? = null,
+    var type: String? = null,
+    var change: Any? = null,
+    var createdAt: String? = null,
+    var _parentId: String? = null
 )

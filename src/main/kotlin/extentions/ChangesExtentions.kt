@@ -24,7 +24,7 @@ fun Novu.applyChanges() = runBlocking {
 }
 
 fun Novu.applychange(changeId: String) = runBlocking {
-    changesApi.applychange(changedId = changeId)
+    changesApi.applyChange(changedId = changeId)
         .body()
         .apply { logger.info { this } }
 }

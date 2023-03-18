@@ -38,8 +38,8 @@ fun Novu.deleteSubscriber(subscriberId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateSubscriberCredentials(subscriberId: String) = runBlocking {
-    subscribersApi.updateSubscriberCredentials(subscriberId)
+fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscriberOnlineStatusRequest) = runBlocking {
+    subscribersApi.updateSubscriberCredentials(subscriberId, request)
         .body()
         .apply { logger.info { this } }
 }
