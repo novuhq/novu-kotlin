@@ -1,9 +1,12 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.MarkAsRequest
 import co.novu.dto.request.subscribers.SubscriberRequest
+import co.novu.dto.request.subscribers.UpdateSubscriberCredentialsRequest
 import co.novu.dto.request.subscribers.UpdateSubscriberOnlineStatusRequest
 import co.novu.dto.request.subscribers.UpdateSubscriberRequest
+import co.novu.dto.response.UpdateSubscriberPreferencesRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import java.math.BigInteger
@@ -38,7 +41,7 @@ fun Novu.deleteSubscriber(subscriberId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscriberOnlineStatusRequest) = runBlocking {
+fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscriberCredentialsRequest) = runBlocking {
     subscribersApi.updateSubscriberCredentials(subscriberId, request)
         .body()
         .apply { logger.info { this } }
@@ -56,8 +59,8 @@ fun Novu.getSubscriberPreferences(subscriberId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String) = runBlocking {
-    subscribersApi.updateSubscriberPreferences(subscriberId, templateId)
+fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, body: UpdateSubscriberPreferencesRequest ) = runBlocking {
+    subscribersApi.updateSubscriberPreferences(subscriberId, templateId,body)
         .body()
         .apply { logger.info { this } }
 }
@@ -68,13 +71,13 @@ fun Novu.getNotificationsForSubscriber(subscriberId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.getUnseenNotificationsForSubscriber(subscriberId: String) = runBlocking {
+fun Novu.getUnseenNotificationsCountForSubscriber(subscriberId: String) = runBlocking {
     subscribersApi.getUnseenNotificationsCountForSubscriber(subscriberId)
         .body()
         .apply { logger.info { this } }
 }
-fun Novu.markActionAsSeen(subscriberId: String, messageId: String, type: String) = runBlocking {
-    subscribersApi.markActionAsSeen(subscriberId, messageId, type)
+fun Novu.markActionAsSeen(subscriberId: String,request: MarkAsRequest) = runBlocking {
+    subscribersApi.markSubscriberMessageFeedAs(subscriberId,request)
         .body()
         .apply { logger.info { this } }
 }

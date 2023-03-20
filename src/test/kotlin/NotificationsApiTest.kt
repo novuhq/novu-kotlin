@@ -16,10 +16,8 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import retrofit2.http.Url
 import java.lang.StringBuilder
 import java.math.BigInteger
-import java.net.URL
 import java.util.UUID
 
 @OptIn(ExperimentalCoroutinesApi::class)
