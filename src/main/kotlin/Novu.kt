@@ -37,6 +37,11 @@ class Novu(
 
     internal val notificationsApi = retrofitInstance.create(NotificationsApi::class.java)
 
+    internal val environmentsApi = retrofitInstance.create(EnvironmentsApi::class.java)
+
+    internal val layoutsApi = retrofitInstance.create(LayoutsApi::class.java)
+
+    internal val notificationTemplatesApi = retrofitInstance.create(NotificationTemplatesApi::class.java)
     fun trigger(body: TriggerEventRequest) = runBlocking {
         eventsApi.triggerEvent(body)
             .body()
