@@ -66,9 +66,3 @@ class Novu(
             .apply { logger.info { this } }
     }
 }
-fun main(args: Array<String>) {
-    val novu = Novu(apiKey = "aeaf31aa1834b3a317dcf6970d028dae", NovuConfig())
-
-    println("Hello World!")
-    println("Program arguments: ${args.joinToString()}")
-}

@@ -1,7 +1,7 @@
 package co.novu.dto.response
 
 import co.novu.dto.ApiKeys
-import jdk.internal.org.jline.reader.Widget
+import co.novu.dto.Widget
 
 data class GetEnvironmentResponse(
     var _id: String,

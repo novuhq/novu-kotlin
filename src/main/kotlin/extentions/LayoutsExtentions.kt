@@ -4,11 +4,12 @@ import co.novu.Novu
 import co.novu.dto.request.CreateLayoutRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getLayouts() = runBlocking {
-    layoutsApi.getLayouts()
+fun Novu.getLayouts(page:BigInteger, pageSize: BigInteger,orderBy: BigInteger,sortBy:String) = runBlocking {
+    layoutsApi.getLayouts(page,pageSize,sortBy,orderBy)
         .body()
         .apply { logger.info { this } }
 }
