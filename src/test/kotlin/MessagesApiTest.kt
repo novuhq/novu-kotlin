@@ -2,7 +2,7 @@ import co.novu.Novu
 import co.novu.NovuConfig
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.jupiter.api.Test
+
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MessagesApiTest {
@@ -12,6 +12,4 @@ class MessagesApiTest {
         NovuConfig(backendUrl = mockWebServer.url("/")),
     )
 
-    @Test
-    fun test
 }

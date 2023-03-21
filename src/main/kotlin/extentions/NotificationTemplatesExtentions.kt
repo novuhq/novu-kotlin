@@ -1,24 +1,26 @@
 package co.novu.extentions
 
 import co.novu.Novu
+import co.novu.dto.response.NotificationTemplates
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotificationTemplates() = runBlocking {
-    notificationTemplatesApi.getNotificationTemplates()
+fun Novu.getNotificationTemplates(page:BigInteger, limit:BigInteger) = runBlocking {
+    notificationTemplatesApi.getNotificationTemplates(page, limit)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.createNotificationTemplates(request: co.novu.dto.request.NotificationTemplates) = runBlocking {
+fun Novu.createNotificationTemplates(request: NotificationTemplates) = runBlocking {
     notificationTemplatesApi.createNotificationTemplates(request)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.updateNotificationTemplates(templateId: String, request: co.novu.dto.request.NotificationTemplates) = runBlocking {
+fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTemplates) = runBlocking {
     notificationTemplatesApi.updateNotificationTemplates(templateId, request)
         .body()
         .apply { logger.info { this } }
