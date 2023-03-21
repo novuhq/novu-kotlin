@@ -1,6 +1,6 @@
 package co.novu.dto.request
 
-data class MarkAsRequest(
+data class MarkSubscriberFeedAsRequest(
         val messageId: Any, // Can be either a String or an Array of Strings
         val mark: Mark
 )

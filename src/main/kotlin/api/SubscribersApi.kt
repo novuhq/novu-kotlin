@@ -1,6 +1,6 @@
 package co.novu.api
 
-import co.novu.dto.request.MarkAsRequest
+import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.subscribers.SubscriberRequest
 import co.novu.dto.request.subscribers.UpdateSubscriberCredentialsRequest
 import co.novu.dto.request.subscribers.UpdateSubscriberOnlineStatusRequest
@@ -66,6 +66,13 @@ interface SubscribersApi {
     @POST("subscribers/{subscriberId}/messages/markAs")
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
-        @Body request: MarkAsRequest,
+        @Body request: MarkSubscriberFeedAsRequest,
+    ): Response<SubscriberNotificationResponse>
+
+    @POST("subscribers/{subscriberId}/messages/{messageId}/actions/{type}")
+    suspend fun markMessageActionAsSeen(
+        @Path("subscriberId") subscriberId: String,
+        @Path("messageId") messageId: String,
+        @Path("type") type: String,
     ): Response<SubscriberNotificationResponse>
 }
