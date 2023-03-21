@@ -18,5 +18,5 @@ interface FeedsApi {
     suspend fun getFeeds(): Response<PaginatedResponseWrapper<FeedResponse>>
 
     @DELETE("feeds/{feedId}")
-    suspend fun deleteFeed(@Path("feedId") feedId: String): Response<PaginatedResponseWrapper<FeedResponse>>
+    suspend fun deleteFeed(@Path("feedId") feedId: String): Response<FeedResponse>
 }

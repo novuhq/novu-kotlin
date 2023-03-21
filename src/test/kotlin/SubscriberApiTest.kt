@@ -476,8 +476,9 @@ class SubscriberApiTest {
         )
         val result = mockNovu.markSubscriberFeedAs("123", requestBody)
         val request = mockWebServer.takeRequest()
+        val subscriberId = "123"
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(request.path == "/subscribers/123/notifications/markAs")
+        assert(request.path == "/subscribers/$subscriberId/messages/markAs")
         assert(request.method == "POST")
         assert(result == responseBody)
     }
@@ -522,7 +523,7 @@ class SubscriberApiTest {
         val type = "type"
         val result = mockNovu.markMessageActionAsSeen(subscriberId, messageId, type)
         val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$subscriberId/notifications/messages/$messageId/actions/$type/seen")
+        assert(request.path == "/subscribers/$subscriberId/messages/$messageId/actions/$type")
         assert(request.method == "POST")
         assert(result == responseBody)
     }
