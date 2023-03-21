@@ -1,12 +1,13 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.CreateFeedRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
-fun Novu.createFeed(name: String) = runBlocking {
-    feedsApi.createFeed(name)
+fun Novu.createFeed(body: CreateFeedRequest) = runBlocking {
+    feedsApi.createFeed(body)
         .body()
         .apply { logger.info { this } }
 }

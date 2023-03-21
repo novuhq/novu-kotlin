@@ -21,11 +21,11 @@ interface IntegrationsApi {
     suspend fun getActiveIntegrations(): Response<List<IntegrationReponse>>
 
     @GET("integrations/webhook/provider/{providerId}/status")
-    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Response<Any>
+    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Response<IntegrationReponse>
 
     @PUT("integrations/{integrationId}")
-    suspend fun updateIntegrations(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): Response<IntegrationReponse>
+    suspend fun updateIntegration(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): Response<IntegrationReponse>
 
     @DELETE("integrations/{integrationId}")
-    suspend fun deleteIntegrations(@Path("integrationId") integrationId: String): Response<IntegrationReponse>
+    suspend fun deleteIntegration(@Path("integrationId") integrationId: String): Response<IntegrationReponse>
 }

@@ -1,5 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
+import co.novu.dto.request.CreateFeedRequest
 import co.novu.dto.response.FeedResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.extensions.createFeed
@@ -32,8 +33,12 @@ class FeedsApiTest {
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.createFeed("test")
+        val requestBody = CreateFeedRequest(
+            name = "test"
+        )
+        val result = mockNovu.createFeed(requestBody)
         val request = mockWebServer.takeRequest()
+        assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(request.path == "/feeds")
         assert(request.method == "POST")
         assert(result == responseBody)

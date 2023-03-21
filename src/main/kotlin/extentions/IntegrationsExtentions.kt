@@ -30,14 +30,14 @@ fun Novu.getProviderWebhook(providerId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateIntegrations(integrationId: String, request: IntegrationRequest) = runBlocking {
-    integrationsApi.updateIntegrations(integrationId, request)
+fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest) = runBlocking {
+    integrationsApi.updateIntegration(integrationId, request)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.deleteIntegrations(integrationId: String) = runBlocking {
-    integrationsApi.deleteIntegrations(integrationId)
+fun Novu.deleteIntegration(integrationId: String) = runBlocking {
+    integrationsApi.deleteIntegration(integrationId)
         .body()
         .apply { logger.info { this } }
 }
