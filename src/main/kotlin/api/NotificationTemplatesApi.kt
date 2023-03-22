@@ -15,7 +15,7 @@ import java.math.BigInteger
 interface NotificationTemplatesApi {
 
     @GET("notification-templates")
-    suspend fun getNotificationTemplates(@Query("page") page: BigInteger, @Query("limit") limit: BigInteger): Response<NotificationTemplates>
+    suspend fun getNotificationTemplates(@Query("page") page: BigInteger?= BigInteger.valueOf(1), @Query("limit") limit: BigInteger?=BigInteger.valueOf(10)): Response<NotificationTemplates>
 
     @POST("notification-templates")
     suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<NotificationTemplates>

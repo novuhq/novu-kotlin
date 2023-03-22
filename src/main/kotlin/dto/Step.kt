@@ -6,7 +6,7 @@ data class Step(
     val active: Boolean? = null,
     val shouldStopOnFail: Boolean? = null,
     val template: Any? = null,
-    val filters: Filters? = null,
+    val filters: List<Filters>? = null,
     val _parentId: String? = null,
     val metadata: Metadata? = null,
     val replyCallback: Any? = null

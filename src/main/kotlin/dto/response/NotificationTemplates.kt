@@ -1,5 +1,6 @@
 package co.novu.dto.response
 
+import co.novu.dto.Metadata
 import co.novu.dto.NotificationGroup
 import co.novu.dto.PreferenceSettings
 import co.novu.dto.Step
@@ -20,7 +21,6 @@ data class NotificationTemplates(
     val _environmentId: String? = null,
     val triggers: List<Trigger>? = null,
     val _notificationGroupId: String? = null,
-    val _parentId: String? = null,
     val deleted: Boolean? = null,
     val deletedAt: String? = null,
     val deletedBy: String? = null,

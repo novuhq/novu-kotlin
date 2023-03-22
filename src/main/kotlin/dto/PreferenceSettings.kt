@@ -1,9 +1,12 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class PreferenceSettings(
-    val email: String? = null,
-    val sms: String? = null,
-    val in_app: String? = null,
-    val chat: String? = null,
-    val push: String? = null
+    val email: Boolean? = null,
+    val sms: Boolean? = null,
+    @SerializedName("in_app")
+    val inApp: Boolean? = null,
+    val chat: Boolean? = null,
+    val push: Boolean? = null
 )
