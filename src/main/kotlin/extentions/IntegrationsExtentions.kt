@@ -41,4 +41,3 @@ fun Novu.deleteIntegration(integrationId: String) = runBlocking {
         .body()
         .apply { logger.info { this } }
 }
-

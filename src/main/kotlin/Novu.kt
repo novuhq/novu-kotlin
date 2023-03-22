@@ -1,6 +1,18 @@
 package co.novu
 
-import co.novu.api.*
+import co.novu.api.ChangesApi
+import co.novu.api.EnvironmentsApi
+import co.novu.api.EventsApi
+import co.novu.api.ExcecutionDetailsApi
+import co.novu.api.FeedsApi
+import co.novu.api.IntegrationsApi
+import co.novu.api.LayoutsApi
+import co.novu.api.MessagesApi
+import co.novu.api.NotificationGroupsApi
+import co.novu.api.NotificationTemplatesApi
+import co.novu.api.NotificationsApi
+import co.novu.api.SubscribersApi
+import co.novu.api.TopicsApi
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
 import co.novu.helpers.RetrofitHelper
@@ -15,7 +27,7 @@ data class NovuConfig(var backendUrl: HttpUrl = "https://api.novu.co/v1/".toHttp
 
 class Novu(
     apiKey: String,
-    config: NovuConfig = NovuConfig(),
+    config: NovuConfig = NovuConfig()
 ) {
     private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance()
 
@@ -42,6 +54,8 @@ class Novu(
     internal val layoutsApi = retrofitInstance.create(LayoutsApi::class.java)
 
     internal val notificationTemplatesApi = retrofitInstance.create(NotificationTemplatesApi::class.java)
+
+    internal val notificationGroupsApi = retrofitInstance.create(NotificationGroupsApi::class.java)
     fun trigger(body: TriggerEventRequest) = runBlocking {
         eventsApi.triggerEvent(body)
             .body()

@@ -14,7 +14,7 @@ abstract class BaseEventRequest {
         _name: String,
         _payload: Map<String, Any>,
         _overrides: Map<String, Any>? = null,
-        _transactionId: String? = null,
+        _transactionId: String? = null
     ): BaseEventRequest {
         return this.apply {
             this.name = _name

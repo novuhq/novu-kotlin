@@ -11,7 +11,7 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: Any,
             payload: Map<String, Any>,
             overrides: Map<String, Any>?,
-            transactionId: String?,
+            transactionId: String?
         ) =
             TriggerEventRequest()
                 .apply {
@@ -25,7 +25,7 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: String,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null,
+            transactionId: String? = null
         ) = initFields(name, to, payload, overrides, transactionId)
 
         @JvmName("fromListOfString")
@@ -34,7 +34,7 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: List<String>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null,
+            transactionId: String? = null
         ) = initFields(name, to, payload, overrides, transactionId)
 
         @JvmName("fromListOfSubscribers")
@@ -43,7 +43,7 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: List<SubscriberRequest>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null,
+            transactionId: String? = null
         ) = initFields(name, to, payload, overrides, transactionId)
 
         @JvmName("fromSubscribers")
@@ -52,7 +52,7 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: SubscriberRequest,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null,
+            transactionId: String? = null
         ) = initFields(name, to, payload, overrides, transactionId)
     }
 }

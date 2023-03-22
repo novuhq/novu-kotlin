@@ -18,7 +18,7 @@ class EventsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -28,13 +28,13 @@ class EventsApiTest {
                 acknowledged = true,
                 status = "status",
                 transactionId = "transactionId",
-                error = listOf("error"),
-            ),
+                error = listOf("error")
+            )
         )
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val requestBody = TriggerEventRequest(
             name = "test",
@@ -42,10 +42,10 @@ class EventsApiTest {
                 subscriberId = "subscriberId",
                 email = "email@email.com",
                 firstName = "John",
-                lastName = "Doe",
+                lastName = "Doe"
             ),
             payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId",
+            transactionId = "transactionId"
         )
         val result = mockNovu.trigger(requestBody)
         val request = mockWebServer.takeRequest()
@@ -62,13 +62,13 @@ class EventsApiTest {
                 acknowledged = true,
                 status = "status",
                 transactionId = "transactionId",
-                error = listOf("error"),
-            ),
+                error = listOf("error")
+            )
         )
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val requestBody = listOf(
             TriggerEventRequest(
@@ -77,11 +77,11 @@ class EventsApiTest {
                     subscriberId = "subscriberId",
                     email = "email@email.com",
                     firstName = "John",
-                    lastName = "Doe",
+                    lastName = "Doe"
                 ),
                 payload = mapOf("customVariables" to "Hello"),
-                transactionId = "transactionId",
-            ),
+                transactionId = "transactionId"
+            )
         )
         val result = mockNovu.bulkTrigger(requestBody)
         val request = mockWebServer.takeRequest()
@@ -98,18 +98,18 @@ class EventsApiTest {
                 acknowledged = true,
                 status = "status",
                 transactionId = "transactionId",
-                error = listOf("error"),
-            ),
+                error = listOf("error")
+            )
         )
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val requestBody = BroadcastEventRequest(
             name = "test",
             payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId",
+            transactionId = "transactionId"
         )
         val result = mockNovu.broadcast(requestBody)
         val request = mockWebServer.takeRequest()
@@ -125,7 +125,7 @@ class EventsApiTest {
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val transactionId = "transactionId"
         val result = mockNovu.cancelTriggerEvent(transactionId)

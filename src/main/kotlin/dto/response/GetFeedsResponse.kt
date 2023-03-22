@@ -5,5 +5,5 @@ data class GetFeedsResponse(
     var name: String,
     var identifier: String,
     var _environmentId: String,
-    var _organizationId: String,
+    var _organizationId: String
 )

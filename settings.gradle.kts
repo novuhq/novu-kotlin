@@ -1,3 +1,2 @@
 
 rootProject.name = "novu-kotlin"
-

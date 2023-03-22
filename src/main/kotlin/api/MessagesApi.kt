@@ -15,7 +15,7 @@ interface MessagesApi {
         @Query("channel") channel: String,
         @Query("subscriberId") subscriberId: String,
         @Query("limit") limit: BigInteger,
-        @Query("page") page: BigInteger,
+        @Query("page") page: BigInteger
     ): Response<PaginatedResponseWrapper<Any>>
 
     @DELETE("message/{messageId}")

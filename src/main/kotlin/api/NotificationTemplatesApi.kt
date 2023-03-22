@@ -2,7 +2,6 @@ package co.novu.api
 
 import co.novu.dto.request.UpdateNotificationStatusRequest
 import co.novu.dto.response.NotificationTemplates
-import jdk.jfr.BooleanFlag
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -16,13 +15,13 @@ import java.math.BigInteger
 interface NotificationTemplatesApi {
 
     @GET("notification-templates")
-    suspend fun getNotificationTemplates(@Query("page") page:BigInteger , @Query("limit") limit: BigInteger): Response<NotificationTemplates>
+    suspend fun getNotificationTemplates(@Query("page") page: BigInteger, @Query("limit") limit: BigInteger): Response<NotificationTemplates>
 
     @POST("notification-templates")
-    suspend fun createNotificationTemplates(@Body request:NotificationTemplates): Response<NotificationTemplates>
+    suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<NotificationTemplates>
 
     @PUT("notification-templates/{templateId}")
-    suspend fun updateNotificationTemplates(@Query("templateId") templateId: String, @Body request:NotificationTemplates): Response<NotificationTemplates>
+    suspend fun updateNotificationTemplates(@Query("templateId") templateId: String, @Body request: NotificationTemplates): Response<NotificationTemplates>
 
     @DELETE("notification-templates/{templateId}")
     suspend fun deleteNotificationTemplate(@Query("templateId") templateId: String): Response<Boolean>

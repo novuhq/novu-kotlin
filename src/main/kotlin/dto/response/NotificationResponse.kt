@@ -6,5 +6,5 @@ data class NotificationResponse(
     var _organizationId: String,
     var transactionId: String,
     var createdAt: String,
-    var channels: String,
+    var channels: String
 )

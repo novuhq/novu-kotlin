@@ -9,6 +9,6 @@ interface ExcecutionDetailsApi {
     @GET("execution-details")
     suspend fun getExecutionDetails(
         @Query("notificationId") notificationId: String,
-        @Query("subscriberId") subscriberId: String,
+        @Query("subscriberId") subscriberId: String
     ): Response<PaginatedResponseWrapper<Any>>
 }

@@ -5,5 +5,5 @@ data class NotificationGroupsResponse(
     var name: String,
     var _environmentId: String,
     var _organizationId: String,
-    var _parentId: String,
+    var _parentId: String
 )

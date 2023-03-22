@@ -30,5 +30,3 @@ class SubscriberResponse(
     phone,
     avatar
 )
-
-

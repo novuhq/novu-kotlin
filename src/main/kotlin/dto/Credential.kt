@@ -17,5 +17,5 @@ data class Credential(
     var senderName: String,
     var projectName: String,
     var applicationId: String,
-    var clientId: String,
+    var clientId: String
 )

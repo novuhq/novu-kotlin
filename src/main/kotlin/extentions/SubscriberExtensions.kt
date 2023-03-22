@@ -61,30 +61,30 @@ fun Novu.getSubscriberPreferences(subscriberId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, body: UpdateSubscriberPreferencesRequest ) = runBlocking {
-    subscribersApi.updateSubscriberPreferences(subscriberId, templateId,body)
+fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, body: UpdateSubscriberPreferencesRequest) = runBlocking {
+    subscribersApi.updateSubscriberPreferences(subscriberId, templateId, body)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.getNotificationsFeedForSubscriber(subscriberId: String) = runBlocking {
-    subscribersApi.getNotificationFeedForSubscriber(subscriberId)
+fun Novu.getSubscriberNotificationsFeed(subscriberId: String) = runBlocking {
+    subscribersApi.getSubscriberNotificationsFeed(subscriberId)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.getUnseenNotificationsCountForSubscriber(subscriberId: String) = runBlocking {
-    subscribersApi.getUnseenNotificationsCountForSubscriber(subscriberId)
+fun Novu.getSubscriberUnseenNotificationsCount(subscriberId: String) = runBlocking {
+    subscribersApi.getSubscriberUnseenNotificationsCount(subscriberId)
         .body()
         .apply { logger.info { this } }
 }
-fun Novu.markSubscriberFeedAs(subscriberId: String,request: MarkSubscriberFeedAsRequest) = runBlocking {
-    subscribersApi.markSubscriberMessageFeedAs(subscriberId,request)
+fun Novu.markSubscriberFeedAs(subscriberId: String, request: MarkSubscriberFeedAsRequest) = runBlocking {
+    subscribersApi.markSubscriberMessageFeedAs(subscriberId, request)
         .body()
         .apply { logger.info { this } }
 }
 
-fun Novu.markMessageActionAsSeen(subscriberId:String, messageId: String, type: String) = runBlocking {
+fun Novu.markMessageActionAsSeen(subscriberId: String, messageId: String, type: String) = runBlocking {
     subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type)
         .body()
         .apply { logger.info { this } }

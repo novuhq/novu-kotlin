@@ -17,7 +17,19 @@ import co.novu.dto.response.subscribers.SubscriberDeleteResponse
 import co.novu.dto.response.subscribers.SubscriberNotificationResponse
 import co.novu.dto.response.subscribers.SubscriberPreferenceResponse
 import co.novu.dto.response.subscribers.SubscriberResponse
-import co.novu.extensions.*
+import co.novu.extensions.createSubscriber
+import co.novu.extensions.deleteSubscriber
+import co.novu.extensions.getSubscriber
+import co.novu.extensions.getSubscriberNotificationsFeed
+import co.novu.extensions.getSubscriberPreferences
+import co.novu.extensions.getSubscriberUnseenNotificationsCount
+import co.novu.extensions.markMessageActionAsSeen
+import co.novu.extensions.markSubscriberFeedAs
+import co.novu.extensions.subscribers
+import co.novu.extensions.updateSubscriber
+import co.novu.extensions.updateSubscriberCredentials
+import co.novu.extensions.updateSubscriberOnlineStatus
+import co.novu.extensions.updateSubscriberPreferences
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,7 +44,7 @@ class SubscriberApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -56,12 +68,14 @@ class SubscriberApiTest {
                     phone = "123",
                     avatar = "123",
                     subscriberId = "123",
-                    channels = listOf(Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens"),
+                    channels = listOf(
+                        Channel(
+                            credentials = ChannelCredentials(
+                                webhookUrl = "webhookUrl",
+                                deviceTokens = listOf("deviceTokens")
+                            )
                         )
-                    ))
+                    )
                 )
             ),
             totalCount = BigInteger.TEN
@@ -94,12 +108,14 @@ class SubscriberApiTest {
                 email = "123",
                 phone = "123",
                 avatar = "123",
-                channels = listOf(Channel(
-                    credentials = ChannelCredentials(
-                        webhookUrl = "webhookUrl",
-                        deviceTokens = listOf("deviceTokens"),
+                channels = listOf(
+                    Channel(
+                        credentials = ChannelCredentials(
+                            webhookUrl = "webhookUrl",
+                            deviceTokens = listOf("deviceTokens")
+                        )
                     )
-                ))
+                )
             )
 
         )
@@ -110,7 +126,7 @@ class SubscriberApiTest {
             email = "123",
             phone = "123",
             avatar = "123",
-            subscriberId = "123",
+            subscriberId = "123"
         )
         JsonParser().parse(Gson().toJson(requestBody)).toString()
 
@@ -142,12 +158,14 @@ class SubscriberApiTest {
                 email = "123",
                 phone = "123",
                 avatar = "123",
-                channels = listOf(Channel(
-                    credentials = ChannelCredentials(
-                        webhookUrl = "webhookUrl",
-                        deviceTokens = listOf("deviceTokens"),
+                channels = listOf(
+                    Channel(
+                        credentials = ChannelCredentials(
+                            webhookUrl = "webhookUrl",
+                            deviceTokens = listOf("deviceTokens")
+                        )
                     )
-                ))
+                )
             )
 
         )
@@ -157,7 +175,7 @@ class SubscriberApiTest {
             lastName = "123",
             email = "123",
             phone = "123",
-            avatar = "123",
+            avatar = "123"
         )
         val subscriberId = "123"
         val result = mockNovu.updateSubscriber(subscriberId, requestBody)
@@ -192,7 +210,7 @@ class SubscriberApiTest {
                     Channel(
                         credentials = ChannelCredentials(
                             webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens"),
+                            deviceTokens = listOf("deviceTokens")
                         )
                     )
                 )
@@ -248,7 +266,7 @@ class SubscriberApiTest {
                     Channel(
                         credentials = ChannelCredentials(
                             webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens"),
+                            deviceTokens = listOf("deviceTokens")
                         )
                     )
                 )
@@ -260,7 +278,7 @@ class SubscriberApiTest {
             providerId = "123",
             credentials = ChannelCredentials(
                 webhookUrl = "webhookUrl",
-                deviceTokens = listOf("deviceTokens"),
+                deviceTokens = listOf("deviceTokens")
             )
         )
 
@@ -297,7 +315,7 @@ class SubscriberApiTest {
                     Channel(
                         credentials = ChannelCredentials(
                             webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens"),
+                            deviceTokens = listOf("deviceTokens")
                         )
                     )
                 )
@@ -317,16 +335,16 @@ class SubscriberApiTest {
     @Test
     fun testGetSubscriberPreferences() = runTest {
         val responseBody = ResponseWrapper(
-                SubscriberPreferenceResponse(
-                    template = Template(
-                        _id = "123",
-                       name = "name",
-                        critical = true
-                    ),
-                    preference = Preference(
-                        enabled = true,
-                        channels = "channels"
-                    )
+            SubscriberPreferenceResponse(
+                template = Template(
+                    _id = "123",
+                    name = "name",
+                    critical = true
+                ),
+                preference = Preference(
+                    enabled = true,
+                    channels = "channels"
+                )
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -336,28 +354,27 @@ class SubscriberApiTest {
         assert(request.path == "/subscribers/$susbcriberId/preferences")
         assert(request.method == "GET")
         assert(result == responseBody)
-
     }
 
     @Test
     fun testUpdateSubscriberPreferences() = runTest {
         val responseBody = ResponseWrapper(
-                SubscriberPreferenceResponse(
-                    template = Template(
-                        _id = "123",
-                        name = "name",
-                        critical = true
-                    ),
-                    preference = Preference(
-                        enabled = true,
-                        channels = "channels"
-                    )
+            SubscriberPreferenceResponse(
+                template = Template(
+                    _id = "123",
+                    name = "name",
+                    critical = true
+                ),
+                preference = Preference(
+                    enabled = true,
+                    channels = "channels"
                 )
+            )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val requestBody = UpdateSubscriberPreferencesRequest(
             channel = "channel",
-            enabled = true,
+            enabled = true
         )
         val susbcriberId = "123"
         val templateId = "123"
@@ -368,50 +385,51 @@ class SubscriberApiTest {
         assert(request.path == "/subscribers/$susbcriberId/preferences/$templateId")
         assert(request.method == "PUT")
         assert(result == responseBody)
-
     }
 
     @Test
     fun testGetNotificationFeedForSubscribers() = runTest {
         val responseBody = PaginatedResponseWrapper(
-            data = listOf(SubscriberNotificationResponse(
-                _id="123",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
-                _messageTemplateId = "_messageTemplateId",
-                _subscriberId = "_subscriberId",
-                subscriber = "subscriber",
-                template = "template",
-                templateIdentifier = "templateIdentifier",
-                createdAt = "createdAt",
-                content = "content",
-                transactionId = "transactionId",
-                channel = "channel",
-                seen = true,
-                email = "email@email.com",
-                phone = "phone",
-                status = "status",
-                directWebhookUrl = "directWebhookUrl",
-                providerId = "providerId",
-                deviceTokens = listOf("deviceTokens"),
-                title = "title",
-                lastSeenDate = "lastSeenDate",
-                cta = "cta",
-                _feedId = "_feedId",
-                errorId = "errorId",
-                errorText = "errorText",
-                payload = "payload",
-                overrides = "overrides",
-                subject = "subject",
-                _notificationId = "_notificationId",
-                _templateId = "_templateId",
-            )),
+            data = listOf(
+                SubscriberNotificationResponse(
+                    _id = "123",
+                    _organizationId = "_organizationId",
+                    _environmentId = "_environmentId",
+                    _messageTemplateId = "_messageTemplateId",
+                    _subscriberId = "_subscriberId",
+                    subscriber = "subscriber",
+                    template = "template",
+                    templateIdentifier = "templateIdentifier",
+                    createdAt = "createdAt",
+                    content = "content",
+                    transactionId = "transactionId",
+                    channel = "channel",
+                    seen = true,
+                    email = "email@email.com",
+                    phone = "phone",
+                    status = "status",
+                    directWebhookUrl = "directWebhookUrl",
+                    providerId = "providerId",
+                    deviceTokens = listOf("deviceTokens"),
+                    title = "title",
+                    lastSeenDate = "lastSeenDate",
+                    cta = "cta",
+                    _feedId = "_feedId",
+                    errorId = "errorId",
+                    errorText = "errorText",
+                    payload = "payload",
+                    overrides = "overrides",
+                    subject = "subject",
+                    _notificationId = "_notificationId",
+                    _templateId = "_templateId"
+                )
+            ),
             totalCount = BigInteger.TEN
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val susbcriberId = "123"
-        val result = mockNovu.getNotificationsFeedForSubscriber(subscriberId = susbcriberId)
+        val result = mockNovu.getSubscriberNotificationsFeed(subscriberId = susbcriberId)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers/$susbcriberId/notifications/feed")
         assert(request.method == "GET")
@@ -424,7 +442,7 @@ class SubscriberApiTest {
             count = BigInteger.TEN
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getUnseenNotificationsCountForSubscriber("123")
+        val result = mockNovu.getSubscriberUnseenNotificationsCount("123")
         val request = mockWebServer.takeRequest()
         val subscriberId = "123"
         assert(request.path == "/subscribers/$subscriberId/notifications/unseen")
@@ -435,7 +453,7 @@ class SubscriberApiTest {
     @Test
     fun testMarkSubscriberFeedAs() = runTest {
         val responseBody = SubscriberNotificationResponse(
-            _id="123",
+            _id = "123",
             _organizationId = "_organizationId",
             _environmentId = "_environmentId",
             _messageTemplateId = "_messageTemplateId",
@@ -464,14 +482,14 @@ class SubscriberApiTest {
             overrides = "overrides",
             subject = "subject",
             _notificationId = "_notificationId",
-            _templateId = "_templateId",
+            _templateId = "_templateId"
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = MarkSubscriberFeedAsRequest(
             messageId = listOf("123"),
             mark = Mark(
                 read = true,
-                seen = true,
+                seen = true
             )
         )
         val result = mockNovu.markSubscriberFeedAs("123", requestBody)
@@ -486,7 +504,7 @@ class SubscriberApiTest {
     @Test
     fun testMarkMessageActionAsSeen() = runTest {
         val responseBody = SubscriberNotificationResponse(
-            _id="123",
+            _id = "123",
             _organizationId = "_organizationId",
             _environmentId = "_environmentId",
             _messageTemplateId = "_messageTemplateId",
@@ -515,7 +533,7 @@ class SubscriberApiTest {
             overrides = "overrides",
             subject = "subject",
             _notificationId = "_notificationId",
-            _templateId = "_templateId",
+            _templateId = "_templateId"
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val subscriberId = "123"
@@ -527,9 +545,4 @@ class SubscriberApiTest {
         assert(request.method == "POST")
         assert(result == responseBody)
     }
-
-
-
-
-
 }

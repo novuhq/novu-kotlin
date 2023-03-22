@@ -5,5 +5,5 @@ data class NotificationGroup(
     val name: String,
     val _organizationId: String,
     val _environmentId: String,
-    val _parentId: String,
+    val _parentId: String
 )

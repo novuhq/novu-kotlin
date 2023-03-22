@@ -3,7 +3,12 @@ import co.novu.NovuConfig
 import co.novu.dto.Credential
 import co.novu.dto.request.integrations.IntegrationRequest
 import co.novu.dto.response.integrations.IntegrationReponse
-import co.novu.extensions.*
+import co.novu.extensions.createIntegration
+import co.novu.extensions.deleteIntegration
+import co.novu.extensions.getActiveIntegrations
+import co.novu.extensions.getIntegrations
+import co.novu.extensions.getProviderWebhook
+import co.novu.extensions.updateIntegration
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -16,7 +21,7 @@ class IntegrationsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -45,13 +50,13 @@ class IntegrationsApiTest {
                     projectName = "projectName",
                     applicationId = "applicationId",
                     clientId = "clientId",
-                    domain = "domain",
+                    domain = "domain"
                 ),
                 active = true,
                 deleted = false,
                 deletedAt = "deletedAt",
-                deletedBy = "deletedBy",
-                )
+                deletedBy = "deletedBy"
+            )
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -87,7 +92,7 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             deleted = false,
@@ -116,7 +121,7 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             check = true
@@ -156,12 +161,12 @@ class IntegrationsApiTest {
                     projectName = "projectName",
                     applicationId = "applicationId",
                     clientId = "clientId",
-                    domain = "domain",
+                    domain = "domain"
                 ),
                 active = true,
                 deleted = false,
                 deletedAt = "deletedAt",
-                deletedBy = "deletedBy",
+                deletedBy = "deletedBy"
             )
         )
 
@@ -198,12 +203,12 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             deleted = false,
             deletedAt = "deletedAt",
-            deletedBy = "deletedBy",
+            deletedBy = "deletedBy"
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -241,7 +246,7 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             deleted = false,
@@ -271,7 +276,7 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             check = true
@@ -312,7 +317,7 @@ class IntegrationsApiTest {
                 projectName = "projectName",
                 applicationId = "applicationId",
                 clientId = "clientId",
-                domain = "domain",
+                domain = "domain"
             ),
             active = true,
             deleted = false,

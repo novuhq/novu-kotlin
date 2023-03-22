@@ -5,5 +5,5 @@ data class CreateLayoutRequest(
     var description: String,
     var content: String,
     var variables: List<Any>,
-    var isDefault: Boolean,
+    var isDefault: Boolean
 )

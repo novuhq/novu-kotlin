@@ -10,6 +10,6 @@ data class GetEnvironmentResponse(
     var identifier: String,
     var apiKeys: List<ApiKeys>,
     var widget: Widget,
-    var _parentId: String,
+    var _parentId: String
 
 )

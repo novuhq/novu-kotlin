@@ -18,7 +18,7 @@ interface EnvironmentsApi {
     suspend fun getEnvironments(): Response<GetEnvironmentResponse>
 
     @POST("environments")
-    suspend fun createEnvironment(@Body request: CreateEnvironmentRequest ): Response<GetEnvironmentResponse>
+    suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<GetEnvironmentResponse>
 
     @GET("/environments/{environmentId}")
     suspend fun getEnvironment(@Body environmentId: String): Response<List<GetEnvironmentResponse>>
@@ -34,5 +34,4 @@ interface EnvironmentsApi {
 
     @PUT("/environments/api-keys/widget/settings")
     suspend fun updateWidgetSettings(@Body request: Widget): Response<GetEnvironmentResponse>
-
 }

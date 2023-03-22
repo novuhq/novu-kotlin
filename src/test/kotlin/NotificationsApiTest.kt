@@ -25,7 +25,7 @@ class NotificationsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -34,12 +34,12 @@ class NotificationsApiTest {
         val responseBody = NotificationStatsResponse(
             BigInteger.ONE,
             BigInteger.ONE,
-            BigInteger.ONE,
+            BigInteger.ONE
         )
         mockWebServer.enqueue(
             MockResponse()
                 .setBody(Gson().toJson(responseBody))
-                .setResponseCode(200),
+                .setResponseCode(200)
         )
 
         val result = mockNovu.getNotificationsStats()
@@ -58,10 +58,10 @@ class NotificationsApiTest {
                     _id = UUID.randomUUID().toString(),
                     count = BigInteger.TEN,
                     templates = listOf("email"),
-                    channels = emptyList(),
-                ),
+                    channels = emptyList()
+                )
             ),
-            totalCount = BigInteger.TEN,
+            totalCount = BigInteger.TEN
         )
         val response = MockResponse()
             .setResponseCode(200)
@@ -80,7 +80,7 @@ class NotificationsApiTest {
             data = emptyList(),
             page = BigInteger.ONE,
             pageSize = BigInteger.TEN,
-            totalCount = BigInteger.TEN,
+            totalCount = BigInteger.TEN
         )
         val response = MockResponse()
             .setResponseCode(200)

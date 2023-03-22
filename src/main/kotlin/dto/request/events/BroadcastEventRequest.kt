@@ -2,7 +2,6 @@ package co.novu.dto.request.events
 
 class BroadcastEventRequest private constructor() : BaseEventRequest() {
 
-
     companion object {
         operator fun invoke(
             name: String,
@@ -11,9 +10,5 @@ class BroadcastEventRequest private constructor() : BaseEventRequest() {
             transactionId: String? = null
         ) =
             BroadcastEventRequest().apply { init(name, payload, overrides, transactionId) }
-
     }
 }
-
-
-

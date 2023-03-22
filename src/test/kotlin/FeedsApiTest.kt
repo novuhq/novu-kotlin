@@ -1,6 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.dto.request.CreateFeedRequest
+import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.FeedResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.extensions.createFeed
@@ -19,7 +19,7 @@ class FeedsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -29,11 +29,11 @@ class FeedsApiTest {
             name = "test",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
-            identifier = "identifier",
+            identifier = "identifier"
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val requestBody = CreateFeedRequest(
+        val requestBody = CreateByNameRequest(
             name = "test"
         )
         val result = mockNovu.createFeed(requestBody)
@@ -46,15 +46,15 @@ class FeedsApiTest {
 
     @Test
     fun testGetFeeds() = runTest {
-        val responseBody =PaginatedResponseWrapper(
+        val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 FeedResponse(
                     _id = "123",
                     name = "test",
                     _environmentId = "enviromentId",
                     _organizationId = "organizationId",
-                    identifier = "identifier",
-                    )
+                    identifier = "identifier"
+                )
             ),
             totalCount = BigInteger.TEN
         )
@@ -74,7 +74,7 @@ class FeedsApiTest {
             name = "test",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
-            identifier = "identifier",
+            identifier = "identifier"
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -85,6 +85,5 @@ class FeedsApiTest {
         assert(request.path == "/feeds/$feedId")
         assert(request.method == "DELETE")
         assert(result == responseBody)
-
     }
 }

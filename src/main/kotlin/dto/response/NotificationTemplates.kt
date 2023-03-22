@@ -16,7 +16,7 @@ data class NotificationTemplates(
     val tags: List<String>? = null,
     val steps: List<Step>? = null,
     val _organizationId: String? = null,
-   val  _creatorId: String? = null,
+    val _creatorId: String? = null,
     val _environmentId: String? = null,
     val triggers: List<Trigger>? = null,
     val _notificationGroupId: String? = null,
@@ -24,5 +24,5 @@ data class NotificationTemplates(
     val deleted: Boolean? = null,
     val deletedAt: String? = null,
     val deletedBy: String? = null,
-    val notificationGroup: NotificationGroup?=null
+    val notificationGroup: NotificationGroup? = null
 )

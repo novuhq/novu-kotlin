@@ -21,7 +21,7 @@ class ChangesApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/")),
+        NovuConfig(backendUrl = mockWebServer.url("/"))
     )
 
     @Test
@@ -39,15 +39,15 @@ class ChangesApiTest {
                     type = "type",
                     change = "change",
                     createdAt = "createdAt",
-                    _parentId = "_parentId",
-                ),
+                    _parentId = "_parentId"
+                )
             ),
-            totalCount = BigInteger.TEN,
+            totalCount = BigInteger.TEN
         )
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(200)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val page = BigInteger.ONE
         val limit = BigInteger.TEN
@@ -65,7 +65,7 @@ class ChangesApiTest {
         val responseBody = ResponseWrapper(data = BigInteger.ONE)
         mockWebServer.enqueue(
             MockResponse().setResponseCode(200)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val result = mockNovu.getChangesCount()
         val request = mockWebServer.takeRequest()
@@ -89,14 +89,14 @@ class ChangesApiTest {
                     type = "type",
                     change = "change",
                     createdAt = "createdAt",
-                    _parentId = "_parentId",
-                ),
-            ),
+                    _parentId = "_parentId"
+                )
+            )
         )
 
         mockWebServer.enqueue(
             MockResponse().setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val result = mockNovu.applyChanges()
         val request = mockWebServer.takeRequest()
@@ -119,13 +119,13 @@ class ChangesApiTest {
                 type = "type",
                 change = "change",
                 createdAt = "createdAt",
-                _parentId = "_parentId",
-            ),
+                _parentId = "_parentId"
+            )
         )
 
         mockWebServer.enqueue(
             MockResponse().setResponseCode(201)
-                .setBody(Gson().toJson(responseBody)),
+                .setBody(Gson().toJson(responseBody))
         )
         val changeId = UUID.randomUUID().toString()
         val result = mockNovu.applychange(changeId)

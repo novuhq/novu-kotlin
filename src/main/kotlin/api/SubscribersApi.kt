@@ -58,21 +58,21 @@ interface SubscribersApi {
     ): Response<ResponseWrapper<SubscriberPreferenceResponse>>
 
     @GET("subscribers/{subscriberId}/notifications/feed")
-    suspend fun getNotificationFeedForSubscriber(@Path("subscriberId") subscriberId: String): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
+    suspend fun getSubscriberNotificationsFeed(@Path("subscriberId") subscriberId: String): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
 
     @GET("subscribers/{subscriberId}/notifications/unseen")
-    suspend fun getUnseenNotificationsCountForSubscriber(@Path("subscriberId") subscriberId: String): Response<UnseenNotificationsCountResponse>
+    suspend fun getSubscriberUnseenNotificationsCount(@Path("subscriberId") subscriberId: String): Response<UnseenNotificationsCountResponse>
 
     @POST("subscribers/{subscriberId}/messages/markAs")
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
-        @Body request: MarkSubscriberFeedAsRequest,
+        @Body request: MarkSubscriberFeedAsRequest
     ): Response<SubscriberNotificationResponse>
 
     @POST("subscribers/{subscriberId}/messages/{messageId}/actions/{type}")
     suspend fun markMessageActionAsSeen(
         @Path("subscriberId") subscriberId: String,
         @Path("messageId") messageId: String,
-        @Path("type") type: String,
+        @Path("type") type: String
     ): Response<SubscriberNotificationResponse>
 }
