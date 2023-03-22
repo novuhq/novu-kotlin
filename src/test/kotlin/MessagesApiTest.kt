@@ -1,7 +1,7 @@
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.dto.ExecutionDetails
 import co.novu.dto.Children
+import co.novu.dto.ExecutionDetails
 import co.novu.dto.Filters
 import co.novu.dto.Job
 import co.novu.dto.Step

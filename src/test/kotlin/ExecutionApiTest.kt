@@ -40,7 +40,7 @@ class ExecutionApiTest {
                     _notificationId = "_notificationId",
                     _subscriberId = "_subscriberId",
                     _notificationTemplateId = "_notificationTemplateId",
-                    _messageId = "_messageId",
+                    _messageId = "_messageId"
                 )
             ),
             totalCount = BigInteger.TEN

@@ -31,23 +31,25 @@ class EnvironmentsApiTest {
 
     @Test
     fun testGetEnvironments() {
-        val responseBody = ResponseWrapper(GetEnvironmentResponse(
-            _id = "1234",
-            name = "name",
-            _organizationId = "orgId",
-            identifier = "identifier",
-            apiKeys = listOf(
-                ApiKeys(
-                    key = "key",
-                    _userId = "userId"
-                )
-            ),
-            widget = Widget(
-                notificationCenterEncryption = true
-            ),
-            _parentId = "parentId"
+        val responseBody = ResponseWrapper(
+            GetEnvironmentResponse(
+                _id = "1234",
+                name = "name",
+                _organizationId = "orgId",
+                identifier = "identifier",
+                apiKeys = listOf(
+                    ApiKeys(
+                        key = "key",
+                        _userId = "userId"
+                    )
+                ),
+                widget = Widget(
+                    notificationCenterEncryption = true
+                ),
+                _parentId = "parentId"
 
-        ))
+            )
+        )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getCurrentEnvironment()

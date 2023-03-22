@@ -4,7 +4,12 @@ import co.novu.dto.request.CreateLayoutRequest
 import co.novu.dto.response.CreateLayoutResponse
 import co.novu.dto.response.GetLayoutsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
-import co.novu.extentions.*
+import co.novu.extentions.createLayout
+import co.novu.extentions.deleteLayout
+import co.novu.extentions.filterLayouts
+import co.novu.extentions.getLayout
+import co.novu.extentions.setDefaultLayout
+import co.novu.extentions.updateLayout
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -72,7 +77,7 @@ class LayoutsApiTest {
         val pageSize = BigInteger.TEN
         val sortBy = "sortBy"
         val orderBy = BigInteger.ONE
-        val result = mockNovu.filterLayouts(page, pageSize,orderBy, sortBy)
+        val result = mockNovu.filterLayouts(page, pageSize, orderBy, sortBy)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")
@@ -165,6 +170,4 @@ class LayoutsApiTest {
         assert(request.method == "POST")
         assert(request.path == "/layouts/$layoutId/default")
     }
-
-
 }
