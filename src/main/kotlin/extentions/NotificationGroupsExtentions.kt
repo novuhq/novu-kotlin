@@ -8,7 +8,7 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotificationGroups(page: BigInteger? = null) = runBlocking {
+fun Novu.getNotificationGroups() = runBlocking {
     notificationGroupsApi.getNotificationGroups()
         .body()
         .apply { logger.info { this } }
