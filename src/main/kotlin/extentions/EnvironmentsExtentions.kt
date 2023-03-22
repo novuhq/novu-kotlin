@@ -9,8 +9,8 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getEnvironments() = runBlocking {
-    environmentsApi.getEnvironments()
+fun Novu.getCurrentEnvironment() = runBlocking {
+    environmentsApi.getCurrentEnvironment()
         .body()
         .apply { logger.info { this } }
 }
@@ -21,8 +21,8 @@ fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.getEnvironment(environmentId: String) = runBlocking {
-    environmentsApi.getEnvironment(environmentId)
+fun Novu.getEnvironments() = runBlocking {
+    environmentsApi.getEnvironments()
         .body()
         .apply { logger.info { this } }
 }

@@ -15,13 +15,13 @@ import retrofit2.http.Path
 interface EnvironmentsApi {
 
     @GET("environments/me")
-    suspend fun getEnvironments(): Response<GetEnvironmentResponse>
+    suspend fun getCurrentEnvironment(): Response<GetEnvironmentResponse>
 
     @POST("environments")
     suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<GetEnvironmentResponse>
 
-    @GET("/environments/{environmentId}")
-    suspend fun getEnvironment(@Body environmentId: String): Response<List<GetEnvironmentResponse>>
+    @GET("/environments")
+    suspend fun getEnvironments(): Response<List<GetEnvironmentResponse>>
 
     @PUT("/environments/{environmentId}")
     suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest)

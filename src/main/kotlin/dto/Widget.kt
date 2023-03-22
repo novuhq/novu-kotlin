@@ -1,5 +1,5 @@
 package co.novu.dto
 
 data class Widget(
-    var notificationCenterEncryption: String? = null
+    var notificationCenterEncryption: Boolean? = null
 )
