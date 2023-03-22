@@ -5,6 +5,7 @@ import co.novu.dto.Widget
 import co.novu.dto.request.CreateEnvironmentRequest
 import co.novu.dto.request.UpdateEnvironmentRequest
 import co.novu.dto.response.GetEnvironmentResponse
+import co.novu.dto.response.ResponseWrapper
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,7 +16,7 @@ import retrofit2.http.Path
 interface EnvironmentsApi {
 
     @GET("environments/me")
-    suspend fun getCurrentEnvironment(): Response<GetEnvironmentResponse>
+    suspend fun getCurrentEnvironment(): Response<ResponseWrapper<GetEnvironmentResponse>>
 
     @POST("environments")
     suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<GetEnvironmentResponse>

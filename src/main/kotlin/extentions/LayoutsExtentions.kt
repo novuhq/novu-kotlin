@@ -8,8 +8,8 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String) = runBlocking {
-    layoutsApi.getLayouts(page, pageSize, sortBy, orderBy)
+fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String) = runBlocking {
+    layoutsApi.filterLayouts(page, pageSize, sortBy, orderBy)
         .body()
         .apply { logger.info { this } }
 }

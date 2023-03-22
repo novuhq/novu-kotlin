@@ -3,7 +3,7 @@ package co.novu
 import co.novu.api.ChangesApi
 import co.novu.api.EnvironmentsApi
 import co.novu.api.EventsApi
-import co.novu.api.ExcecutionDetailsApi
+import co.novu.api.ExecutionDetailsApi
 import co.novu.api.FeedsApi
 import co.novu.api.IntegrationsApi
 import co.novu.api.LayoutsApi
@@ -15,6 +15,7 @@ import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
+import co.novu.extentions.getCurrentEnvironment
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -41,7 +42,7 @@ class Novu(
 
     internal val integrationsApi = retrofitInstance.create(IntegrationsApi::class.java)
 
-    internal val executionDetailsApi = retrofitInstance.create(ExcecutionDetailsApi::class.java)
+    internal val executionDetailsApi = retrofitInstance.create(ExecutionDetailsApi::class.java)
 
     internal val feedsApi = retrofitInstance.create(FeedsApi::class.java)
 
@@ -79,4 +80,10 @@ class Novu(
             .body()
             .apply { logger.info { this } }
     }
+}
+
+fun main() {
+    val novu = Novu("aeaf31aa1834b3a317dcf6970d028dae")
+    val env = novu.getCurrentEnvironment()
+    logger.info { env }
 }

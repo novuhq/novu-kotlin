@@ -1,7 +1,5 @@
 package co.novu.dto
 
-import co.novu.api.ExecutionDetails
-
 data class Job(
     var _id: String? = null,
     var type: String? = null,

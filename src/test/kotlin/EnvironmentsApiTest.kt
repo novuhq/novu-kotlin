@@ -6,6 +6,7 @@ import co.novu.dto.Widget
 import co.novu.dto.request.CreateEnvironmentRequest
 import co.novu.dto.request.UpdateEnvironmentRequest
 import co.novu.dto.response.GetEnvironmentResponse
+import co.novu.dto.response.ResponseWrapper
 import co.novu.extentions.createEnvironment
 import co.novu.extentions.getApiKeys
 import co.novu.extentions.getCurrentEnvironment
@@ -30,7 +31,7 @@ class EnvironmentsApiTest {
 
     @Test
     fun testGetEnvironments() {
-        val responseBody = GetEnvironmentResponse(
+        val responseBody = ResponseWrapper(GetEnvironmentResponse(
             _id = "1234",
             name = "name",
             _organizationId = "orgId",
@@ -46,7 +47,7 @@ class EnvironmentsApiTest {
             ),
             _parentId = "parentId"
 
-        )
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getCurrentEnvironment()
