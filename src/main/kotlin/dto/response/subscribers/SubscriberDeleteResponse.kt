@@ -1,6 +1,6 @@
 package co.novu.dto.response.subscribers
 
 data class SubscriberDeleteResponse(
-    var acknowledged: Boolean,
-    var status: String
+    var acknowledged: Boolean? = null,
+    var status: String? = null
 )

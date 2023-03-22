@@ -1,9 +1,9 @@
 package co.novu.dto.response
 
 data class NotificationGroupsResponse(
-    var _id: String,
-    var name: String,
-    var _environmentId: String,
-    var _organizationId: String,
-    var _parentId: String
+    var _id: String? = null,
+    var name: String? = null,
+    var _environmentId: String? = null,
+    var _organizationId: String? = null,
+    var _parentId: String? = null
 )

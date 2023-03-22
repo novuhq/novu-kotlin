@@ -1,13 +1,13 @@
 package co.novu.dto
 
 data class Step(
-    val _id: String,
-    val _templateId: String,
-    val active: Boolean,
-    val shouldStopOnFail: Boolean,
-    val template: Any,
-    val filters: List<Filters>,
-    val _parentId: String,
-    val metadata: Metadata,
-    val replyCallback: Any
+    val _id: String? = null,
+    val _templateId: String? = null,
+    val active: Boolean? = null,
+    val shouldStopOnFail: Boolean? = null,
+    val template: Any? = null,
+    val filters: Filters? = null,
+    val _parentId: String? = null,
+    val metadata: Metadata? = null,
+    val replyCallback: Any? = null
 )

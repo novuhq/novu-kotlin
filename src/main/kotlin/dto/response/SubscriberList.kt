@@ -1,5 +1,5 @@
 package co.novu.dto.response
 
 data class SubscriberList(
-    val subscribers: List<String>
+    val subscribers: List<String>? = null
 )

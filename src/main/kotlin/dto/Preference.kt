@@ -1,6 +1,6 @@
 package co.novu.dto
 
 data class Preference(
-    var enabled: Boolean,
-    var channels: Any?
+    var enabled: Boolean? = null,
+    var channels: Any? = null
 )

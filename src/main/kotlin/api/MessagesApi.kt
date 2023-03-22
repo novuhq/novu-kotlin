@@ -1,5 +1,6 @@
 package co.novu.api
 
+import co.novu.dto.response.Message
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.events.TriggerResponse
 import retrofit2.Response
@@ -16,7 +17,7 @@ interface MessagesApi {
         @Query("subscriberId") subscriberId: String,
         @Query("limit") limit: BigInteger,
         @Query("page") page: BigInteger
-    ): Response<PaginatedResponseWrapper<Any>>
+    ): Response<PaginatedResponseWrapper<Message>>
 
     @DELETE("message/{messageId}")
     suspend fun deleteMessage(@Path("messageId") messageId: String): Response<TriggerResponse>

@@ -1,21 +1,21 @@
 package co.novu.dto
 
 data class Credential(
-    var apiKey: String,
-    var user: String,
-    var secretKey: String,
-    var domain: String,
-    var password: String,
-    var host: String,
-    var port: String,
-    var secure: Boolean,
-    var region: String,
-    var accountSid: String,
-    var messageProfileId: String,
-    var token: String,
-    var from: String,
-    var senderName: String,
-    var projectName: String,
-    var applicationId: String,
-    var clientId: String
+    var apiKey: String? = null,
+    var user: String? = null,
+    var secretKey: String? = null,
+    var domain: String? = null,
+    var password: String? = null,
+    var host: String? = null,
+    var port: String? = null,
+    var secure: Boolean? = null,
+    var region: String? = null,
+    var accountSid: String? = null,
+    var messageProfileId: String? = null,
+    var token: String? = null,
+    var from: String? = null,
+    var senderName: String? = null,
+    var projectName: String? = null,
+    var applicationId: String? = null,
+    var clientId: String? = null
 )

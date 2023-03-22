@@ -4,7 +4,6 @@ import co.novu.Novu
 import co.novu.dto.request.CreateByNameRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
-import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
