@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import java.math.BigInteger
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ExecutionApiTest {
+class ExecutionDetailsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",

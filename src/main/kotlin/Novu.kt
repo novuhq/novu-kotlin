@@ -5,6 +5,7 @@ import co.novu.api.EnvironmentsApi
 import co.novu.api.EventsApi
 import co.novu.api.ExecutionDetailsApi
 import co.novu.api.FeedsApi
+import co.novu.api.InboundParseApi
 import co.novu.api.IntegrationsApi
 import co.novu.api.LayoutsApi
 import co.novu.api.MessagesApi
@@ -57,6 +58,8 @@ class Novu(
     internal val notificationTemplatesApi = retrofitInstance.create(NotificationTemplatesApi::class.java)
 
     internal val notificationGroupsApi = retrofitInstance.create(NotificationGroupsApi::class.java)
+
+    internal val inboundParseApi = retrofitInstance.create(InboundParseApi::class.java)
     fun trigger(body: TriggerEventRequest) = runBlocking {
         eventsApi.triggerEvent(body)
             .body()
