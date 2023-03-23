@@ -91,16 +91,18 @@ class MessagesApiTest {
                             step = Step(
                                 _id = "stepId",
                                 active = true,
-                                filters = Filters(
-                                    isNegated = true,
-                                    type = "true",
-                                    value = "value",
-                                    children = listOf(
-                                        Children(
-                                            field = "field",
-                                            operator = "operator",
-                                            value = "value",
-                                            on = "on"
+                                filters = listOf(
+                                    Filters(
+                                        isNegated = true,
+                                        type = "true",
+                                        value = "value",
+                                        children = listOf(
+                                            Children(
+                                                field = "field",
+                                                operator = "operator",
+                                                value = "value",
+                                                on = "on"
+                                            )
                                         )
                                     )
                                 ),

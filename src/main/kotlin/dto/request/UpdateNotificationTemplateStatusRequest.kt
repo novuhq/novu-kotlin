@@ -1,5 +1,5 @@
 package co.novu.dto.request
 
-data class UpdateNotificationStatusRequest(
+data class UpdateNotificationTemplateStatusRequest(
     var active: Boolean? = null
 )

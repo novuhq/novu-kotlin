@@ -1,6 +1,6 @@
 package co.novu.api
 
-import co.novu.dto.request.UpdateNotificationStatusRequest
+import co.novu.dto.request.UpdateNotificationTemplateStatusRequest
 import co.novu.dto.response.NotificationTemplates
 import retrofit2.Response
 import retrofit2.http.Body
@@ -15,20 +15,20 @@ import java.math.BigInteger
 interface NotificationTemplatesApi {
 
     @GET("notification-templates")
-    suspend fun getNotificationTemplates(@Query("page") page: BigInteger?= BigInteger.valueOf(1), @Query("limit") limit: BigInteger?=BigInteger.valueOf(10)): Response<NotificationTemplates>
+    suspend fun getNotificationTemplates(@Query("page") page: BigInteger? = BigInteger.valueOf(1), @Query("limit") limit: BigInteger? = BigInteger.valueOf(10)): Response<NotificationTemplates>
 
     @POST("notification-templates")
     suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<NotificationTemplates>
 
-    @PUT("notification-templates/{templateId}")
+    @PUT("notification-templates")
     suspend fun updateNotificationTemplates(@Query("templateId") templateId: String, @Body request: NotificationTemplates): Response<NotificationTemplates>
 
-    @DELETE("notification-templates/{templateId}")
+    @DELETE("notification-templates")
     suspend fun deleteNotificationTemplate(@Query("templateId") templateId: String): Response<Boolean>
 
     @GET("notification-templates/{templateId}")
     suspend fun getNotificationTemplate(@Path("templateId") templateId: String): Response<NotificationTemplates>
 
     @PUT("notification-templates/{templateId}/status")
-    suspend fun updateNotificationTemplateStatus(@Path("templateId") templateId: String, @Body request: UpdateNotificationStatusRequest): Response<NotificationTemplates>
+    suspend fun updateNotificationTemplateStatus(@Path("templateId") templateId: String, @Body request: UpdateNotificationTemplateStatusRequest): Response<NotificationTemplates>
 }

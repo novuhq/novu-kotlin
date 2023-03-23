@@ -1,6 +1,5 @@
 package co.novu.dto.response
 
-import co.novu.dto.Metadata
 import co.novu.dto.NotificationGroup
 import co.novu.dto.PreferenceSettings
 import co.novu.dto.Step

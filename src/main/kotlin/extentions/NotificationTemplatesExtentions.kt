@@ -38,7 +38,7 @@ fun Novu.getNotificationTemplate(templateId: String) = runBlocking {
         .apply { logger.info { this } }
 }
 
-fun Novu.updateNotificationTemplateStatus(templateId: String, request: co.novu.dto.request.UpdateNotificationStatusRequest) = runBlocking {
+fun Novu.updateNotificationTemplateStatus(templateId: String, request: co.novu.dto.request.UpdateNotificationTemplateStatusRequest) = runBlocking {
     notificationTemplatesApi.updateNotificationTemplateStatus(templateId, request)
         .body()
         .apply { logger.info { this } }
