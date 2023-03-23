@@ -9,37 +9,55 @@ import java.math.BigInteger
 private val logger = KotlinLogging.logger {}
 
 fun Novu.getNotificationTemplates(page: BigInteger, limit: BigInteger) = runBlocking {
-    notificationTemplatesApi.getNotificationTemplates(page, limit)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.getNotificationTemplates(page, limit)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createNotificationTemplates(request: NotificationTemplates) = runBlocking {
-    notificationTemplatesApi.createNotificationTemplates(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.createNotificationTemplates(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTemplates) = runBlocking {
-    notificationTemplatesApi.updateNotificationTemplates(templateId, request)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.updateNotificationTemplates(templateId, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.deleteNotificationTemplate(templateId: String) = runBlocking {
-    notificationTemplatesApi.deleteNotificationTemplate(templateId)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.deleteNotificationTemplate(templateId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getNotificationTemplate(templateId: String) = runBlocking {
-    notificationTemplatesApi.getNotificationTemplate(templateId)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.getNotificationTemplate(templateId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateNotificationTemplateStatus(templateId: String, request: co.novu.dto.request.UpdateNotificationTemplateStatusRequest) = runBlocking {
-    notificationTemplatesApi.updateNotificationTemplateStatus(templateId, request)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationTemplatesApi.updateNotificationTemplateStatus(templateId, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

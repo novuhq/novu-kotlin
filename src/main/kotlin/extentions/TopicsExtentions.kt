@@ -1,45 +1,65 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.request.topics.CreateTopicRequest
+import co.novu.dto.response.SubscriberList
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getTopics(page: BigInteger, pageSize: BigInteger, key: String) = runBlocking {
-    topicsApi.getTopics(page, pageSize, key)
-        .body()
-        .apply { logger.info { this } }
+fun Novu.filterTopics(page: BigInteger? = null, pageSize: BigInteger? = null, key: String? = null) = runBlocking {
+    val response = topicsApi.filterTopics(page, pageSize, key)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createTopic(request: CreateTopicRequest) = runBlocking {
-    topicsApi.createTopic(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = topicsApi.createTopic(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
-fun Novu.addSubscriber(topicKey: String) = runBlocking {
-    topicsApi.addSubscriber(topicKey)
-        .body()
-        .apply { logger.info { this } }
+fun Novu.addSubscribers(topicKey: String, request: SubscriberList) = runBlocking {
+    val response = topicsApi.addSubscriber(topicKey, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
-fun Novu.removeSubscriber(topicKey: String) = runBlocking {
-    topicsApi.removeSubscriber(topicKey)
-        .body()
-        .apply { logger.info { this } }
+fun Novu.removeSubscriber(topicKey: String, request: SubscriberList) = runBlocking {
+    val response = topicsApi.removeSubscribers(topicKey, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getTopic(topicKey: String) = runBlocking {
-    topicsApi.getTopic(topicKey)
-        .body()
-        .apply { logger.info { this } }
+    val response = topicsApi.getTopic(topicKey)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
-fun Novu.renameTopic(topicKey: String) = runBlocking {
-    topicsApi.renameTopic((topicKey))
-        .body()
-        .apply { logger.info { this } }
+fun Novu.renameTopic(topicKey: String, request: CreateByNameRequest) = runBlocking {
+    val response = topicsApi.renameTopic(topicKey, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

@@ -7,37 +7,55 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 fun Novu.getIntegrations() = runBlocking {
-    integrationsApi.getIntegrations()
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.getIntegrations()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createIntegration(request: IntegrationRequest) = runBlocking {
-    integrationsApi.createIntegration(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.createIntegration(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getActiveIntegrations() = runBlocking {
-    integrationsApi.getActiveIntegrations()
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.getActiveIntegrations()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getProviderWebhook(providerId: String) = runBlocking {
-    integrationsApi.getProviderWebhook(providerId)
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.getProviderWebhook(providerId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest) = runBlocking {
-    integrationsApi.updateIntegration(integrationId, request)
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.updateIntegration(integrationId, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.deleteIntegration(integrationId: String) = runBlocking {
-    integrationsApi.deleteIntegration(integrationId)
-        .body()
-        .apply { logger.info { this } }
+    val response = integrationsApi.deleteIntegration(integrationId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

@@ -19,20 +19,21 @@ interface EnvironmentsApi {
     suspend fun getCurrentEnvironment(): Response<ResponseWrapper<GetEnvironmentResponse>>
 
     @POST("environments")
-    suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<GetEnvironmentResponse>
+    suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<ResponseWrapper<GetEnvironmentResponse>>
 
-    @GET("/environments")
-    suspend fun getEnvironments(): Response<List<GetEnvironmentResponse>>
+    @GET("environments")
+    suspend fun getEnvironments(): Response<ResponseWrapper<List<GetEnvironmentResponse>>>
 
-    @PUT("/environments/{environmentId}")
-    suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest)
+    // checking
+    @PUT("environments/{environmentId}")
+    suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest): Response<Unit>
 
-    @GET("/environments/api-keys")
-    suspend fun getApiKeys(): Response<List<ApiKeys>>
+    @GET("environments/api-keys")
+    suspend fun getApiKeys(): Response<ResponseWrapper<List<ApiKeys>>>
 
-    @POST("/environments/api-keys/regenerate")
-    suspend fun regenerateApiKey(): Response<List<ApiKeys>>
+    @POST("environments/api-keys/regenerate")
+    suspend fun regenerateApiKey(): Response<ResponseWrapper<List<ApiKeys>>>
 
-    @PUT("/environments/api-keys/widget/settings")
-    suspend fun updateWidgetSettings(@Body request: Widget): Response<GetEnvironmentResponse>
+    @PUT("environments/api-keys/widget/settings")
+    suspend fun updateWidgetSettings(@Body request: Widget): Response<ResponseWrapper<GetEnvironmentResponse>>
 }

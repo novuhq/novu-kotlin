@@ -13,7 +13,7 @@ import java.math.BigInteger
 public interface ChangesApi {
 
     @GET("changes")
-    suspend fun getChanges(@Query("page") page: BigInteger, @Query("limit") limit: BigInteger, @Query("promoted") promoted: String): Response<PaginatedResponseWrapper<ChangesResponse>>
+    suspend fun getChanges(@Query("page") page: BigInteger? = null, @Query("limit") limit: BigInteger? = null, @Query("promoted") promoted: String? = null): Response<PaginatedResponseWrapper<ChangesResponse>>
 
     @GET("changes/count")
     suspend fun getChangesCount(): Response<ResponseWrapper<BigInteger>>
@@ -22,5 +22,5 @@ public interface ChangesApi {
     suspend fun applyChanges(): Response<ResponseWrapper<List<ChangesResponse>>>
 
     @POST("changes/{changedId}/apply")
-    suspend fun applyChange(@Path("changedId") changedId: String): Response<ResponseWrapper<ChangesResponse>>
+    suspend fun applyChange(@Path("changedId") changedId: String): Response<ResponseWrapper<List<ChangesResponse>>>
 }

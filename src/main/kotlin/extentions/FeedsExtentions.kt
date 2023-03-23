@@ -7,19 +7,28 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 fun Novu.createFeed(body: CreateByNameRequest) = runBlocking {
-    feedsApi.createFeed(body)
-        .body()
-        .apply { logger.info { this } }
+    val response = feedsApi.createFeed(body)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getFeeds() = runBlocking {
-    feedsApi.getFeeds()
-        .body()
-        .apply { logger.info { this } }
+    val response = feedsApi.getFeeds()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.deleteFeed(feedId: String) = runBlocking {
-    feedsApi.deleteFeed(feedId)
-        .body()
-        .apply { logger.info { this } }
+    val response = feedsApi.deleteFeed(feedId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

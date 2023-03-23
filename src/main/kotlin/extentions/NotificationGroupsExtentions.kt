@@ -8,13 +8,19 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 fun Novu.getNotificationGroups() = runBlocking {
-    notificationGroupsApi.getNotificationGroups()
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationGroupsApi.getNotificationGroups()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createNotificationGroup(request: CreateByNameRequest) = runBlocking {
-    notificationGroupsApi.createNotificationGroup(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = notificationGroupsApi.createNotificationGroup(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

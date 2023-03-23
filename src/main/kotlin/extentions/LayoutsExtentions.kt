@@ -9,35 +9,55 @@ import java.math.BigInteger
 private val logger = KotlinLogging.logger {}
 
 fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String) = runBlocking {
-    layoutsApi.filterLayouts(page, pageSize, sortBy, orderBy)
-        .body()
-        .apply { logger.info { this } }
+    val response = layoutsApi.filterLayouts(page, pageSize, sortBy, orderBy)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createLayout(request: CreateLayoutRequest) = runBlocking {
-    layoutsApi.createLayout(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = layoutsApi.createLayout(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getLayout(layoutId: String) = runBlocking {
-    layoutsApi.getLayout(layoutId)
-        .body()
-        .apply { logger.info { this } }
+    val response = layoutsApi.getLayout(layoutId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.deleteLayout(layoutId: String) = runBlocking {
-    layoutsApi.deleteLayout(layoutId)
-        .apply { logger.info { this } }
+    val response = layoutsApi.deleteLayout(layoutId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest) = runBlocking {
-    layoutsApi.updateLayout(layoutId, request)
-        .body()
-        .apply { logger.info { this } }
+    val response = layoutsApi.updateLayout(layoutId, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.setDefaultLayout(layoutId: String) = runBlocking {
-    layoutsApi.setDefaultLayout(layoutId)
-        .apply { logger.info { this } }
+    val response = layoutsApi.setDefaultLayout(layoutId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

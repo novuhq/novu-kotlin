@@ -7,7 +7,10 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 fun Novu.validateMxRecordSetupForInboundParse() = runBlocking {
-    inboundParseApi.validateMxRecordSetupForInboundParse()
-        .body()
-        .apply { logger.info { this } }
+    val response = inboundParseApi.validateMxRecordSetupForInboundParse()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

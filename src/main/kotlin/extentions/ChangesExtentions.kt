@@ -7,24 +7,36 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getChanges(page: BigInteger, limit: BigInteger, promoted: String) = runBlocking {
-    changesApi.getChanges(page, limit, promoted)
-        .body()
-        .apply { logger.info { this } }
+fun Novu.getChanges(page: BigInteger? = null, limit: BigInteger? = null, promoted: String? = null) = runBlocking {
+    val response = changesApi.getChanges(page, limit, promoted)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 fun Novu.getChangesCount() = runBlocking {
-    changesApi.getChangesCount()
-        .body()
-        .apply { logger.info { this } }
+    val response = changesApi.getChangesCount()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 fun Novu.applyChanges() = runBlocking {
-    changesApi.applyChanges()
-        .body()
-        .apply { logger.info { this } }
+    val response = changesApi.applyChanges()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.applychange(changeId: String) = runBlocking {
-    changesApi.applyChange(changedId = changeId)
-        .body()
-        .apply { logger.info { this } }
+    val response = changesApi.applyChange(changedId = changeId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

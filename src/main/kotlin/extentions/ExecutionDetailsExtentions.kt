@@ -6,7 +6,10 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 fun Novu.getExecutionDetails(notificationId: String, subscriberId: String) = runBlocking {
-    executionDetailsApi.getExecutionDetails(notificationId, subscriberId)
-        .body()
-        .apply { logger.info { this } }
+    val response = executionDetailsApi.getExecutionDetails(notificationId, subscriberId)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }

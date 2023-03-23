@@ -10,42 +10,64 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 fun Novu.getCurrentEnvironment() = runBlocking {
-    environmentsApi.getCurrentEnvironment()
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.getCurrentEnvironment()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
-    environmentsApi.createEnvironment(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.createEnvironment(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getEnvironments() = runBlocking {
-    environmentsApi.getEnvironments()
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.getEnvironments()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequest) = runBlocking {
-    environmentsApi.updateEnvironment(environmentId, request)
-        .apply { logger.info { this } }
+    val response = environmentsApi.updateEnvironment(environmentId, request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.getApiKeys() = runBlocking {
-    environmentsApi.getApiKeys()
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.getApiKeys()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.regenrateApiKey() = runBlocking {
-    environmentsApi.regenerateApiKey()
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.regenerateApiKey()
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
 
 fun Novu.updateWidgetSettings(request: Widget) = runBlocking {
-    environmentsApi.updateWidgetSettings(request)
-        .body()
-        .apply { logger.info { this } }
+    val response = environmentsApi.updateWidgetSettings(request)
+    if (response.isSuccessful) {
+        response.body().apply { logger.info { this } }
+    } else {
+        response.errorBody()?.string().apply { logger.error { this } }
+    }
 }
