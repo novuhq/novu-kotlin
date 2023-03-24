@@ -2,7 +2,6 @@ package co.novu.api
 
 import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.FeedResponse
-import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import retrofit2.Response
 import retrofit2.http.Body

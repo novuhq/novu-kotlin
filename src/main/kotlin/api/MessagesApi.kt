@@ -14,10 +14,10 @@ import java.math.BigInteger
 interface MessagesApi {
     @GET("messages")
     suspend fun getMessages(
-        @Query("channel") channel: String?=null,
-        @Query("subscriberId") subscriberId: String?=null,
-        @Query("limit") limit: BigInteger?=null,
-        @Query("page") page: BigInteger?=null
+        @Query("channel") channel: String? = null,
+        @Query("subscriberId") subscriberId: String? = null,
+        @Query("limit") limit: BigInteger? = null,
+        @Query("page") page: BigInteger? = null
     ): Response<PaginatedResponseWrapper<Message>>
 
     @DELETE("messages/{messageId}")

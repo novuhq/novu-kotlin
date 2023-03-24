@@ -48,7 +48,7 @@ interface SubscribersApi {
     suspend fun updateSubscriberOnlineStatus(@Path("subscriberId")subscriberId: String, @Body request: UpdateSubscriberOnlineStatusRequest): Response<ResponseWrapper<SubscriberResponse>>
 
     @GET("subscribers/{subscriberId}/preferences")
-    suspend fun getSubscriberPreferences(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<SubscriberPreferenceResponse>>
+    suspend fun getSubscriberPreferences(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<List<SubscriberPreferenceResponse>>>
 
     @PUT("subscribers/{subscriberId}/preferences/{templateId}")
     suspend fun updateSubscriberPreferences(
@@ -61,18 +61,18 @@ interface SubscribersApi {
     suspend fun getSubscriberNotificationsFeed(@Path("subscriberId") subscriberId: String): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
 
     @GET("subscribers/{subscriberId}/notifications/unseen")
-    suspend fun getSubscriberUnseenNotificationsCount(@Path("subscriberId") subscriberId: String): Response<UnseenNotificationsCountResponse>
+    suspend fun getSubscriberUnseenNotificationsCount(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<UnseenNotificationsCountResponse>>
 
     @POST("subscribers/{subscriberId}/messages/markAs")
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
         @Body request: MarkSubscriberFeedAsRequest
-    ): Response<SubscriberNotificationResponse>
+    ): Response<ResponseWrapper<SubscriberNotificationResponse>>
 
     @POST("subscribers/{subscriberId}/messages/{messageId}/actions/{type}")
     suspend fun markMessageActionAsSeen(
         @Path("subscriberId") subscriberId: String,
         @Path("messageId") messageId: String,
         @Path("type") type: String
-    ): Response<SubscriberNotificationResponse>
+    ): Response<ResponseWrapper<SubscriberNotificationResponse>>
 }

@@ -1,7 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.ExecutionDetails
-import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.extensions.getExecutionDetails
 import com.google.gson.Gson
@@ -10,7 +9,6 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.Test
-import java.math.BigInteger
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ExecutionDetailsApiTest {

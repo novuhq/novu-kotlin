@@ -23,9 +23,9 @@ import co.novu.extensions.getSubscriber
 import co.novu.extensions.getSubscriberNotificationsFeed
 import co.novu.extensions.getSubscriberPreferences
 import co.novu.extensions.getSubscriberUnseenNotificationsCount
+import co.novu.extensions.getSubscribers
 import co.novu.extensions.markMessageActionAsSeen
 import co.novu.extensions.markSubscriberFeedAs
-import co.novu.extensions.subscribers
 import co.novu.extensions.updateSubscriber
 import co.novu.extensions.updateSubscriberCredentials
 import co.novu.extensions.updateSubscriberOnlineStatus
@@ -81,7 +81,7 @@ class SubscriberApiTest {
             totalCount = BigInteger.TEN
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.subscribers(BigInteger.TEN)
+        val result = mockNovu.getSubscribers(BigInteger.TEN)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers?page=10")
         assert(request.method == "GET")
@@ -335,15 +335,17 @@ class SubscriberApiTest {
     @Test
     fun testGetSubscriberPreferences() = runTest {
         val responseBody = ResponseWrapper(
-            SubscriberPreferenceResponse(
-                template = Template(
-                    _id = "123",
-                    name = "name",
-                    critical = true
-                ),
-                preference = Preference(
-                    enabled = true,
-                    channels = "channels"
+            listOf(
+                SubscriberPreferenceResponse(
+                    template = Template(
+                        _id = "123",
+                        name = "name",
+                        critical = true
+                    ),
+                    preference = Preference(
+                        enabled = true,
+                        channels = "channels"
+                    )
                 )
             )
         )
@@ -437,9 +439,11 @@ class SubscriberApiTest {
     }
 
     @Test
-    fun testGetUnseenNotificationsCountForSubscriber() = runTest {
-        val responseBody = UnseenNotificationsCountResponse(
-            count = BigInteger.TEN
+    fun testGetSubscriberUnseenNotificationsCount() = runTest {
+        val responseBody = ResponseWrapper(
+            UnseenNotificationsCountResponse(
+                count = BigInteger.TEN
+            )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getSubscriberUnseenNotificationsCount("123")
@@ -452,37 +456,39 @@ class SubscriberApiTest {
 
     @Test
     fun testMarkSubscriberFeedAs() = runTest {
-        val responseBody = SubscriberNotificationResponse(
-            _id = "123",
-            _organizationId = "_organizationId",
-            _environmentId = "_environmentId",
-            _messageTemplateId = "_messageTemplateId",
-            _subscriberId = "_subscriberId",
-            subscriber = "subscriber",
-            template = "template",
-            templateIdentifier = "templateIdentifier",
-            createdAt = "createdAt",
-            content = "content",
-            transactionId = "transactionId",
-            channel = "channel",
-            seen = true,
-            email = "email@email.com",
-            phone = "phone",
-            status = "status",
-            directWebhookUrl = "directWebhookUrl",
-            providerId = "providerId",
-            deviceTokens = listOf("deviceTokens"),
-            title = "title",
-            lastSeenDate = "lastSeenDate",
-            cta = "cta",
-            _feedId = "_feedId",
-            errorId = "errorId",
-            errorText = "errorText",
-            payload = "payload",
-            overrides = "overrides",
-            subject = "subject",
-            _notificationId = "_notificationId",
-            _templateId = "_templateId"
+        val responseBody = ResponseWrapper(
+            SubscriberNotificationResponse(
+                _id = "123",
+                _organizationId = "_organizationId",
+                _environmentId = "_environmentId",
+                _messageTemplateId = "_messageTemplateId",
+                _subscriberId = "_subscriberId",
+                subscriber = "subscriber",
+                template = "template",
+                templateIdentifier = "templateIdentifier",
+                createdAt = "createdAt",
+                content = "content",
+                transactionId = "transactionId",
+                channel = "channel",
+                seen = true,
+                email = "email@email.com",
+                phone = "phone",
+                status = "status",
+                directWebhookUrl = "directWebhookUrl",
+                providerId = "providerId",
+                deviceTokens = listOf("deviceTokens"),
+                title = "title",
+                lastSeenDate = "lastSeenDate",
+                cta = "cta",
+                _feedId = "_feedId",
+                errorId = "errorId",
+                errorText = "errorText",
+                payload = "payload",
+                overrides = "overrides",
+                subject = "subject",
+                _notificationId = "_notificationId",
+                _templateId = "_templateId"
+            )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = MarkSubscriberFeedAsRequest(
@@ -503,37 +509,39 @@ class SubscriberApiTest {
 
     @Test
     fun testMarkMessageActionAsSeen() = runTest {
-        val responseBody = SubscriberNotificationResponse(
-            _id = "123",
-            _organizationId = "_organizationId",
-            _environmentId = "_environmentId",
-            _messageTemplateId = "_messageTemplateId",
-            _subscriberId = "_subscriberId",
-            subscriber = "subscriber",
-            template = "template",
-            templateIdentifier = "templateIdentifier",
-            createdAt = "createdAt",
-            content = "content",
-            transactionId = "transactionId",
-            channel = "channel",
-            seen = true,
-            email = "email@email.com",
-            phone = "phone",
-            status = "status",
-            directWebhookUrl = "directWebhookUrl",
-            providerId = "providerId",
-            deviceTokens = listOf("deviceTokens"),
-            title = "title",
-            lastSeenDate = "lastSeenDate",
-            cta = "cta",
-            _feedId = "_feedId",
-            errorId = "errorId",
-            errorText = "errorText",
-            payload = "payload",
-            overrides = "overrides",
-            subject = "subject",
-            _notificationId = "_notificationId",
-            _templateId = "_templateId"
+        val responseBody = ResponseWrapper(
+            SubscriberNotificationResponse(
+                _id = "123",
+                _organizationId = "_organizationId",
+                _environmentId = "_environmentId",
+                _messageTemplateId = "_messageTemplateId",
+                _subscriberId = "_subscriberId",
+                subscriber = "subscriber",
+                template = "template",
+                templateIdentifier = "templateIdentifier",
+                createdAt = "createdAt",
+                content = "content",
+                transactionId = "transactionId",
+                channel = "channel",
+                seen = true,
+                email = "email@email.com",
+                phone = "phone",
+                status = "status",
+                directWebhookUrl = "directWebhookUrl",
+                providerId = "providerId",
+                deviceTokens = listOf("deviceTokens"),
+                title = "title",
+                lastSeenDate = "lastSeenDate",
+                cta = "cta",
+                _feedId = "_feedId",
+                errorId = "errorId",
+                errorText = "errorText",
+                payload = "payload",
+                overrides = "overrides",
+                subject = "subject",
+                _notificationId = "_notificationId",
+                _templateId = "_templateId"
+            )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val subscriberId = "123"

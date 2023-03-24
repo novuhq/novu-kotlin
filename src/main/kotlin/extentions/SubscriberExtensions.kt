@@ -13,7 +13,7 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.subscribers(page: BigInteger? = null) = runBlocking {
+fun Novu.getSubscribers(page: BigInteger? = null) = runBlocking {
     val response = subscribersApi.getSubscribers(page)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

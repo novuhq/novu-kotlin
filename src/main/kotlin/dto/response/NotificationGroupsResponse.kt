@@ -10,5 +10,5 @@ data class NotificationGroupsResponse(
     var _parentId: String? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null,
-    var __v: BigInteger? = null,
+    var __v: BigInteger? = null
 )

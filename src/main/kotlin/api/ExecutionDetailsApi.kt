@@ -1,7 +1,6 @@
 package co.novu.api
 
 import co.novu.dto.ExecutionDetails
-import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import retrofit2.Response
 import retrofit2.http.GET

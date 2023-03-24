@@ -11,7 +11,6 @@ import co.novu.extensions.getNotificationGraphStats
 import co.novu.extensions.getNotifications
 import co.novu.extensions.getNotificationsStats
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
@@ -33,11 +32,13 @@ class NotificationsApiTest {
     @Test
     @DisplayName("Get Notification Stats")
     fun testGetNotificationStats() = runTest {
-        val responseBody = ResponseWrapper(NotificationStatsResponse(
-            BigInteger.ONE,
-            BigInteger.ONE,
-            BigInteger.ONE
-        ))
+        val responseBody = ResponseWrapper(
+            NotificationStatsResponse(
+                BigInteger.ONE,
+                BigInteger.ONE,
+                BigInteger.ONE
+            )
+        )
         mockWebServer.enqueue(
             MockResponse()
                 .setBody(Gson().toJson(responseBody))

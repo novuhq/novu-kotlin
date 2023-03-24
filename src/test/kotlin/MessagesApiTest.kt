@@ -11,10 +11,10 @@ import co.novu.dto.Trigger
 import co.novu.dto.Variables
 import co.novu.dto.response.Message
 import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.events.TriggerResponse
 import co.novu.extensions.deleteMessage
 import co.novu.extensions.getMessages
-import co.novu.extentions.filterLayouts
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -132,17 +132,18 @@ class MessagesApiTest {
 
     @Test
     fun testDeleteMessage() = runTest {
-        val responseBody = TriggerResponse(
-            acknowledged = true,
-            status = "status"
+        val responseBody = ResponseWrapper(
+            TriggerResponse(
+                acknowledged = true,
+                status = "status"
+            )
         )
         val messageId = "messageId"
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.deleteMessage(messageId)
         val request = mockWebServer.takeRequest()
-        assert(request.path == "/message/$messageId")
+        assert(request.path == "/messages/$messageId")
         assert(request.method == "DELETE")
         assert(result == responseBody)
     }
-
 }

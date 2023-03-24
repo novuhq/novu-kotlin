@@ -2,6 +2,8 @@ package co.novu.api
 
 import co.novu.dto.request.UpdateNotificationTemplateStatusRequest
 import co.novu.dto.response.NotificationTemplates
+import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -15,20 +17,20 @@ import java.math.BigInteger
 interface NotificationTemplatesApi {
 
     @GET("notification-templates")
-    suspend fun getNotificationTemplates(@Query("page") page: BigInteger? = BigInteger.valueOf(1), @Query("limit") limit: BigInteger? = BigInteger.valueOf(10)): Response<NotificationTemplates>
+    suspend fun getNotificationTemplates(@Query("page") page: BigInteger? = BigInteger.valueOf(1), @Query("limit") limit: BigInteger? = BigInteger.valueOf(10)): Response<PaginatedResponseWrapper<NotificationTemplates>>
 
     @POST("notification-templates")
-    suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<NotificationTemplates>
+    suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<ResponseWrapper<NotificationTemplates>>
 
-    @PUT("notification-templates")
-    suspend fun updateNotificationTemplates(@Query("templateId") templateId: String, @Body request: NotificationTemplates): Response<NotificationTemplates>
+    @PUT("notification-templates/{templateId}")
+    suspend fun updateNotificationTemplates(@Path("templateId") templateId: String, @Body request: NotificationTemplates): Response<ResponseWrapper<NotificationTemplates>>
 
-    @DELETE("notification-templates")
-    suspend fun deleteNotificationTemplate(@Query("templateId") templateId: String): Response<Boolean>
+    @DELETE("notification-templates/{templateId}")
+    suspend fun deleteNotificationTemplate(@Path("templateId") templateId: String): Response<ResponseWrapper<Boolean>>
 
     @GET("notification-templates/{templateId}")
-    suspend fun getNotificationTemplate(@Path("templateId") templateId: String): Response<NotificationTemplates>
+    suspend fun getNotificationTemplate(@Path("templateId") templateId: String): Response<ResponseWrapper<NotificationTemplates>>
 
     @PUT("notification-templates/{templateId}/status")
-    suspend fun updateNotificationTemplateStatus(@Path("templateId") templateId: String, @Body request: UpdateNotificationTemplateStatusRequest): Response<NotificationTemplates>
+    suspend fun updateNotificationTemplateStatus(@Path("templateId") templateId: String, @Body request: UpdateNotificationTemplateStatusRequest): Response<ResponseWrapper<NotificationTemplates>>
 }

@@ -11,5 +11,5 @@ data class FeedResponse(
     var updatedAt: String? = null,
     var createdAt: String? = null,
     var __v: BigDecimal? = null,
-    var deleted: Boolean? = null,
+    var deleted: Boolean? = null
 )
