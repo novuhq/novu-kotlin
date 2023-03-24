@@ -2,6 +2,7 @@ import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.ExecutionDetails
 import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.extensions.getExecutionDetails
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,8 +22,8 @@ class ExecutionDetailsApiTest {
 
     @Test
     fun testGetExecutionDetails() = runTest {
-        val responseBody = PaginatedResponseWrapper(
-            data = listOf(
+        val responseBody = ResponseWrapper(
+            listOf(
                 ExecutionDetails(
                     _id = "_id",
                     _jobId = "_jobId",
@@ -42,8 +43,7 @@ class ExecutionDetailsApiTest {
                     _notificationTemplateId = "_notificationTemplateId",
                     _messageId = "_messageId"
                 )
-            ),
-            totalCount = BigInteger.TEN
+            )
         )
         mockWebServer.enqueue(
             MockResponse()

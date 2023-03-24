@@ -3,6 +3,7 @@ import co.novu.NovuConfig
 import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.FeedResponse
 import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.extensions.createFeed
 import co.novu.extensions.deleteFeed
 import co.novu.extensions.getFeeds
@@ -24,13 +25,16 @@ class FeedsApiTest {
 
     @Test
     fun testCreateFeed() = runTest {
-        val responseBody = FeedResponse(
+        val responseBody = ResponseWrapper(FeedResponse(
             _id = "123",
             name = "test",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
-            identifier = "identifier"
-        )
+            identifier = "identifier",
+            deleted = false,
+            createdAt = "createdAt",
+            updatedAt = "updatedAt"
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = CreateByNameRequest(
@@ -46,8 +50,8 @@ class FeedsApiTest {
 
     @Test
     fun testGetFeeds() = runTest {
-        val responseBody = PaginatedResponseWrapper(
-            data = listOf(
+        val responseBody = ResponseWrapper(
+            listOf(
                 FeedResponse(
                     _id = "123",
                     name = "test",
@@ -55,8 +59,7 @@ class FeedsApiTest {
                     _organizationId = "organizationId",
                     identifier = "identifier"
                 )
-            ),
-            totalCount = BigInteger.TEN
+            )
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -69,13 +72,14 @@ class FeedsApiTest {
 
     @Test
     fun testDeleteFeed() = runTest {
-        val responseBody = FeedResponse(
+        val responseBody = ResponseWrapper(FeedResponse(
             _id = "123",
             name = "test",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
-            identifier = "identifier"
-        )
+            identifier = "identifier",
+            deleted = true
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val feedId = "123"

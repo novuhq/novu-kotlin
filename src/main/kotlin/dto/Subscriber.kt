@@ -1,6 +1,7 @@
 package co.novu.dto
 
 open class Subscriber(
+    var id: String? = null,
     var subscriberId: String? = null,
     var firstName: String? = null,
     var lastName: String? = null,

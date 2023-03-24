@@ -1,6 +1,7 @@
 package co.novu.dto.response.integrations
 
 import co.novu.dto.Credential
+import java.math.BigDecimal
 
 data class IntegrationReponse(
     var _id: String? = null,
@@ -11,6 +12,7 @@ data class IntegrationReponse(
     var credential: Credential? = null,
     var active: Boolean? = null,
     var deleted: Boolean? = null,
-    var deletedAt: String? = null,
-    var deletedBy: String? = null
+    var createdAt: String? = null,
+    var updatedAt: String? = null,
+    var __v: BigDecimal? = null
 )

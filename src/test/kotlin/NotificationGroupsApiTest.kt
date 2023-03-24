@@ -3,6 +3,7 @@ import co.novu.NovuConfig
 import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.NotificationGroupsResponse
 import co.novu.extensions.createNotificationGroup
+import co.novu.extensions.deleteMessage
 import co.novu.extensions.getNotificationGroups
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -56,4 +57,5 @@ class NotificationGroupsApiTest {
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(response == responseBody)
     }
+
 }

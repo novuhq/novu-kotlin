@@ -1,6 +1,7 @@
 package co.novu.api
 
 import co.novu.dto.request.integrations.IntegrationRequest
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.integrations.IntegrationReponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -12,20 +13,20 @@ import retrofit2.http.Path
 
 interface IntegrationsApi {
     @GET("integrations")
-    suspend fun getIntegrations(): Response<List<IntegrationReponse>>
+    suspend fun getIntegrations(): Response<ResponseWrapper<List<IntegrationReponse>>>
 
     @POST("integrations")
-    suspend fun createIntegration(@Body request: IntegrationRequest): Response<IntegrationReponse>
+    suspend fun createIntegration(@Body request: IntegrationRequest): Response<ResponseWrapper<IntegrationReponse>>
 
     @GET("integrations/active")
-    suspend fun getActiveIntegrations(): Response<List<IntegrationReponse>>
+    suspend fun getActiveIntegrations(): Response<ResponseWrapper<List<IntegrationReponse>>>
 
     @GET("integrations/webhook/provider/{providerId}/status")
-    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Response<IntegrationReponse>
+    suspend fun getProviderWebhook(@Path("providerId") providerId: String): Response<ResponseWrapper<Boolean>>
 
     @PUT("integrations/{integrationId}")
-    suspend fun updateIntegration(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): Response<IntegrationReponse>
+    suspend fun updateIntegration(@Path("integrationId") integrationId: String, @Body request: IntegrationRequest): Response<ResponseWrapper<IntegrationReponse>>
 
     @DELETE("integrations/{integrationId}")
-    suspend fun deleteIntegration(@Path("integrationId") integrationId: String): Response<IntegrationReponse>
+    suspend fun deleteIntegration(@Path("integrationId") integrationId: String): Response<ResponseWrapper<List<IntegrationReponse>>>
 }

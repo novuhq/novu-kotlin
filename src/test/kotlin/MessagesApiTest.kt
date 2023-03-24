@@ -14,6 +14,7 @@ import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.events.TriggerResponse
 import co.novu.extensions.deleteMessage
 import co.novu.extensions.getMessages
+import co.novu.extentions.filterLayouts
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -40,7 +41,6 @@ class MessagesApiTest {
                     _organizationId = "organizationId",
                     transactionId = "transactionId",
                     createdAt = "createdAt",
-                    channels = "channels",
                     subscriber = Subscriber(
                         subscriberId = "subscriberId",
                         email = "email",
@@ -144,4 +144,5 @@ class MessagesApiTest {
         assert(request.method == "DELETE")
         assert(result == responseBody)
     }
+
 }

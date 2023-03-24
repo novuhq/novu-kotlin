@@ -61,7 +61,7 @@ class EnvironmentsApiTest {
 
     @Test
     fun testCreateEnvironment() = runTest {
-        val responseBody = GetEnvironmentResponse(
+        val responseBody = ResponseWrapper(GetEnvironmentResponse(
             _id = "1234",
             name = "name",
             _organizationId = "orgId",
@@ -76,6 +76,7 @@ class EnvironmentsApiTest {
                 notificationCenterEncryption = true
             ),
             _parentId = "parentId"
+        )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = CreateEnvironmentRequest(
@@ -93,7 +94,7 @@ class EnvironmentsApiTest {
 
     @Test
     fun testGetEnvironment() = runTest {
-        val responseBody = listOf(
+        val responseBody = ResponseWrapper(listOf(
             GetEnvironmentResponse(
                 _id = "1234",
                 name = "name",
@@ -111,6 +112,7 @@ class EnvironmentsApiTest {
                 _parentId = "parentId"
 
             )
+        )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getEnvironments()
@@ -144,12 +146,12 @@ class EnvironmentsApiTest {
 
     @Test
     fun testGetApiKeys() = runTest {
-        val responseBody = listOf(
+        val responseBody = ResponseWrapper(listOf(
             ApiKeys(
                 key = "key",
                 _userId = "userId"
             )
-        )
+        ))
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getApiKeys()
         val request = mockWebServer.takeRequest()
@@ -161,12 +163,12 @@ class EnvironmentsApiTest {
 
     @Test
     fun testRegenerateApiKey() = runTest {
-        val responseBody = listOf(
+        val responseBody = ResponseWrapper(listOf(
             ApiKeys(
                 key = "key",
                 _userId = "userId"
             )
-        )
+        ))
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.regenrateApiKey()
         val request = mockWebServer.takeRequest()
@@ -178,7 +180,7 @@ class EnvironmentsApiTest {
 
     @Test
     fun testUpdateWidgetSettings() = runTest {
-        val responseBody = GetEnvironmentResponse(
+        val responseBody = ResponseWrapper(GetEnvironmentResponse(
             _id = "1234",
             name = "name",
             _organizationId = "orgId",
@@ -194,7 +196,7 @@ class EnvironmentsApiTest {
             ),
             _parentId = "parentId"
 
-        )
+        ))
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val requestBody = Widget(
             notificationCenterEncryption = true

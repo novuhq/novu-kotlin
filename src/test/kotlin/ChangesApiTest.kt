@@ -109,6 +109,7 @@ class ChangesApiTest {
     @Test
     fun testApplyChange() = runTest {
         val responseBody = ResponseWrapper(
+            listOf(
             ChangesResponse(
                 _id = "_id",
                 _creatorId = "_creatorId",
@@ -121,6 +122,7 @@ class ChangesApiTest {
                 createdAt = "createdAt",
                 _parentId = "_parentId"
             )
+        )
         )
 
         mockWebServer.enqueue(

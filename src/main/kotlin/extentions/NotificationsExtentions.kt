@@ -6,7 +6,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotifications(channels: List<String>, templates: List<String>, emails: List<String>, search: String, page: String? = null, transactionId: String? = null) = runBlocking {
+fun Novu.getNotifications(channels: List<String>?=null, templates: List<String>?=null, emails: List<String>?=null, search: String?=null, page: String? = null, transactionId: String? = null) = runBlocking {
     val response = notificationsApi.getNotifications(channels, templates, emails, search, page, transactionId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

@@ -2,6 +2,7 @@ import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.Credential
 import co.novu.dto.request.integrations.IntegrationRequest
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.integrations.IntegrationReponse
 import co.novu.extensions.createIntegration
 import co.novu.extensions.deleteIntegration
@@ -26,7 +27,7 @@ class IntegrationsApiTest {
 
     @Test
     fun testGetIntegrations() = runTest {
-        val responseBody = listOf(
+        val responseBody = ResponseWrapper(listOf(
             IntegrationReponse(
                 _id = "123",
                 _environmentId = "enviromentId",
@@ -35,8 +36,6 @@ class IntegrationsApiTest {
                 channel = "channel",
                 credential = Credential(
                     apiKey = "apiKey",
-                    user = "user",
-                    password = "password",
                     secretKey = "secretKey",
                     token = "token",
                     host = "host",
@@ -53,10 +52,9 @@ class IntegrationsApiTest {
                     domain = "domain"
                 ),
                 active = true,
-                deleted = false,
-                deletedAt = "deletedAt",
-                deletedBy = "deletedBy"
+                deleted = false
             )
+        )
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -69,7 +67,7 @@ class IntegrationsApiTest {
 
     @Test
     fun testCreateIntegrations() = runTest {
-        val responseBody = IntegrationReponse(
+        val responseBody = ResponseWrapper(IntegrationReponse(
             _id = "123",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
@@ -96,9 +94,7 @@ class IntegrationsApiTest {
             ),
             active = true,
             deleted = false,
-            deletedAt = "deletedAt",
-            deletedBy = "deletedBy"
-        )
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = IntegrationRequest(
@@ -137,7 +133,7 @@ class IntegrationsApiTest {
 
     @Test
     fun testGetActiveIntegrations() = runTest {
-        val responseBody = listOf(
+        val responseBody = ResponseWrapper(listOf(
             IntegrationReponse(
                 _id = "123",
                 _environmentId = "enviromentId",
@@ -164,11 +160,9 @@ class IntegrationsApiTest {
                     domain = "domain"
                 ),
                 active = true,
-                deleted = false,
-                deletedAt = "deletedAt",
-                deletedBy = "deletedBy"
+                deleted = false
             )
-        )
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val result = mockNovu.getActiveIntegrations()
@@ -180,36 +174,7 @@ class IntegrationsApiTest {
 
     @Test
     fun testGetProviderWebHook() = runTest {
-        val responseBody = IntegrationReponse(
-            _id = "123",
-            _environmentId = "enviromentId",
-            _organizationId = "organizationId",
-            providerId = "providerId",
-            channel = "channel",
-            credential = Credential(
-                apiKey = "apiKey",
-                user = "user",
-                password = "password",
-                secretKey = "secretKey",
-                token = "token",
-                host = "host",
-                port = "port",
-                secure = true,
-                region = "region",
-                accountSid = "accountSid",
-                messageProfileId = "messageProfileId",
-                from = "from",
-                senderName = "senderName",
-                projectName = "projectName",
-                applicationId = "applicationId",
-                clientId = "clientId",
-                domain = "domain"
-            ),
-            active = true,
-            deleted = false,
-            deletedAt = "deletedAt",
-            deletedBy = "deletedBy"
-        )
+        val responseBody = ResponseWrapper(true)
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val providerId = "providerId"
@@ -223,7 +188,7 @@ class IntegrationsApiTest {
 
     @Test
     fun testUpdateIntegration() = runTest {
-        val responseBody = IntegrationReponse(
+        val responseBody = ResponseWrapper(IntegrationReponse(
             _id = "123",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
@@ -250,9 +215,7 @@ class IntegrationsApiTest {
             ),
             active = true,
             deleted = false,
-            deletedAt = "deletedAt",
-            deletedBy = "deletedBy"
-        )
+        ))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
@@ -294,7 +257,8 @@ class IntegrationsApiTest {
 
     @Test
     fun testDeleteIntegration() = runTest {
-        val responseBody = IntegrationReponse(
+        val responseBody = ResponseWrapper(
+            listOf(IntegrationReponse(
             _id = "123",
             _environmentId = "enviromentId",
             _organizationId = "organizationId",
@@ -321,9 +285,7 @@ class IntegrationsApiTest {
             ),
             active = true,
             deleted = false,
-            deletedAt = "deletedAt",
-            deletedBy = "deletedBy"
-        )
+        )))
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val integrationId = "integrationId"

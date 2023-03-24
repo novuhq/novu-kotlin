@@ -15,7 +15,8 @@ data class ExecutionDetails(
     val detail: String? = null,
     val isRetry: Boolean? = null,
     val isTest: Boolean? = null,
-    val raw: String? = null,
+    val raw: Any? = null,
     val source: String? = null,
-    val createdAt: String? = null
+    val createdAt: String? = null,
+    var updatedAt: String? = null,
 )

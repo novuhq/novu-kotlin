@@ -2,6 +2,7 @@ package co.novu.api
 
 import co.novu.dto.response.Message
 import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.events.TriggerResponse
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -13,12 +14,12 @@ import java.math.BigInteger
 interface MessagesApi {
     @GET("messages")
     suspend fun getMessages(
-        @Query("channel") channel: String,
-        @Query("subscriberId") subscriberId: String,
-        @Query("limit") limit: BigInteger,
-        @Query("page") page: BigInteger
+        @Query("channel") channel: String?=null,
+        @Query("subscriberId") subscriberId: String?=null,
+        @Query("limit") limit: BigInteger?=null,
+        @Query("page") page: BigInteger?=null
     ): Response<PaginatedResponseWrapper<Message>>
 
-    @DELETE("message/{messageId}")
-    suspend fun deleteMessage(@Path("messageId") messageId: String): Response<TriggerResponse>
+    @DELETE("messages/{messageId}")
+    suspend fun deleteMessage(@Path("messageId") messageId: String): Response<ResponseWrapper<TriggerResponse>>
 }
