@@ -154,7 +154,7 @@ class TopicsApiTest {
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")
-        assert(request.path == "/topics/?topicKey=$topicKey")
+        assert(request.path == "/topics?topicKey=$topicKey")
         assert(responseBody == result)
     }
 
