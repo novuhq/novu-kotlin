@@ -6,7 +6,7 @@ import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
-fun Novu.getIntegrations() = runBlocking {
+fun Novu.integrations() = runBlocking {
     val response = integrationsApi.getIntegrations()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -24,7 +24,7 @@ fun Novu.createIntegration(request: IntegrationRequest) = runBlocking {
     }
 }
 
-fun Novu.getActiveIntegrations() = runBlocking {
+fun Novu.activeIntegrations() = runBlocking {
     val response = integrationsApi.getActiveIntegrations()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -33,7 +33,7 @@ fun Novu.getActiveIntegrations() = runBlocking {
     }
 }
 
-fun Novu.getProviderWebhook(providerId: String) = runBlocking {
+fun Novu.providerWebhook(providerId: String) = runBlocking {
     val response = integrationsApi.getProviderWebhook(providerId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

@@ -2,7 +2,7 @@ import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.ExecutionDetails
 import co.novu.dto.response.ResponseWrapper
-import co.novu.extensions.getExecutionDetails
+import co.novu.extensions.executionDetails
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -50,7 +50,7 @@ class ExecutionDetailsApiTest {
         )
         val notificationId = "notificationId"
         val subscriberId = "subscriberId"
-        val result = mockNovu.getExecutionDetails(notificationId, subscriberId)
+        val result = mockNovu.executionDetails(notificationId, subscriberId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")

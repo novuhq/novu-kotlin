@@ -5,8 +5,8 @@ import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.changes.ChangesResponse
 import co.novu.extensions.applyChanges
 import co.novu.extensions.applychange
-import co.novu.extensions.getChanges
-import co.novu.extensions.getChangesCount
+import co.novu.extensions.changes
+import co.novu.extensions.changesCount
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -52,7 +52,7 @@ class ChangesApiTest {
         val page = BigInteger.ONE
         val limit = BigInteger.TEN
         val promoted = "promoted"
-        val result = mockNovu.getChanges(page, limit, promoted)
+        val result = mockNovu.changes(page, limit, promoted)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")
@@ -67,7 +67,7 @@ class ChangesApiTest {
             MockResponse().setResponseCode(200)
                 .setBody(Gson().toJson(responseBody))
         )
-        val result = mockNovu.getChangesCount()
+        val result = mockNovu.changesCount()
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/changes/count")

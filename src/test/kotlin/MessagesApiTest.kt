@@ -14,7 +14,7 @@ import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.events.TriggerResponse
 import co.novu.extensions.deleteMessage
-import co.novu.extensions.getMessages
+import co.novu.extensions.messages
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -123,7 +123,7 @@ class MessagesApiTest {
         val subscriberId = "subscriberId"
         val limit = BigInteger.TEN
         val page = BigInteger.ONE
-        val result = mockNovu.getMessages(channel, subscriberId, limit, page)
+        val result = mockNovu.messages(channel, subscriberId, limit, page)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/messages?channel=$channel&subscriberId=$subscriberId&limit=$limit&page=$page")
         assert(request.method == "GET")

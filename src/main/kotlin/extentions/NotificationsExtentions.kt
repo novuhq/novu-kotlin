@@ -6,7 +6,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotifications(channels: List<String>? = null, templates: List<String>? = null, emails: List<String>? = null, search: String? = null, page: String? = null, transactionId: String? = null) = runBlocking {
+fun Novu.notifications(channels: List<String>? = null, templates: List<String>? = null, emails: List<String>? = null, search: String? = null, page: String? = null, transactionId: String? = null) = runBlocking {
     val response = notificationsApi.getNotifications(channels, templates, emails, search, page, transactionId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -15,7 +15,7 @@ fun Novu.getNotifications(channels: List<String>? = null, templates: List<String
     }
 }
 
-fun Novu.getNotificationsStats() = runBlocking {
+fun Novu.notificationsStats() = runBlocking {
     val response = notificationsApi.getNotificationsStats()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -24,7 +24,7 @@ fun Novu.getNotificationsStats() = runBlocking {
     }
 }
 
-fun Novu.getNotificationGraphStats() = runBlocking {
+fun Novu.notificationGraphStats() = runBlocking {
     val response = notificationsApi.getNotificationGraphStats()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -33,7 +33,7 @@ fun Novu.getNotificationGraphStats() = runBlocking {
     }
 }
 
-fun Novu.getNotification(notificationId: String) = runBlocking {
+fun Novu.notification(notificationId: String) = runBlocking {
     val response = notificationsApi.getNotification(notificationId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

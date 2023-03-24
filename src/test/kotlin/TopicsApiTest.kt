@@ -11,9 +11,9 @@ import co.novu.dto.response.topics.TopicResponse
 import co.novu.extensions.addSubscribers
 import co.novu.extensions.createTopic
 import co.novu.extensions.filterTopics
-import co.novu.extensions.getTopic
 import co.novu.extensions.removeSubscriber
 import co.novu.extensions.renameTopic
+import co.novu.extensions.topic
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -150,7 +150,7 @@ class TopicsApiTest {
                 .setBody(Gson().toJson(responseBody))
         )
         val topicKey = "test-topics"
-        val result = mockNovu.getTopic(topicKey)
+        val result = mockNovu.topic(topicKey)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")

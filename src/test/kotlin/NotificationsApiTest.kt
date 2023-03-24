@@ -6,10 +6,10 @@ import co.novu.dto.response.NotificationGraphStatsResponse
 import co.novu.dto.response.NotificationStatsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
-import co.novu.extensions.getNotification
-import co.novu.extensions.getNotificationGraphStats
-import co.novu.extensions.getNotifications
-import co.novu.extensions.getNotificationsStats
+import co.novu.extensions.notification
+import co.novu.extensions.notificationGraphStats
+import co.novu.extensions.notifications
+import co.novu.extensions.notificationsStats
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -45,7 +45,7 @@ class NotificationsApiTest {
                 .setResponseCode(200)
         )
 
-        val result = mockNovu.getNotificationsStats()
+        val result = mockNovu.notificationsStats()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/notifications/stats")
         assert(request.method == "GET")
@@ -68,7 +68,7 @@ class NotificationsApiTest {
             .setResponseCode(200)
             .setBody(Gson().toJson(responseBody))
         mockWebServer.enqueue(response)
-        val result = mockNovu.getNotificationGraphStats()
+        val result = mockNovu.notificationGraphStats()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/notifications/graph/stats")
         assert(request.method == "GET")
@@ -92,7 +92,7 @@ class NotificationsApiTest {
         val template = listOf("template")
         val emails = listOf("emails")
         val search = "search"
-        val result = mockNovu.getNotifications(channels, template, emails, "search")
+        val result = mockNovu.notifications(channels, template, emails, "search")
         val request = mockWebServer.takeRequest()
         var sb = StringBuilder()
         sb.append("?")
@@ -114,7 +114,7 @@ class NotificationsApiTest {
         mockWebServer.enqueue(MockResponse().setBody(Gson().toJson(responseBody)).setResponseCode(200))
 
         val notificationId = UUID.randomUUID().toString()
-        val result = mockNovu.getNotification(notificationId)
+        val result = mockNovu.notification(notificationId)
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/notifications/$notificationId")

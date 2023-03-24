@@ -7,7 +7,7 @@ import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.extentions.createLayout
 import co.novu.extentions.deleteLayout
 import co.novu.extentions.filterLayouts
-import co.novu.extentions.getLayout
+import co.novu.extentions.layout
 import co.novu.extentions.setDefaultLayout
 import co.novu.extentions.updateLayout
 import com.google.gson.Gson
@@ -106,7 +106,7 @@ class LayoutsApiTest {
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val layoutId = "layoutId"
-        val result = mockNovu.getLayout(layoutId)
+        val result = mockNovu.layout(layoutId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")

@@ -19,13 +19,13 @@ import co.novu.dto.response.subscribers.SubscriberPreferenceResponse
 import co.novu.dto.response.subscribers.SubscriberResponse
 import co.novu.extensions.createSubscriber
 import co.novu.extensions.deleteSubscriber
-import co.novu.extensions.getSubscriber
-import co.novu.extensions.getSubscriberNotificationsFeed
-import co.novu.extensions.getSubscriberPreferences
-import co.novu.extensions.getSubscriberUnseenNotificationsCount
-import co.novu.extensions.getSubscribers
-import co.novu.extensions.markMessageActionAsSeen
-import co.novu.extensions.markSubscriberFeedAs
+import co.novu.extensions.markMessageActionSeen
+import co.novu.extensions.markSubscriberFeed
+import co.novu.extensions.subscriber
+import co.novu.extensions.subscriberNotificationsFeed
+import co.novu.extensions.subscriberPreferences
+import co.novu.extensions.subscriberUnseenNotificationsCount
+import co.novu.extensions.subscribers
 import co.novu.extensions.updateSubscriber
 import co.novu.extensions.updateSubscriberCredentials
 import co.novu.extensions.updateSubscriberOnlineStatus
@@ -81,7 +81,7 @@ class SubscriberApiTest {
             totalCount = BigInteger.TEN
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getSubscribers(BigInteger.TEN)
+        val result = mockNovu.subscribers(BigInteger.TEN)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers?page=10")
         assert(request.method == "GET")
@@ -218,7 +218,7 @@ class SubscriberApiTest {
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val subscriberId = "123"
-        val result = mockNovu.getSubscriber(subscriberId)
+        val result = mockNovu.subscriber(subscriberId)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers/$subscriberId")
         assert(request.method == "GET")
@@ -326,7 +326,6 @@ class SubscriberApiTest {
         val isOnline = false
         val result = mockNovu.updateSubscriberOnlineStatus(subscriberId, isOnline)
         val request = mockWebServer.takeRequest()
-        val susbcriberId = "123"
         assert(request.path == "/subscribers/$subscriberId/online-status")
         assert(request.method == "PATCH")
         assert(Gson().toJson(result) == Gson().toJson(responseBody))
@@ -350,7 +349,7 @@ class SubscriberApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getSubscriberPreferences("123")
+        val result = mockNovu.subscriberPreferences("123")
         val request = mockWebServer.takeRequest()
         val susbcriberId = "123"
         assert(request.path == "/subscribers/$susbcriberId/preferences")
@@ -431,7 +430,7 @@ class SubscriberApiTest {
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val susbcriberId = "123"
-        val result = mockNovu.getSubscriberNotificationsFeed(subscriberId = susbcriberId)
+        val result = mockNovu.subscriberNotificationsFeed(subscriberId = susbcriberId)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers/$susbcriberId/notifications/feed")
         assert(request.method == "GET")
@@ -446,7 +445,7 @@ class SubscriberApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getSubscriberUnseenNotificationsCount("123")
+        val result = mockNovu.subscriberUnseenNotificationsCount("123")
         val request = mockWebServer.takeRequest()
         val subscriberId = "123"
         assert(request.path == "/subscribers/$subscriberId/notifications/unseen")
@@ -498,7 +497,7 @@ class SubscriberApiTest {
                 seen = true
             )
         )
-        val result = mockNovu.markSubscriberFeedAs("123", requestBody)
+        val result = mockNovu.markSubscriberFeed("123", requestBody)
         val request = mockWebServer.takeRequest()
         val subscriberId = "123"
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
@@ -547,7 +546,7 @@ class SubscriberApiTest {
         val subscriberId = "123"
         val messageId = "123"
         val type = "type"
-        val result = mockNovu.markMessageActionAsSeen(subscriberId, messageId, type)
+        val result = mockNovu.markMessageActionSeen(subscriberId, messageId, type)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers/$subscriberId/messages/$messageId/actions/$type")
         assert(request.method == "POST")

@@ -14,8 +14,8 @@ import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.extentions.createNotificationTemplates
 import co.novu.extentions.deleteNotificationTemplate
-import co.novu.extentions.getNotificationTemplate
-import co.novu.extentions.getNotificationTemplates
+import co.novu.extentions.notificationTemplate
+import co.novu.extentions.notificationTemplates
 import co.novu.extentions.updateNotificationTemplateStatus
 import co.novu.extentions.updateNotificationTemplates
 import com.google.gson.Gson
@@ -126,7 +126,7 @@ class NotificationTemplatesApiTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val page = BigInteger.valueOf(1)
         val limit = BigInteger.valueOf(10)
-        val result = mockNovu.getNotificationTemplates(page, limit)
+        val result = mockNovu.notificationTemplates(page, limit)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")
@@ -515,7 +515,7 @@ class NotificationTemplatesApiTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
         val templateId = "_id"
-        val result = mockNovu.getNotificationTemplate(templateId)
+        val result = mockNovu.notificationTemplate(templateId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")

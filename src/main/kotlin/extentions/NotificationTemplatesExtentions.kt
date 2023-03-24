@@ -8,7 +8,7 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotificationTemplates(page: BigInteger, limit: BigInteger) = runBlocking {
+fun Novu.notificationTemplates(page: BigInteger, limit: BigInteger) = runBlocking {
     val response = notificationTemplatesApi.getNotificationTemplates(page, limit)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -44,7 +44,7 @@ fun Novu.deleteNotificationTemplate(templateId: String) = runBlocking {
     }
 }
 
-fun Novu.getNotificationTemplate(templateId: String) = runBlocking {
+fun Novu.notificationTemplate(templateId: String) = runBlocking {
     val response = notificationTemplatesApi.getNotificationTemplate(templateId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

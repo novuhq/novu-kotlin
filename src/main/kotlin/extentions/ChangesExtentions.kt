@@ -7,7 +7,7 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getChanges(page: BigInteger? = null, limit: BigInteger? = null, promoted: String? = null) = runBlocking {
+fun Novu.changes(page: BigInteger? = null, limit: BigInteger? = null, promoted: String? = null) = runBlocking {
     val response = changesApi.getChanges(page, limit, promoted)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -15,7 +15,7 @@ fun Novu.getChanges(page: BigInteger? = null, limit: BigInteger? = null, promote
         response.errorBody()?.string().apply { logger.error { this } }
     }
 }
-fun Novu.getChangesCount() = runBlocking {
+fun Novu.changesCount() = runBlocking {
     val response = changesApi.getChangesCount()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

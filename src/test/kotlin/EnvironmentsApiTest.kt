@@ -7,10 +7,10 @@ import co.novu.dto.request.CreateEnvironmentRequest
 import co.novu.dto.request.UpdateEnvironmentRequest
 import co.novu.dto.response.GetEnvironmentResponse
 import co.novu.dto.response.ResponseWrapper
+import co.novu.extentions.apiKeys
 import co.novu.extentions.createEnvironment
-import co.novu.extentions.getApiKeys
-import co.novu.extentions.getCurrentEnvironment
-import co.novu.extentions.getEnvironments
+import co.novu.extentions.currentEnvironment
+import co.novu.extentions.environments
 import co.novu.extentions.regenrateApiKey
 import co.novu.extentions.updateEnvironment
 import co.novu.extentions.updateWidgetSettings
@@ -52,7 +52,7 @@ class EnvironmentsApiTest {
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getCurrentEnvironment()
+        val result = mockNovu.currentEnvironment()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/environments/me")
         assert(request.method == "GET")
@@ -117,7 +117,7 @@ class EnvironmentsApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getEnvironments()
+        val result = mockNovu.environments()
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/environments")
@@ -157,7 +157,7 @@ class EnvironmentsApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getApiKeys()
+        val result = mockNovu.apiKeys()
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/environments/api-keys")

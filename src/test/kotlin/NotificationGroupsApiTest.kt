@@ -4,7 +4,7 @@ import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.NotificationGroupsResponse
 import co.novu.dto.response.ResponseWrapper
 import co.novu.extensions.createNotificationGroup
-import co.novu.extensions.getNotificationGroups
+import co.novu.extensions.notificationGroups
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -34,7 +34,7 @@ class NotificationGroupsApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val response = mockNovu.getNotificationGroups()
+        val response = mockNovu.notificationGroups()
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")

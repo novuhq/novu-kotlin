@@ -15,7 +15,7 @@ fun Novu.createFeed(body: CreateByNameRequest) = runBlocking {
     }
 }
 
-fun Novu.getFeeds() = runBlocking {
+fun Novu.feeds() = runBlocking {
     val response = feedsApi.getFeeds()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

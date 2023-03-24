@@ -7,7 +7,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getNotificationGroups() = runBlocking {
+fun Novu.notificationGroups() = runBlocking {
     val response = notificationGroupsApi.getNotificationGroups()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

@@ -5,7 +5,7 @@ import co.novu.dto.response.FeedResponse
 import co.novu.dto.response.ResponseWrapper
 import co.novu.extensions.createFeed
 import co.novu.extensions.deleteFeed
-import co.novu.extensions.getFeeds
+import co.novu.extensions.feeds
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -63,7 +63,7 @@ class FeedsApiTest {
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getFeeds()
+        val result = mockNovu.feeds()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/feeds")
         assert(request.method == "GET")

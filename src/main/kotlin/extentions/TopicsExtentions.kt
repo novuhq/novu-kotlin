@@ -46,7 +46,7 @@ fun Novu.removeSubscriber(topicKey: String, request: SubscriberList) = runBlocki
     }
 }
 
-fun Novu.getTopic(topicKey: String) = runBlocking {
+fun Novu.topic(topicKey: String) = runBlocking {
     val response = topicsApi.getTopic(topicKey)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

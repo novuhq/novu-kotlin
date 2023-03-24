@@ -4,11 +4,11 @@ import co.novu.dto.Credential
 import co.novu.dto.request.integrations.IntegrationRequest
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.integrations.IntegrationReponse
+import co.novu.extensions.activeIntegrations
 import co.novu.extensions.createIntegration
 import co.novu.extensions.deleteIntegration
-import co.novu.extensions.getActiveIntegrations
-import co.novu.extensions.getIntegrations
-import co.novu.extensions.getProviderWebhook
+import co.novu.extensions.integrations
+import co.novu.extensions.providerWebhook
 import co.novu.extensions.updateIntegration
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -59,7 +59,7 @@ class IntegrationsApiTest {
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getIntegrations()
+        val result = mockNovu.integrations()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/integrations")
         assert(request.method == "GET")
@@ -170,7 +170,7 @@ class IntegrationsApiTest {
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.getActiveIntegrations()
+        val result = mockNovu.activeIntegrations()
         val request = mockWebServer.takeRequest()
         assert(request.path == "/integrations/active")
         assert(request.method == "GET")
@@ -183,7 +183,7 @@ class IntegrationsApiTest {
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val providerId = "providerId"
-        val result = mockNovu.getProviderWebhook(providerId)
+        val result = mockNovu.providerWebhook(providerId)
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/integrations/webhook/provider/$providerId/status")

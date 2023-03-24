@@ -9,7 +9,7 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getCurrentEnvironment() = runBlocking {
+fun Novu.currentEnvironment() = runBlocking {
     val response = environmentsApi.getCurrentEnvironment()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -27,7 +27,7 @@ fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
     }
 }
 
-fun Novu.getEnvironments() = runBlocking {
+fun Novu.environments() = runBlocking {
     val response = environmentsApi.getEnvironments()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -45,7 +45,7 @@ fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequ
     }
 }
 
-fun Novu.getApiKeys() = runBlocking {
+fun Novu.apiKeys() = runBlocking {
     val response = environmentsApi.getApiKeys()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

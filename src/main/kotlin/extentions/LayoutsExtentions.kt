@@ -26,7 +26,7 @@ fun Novu.createLayout(request: CreateLayoutRequest) = runBlocking {
     }
 }
 
-fun Novu.getLayout(layoutId: String) = runBlocking {
+fun Novu.layout(layoutId: String) = runBlocking {
     val response = layoutsApi.getLayout(layoutId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

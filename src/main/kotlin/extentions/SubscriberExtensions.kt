@@ -13,7 +13,7 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.getSubscribers(page: BigInteger? = null) = runBlocking {
+fun Novu.subscribers(page: BigInteger? = null) = runBlocking {
     val response = subscribersApi.getSubscribers(page)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -31,7 +31,7 @@ fun Novu.createSubscriber(subscriberRequest: SubscriberRequest) = runBlocking {
     }
 }
 
-fun Novu.getSubscriber(subscriberId: String) = runBlocking {
+fun Novu.subscriber(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriber(subscriberId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -76,7 +76,7 @@ fun Novu.updateSubscriberOnlineStatus(subscriberId: String, isOnline: Boolean) =
     }
 }
 
-fun Novu.getSubscriberPreferences(subscriberId: String) = runBlocking {
+fun Novu.subscriberPreferences(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberPreferences(subscriberId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -94,7 +94,7 @@ fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, b
     }
 }
 
-fun Novu.getSubscriberNotificationsFeed(subscriberId: String) = runBlocking {
+fun Novu.subscriberNotificationsFeed(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberNotificationsFeed(subscriberId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -103,7 +103,7 @@ fun Novu.getSubscriberNotificationsFeed(subscriberId: String) = runBlocking {
     }
 }
 
-fun Novu.getSubscriberUnseenNotificationsCount(subscriberId: String) = runBlocking {
+fun Novu.subscriberUnseenNotificationsCount(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberUnseenNotificationsCount(subscriberId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -111,7 +111,7 @@ fun Novu.getSubscriberUnseenNotificationsCount(subscriberId: String) = runBlocki
         response.errorBody()?.string().apply { logger.error { this } }
     }
 }
-fun Novu.markSubscriberFeedAs(subscriberId: String, request: MarkSubscriberFeedAsRequest) = runBlocking {
+fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest) = runBlocking {
     val response = subscribersApi.markSubscriberMessageFeedAs(subscriberId, request)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
@@ -120,7 +120,7 @@ fun Novu.markSubscriberFeedAs(subscriberId: String, request: MarkSubscriberFeedA
     }
 }
 
-fun Novu.markMessageActionAsSeen(subscriberId: String, messageId: String, type: String) = runBlocking {
+fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: String) = runBlocking {
     val response = subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
