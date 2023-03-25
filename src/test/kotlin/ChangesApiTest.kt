@@ -3,8 +3,8 @@ import co.novu.NovuConfig
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.changes.ChangesResponse
-import co.novu.extensions.applyChanges
-import co.novu.extensions.applychange
+import co.novu.extensions.applyBulkChanges
+import co.novu.extensions.applyChange
 import co.novu.extensions.changes
 import co.novu.extensions.changesCount
 import com.google.gson.Gson
@@ -98,7 +98,7 @@ class ChangesApiTest {
             MockResponse().setResponseCode(201)
                 .setBody(Gson().toJson(responseBody))
         )
-        val result = mockNovu.applyChanges()
+        val result = mockNovu.applyBulkChanges()
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/changes/bulk/apply")
@@ -130,7 +130,7 @@ class ChangesApiTest {
                 .setBody(Gson().toJson(responseBody))
         )
         val changeId = UUID.randomUUID().toString()
-        val result = mockNovu.applychange(changeId)
+        val result = mockNovu.applyChange(changeId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "POST")

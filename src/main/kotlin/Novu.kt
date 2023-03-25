@@ -16,6 +16,7 @@ import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
+import co.novu.extensions.applyBulkChanges
 import co.novu.extentions.currentEnvironment
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
@@ -99,8 +100,3 @@ class Novu(
     }
 }
 
-fun main() {
-    val novu = Novu("af3749ea80b67bf2c4f267084b197f98")
-    val env = novu.currentEnvironment()
-    logger.info { env }
-}

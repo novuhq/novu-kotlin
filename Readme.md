@@ -37,24 +37,24 @@ The client methods map directly to the Novu API endpoints. Here's a list of all 
 
 ### Changes
 
-- `changes(query = {})`
+- `changes()`
 - `count_changes()`
-- `apply_bulk_changes()`
-- `apply_change(change_id)`
+- `applyBulkChanges()`
+- `applyChange(changeId)`
 
 ### Environments
 
-- `current_environment()`
-- `create_environment(body)`
+- `currentEnvironment()`
+- `createEnvironment(body)`
 - `environments()`
-- `update_environment(environment_id, body)`
-- `api_keys()`
-- `regenerate_api_keys()`
-- `update_widget_settings(body)`
+- `updateEnvironment(environmentId, body)`
+- `apiKeys()`
+- `regenerateApiKeys()`
+- `updateWidgetSettings(body)`
 
 ### Events
 
-- `trigger_event(body)`
+- `trigger(body)`
 - `trigger_bulk_event(body)`
 - `broadcast_event(body)`
 - `cancel_triggered_event(transaction_id)`

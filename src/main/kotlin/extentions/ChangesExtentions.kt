@@ -23,8 +23,8 @@ fun Novu.changesCount() = runBlocking {
         response.errorBody()?.string().apply { logger.error { this } }
     }
 }
-fun Novu.applyChanges() = runBlocking {
-    val response = changesApi.applyChanges()
+fun Novu.applyBulkChanges() = runBlocking {
+    val response = changesApi.applyBulkChanges()
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
@@ -32,7 +32,7 @@ fun Novu.applyChanges() = runBlocking {
     }
 }
 
-fun Novu.applychange(changeId: String) = runBlocking {
+fun Novu.applyChange(changeId: String) = runBlocking {
     val response = changesApi.applyChange(changedId = changeId)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }

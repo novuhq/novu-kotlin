@@ -19,7 +19,7 @@ public interface ChangesApi {
     suspend fun getChangesCount(): Response<ResponseWrapper<BigInteger>>
 
     @POST("changes/bulk/apply")
-    suspend fun applyChanges(): Response<ResponseWrapper<List<ChangesResponse>>>
+    suspend fun applyBulkChanges(): Response<ResponseWrapper<List<ChangesResponse>>>
 
     @POST("changes/{changedId}/apply")
     suspend fun applyChange(@Path("changedId") changedId: String): Response<ResponseWrapper<List<ChangesResponse>>>
