@@ -1,6 +1,7 @@
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+    id("maven-publish")
     kotlin("jvm") version "1.8.0"
     application
 }
@@ -51,4 +52,22 @@ application {
 extensions.findByName("buildScan")?.withGroovyBuilder {
     setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
     setProperty("termsOfServiceAgree", "yes")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }
