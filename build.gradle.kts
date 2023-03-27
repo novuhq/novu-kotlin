@@ -58,9 +58,9 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin-public")
+            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
+                username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
