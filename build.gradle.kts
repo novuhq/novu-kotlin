@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.novu"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -58,7 +58,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin")
+            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin-public")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -68,6 +68,9 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+            artifactId = "novu-kotlin"
+            version = "1.0.0"
+            groupId = "org.novu"
         }
     }
 }
