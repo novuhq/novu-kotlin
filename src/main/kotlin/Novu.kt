@@ -28,11 +28,14 @@ data class NovuConfig(var backendUrl: HttpUrl = "https://api.novu.co/v1/".toHttp
 
 class Novu(
     apiKey: String,
-    config: NovuConfig = NovuConfig()
+    config: NovuConfig? = NovuConfig(),
+    host: String? = "https://api.novu.co/v1/"
 ) {
+    private val config = NovuConfig(backendUrl = host?.toHttpUrlOrNull()!!)
+
     private val logger = KotlinLogging.logger {}
 
-    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config.backendUrl).getInstance()
+    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config!!.backendUrl).getInstance()
 
     private val eventsApi = retrofitInstance.create(EventsApi::class.java)
 
