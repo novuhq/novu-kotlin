@@ -16,8 +16,6 @@ import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
 import co.novu.dto.request.events.BroadcastEventRequest
 import co.novu.dto.request.events.TriggerEventRequest
-import co.novu.extensions.applyBulkChanges
-import co.novu.extentions.currentEnvironment
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -99,4 +97,3 @@ class Novu(
         }
     }
 }
-

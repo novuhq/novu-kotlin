@@ -1,13 +1,21 @@
 
-plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
-    id("maven-publish")
-    kotlin("jvm") version "1.8.0"
-    application
-}
 
-group = "org.novu"
-version = "1.0.0"
+plugins {
+    `java-library`
+    `maven-publish`
+    signing
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+
+    id("java-library")
+    kotlin("jvm") version "1.8.0"
+}
+group = "io.github.crashiv"
+version = "1.0-SNAPSHOT"
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 repositories {
     mavenCentral()
@@ -36,41 +44,78 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.36")
     implementation("org.slf4j:slf4j-simple:1.7.36")
 }
-
 tasks.test {
     useJUnitPlatform()
 }
-
 kotlin {
     jvmToolchain(8)
 }
-
-application {
-    mainClass.set("NovuKt")
-}
-
 extensions.findByName("buildScan")?.withGroovyBuilder {
     setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
     setProperty("termsOfServiceAgree", "yes")
 }
-
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Crashiv/novu-kotlin")
+            val releaseRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            val snapshotRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
             credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_TOKEN")
+                username = "Crashiv"
+                password = "xCh7bxAc&6Eq_2k"
             }
         }
     }
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"])
             artifactId = "novu-kotlin"
-            version = "1.0.0"
-            groupId = "org.novu"
+            from(components["java"])
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name.set("Novu Kotlin")
+                description.set("A kotlin SDK for Novu")
+                url.set("https://github.com/Crashiv/novu-kotlin")
+                properties.set(mapOf("kotlin.version" to "1.8.0"))
+                properties.set(mapOf("kotlinx.coroutines.version" to "1.6.4"))
+                properties.set(mapOf("kotlinx.serialization.version" to "1.3.0"))
+                properties.set(mapOf("kotlinx.logging.version" to "2.1.23"))
+                properties.set(mapOf("kotlinx.retrofit.version" to "2.9.0"))
+                properties.set(mapOf("kotlinx.okhttp.version" to "4.10.0"))
+                licenses {
+                    license {
+                        name.set("The Apache Software License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        distribution.set("repo")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("crashiv")
+                        name.set("Shivam Shah")
+                        email.set("crashiv2541@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/Crashiv/novu-kotlin.git")
+                    developerConnection.set("scm:git:ssh://github.com/Crashiv/novu-kotlin.git")
+                    url.set("https://github.com/Crashiv/novu-kotlin")
+                }
+            }
         }
+    }
+}
+signing {
+    sign(publishing.publications["mavenJava"])
+}
+tasks.javadoc {
+    if (JavaVersion.current().isJava8Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }

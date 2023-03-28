@@ -1,1 +1,1 @@
-# Novu Kotlin client library
+# Novu Kotlin client library"
