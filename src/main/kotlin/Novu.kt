@@ -24,14 +24,16 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 private val logger = KotlinLogging.logger {}
 
-data class NovuConfig(var backendUrl: HttpUrl = "https://api.novu.co/v1/".toHttpUrlOrNull()!!)
+data class NovuConfig(
+    var host: String? = "https://api.novu.co/",
+    var version: String? = "v1/",
+    var backendUrl: HttpUrl = host.plus(version)?.toHttpUrlOrNull()!!
+)
 
 class Novu(
     apiKey: String,
-    config: NovuConfig? = NovuConfig(),
-    host: String? = "https://api.novu.co/v1/"
+    config: NovuConfig? = NovuConfig()
 ) {
-    private val config = NovuConfig(backendUrl = host?.toHttpUrlOrNull()!!)
 
     private val logger = KotlinLogging.logger {}
 
