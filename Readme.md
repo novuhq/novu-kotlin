@@ -10,7 +10,9 @@ Maven users
     ...
     <repository>
         <id>sonatype</id>
-        <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+        <url>https://s01.oss.sonatype.org/content/repositories/releases/</url> // for release
+        or 
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url> // for snapshot
     </repository>
 </repositories>
 
@@ -18,7 +20,7 @@ Maven users
 <dependency>
     <groupId>io.github.crashiv</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>latest-version</version>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 Then run `mnv install`.
@@ -28,6 +30,7 @@ Gradle users
 ```gradle
 //Add sonatype release repositories
 repositories {
+    ...
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases/" }
 }
 
@@ -42,11 +45,8 @@ then run `gradlew build`
 To use the library, first initialize the client with your API token:
 
 ```kotlin
-    val config = NovuConfig(backendUrl = "https://api.novu.co/v1")
-
+    val config = NovuConfig(backendUrl = "https://api.novu.co/v1/")
     val novu = Novu("API_KEY",config)
-    
-    
 ```
 
 You can then call methods on the client to interact with the Novu API:
