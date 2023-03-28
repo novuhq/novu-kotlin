@@ -20,14 +20,11 @@ import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import okhttp3.HttpUrl
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-
-private val logger = KotlinLogging.logger {}
 
 data class NovuConfig(
     var host: String? = "https://api.novu.co/",
     var version: String? = "v1/",
-    var backendUrl: HttpUrl = host.plus(version)?.toHttpUrlOrNull()!!
+    var backendUrl: HttpUrl = HttpUrl.get(host.plus(version))
 )
 
 class Novu(

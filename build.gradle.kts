@@ -32,7 +32,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")
 
     // OkHttp3 and Retrofit2
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
@@ -82,12 +81,6 @@ publishing {
                 name.set("Novu Kotlin")
                 description.set("A kotlin SDK for Novu")
                 url.set("https://github.com/Crashiv/novu-kotlin")
-                properties.set(mapOf("kotlin.version" to "1.8.0"))
-                properties.set(mapOf("kotlinx.coroutines.version" to "1.6.4"))
-                properties.set(mapOf("kotlinx.serialization.version" to "1.3.0"))
-                properties.set(mapOf("kotlinx.logging.version" to "2.1.23"))
-                properties.set(mapOf("kotlinx.retrofit.version" to "2.9.0"))
-                properties.set(mapOf("kotlinx.okhttp.version" to "4.10.0"))
                 licenses {
                     license {
                         name.set("The Apache Software License, Version 2.0")
