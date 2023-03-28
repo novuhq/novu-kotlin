@@ -23,7 +23,7 @@ class LayoutsApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
         apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("/"))
+        NovuConfig(backendUrl = mockWebServer.url("").toString())
     )
 
     @Test

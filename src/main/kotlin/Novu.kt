@@ -19,13 +19,8 @@ import co.novu.dto.request.events.TriggerEventRequest
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
-import okhttp3.HttpUrl
 
-data class NovuConfig(
-    var host: String? = "https://api.novu.co/",
-    var version: String? = "v1/",
-    var backendUrl: HttpUrl = HttpUrl.get(host.plus(version))
-)
+data class NovuConfig(var backendUrl: String? = "https://api.novu.co/v1")
 
 class Novu(
     apiKey: String,
@@ -34,7 +29,7 @@ class Novu(
 
     private val logger = KotlinLogging.logger {}
 
-    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config!!.backendUrl).getInstance()
+    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config?.backendUrl!!).getInstance()
 
     private val eventsApi = retrofitInstance.create(EventsApi::class.java)
 
