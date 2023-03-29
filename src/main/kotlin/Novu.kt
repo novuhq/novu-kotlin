@@ -94,3 +94,7 @@ class Novu(
         }
     }
 }
+
+fun main() {
+    println(System.getenv("NOVU_API_KEY"))
+}
