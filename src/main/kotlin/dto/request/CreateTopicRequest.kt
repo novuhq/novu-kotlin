@@ -1,4 +1,4 @@
-package co.novu.dto.request.topics
+package co.novu.dto.request
 
 data class CreateTopicRequest(
     val key: String,

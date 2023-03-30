@@ -1,6 +1,4 @@
-package co.novu.dto.request.events
-
-import co.novu.dto.request.subscribers.SubscriberRequest
+package co.novu.dto.request
 
 class TriggerEventRequest private constructor() : BaseEventRequest() {
     private var to: Any? = null

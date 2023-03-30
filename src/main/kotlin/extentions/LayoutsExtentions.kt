@@ -13,7 +13,7 @@ fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteg
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -22,7 +22,7 @@ fun Novu.createLayout(request: CreateLayoutRequest) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -31,7 +31,7 @@ fun Novu.layout(layoutId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -40,7 +40,7 @@ fun Novu.deleteLayout(layoutId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -49,7 +49,7 @@ fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest) = runBlock
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -58,6 +58,6 @@ fun Novu.setDefaultLayout(layoutId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

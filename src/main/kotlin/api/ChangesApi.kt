@@ -1,8 +1,8 @@
 package co.novu.api
 
+import co.novu.dto.response.ChangesResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.changes.ChangesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST

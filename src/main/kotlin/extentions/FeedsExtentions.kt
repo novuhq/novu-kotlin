@@ -11,7 +11,7 @@ fun Novu.createFeed(body: CreateByNameRequest) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -20,7 +20,7 @@ fun Novu.feeds() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -29,6 +29,6 @@ fun Novu.deleteFeed(feedId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

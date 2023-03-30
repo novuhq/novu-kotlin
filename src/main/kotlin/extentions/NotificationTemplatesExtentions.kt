@@ -13,7 +13,7 @@ fun Novu.notificationTemplates(page: BigInteger, limit: BigInteger) = runBlockin
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -22,7 +22,7 @@ fun Novu.createNotificationTemplates(request: NotificationTemplates) = runBlocki
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -31,7 +31,7 @@ fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTe
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -40,7 +40,7 @@ fun Novu.deleteNotificationTemplate(templateId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -49,7 +49,7 @@ fun Novu.notificationTemplate(templateId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -58,6 +58,6 @@ fun Novu.updateNotificationTemplateStatus(templateId: String, request: co.novu.d
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

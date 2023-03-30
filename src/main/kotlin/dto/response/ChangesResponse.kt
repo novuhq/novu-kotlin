@@ -1,4 +1,4 @@
-package co.novu.dto.response.changes
+package co.novu.dto.response
 
 import co.novu.dto.User
 import java.math.BigDecimal

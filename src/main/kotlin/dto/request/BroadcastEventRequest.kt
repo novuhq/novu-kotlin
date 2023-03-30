@@ -1,4 +1,4 @@
-package co.novu.dto.request.events
+package co.novu.dto.request
 
 class BroadcastEventRequest private constructor() : BaseEventRequest() {
 

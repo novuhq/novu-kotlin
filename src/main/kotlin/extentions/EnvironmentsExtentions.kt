@@ -14,7 +14,7 @@ fun Novu.currentEnvironment() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -23,7 +23,7 @@ fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -32,7 +32,7 @@ fun Novu.environments() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -41,7 +41,7 @@ fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequ
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -50,7 +50,7 @@ fun Novu.apiKeys() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -59,7 +59,7 @@ fun Novu.regenrateApiKey() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -68,6 +68,6 @@ fun Novu.updateWidgetSettings(request: Widget) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

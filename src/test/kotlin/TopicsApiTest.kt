@@ -1,13 +1,13 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.request.CreateByNameRequest
-import co.novu.dto.request.topics.CreateTopicRequest
+import co.novu.dto.request.CreateTopicRequest
 import co.novu.dto.response.AddSubscribersResponse
 import co.novu.dto.response.CreateTopicResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SubscriberList
-import co.novu.dto.response.topics.TopicResponse
+import co.novu.dto.response.TopicResponse
 import co.novu.extensions.addSubscribers
 import co.novu.extensions.createTopic
 import co.novu.extensions.filterTopics

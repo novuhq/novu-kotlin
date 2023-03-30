@@ -10,6 +10,6 @@ fun Novu.executionDetails(notificationId: String, subscriberId: String) = runBlo
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

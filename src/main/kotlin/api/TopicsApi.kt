@@ -1,13 +1,13 @@
 package co.novu.api
 
 import co.novu.dto.request.CreateByNameRequest
-import co.novu.dto.request.topics.CreateTopicRequest
+import co.novu.dto.request.CreateTopicRequest
 import co.novu.dto.response.AddSubscribersResponse
 import co.novu.dto.response.CreateTopicResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SubscriberList
-import co.novu.dto.response.topics.TopicResponse
+import co.novu.dto.response.TopicResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -1,18 +1,18 @@
 package co.novu.api
 
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
-import co.novu.dto.request.subscribers.SubscriberRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberCredentialsRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberOnlineStatusRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberRequest
+import co.novu.dto.request.SubscriberRequest
+import co.novu.dto.request.UpdateSubscriberCredentialsRequest
+import co.novu.dto.request.UpdateSubscriberOnlineStatusRequest
+import co.novu.dto.request.UpdateSubscriberRequest
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
+import co.novu.dto.response.SubscriberDeleteResponse
+import co.novu.dto.response.SubscriberNotificationResponse
+import co.novu.dto.response.SubscriberPreferenceResponse
+import co.novu.dto.response.SubscriberResponse
 import co.novu.dto.response.UnseenNotificationsCountResponse
 import co.novu.dto.response.UpdateSubscriberPreferencesRequest
-import co.novu.dto.response.subscribers.SubscriberDeleteResponse
-import co.novu.dto.response.subscribers.SubscriberNotificationResponse
-import co.novu.dto.response.subscribers.SubscriberPreferenceResponse
-import co.novu.dto.response.subscribers.SubscriberResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

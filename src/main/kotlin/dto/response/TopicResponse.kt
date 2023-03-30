@@ -1,4 +1,4 @@
-package co.novu.dto.response.topics
+package co.novu.dto.response
 
 data class TopicResponse(
     var _id: String? = null,

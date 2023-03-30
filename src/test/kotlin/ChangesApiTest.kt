@@ -1,8 +1,8 @@
 import co.novu.Novu
 import co.novu.NovuConfig
+import co.novu.dto.response.ChangesResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.changes.ChangesResponse
 import co.novu.extensions.applyBulkChanges
 import co.novu.extensions.applyChange
 import co.novu.extensions.changes

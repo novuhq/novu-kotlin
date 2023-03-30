@@ -1,4 +1,4 @@
-package co.novu.dto.response.integrations
+package co.novu.dto.response
 
 import co.novu.dto.Credential
 import java.math.BigDecimal

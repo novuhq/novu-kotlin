@@ -1,7 +1,7 @@
 package co.novu.extensions
 
 import co.novu.Novu
-import co.novu.dto.request.integrations.IntegrationRequest
+import co.novu.dto.request.IntegrationRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 
@@ -11,7 +11,7 @@ fun Novu.integrations() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -20,7 +20,7 @@ fun Novu.createIntegration(request: IntegrationRequest) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -29,7 +29,7 @@ fun Novu.activeIntegrations() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -38,7 +38,7 @@ fun Novu.providerWebhook(providerId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -47,7 +47,7 @@ fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest) =
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -56,6 +56,6 @@ fun Novu.deleteIntegration(integrationId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

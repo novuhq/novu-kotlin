@@ -20,7 +20,7 @@ Maven users
 <dependency>
     <groupId>io.github.crashiv</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
 Then run `mnv install`.
@@ -35,7 +35,7 @@ repositories {
 }
 
 // add dependency
-implementation("io.github.crashiv:novu-kotlin:1.0-SNAPSHOT")
+implementation("io.github.crashiv:novu-kotlin:0.1.0-SNAPSHOT")
 ```
 then run `gradlew build`
 

@@ -12,7 +12,7 @@ import co.novu.dto.Variables
 import co.novu.dto.response.Message
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.events.TriggerResponse
+import co.novu.dto.response.TriggerResponse
 import co.novu.extensions.deleteMessage
 import co.novu.extensions.messages
 import com.google.gson.Gson

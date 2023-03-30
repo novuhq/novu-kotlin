@@ -1,4 +1,4 @@
-package co.novu.dto.response.subscribers
+package co.novu.dto.response
 
 import co.novu.dto.Channel
 import co.novu.dto.Subscriber

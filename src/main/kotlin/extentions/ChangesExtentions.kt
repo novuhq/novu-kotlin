@@ -12,7 +12,7 @@ fun Novu.changes(page: BigInteger? = null, limit: BigInteger? = null, promoted: 
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 fun Novu.changesCount() = runBlocking {
@@ -20,7 +20,7 @@ fun Novu.changesCount() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 fun Novu.applyBulkChanges() = runBlocking {
@@ -28,7 +28,7 @@ fun Novu.applyBulkChanges() = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -37,6 +37,6 @@ fun Novu.applyChange(changeId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

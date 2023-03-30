@@ -1,8 +1,8 @@
 package co.novu.api
 
-import co.novu.dto.request.integrations.IntegrationRequest
+import co.novu.dto.request.IntegrationRequest
+import co.novu.dto.response.IntegrationReponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.integrations.IntegrationReponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

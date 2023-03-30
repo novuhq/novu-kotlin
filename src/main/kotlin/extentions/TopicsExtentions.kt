@@ -2,10 +2,11 @@ package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.CreateByNameRequest
-import co.novu.dto.request.topics.CreateTopicRequest
+import co.novu.dto.request.CreateTopicRequest
 import co.novu.dto.response.SubscriberList
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import java.lang.Exception
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
@@ -60,6 +61,6 @@ fun Novu.renameTopic(topicKey: String, request: CreateByNameRequest) = runBlocki
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

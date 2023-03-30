@@ -2,10 +2,10 @@ package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
-import co.novu.dto.request.subscribers.SubscriberRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberCredentialsRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberOnlineStatusRequest
-import co.novu.dto.request.subscribers.UpdateSubscriberRequest
+import co.novu.dto.request.SubscriberRequest
+import co.novu.dto.request.UpdateSubscriberCredentialsRequest
+import co.novu.dto.request.UpdateSubscriberOnlineStatusRequest
+import co.novu.dto.request.UpdateSubscriberRequest
 import co.novu.dto.response.UpdateSubscriberPreferencesRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -18,7 +18,7 @@ fun Novu.subscribers(page: BigInteger? = null) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -27,7 +27,7 @@ fun Novu.createSubscriber(subscriberRequest: SubscriberRequest) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -36,7 +36,7 @@ fun Novu.subscriber(subscriberId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -45,7 +45,7 @@ fun Novu.updateSubscriber(subscriberId: String, request: UpdateSubscriberRequest
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -54,7 +54,7 @@ fun Novu.deleteSubscriber(subscriberId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -63,7 +63,7 @@ fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscr
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -72,7 +72,7 @@ fun Novu.updateSubscriberOnlineStatus(subscriberId: String, isOnline: Boolean) =
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -81,7 +81,7 @@ fun Novu.subscriberPreferences(subscriberId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -90,7 +90,7 @@ fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, b
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -99,7 +99,7 @@ fun Novu.subscriberNotificationsFeed(subscriberId: String) = runBlocking {
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -108,7 +108,7 @@ fun Novu.subscriberUnseenNotificationsCount(subscriberId: String) = runBlocking 
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest) = runBlocking {
@@ -116,7 +116,7 @@ fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsR
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }
 
@@ -125,6 +125,6 @@ fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: St
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {
-        response.errorBody()?.string().apply { logger.error { this } }
+        throw Exception(response.errorBody()?.string())
     }
 }

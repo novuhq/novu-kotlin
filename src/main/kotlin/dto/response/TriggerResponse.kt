@@ -1,4 +1,4 @@
-package co.novu.dto.response.events
+package co.novu.dto.response
 
 data class TriggerResponse(
     var acknowledged: Boolean? = null,

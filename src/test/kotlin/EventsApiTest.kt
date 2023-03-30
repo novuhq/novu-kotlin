@@ -1,10 +1,10 @@
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.dto.request.events.BroadcastEventRequest
-import co.novu.dto.request.events.TriggerEventRequest
-import co.novu.dto.request.subscribers.SubscriberRequest
+import co.novu.dto.request.BroadcastEventRequest
+import co.novu.dto.request.SubscriberRequest
+import co.novu.dto.request.TriggerEventRequest
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.events.TriggerResponse
+import co.novu.dto.response.TriggerResponse
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import kotlinx.coroutines.ExperimentalCoroutinesApi

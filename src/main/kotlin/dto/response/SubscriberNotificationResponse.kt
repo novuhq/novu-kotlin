@@ -1,4 +1,4 @@
-package co.novu.dto.response.subscribers
+package co.novu.dto.response
 
 data class SubscriberNotificationResponse(
     var _id: String? = null,

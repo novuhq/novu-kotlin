@@ -1,4 +1,4 @@
-package co.novu.dto.request.subscribers
+package co.novu.dto.request
 
 import co.novu.dto.ChannelCredentials
 

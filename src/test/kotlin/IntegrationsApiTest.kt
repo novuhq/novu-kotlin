@@ -1,9 +1,9 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.Credential
-import co.novu.dto.request.integrations.IntegrationRequest
+import co.novu.dto.request.IntegrationRequest
+import co.novu.dto.response.IntegrationReponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.response.integrations.IntegrationReponse
 import co.novu.extensions.activeIntegrations
 import co.novu.extensions.createIntegration
 import co.novu.extensions.deleteIntegration

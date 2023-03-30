@@ -1,4 +1,4 @@
-package co.novu.dto.request.integrations
+package co.novu.dto.request
 
 import co.novu.dto.Credential
 

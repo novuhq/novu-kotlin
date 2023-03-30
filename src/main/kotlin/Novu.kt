@@ -14,13 +14,15 @@ import co.novu.api.NotificationTemplatesApi
 import co.novu.api.NotificationsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
-import co.novu.dto.request.events.BroadcastEventRequest
-import co.novu.dto.request.events.TriggerEventRequest
+import co.novu.dto.request.BroadcastEventRequest
+import co.novu.dto.request.TriggerEventRequest
+import co.novu.extensions.changes
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import okhttp3.internal.concurrent.TaskRunner.Companion.logger
 
-data class NovuConfig(var backendUrl: String? = "https://api.novu.co/v1")
+data class NovuConfig(var backendUrl: String? = "https://api.novu.co/v1/")
 
 class Novu(
     apiKey: String,
@@ -97,4 +99,6 @@ class Novu(
 
 fun main() {
     println(System.getenv("NOVU_API_KEY"))
+    val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98")
+    val changes = novu.changes()
 }
