@@ -64,7 +64,7 @@ import co.novu.Novu
         import co.novu.extentions.environments
 
 fun main() {
-    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/%22")
+    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/")
     val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98",config)
     val environment = novu.environments()
     println(environment)
