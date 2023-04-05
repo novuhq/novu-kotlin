@@ -51,7 +51,7 @@ import co.novu.extentions.environments
 
 fun main() 
 {
-    val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98")
+    val novu = Novu(apiKey = "API_KEY")
     val environment = novu.environments()
     println(environment)
 }
@@ -65,7 +65,7 @@ import co.novu.extentions.environments
 
 fun main() {
     val config = NovuConfig(backendUrl = "http://localhost:8080/v1/")
-    val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98",config)
+    val novu = Novu(apiKey = "API_KEY",config)
     val environment = novu.environments()
     println(environment)
 } 
