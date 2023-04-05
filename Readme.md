@@ -1,10 +1,12 @@
-# Novu Kotlin client library
+# Novu Kotlin SDK
 
-This is a Kolin client library for communicating with the [Novu API](https://api.novu.co/api).
+> The [Novu Kotlin](https://novu.co) SDK provides a fluent and expressive interface for interacting with [Novu's API](https://api.novu.co/api) and managing notifications.
 
 ## Installation
-Maven users
-```maven
+
+**Maven users:**
+
+```xml
 //Add sonatype release repositories
 <repositories>
     ...
@@ -26,7 +28,8 @@ Maven users
 Then run `mnv install`.
 
 
-Gradle users
+**Gradle users:**
+
 ```gradle
 //Add sonatype release repositories
 repositories {
@@ -196,4 +199,4 @@ The client methods map directly to the Novu API endpoints. Here's a list of all 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Crashiv/novu-kotlin
+Bug reports and pull requests are welcome on GitHub at https://github.com/novuhq/novu-kotlin
