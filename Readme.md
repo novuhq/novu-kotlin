@@ -60,8 +60,8 @@ fun main()
 ```kotlin
 // with config param
 import co.novu.Novu
-        import co.novu.NovuConfig
-        import co.novu.extentions.environments
+import co.novu.NovuConfig
+import co.novu.extentions.environments
 
 fun main() {
     val config = NovuConfig(backendUrl = "http://localhost:8080/v1/")
