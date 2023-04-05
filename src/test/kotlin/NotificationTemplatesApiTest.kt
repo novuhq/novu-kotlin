@@ -108,7 +108,7 @@ class NotificationTemplatesApiTest {
                             )
                         )
                     ),
-                    _notificationGroupId = "_notificationGroupId",
+                    notificationGroupId = "_notificationGroupId",
                     deleted = true,
                     deletedBy = "deletedBy",
                     notificationGroup = NotificationGroup(
@@ -207,7 +207,7 @@ class NotificationTemplatesApiTest {
                         )
                     )
                 ),
-                _notificationGroupId = "_notificationGroupId",
+                notificationGroupId = "_notificationGroupId",
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
@@ -339,7 +339,7 @@ class NotificationTemplatesApiTest {
                         )
                     )
                 ),
-                _notificationGroupId = "_notificationGroupId",
+                notificationGroupId = "_notificationGroupId",
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
@@ -401,7 +401,7 @@ class NotificationTemplatesApiTest {
                     replyCallback = "replyCallback"
                 )
             ),
-            _notificationGroupId = "_notificationGroupId"
+            notificationGroupId = "_notificationGroupId"
         )
         val templateId = "_id"
         val result = mockNovu.updateNotificationTemplates(templateId, requestBody)
@@ -500,7 +500,7 @@ class NotificationTemplatesApiTest {
                         )
                     )
                 ),
-                _notificationGroupId = "_notificationGroupId",
+                notificationGroupId = "_notificationGroupId",
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
@@ -596,7 +596,7 @@ class NotificationTemplatesApiTest {
                         )
                     )
                 ),
-                _notificationGroupId = "_notificationGroupId",
+                notificationGroupId = "_notificationGroupId",
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(

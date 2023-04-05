@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitHelper(
     private val baseUrl: String,
     private val apiKey: String,
-    private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
+    private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
 ) {
 
     fun getInstance(): Retrofit {

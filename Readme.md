@@ -20,7 +20,7 @@ Maven users
 <dependency>
     <groupId>io.github.crashiv</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 </dependency>
 ```
 Then run `mnv install`.
@@ -35,7 +35,7 @@ repositories {
 }
 
 // add dependency
-implementation("io.github.crashiv:novu-kotlin:0.1.0-SNAPSHOT")
+implementation("io.github.crashiv:novu-kotlin:0.1.1-SNAPSHOT")
 ```
 then run `gradlew build`
 
@@ -45,8 +45,30 @@ then run `gradlew build`
 To use the library, first initialize the client with your API token:
 
 ```kotlin
-    val config = NovuConfig(backendUrl = "https://api.novu.co/v1/")
-    val novu = Novu("API_KEY",config)
+// without changing the backendUrl
+import co.novu.Novu
+import co.novu.extentions.environments
+
+fun main() 
+{
+    val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98")
+    val environment = novu.environments()
+    println(environment)
+}
+
+```
+```kotlin
+// with config param
+import co.novu.Novu
+        import co.novu.NovuConfig
+        import co.novu.extentions.environments
+
+fun main() {
+    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/%22")
+    val novu = Novu(apiKey = "af3749ea80b67bf2c4f267084b197f98",config)
+    val environment = novu.environments()
+    println(environment)
+} 
 ```
 
 You can then call methods on the client to interact with the Novu API:

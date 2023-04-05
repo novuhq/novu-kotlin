@@ -14,7 +14,7 @@ private val logger = KotlinLogging.logger {}
 fun Novu.filterTopics(page: BigInteger? = null, pageSize: BigInteger? = null, key: String? = null) = runBlocking {
     val response = topicsApi.filterTopics(page, pageSize, key)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         response.errorBody()?.string().apply { logger.error { this } }
     }

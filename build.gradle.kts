@@ -10,7 +10,7 @@ plugins {
     kotlin("jvm") version "1.8.0"
 }
 group = "io.github.crashiv"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.1-SNAPSHOT"
 
 java {
     withJavadocJar()

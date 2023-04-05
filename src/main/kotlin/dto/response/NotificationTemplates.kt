@@ -19,7 +19,7 @@ data class NotificationTemplates(
     val _creatorId: String? = null,
     val _environmentId: String? = null,
     val triggers: List<Trigger>? = null,
-    val _notificationGroupId: String? = null,
+    val notificationGroupId: String? = null,
     val deleted: Boolean? = null,
     val deletedAt: String? = null,
     val deletedBy: String? = null,
