@@ -1,5 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
+import co.novu.dto.Topic
 import co.novu.dto.request.BroadcastEventRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.TriggerEventRequest
@@ -44,6 +45,38 @@ class EventsApiTest {
                 firstName = "John",
                 lastName = "Doe"
             ),
+            payload = mapOf("customVariables" to "Hello"),
+            transactionId = "transactionId"
+        )
+        val result = mockNovu.trigger(requestBody)
+        val request = mockWebServer.takeRequest()
+        assert(result == responseBody)
+        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
+        assert(request.method == "POST")
+        assert(request.path == "/events/trigger")
+    }
+
+    @Test
+    fun testTriggerEventToTopic() = runTest {
+        val responseBody = ResponseWrapper(
+            TriggerResponse(
+                acknowledged = true,
+                status = "status",
+                transactionId = "transactionId",
+                error = listOf("error")
+            )
+        )
+        mockWebServer.enqueue(
+            MockResponse()
+                .setResponseCode(201)
+                .setBody(Gson().toJson(responseBody))
+        )
+        val requestBody = TriggerEventRequest(
+            name = "test",
+            to = listOf(Topic(
+                type = "Topic",
+                topicKey = "posts:comment:12345"
+            )),
             payload = mapOf("customVariables" to "Hello"),
             transactionId = "transactionId"
         )
