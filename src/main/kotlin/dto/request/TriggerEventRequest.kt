@@ -1,5 +1,7 @@
 package co.novu.dto.request
 
+import co.novu.dto.Topic
+
 class TriggerEventRequest private constructor() : BaseEventRequest() {
     private var to: Any? = null
 
@@ -44,10 +46,19 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             transactionId: String? = null
         ) = initFields(name, to, payload, overrides, transactionId)
 
-        @JvmName("fromSubscribers")
+        @JvmName("fromSubscriber")
         operator fun invoke(
             name: String,
             to: SubscriberRequest,
+            payload: Map<String, Any> = mapOf(),
+            overrides: Map<String, Any>? = null,
+            transactionId: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId)
+
+        @JvmName("fromListOfTopics")
+        operator fun invoke(
+            name: String,
+            to: List<Topic>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null
