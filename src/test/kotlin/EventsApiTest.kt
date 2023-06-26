@@ -1,6 +1,7 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.request.BroadcastEventRequest
+import co.novu.dto.request.BulkTriggerEventRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.TriggerEventRequest
 import co.novu.dto.response.ResponseWrapper
@@ -83,10 +84,11 @@ class EventsApiTest {
                 transactionId = "transactionId"
             )
         )
-        val result = mockNovu.bulkTrigger(requestBody)
+        val body = BulkTriggerEventRequest(requestBody)
+        val result = mockNovu.bulkTrigger(body)
         val request = mockWebServer.takeRequest()
         assert(result == responseBody)
-        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
+        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(body).toString())
         assert(request.method == "POST")
         assert(request.path == "/events/trigger/bulk")
     }

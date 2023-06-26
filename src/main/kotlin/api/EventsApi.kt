@@ -1,6 +1,7 @@
 package co.novu.api
 
 import co.novu.dto.request.BroadcastEventRequest
+import co.novu.dto.request.BulkTriggerEventRequest
 import co.novu.dto.request.TriggerEventRequest
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.TriggerResponse
@@ -16,7 +17,7 @@ interface EventsApi {
     suspend fun triggerEvent(@Body body: TriggerEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
     @POST("events/trigger/bulk")
-    suspend fun bulkTriggerEvent(@Body body: List<TriggerEventRequest>): Response<ResponseWrapper<TriggerResponse>>
+    suspend fun bulkTriggerEvent(@Body body: BulkTriggerEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
     @POST("events/trigger/broadcast")
     suspend fun broadcastEvent(@Body body: BroadcastEventRequest): Response<ResponseWrapper<TriggerResponse>>

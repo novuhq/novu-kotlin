@@ -15,6 +15,7 @@ import co.novu.api.NotificationsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TopicsApi
 import co.novu.dto.request.BroadcastEventRequest
+import co.novu.dto.request.BulkTriggerEventRequest
 import co.novu.dto.request.TriggerEventRequest
 import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
@@ -67,7 +68,7 @@ class Novu(
         }
     }
 
-    fun bulkTrigger(body: List<TriggerEventRequest>) = runBlocking {
+    fun bulkTrigger(body: BulkTriggerEventRequest) = runBlocking {
         val response = eventsApi.bulkTriggerEvent(body)
         if (response.isSuccessful) {
             response.body().apply { logger.info { this } }
