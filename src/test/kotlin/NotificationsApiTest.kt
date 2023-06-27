@@ -2,6 +2,7 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.Notification
+import co.novu.dto.request.NotificationRequest
 import co.novu.dto.response.NotificationGraphStatsResponse
 import co.novu.dto.response.NotificationStatsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
@@ -94,12 +95,55 @@ class NotificationsApiTest {
         val search = "search"
         val result = mockNovu.notifications(channels, template, emails, "search")
         val request = mockWebServer.takeRequest()
-        var sb = StringBuilder()
+        val sb = StringBuilder()
         sb.append("?")
         channels.forEach { sb.append("channels=").append(it).append("&") }
         template.forEach { sb.append("templates=").append(it).append("&") }
         emails.forEach { sb.append("emails=").append(it).append("&") }
         sb.append("search=").append(search)
+        assert(request.path == "/notifications$sb")
+        assert(request.method == "GET")
+        assert(responseBody == result)
+    }
+
+    @Test
+    fun testGetNotificationsWithNotificationRequest() = runTest {
+        val responseBody = PaginatedResponseWrapper<Notification>(
+            data = emptyList(),
+            page = BigInteger.ONE,
+            pageSize = BigInteger.TEN,
+            totalCount = BigInteger.TEN
+        )
+        val response = MockResponse()
+            .setResponseCode(200)
+            .setBody(Gson().toJson(responseBody))
+
+        mockWebServer.enqueue(response)
+        val channels = listOf("channel")
+        val template = listOf("template")
+        val emails = listOf("emails")
+        val search = "search"
+        val page = BigInteger.ONE
+        val transactionId = "transactionId"
+        val notificationRequest = NotificationRequest(
+            channels = channels,
+            templates = template,
+            emails = emails,
+            search = search,
+            page = page,
+            transactionId = transactionId
+        )
+
+        val result = mockNovu.notifications(notificationRequest)
+        val request = mockWebServer.takeRequest()
+
+        val sb = StringBuilder("?")
+        channels.forEach { sb.append("channels=").append(it).append("&") }
+        template.forEach { sb.append("templates=").append(it).append("&") }
+        emails.forEach { sb.append("emails=").append(it).append("&") }
+        sb.append("search=").append(search).append("&")
+        sb.append("page=").append(page).append("&")
+        sb.append("transactionId=").append(transactionId)
         assert(request.path == "/notifications$sb")
         assert(request.method == "GET")
         assert(responseBody == result)
