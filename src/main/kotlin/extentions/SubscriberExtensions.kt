@@ -1,6 +1,7 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
@@ -120,8 +121,8 @@ fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsR
     }
 }
 
-fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: String) = runBlocking {
-    val response = subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type)
+fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: String, request: MarkMessageActionAsSeenRequest) = runBlocking {
+    val response = subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type, request)
     if (response.isSuccessful) {
         response.body().apply { logger.info { this } }
     } else {

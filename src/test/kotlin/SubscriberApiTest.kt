@@ -5,6 +5,7 @@ import co.novu.dto.ChannelCredentials
 import co.novu.dto.Preference
 import co.novu.dto.Template
 import co.novu.dto.request.Mark
+import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
@@ -546,8 +547,13 @@ class SubscriberApiTest {
         val subscriberId = "123"
         val messageId = "123"
         val type = "type"
-        val result = mockNovu.markMessageActionSeen(subscriberId, messageId, type)
+        val requestBody = MarkMessageActionAsSeenRequest(
+            status = "status"
+        )
+        val result = mockNovu.markMessageActionSeen(subscriberId, messageId, type, requestBody)
         val request = mockWebServer.takeRequest()
+
+        assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(request.path == "/subscribers/$subscriberId/messages/$messageId/actions/$type")
         assert(request.method == "POST")
         assert(result == responseBody)

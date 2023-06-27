@@ -1,5 +1,6 @@
 package co.novu.api
 
+import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
@@ -73,6 +74,7 @@ interface SubscribersApi {
     suspend fun markMessageActionAsSeen(
         @Path("subscriberId") subscriberId: String,
         @Path("messageId") messageId: String,
-        @Path("type") type: String
+        @Path("type") type: String,
+        @Body request: MarkMessageActionAsSeenRequest
     ): Response<ResponseWrapper<SubscriberNotificationResponse>>
 }
