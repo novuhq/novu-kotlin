@@ -17,7 +17,7 @@ private val logger = KotlinLogging.logger {}
 fun Novu.subscribers(page: BigInteger? = null) = runBlocking {
     val response = subscribersApi.getSubscribers(page)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -26,7 +26,7 @@ fun Novu.subscribers(page: BigInteger? = null) = runBlocking {
 fun Novu.createSubscriber(subscriberRequest: SubscriberRequest) = runBlocking {
     val response = subscribersApi.createSubscriber(subscriberRequest)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -35,7 +35,7 @@ fun Novu.createSubscriber(subscriberRequest: SubscriberRequest) = runBlocking {
 fun Novu.subscriber(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriber(subscriberId)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -44,7 +44,7 @@ fun Novu.subscriber(subscriberId: String) = runBlocking {
 fun Novu.updateSubscriber(subscriberId: String, request: UpdateSubscriberRequest) = runBlocking {
     val response = subscribersApi.updateSubscriber(subscriberId, request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -53,7 +53,7 @@ fun Novu.updateSubscriber(subscriberId: String, request: UpdateSubscriberRequest
 fun Novu.deleteSubscriber(subscriberId: String) = runBlocking {
     val response = subscribersApi.deleteSubscriber(subscriberId)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -62,7 +62,7 @@ fun Novu.deleteSubscriber(subscriberId: String) = runBlocking {
 fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscriberCredentialsRequest) = runBlocking {
     val response = subscribersApi.updateSubscriberCredentials(subscriberId, request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -71,7 +71,7 @@ fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscr
 fun Novu.updateSubscriberOnlineStatus(subscriberId: String, isOnline: Boolean) = runBlocking {
     val response = subscribersApi.updateSubscriberOnlineStatus(subscriberId, UpdateSubscriberOnlineStatusRequest(isOnline))
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -80,7 +80,7 @@ fun Novu.updateSubscriberOnlineStatus(subscriberId: String, isOnline: Boolean) =
 fun Novu.subscriberPreferences(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberPreferences(subscriberId)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -89,7 +89,7 @@ fun Novu.subscriberPreferences(subscriberId: String) = runBlocking {
 fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, body: UpdateSubscriberPreferencesRequest) = runBlocking {
     val response = subscribersApi.updateSubscriberPreferences(subscriberId, templateId, body)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -98,7 +98,7 @@ fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, b
 fun Novu.subscriberNotificationsFeed(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberNotificationsFeed(subscriberId)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -107,7 +107,7 @@ fun Novu.subscriberNotificationsFeed(subscriberId: String) = runBlocking {
 fun Novu.subscriberUnseenNotificationsCount(subscriberId: String) = runBlocking {
     val response = subscribersApi.getSubscriberUnseenNotificationsCount(subscriberId)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -115,7 +115,7 @@ fun Novu.subscriberUnseenNotificationsCount(subscriberId: String) = runBlocking 
 fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest) = runBlocking {
     val response = subscribersApi.markSubscriberMessageFeedAs(subscriberId, request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -124,7 +124,7 @@ fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsR
 fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: String, request: MarkMessageActionAsSeenRequest) = runBlocking {
     val response = subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type, request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }

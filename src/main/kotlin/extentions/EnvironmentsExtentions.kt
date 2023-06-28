@@ -12,7 +12,7 @@ private val logger = KotlinLogging.logger {}
 fun Novu.currentEnvironment() = runBlocking {
     val response = environmentsApi.getCurrentEnvironment()
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -21,7 +21,7 @@ fun Novu.currentEnvironment() = runBlocking {
 fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
     val response = environmentsApi.createEnvironment(request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -30,7 +30,7 @@ fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
 fun Novu.environments() = runBlocking {
     val response = environmentsApi.getEnvironments()
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -39,7 +39,7 @@ fun Novu.environments() = runBlocking {
 fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequest) = runBlocking {
     val response = environmentsApi.updateEnvironment(environmentId, request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -48,7 +48,7 @@ fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequ
 fun Novu.apiKeys() = runBlocking {
     val response = environmentsApi.getApiKeys()
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -57,7 +57,7 @@ fun Novu.apiKeys() = runBlocking {
 fun Novu.regenrateApiKey() = runBlocking {
     val response = environmentsApi.regenerateApiKey()
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -66,7 +66,7 @@ fun Novu.regenrateApiKey() = runBlocking {
 fun Novu.updateWidgetSettings(request: Widget) = runBlocking {
     val response = environmentsApi.updateWidgetSettings(request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }

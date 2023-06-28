@@ -62,36 +62,36 @@ class Novu(
     fun trigger(body: TriggerEventRequest) = runBlocking {
         val response = eventsApi.triggerEvent(body)
         if (response.isSuccessful) {
-            response.body().apply { logger.info { this } }
+            response.body().apply { logger.debug { this } }
         } else {
-            response.errorBody()?.string().apply { logger.error { this } }
+            throw Exception(response.errorBody()?.string())
         }
     }
 
     fun bulkTrigger(body: BulkTriggerEventRequest) = runBlocking {
         val response = eventsApi.bulkTriggerEvent(body)
         if (response.isSuccessful) {
-            response.body().apply { logger.info { this } }
+            response.body().apply { logger.debug { this } }
         } else {
-            response.errorBody()?.string().apply { logger.error { this } }
+            throw Exception(response.errorBody()?.string())
         }
     }
 
     fun broadcast(body: BroadcastEventRequest) = runBlocking {
         val response = eventsApi.broadcastEvent(body)
         if (response.isSuccessful) {
-            response.body().apply { logger.info { this } }
+            response.body().apply { logger.debug { this } }
         } else {
-            response.errorBody()?.string().apply { logger.error { this } }
+            throw Exception(response.errorBody()?.string())
         }
     }
 
     fun cancelTriggerEvent(transactionId: String) = runBlocking {
         val response = eventsApi.cancelTriggerEvent(transactionId)
         if (response.isSuccessful) {
-            response.body().apply { logger.info { this } }
+            response.body().apply { logger.debug { this } }
         } else {
-            response.errorBody()?.string().apply { logger.error { this } }
+            throw Exception(response.errorBody()?.string())
         }
     }
 }
