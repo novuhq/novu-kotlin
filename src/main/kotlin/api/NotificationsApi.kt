@@ -9,6 +9,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.math.BigInteger
 
 interface NotificationsApi {
 
@@ -18,7 +19,7 @@ interface NotificationsApi {
         @Query("templates") templates: List<String>?,
         @Query("emails") emails: List<String>?,
         @Query("search") search: String?,
-        @Query("page") page: String?,
+        @Query("page") page: BigInteger?,
         @Query("transactionId") transactionId: String?
     ): Response<PaginatedResponseWrapper<Notification>>
 
