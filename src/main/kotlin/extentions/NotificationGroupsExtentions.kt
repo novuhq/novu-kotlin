@@ -10,7 +10,7 @@ private val logger = KotlinLogging.logger {}
 fun Novu.notificationGroups() = runBlocking {
     val response = notificationGroupsApi.getNotificationGroups()
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -19,7 +19,7 @@ fun Novu.notificationGroups() = runBlocking {
 fun Novu.createNotificationGroup(request: CreateByNameRequest) = runBlocking {
     val response = notificationGroupsApi.createNotificationGroup(request)
     if (response.isSuccessful) {
-        response.body().apply { logger.info { this } }
+        response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
