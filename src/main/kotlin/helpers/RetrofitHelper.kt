@@ -1,5 +1,6 @@
 package co.novu.helpers
 
+import co.novu.NovuConfig
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,8 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitHelper(
-    private val baseUrl: String,
-    private val apiKey: String,
+    private val config: NovuConfig,
     private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
 ) {
 
@@ -18,14 +18,14 @@ class RetrofitHelper(
         httpClient
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "ApiKey $apiKey")
+                    .addHeader("Authorization", "ApiKey ${config.apiKey}")
                     .build()
                 chain.proceed(request)
             }
             .addInterceptor(HttpLoggingInterceptor().setLevel(loggerLevel))
             .build()
         val gson = GsonBuilder().setLenient().create()
-        return Retrofit.Builder().client(httpClient.build()).baseUrl(baseUrl)
+        return Retrofit.Builder().client(httpClient.build()).baseUrl(config.backendUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

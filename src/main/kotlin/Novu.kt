@@ -21,16 +21,20 @@ import co.novu.helpers.RetrofitHelper
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 
-data class NovuConfig(var backendUrl: String? = "https://api.novu.co/v1/")
+data class NovuConfig(
+    var backendUrl: String = "https://api.novu.co/v1/",
+    var apiKey: String = ""
+)
 
 class Novu(
-    apiKey: String,
-    config: NovuConfig? = NovuConfig()
+    config: NovuConfig
 ) {
+
+    constructor(apiKey: String) : this(NovuConfig(apiKey = apiKey))
 
     private val logger = KotlinLogging.logger {}
 
-    private val retrofitInstance = RetrofitHelper(apiKey = apiKey, baseUrl = config?.backendUrl!!).getInstance()
+    private val retrofitInstance = RetrofitHelper(config).getInstance()
 
     private val eventsApi = retrofitInstance.create(EventsApi::class.java)
 
