@@ -7,6 +7,10 @@ import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.TriggerEventRequest
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.TriggerResponse
+import co.novu.extensions.broadcast
+import co.novu.extensions.bulkTrigger
+import co.novu.extensions.cancelTriggerEvent
+import co.novu.extensions.trigger
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
