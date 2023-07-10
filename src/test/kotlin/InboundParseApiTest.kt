@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test
 class InboundParseApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
-        apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("").toString())
+        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
     )
 
     @Test

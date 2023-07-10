@@ -44,8 +44,7 @@ import java.math.BigInteger
 class SubscriberApiTest {
     private val mockWebServer = MockWebServer()
     private val mockNovu = Novu(
-        apiKey = "1245",
-        NovuConfig(backendUrl = mockWebServer.url("").toString())
+        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
     )
 
     @Test

@@ -48,12 +48,11 @@ then run `gradlew build`
 To use the library, first initialize the client with your API token:
 
 ```kotlin
-// without changing the backendUrl
+// without changing the backend URL
 import co.novu.Novu
 import co.novu.extentions.environments
 
-fun main() 
-{
+fun main() {
     val novu = Novu(apiKey = "API_KEY")
     val environment = novu.environments()
     println(environment)
@@ -67,8 +66,8 @@ import co.novu.NovuConfig
 import co.novu.extentions.environments
 
 fun main() {
-    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/")
-    val novu = Novu(apiKey = "API_KEY",config)
+    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/", apiKey = "API_KEY")
+    val novu = Novu(config)
     val environment = novu.environments()
     println(environment)
 } 
@@ -82,23 +81,23 @@ novu.subscribers()
 
 ## List of all methods
 
-The client methods map directly to the Novu API endpoints. Here's a list of all the available methods. Check [the API docs](https://docs.novu.co/api/overview) for list of available `methods`.
+The client methods map directly to the Novu API endpoints. Here is a list of all the available methods. Check [the API docs](https://docs.novu.co/api/overview) for list of available `methods`.
 
 ### Changes
 
 - `changes(query = {})`
 - `countChanges()`
 - `applyBulkChanges()`
-- `applyChange(change_id)`
+- `applyChange(changeId)`
 
 ### Environments
 
 - `currentEnvironment()`
 - `createEnvironment(body)`
 - `environments()`
-- `updateEnvironment(environment_id, body)`
+- `updateEnvironment(environmentId, body)`
 - `apiKeys()`
-- `regenerate_api_keys()`
+- `regenerateApiKeys()`
 - `updateWidgetSettings(body)`
 
 ### Events
@@ -116,7 +115,7 @@ The client methods map directly to the Novu API endpoints. Here's a list of all 
 
 - `createFeed(body)`
 - `feeds()`
-- `deleteFeed(feed_id)`
+- `deleteFeed(feedId)`
 
 ### Inbound Parse
 
