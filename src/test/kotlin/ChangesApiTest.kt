@@ -1,5 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
+import co.novu.dto.request.ChangesRequest
 import co.novu.dto.response.ChangesResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
@@ -76,6 +77,7 @@ class ChangesApiTest {
 
     @Test
     fun testApplyChanges() = runTest {
+        val requestBody = ChangesRequest(listOf("id1", "id2"))
         val responseBody = ResponseWrapper(
             listOf(
                 ChangesResponse(
@@ -97,7 +99,7 @@ class ChangesApiTest {
             MockResponse().setResponseCode(201)
                 .setBody(Gson().toJson(responseBody))
         )
-        val result = mockNovu.applyBulkChanges()
+        val result = mockNovu.applyBulkChanges(requestBody)
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/changes/bulk/apply")

@@ -1,6 +1,7 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.ChangesRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import java.math.BigInteger
@@ -23,8 +24,8 @@ fun Novu.changesCount() = runBlocking {
         throw Exception(response.errorBody()?.string())
     }
 }
-fun Novu.applyBulkChanges() = runBlocking {
-    val response = changesApi.applyBulkChanges()
+fun Novu.applyBulkChanges(request: ChangesRequest) = runBlocking {
+    val response = changesApi.applyBulkChanges(request)
     if (response.isSuccessful) {
         response.body().apply { logger.debug { this } }
     } else {
