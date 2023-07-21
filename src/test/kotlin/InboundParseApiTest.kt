@@ -1,6 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.dto.validateMxRecordSetupForInboundParseResponse
+import co.novu.dto.ValidateMxRecordSetupForInboundParseResponse
 import co.novu.extentions.validateMxRecordSetupForInboundParse
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,7 +18,7 @@ class InboundParseApiTest {
 
     @Test
     fun testValidateMxRecordSetupForInboundParse() = runTest {
-        val responseBody = validateMxRecordSetupForInboundParseResponse(
+        val responseBody = ValidateMxRecordSetupForInboundParseResponse(
             mxRecordConfigured = true
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
