@@ -117,10 +117,11 @@ class LayoutsApiTest {
     fun testDeleteLayout() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(204))
         val layoutId = "layoutId"
-        mockNovu.deleteLayout(layoutId)
+        val result = mockNovu.deleteLayout(layoutId)
         val request = mockWebServer.takeRequest()
         assert(request.method == "DELETE")
         assert(request.path == "/layouts/$layoutId")
+        assert(result.acknowledged)
     }
 
     @Test
@@ -164,9 +165,10 @@ class LayoutsApiTest {
     fun testSetDefaultLayout() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(204))
         val layoutId = "layoutId"
-        mockNovu.setDefaultLayout(layoutId)
+        val result = mockNovu.setDefaultLayout(layoutId)
         val request = mockWebServer.takeRequest()
         assert(request.method == "POST")
         assert(request.path == "/layouts/$layoutId/default")
+        assert(result.acknowledged)
     }
 }
