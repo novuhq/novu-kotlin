@@ -18,7 +18,7 @@ data class Message(
     val email: String? = null,
     val subject: String? = null,
     val cta: Any? = null,
-    val channel: String? = null,
+    val channels: String? = null,
     val content: String? = null,
     val providerId: String? = null,
     val deviceTokens: List<String>? = null,
