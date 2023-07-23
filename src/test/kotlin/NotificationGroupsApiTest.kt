@@ -4,7 +4,11 @@ import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.response.DeleteWorkflowGroupResponse
 import co.novu.dto.response.NotificationGroupsResponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.extensions.*
+import co.novu.extensions.createWorkflowGroup
+import co.novu.extensions.deleteWorkflowGroup
+import co.novu.extensions.getWorkflowGroup
+import co.novu.extensions.getWorkflowGroups
+import co.novu.extensions.updateWorkflowGroup
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
