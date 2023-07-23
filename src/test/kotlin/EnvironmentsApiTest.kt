@@ -126,7 +126,26 @@ class EnvironmentsApiTest {
 
     @Test
     fun testUpdateEnvironment() = runTest {
-        mockWebServer.enqueue(MockResponse().setResponseCode(200))
+        val responseBody = ResponseWrapper(
+            GetEnvironmentResponse(
+                _id = "1234",
+                name = "name",
+                _organizationId = "orgId",
+                identifier = "identifier",
+                apiKeys = listOf(
+                    ApiKeys(
+                        key = "key",
+                        _userId = "userId"
+                    )
+                ),
+                widget = Widget(
+                    notificationCenterEncryption = true
+                ),
+                _parentId = "parentId"
+
+            )
+        )
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val environmentId = "environmentId"
         val requestBody = UpdateEnvironmentRequest(
             name = "name",
@@ -137,12 +156,13 @@ class EnvironmentsApiTest {
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200))
-        mockNovu.updateEnvironment(environmentId, requestBody)
+        val result = mockNovu.updateEnvironment(environmentId, requestBody)
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/environments/$environmentId")
         assert(request.method == "PUT")
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
+        assert(result == responseBody)
     }
 
     @Test

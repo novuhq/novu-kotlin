@@ -7,8 +7,8 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.messages(channel: String? = null, subscriberId: String? = null, limit: BigInteger? = null, page: BigInteger? = null) = runBlocking {
-    val response = messagesApi.getMessages(channel, subscriberId, limit, page)
+fun Novu.messages(channel: String? = null, subscriberId: String? = null, limit: BigInteger? = null, page: BigInteger? = null, transactionId: String? = null) = runBlocking {
+    val response = messagesApi.getMessages(channel, subscriberId, limit, page, transactionId)
     if (response.isSuccessful) {
         response.body().apply { logger.debug { this } }
     } else {

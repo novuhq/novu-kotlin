@@ -120,11 +120,12 @@ class MessagesApiTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val channel = "channel"
         val subscriberId = "subscriberId"
+        val transactionId = "transactionId"
         val limit = BigInteger.TEN
         val page = BigInteger.ONE
-        val result = mockNovu.messages(channel, subscriberId, limit, page)
+        val result = mockNovu.messages(channel, subscriberId, limit, page, transactionId)
         val request = mockWebServer.takeRequest()
-        assert(request.path == "/messages?channel=$channel&subscriberId=$subscriberId&limit=$limit&page=$page")
+        assert(request.path == "/messages?channel=$channel&subscriberId=$subscriberId&limit=$limit&page=$page&transactionId=$transactionId")
         assert(request.method == "GET")
         assert(Gson().toJson(result) == Gson().toJson(responseBody))
     }

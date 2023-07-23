@@ -34,7 +34,7 @@ class IntegrationsApiTest {
                     _organizationId = "organizationId",
                     providerId = "providerId",
                     channel = "channel",
-                    credential = Credential(
+                    credentials = Credential(
                         apiKey = "apiKey",
                         secretKey = "secretKey",
                         token = "token",
@@ -74,7 +74,7 @@ class IntegrationsApiTest {
                 _organizationId = "organizationId",
                 providerId = "providerId",
                 channel = "channel",
-                credential = Credential(
+                credentials = Credential(
                     apiKey = "apiKey",
                     user = "user",
                     password = "password",
@@ -102,7 +102,7 @@ class IntegrationsApiTest {
         val requestBody = IntegrationRequest(
             providerId = "providerId",
             channel = "channel",
-            credential = Credential(
+            credentials = Credential(
                 apiKey = "apiKey",
                 user = "user",
                 password = "password",
@@ -143,7 +143,7 @@ class IntegrationsApiTest {
                     _organizationId = "organizationId",
                     providerId = "providerId",
                     channel = "channel",
-                    credential = Credential(
+                    credentials = Credential(
                         apiKey = "apiKey",
                         user = "user",
                         password = "password",
@@ -199,7 +199,7 @@ class IntegrationsApiTest {
                 _organizationId = "organizationId",
                 providerId = "providerId",
                 channel = "channel",
-                credential = Credential(
+                credentials = Credential(
                     apiKey = "apiKey",
                     user = "user",
                     password = "password",
@@ -228,7 +228,7 @@ class IntegrationsApiTest {
         val requestBody = IntegrationRequest(
             providerId = "providerId",
             channel = "channel",
-            credential = Credential(
+            credentials = Credential(
                 apiKey = "apiKey",
                 user = "user",
                 password = "password",
@@ -271,7 +271,7 @@ class IntegrationsApiTest {
                     _organizationId = "organizationId",
                     providerId = "providerId",
                     channel = "channel",
-                    credential = Credential(
+                    credentials = Credential(
                         apiKey = "apiKey",
                         user = "user",
                         password = "password",

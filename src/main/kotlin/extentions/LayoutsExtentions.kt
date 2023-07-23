@@ -2,6 +2,8 @@ package co.novu.extentions
 
 import co.novu.Novu
 import co.novu.dto.request.CreateLayoutRequest
+import co.novu.dto.response.DeleteLayoutResponse
+import co.novu.dto.response.SetDefaultLayoutResponse
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import java.math.BigInteger
@@ -38,7 +40,7 @@ fun Novu.layout(layoutId: String) = runBlocking {
 fun Novu.deleteLayout(layoutId: String) = runBlocking {
     val response = layoutsApi.deleteLayout(layoutId)
     if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
+        DeleteLayoutResponse().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }
@@ -56,7 +58,7 @@ fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest) = runBlock
 fun Novu.setDefaultLayout(layoutId: String) = runBlocking {
     val response = layoutsApi.setDefaultLayout(layoutId)
     if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
+        SetDefaultLayoutResponse().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }

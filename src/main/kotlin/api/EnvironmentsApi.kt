@@ -24,9 +24,8 @@ interface EnvironmentsApi {
     @GET("environments")
     suspend fun getEnvironments(): Response<ResponseWrapper<List<GetEnvironmentResponse>>>
 
-    // checking
     @PUT("environments/{environmentId}")
-    suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest): Response<Unit>
+    suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest): Response<ResponseWrapper<GetEnvironmentResponse>>
 
     @GET("environments/api-keys")
     suspend fun getApiKeys(): Response<ResponseWrapper<List<ApiKeys>>>

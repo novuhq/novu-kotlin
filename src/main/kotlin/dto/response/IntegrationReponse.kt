@@ -9,7 +9,7 @@ data class IntegrationReponse(
     var _organizationId: String? = null,
     var providerId: String? = null,
     var channel: String? = null,
-    var credential: Credential? = null,
+    var credentials: Credential? = null,
     var active: Boolean? = null,
     var deleted: Boolean? = null,
     var createdAt: String? = null,
