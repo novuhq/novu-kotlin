@@ -4,6 +4,7 @@ import co.novu.dto.request.CreateLayoutRequest
 import co.novu.dto.response.CreateLayoutResponse
 import co.novu.dto.response.GetLayoutsResponse
 import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.extentions.createLayout
 import co.novu.extentions.deleteLayout
 import co.novu.extentions.filterLayouts
@@ -27,8 +28,10 @@ class LayoutsApiTest {
 
     @Test
     fun testCreateLayout() = runTest {
-        val responseBody = CreateLayoutResponse(
-            _id = "_id"
+        val responseBody = ResponseWrapper(
+            CreateLayoutResponse(
+                _id = "_id"
+            )
         )
         mockWebServer.enqueue(
             MockResponse()
@@ -86,21 +89,23 @@ class LayoutsApiTest {
 
     @Test
     fun testGetLayout() = runTest {
-        val responseBody = GetLayoutsResponse(
-            _id = "_id",
-            _organizationId = "_organizationId",
-            _environmentId = "_environmentId",
-            _creatorId = "_creatorId",
-            name = "name",
-            description = "description",
-            channel = "channel",
-            content = "content",
-            variables = listOf("variables"),
-            isDefault = true,
-            isDeleted = true,
-            createdAt = "createdAt",
-            updatedAt = "updatedAt",
-            _parentId = "_parentId"
+        val responseBody = ResponseWrapper(
+            GetLayoutsResponse(
+                _id = "_id",
+                _organizationId = "_organizationId",
+                _environmentId = "_environmentId",
+                _creatorId = "_creatorId",
+                name = "name",
+                description = "description",
+                channel = "channel",
+                content = "content",
+                variables = listOf("variables"),
+                isDefault = true,
+                isDeleted = true,
+                createdAt = "createdAt",
+                updatedAt = "updatedAt",
+                _parentId = "_parentId"
+            )
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
@@ -126,21 +131,23 @@ class LayoutsApiTest {
 
     @Test
     fun testUpdateLayout() = runTest {
-        val responseBody = GetLayoutsResponse(
-            _id = "_id",
-            _organizationId = "_organizationId",
-            _environmentId = "_environmentId",
-            _creatorId = "_creatorId",
-            name = "name",
-            description = "description",
-            channel = "channel",
-            content = "content",
-            variables = listOf("variables"),
-            isDefault = true,
-            isDeleted = true,
-            createdAt = "createdAt",
-            updatedAt = "updatedAt",
-            _parentId = "_parentId"
+        val responseBody = ResponseWrapper(
+            GetLayoutsResponse(
+                _id = "_id",
+                _organizationId = "_organizationId",
+                _environmentId = "_environmentId",
+                _creatorId = "_creatorId",
+                name = "name",
+                description = "description",
+                channel = "channel",
+                content = "content",
+                variables = listOf("variables"),
+                isDefault = true,
+                isDeleted = true,
+                createdAt = "createdAt",
+                updatedAt = "updatedAt",
+                _parentId = "_parentId"
+            )
         )
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
