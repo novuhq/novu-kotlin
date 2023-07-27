@@ -23,7 +23,6 @@ class RetrofitHelper(
                 chain.proceed(request)
             }
             .addInterceptor(HttpLoggingInterceptor().setLevel(loggerLevel))
-            .build()
         val gson = GsonBuilder().setLenient().create()
         return Retrofit.Builder().client(httpClient.build()).baseUrl(config.backendUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))

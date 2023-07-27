@@ -27,33 +27,33 @@ class Novu(
 
     constructor(apiKey: String) : this(NovuConfig(apiKey = apiKey))
 
-    private val retrofitInstance = RetrofitHelper(config).getInstance()
+    private val retrofitInstance by lazy { RetrofitHelper(config).getInstance() }
 
-    internal val eventsApi = retrofitInstance.create(EventsApi::class.java)
+    internal val eventsApi by lazy { retrofitInstance.create(EventsApi::class.java) }
 
-    internal val subscribersApi = retrofitInstance.create(SubscribersApi::class.java)
+    internal val subscribersApi by lazy { retrofitInstance.create(SubscribersApi::class.java) }
 
-    internal val topicsApi = retrofitInstance.create(TopicsApi::class.java)
+    internal val topicsApi by lazy { retrofitInstance.create(TopicsApi::class.java) }
 
-    internal val changesApi = retrofitInstance.create(ChangesApi::class.java)
+    internal val changesApi by lazy { retrofitInstance.create(ChangesApi::class.java) }
 
-    internal val integrationsApi = retrofitInstance.create(IntegrationsApi::class.java)
+    internal val integrationsApi by lazy { retrofitInstance.create(IntegrationsApi::class.java) }
 
-    internal val executionDetailsApi = retrofitInstance.create(ExecutionDetailsApi::class.java)
+    internal val executionDetailsApi by lazy { retrofitInstance.create(ExecutionDetailsApi::class.java) }
 
-    internal val feedsApi = retrofitInstance.create(FeedsApi::class.java)
+    internal val feedsApi by lazy { retrofitInstance.create(FeedsApi::class.java) }
 
-    internal val messagesApi = retrofitInstance.create(MessagesApi::class.java)
+    internal val messagesApi by lazy { retrofitInstance.create(MessagesApi::class.java) }
 
-    internal val notificationsApi = retrofitInstance.create(NotificationsApi::class.java)
+    internal val notificationsApi by lazy { retrofitInstance.create(NotificationsApi::class.java) }
 
-    internal val environmentsApi = retrofitInstance.create(EnvironmentsApi::class.java)
+    internal val environmentsApi by lazy { retrofitInstance.create(EnvironmentsApi::class.java) }
 
-    internal val layoutsApi = retrofitInstance.create(LayoutsApi::class.java)
+    internal val layoutsApi by lazy { retrofitInstance.create(LayoutsApi::class.java) }
 
-    internal val notificationTemplatesApi = retrofitInstance.create(NotificationTemplatesApi::class.java)
+    internal val notificationTemplatesApi by lazy { retrofitInstance.create(NotificationTemplatesApi::class.java) }
 
-    internal val notificationGroupsApi = retrofitInstance.create(NotificationGroupsApi::class.java)
+    internal val notificationGroupsApi by lazy { retrofitInstance.create(NotificationGroupsApi::class.java) }
 
-    internal val inboundParseApi = retrofitInstance.create(InboundParseApi::class.java)
+    internal val inboundParseApi by lazy { retrofitInstance.create(InboundParseApi::class.java) }
 }
