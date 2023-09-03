@@ -1,5 +1,3 @@
-
-
 plugins {
     `java-library`
     `maven-publish`
@@ -9,8 +7,8 @@ plugins {
     id("java-library")
     kotlin("jvm") version "1.8.0"
 }
-group = "io.github.crashiv"
-version = "0.1.1-SNAPSHOT"
+group = "co.novu"
+version = "1.0.0"
 
 java {
     withJavadocJar()
@@ -57,12 +55,13 @@ extensions.findByName("buildScan")?.withGroovyBuilder {
 publishing {
     repositories {
         maven {
+            name = "OSSRH"
             val releaseRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             val snapshotRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
+            url = uri(releaseRepoUrl)
             credentials {
-                username = "Crashiv"
-                password = "xCh7bxAc&6Eq_2k"
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }
@@ -80,13 +79,13 @@ publishing {
             }
             pom {
                 name.set("Novu Kotlin")
-                description.set("A kotlin SDK for Novu")
-                url.set("https://github.com/Crashiv/novu-kotlin")
+                packaging = "jar"
+                description.set("Kotlin SDK for Novu - The open-source notification infrastructure for engineers")
+                url.set("https://github.com/novuhq/novu-kotlin")
                 licenses {
                     license {
-                        name.set("The Apache Software License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        distribution.set("repo")
+                        name.set("MIT License")
+                        url.set("https://opensource.org/license/mit/")
                     }
                 }
                 developers {
@@ -95,17 +94,30 @@ publishing {
                         name.set("Shivam Shah")
                         email.set("crashiv2541@gmail.com")
                     }
+                    developer {
+                        id.set("unicodeveloper")
+                        name.set("Prosper Otemuyiwa")
+                        email.set("prosper@novu.co")
+                    }
+                    developer {
+                        id.set("Mayorjay")
+                        name.set("Joseph Olugbohunmi")
+                        email.set("joseolu4gsm@yahoo.com")
+                    }
                 }
                 scm {
-                    connection.set("scm:git:git://github.com/Crashiv/novu-kotlin.git")
-                    developerConnection.set("scm:git:ssh://github.com/Crashiv/novu-kotlin.git")
-                    url.set("https://github.com/Crashiv/novu-kotlin")
+                    connection.set("scm:git:git://github.com/novuhq/novu-kotlin.git")
+                    developerConnection.set("scm:git:ssh://github.com/novuhq/novu-kotlin.git")
+                    url.set("https://github.com/novuhq/novu-kotlin/tree/main")
                 }
             }
         }
     }
 }
 signing {
+    val signingKey = System.getenv("MAVEN_GPG_PRIVATE_KEY")
+    val signingPassword = System.getenv("MAVEN_GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
 tasks.javadoc {
