@@ -80,7 +80,7 @@ publishing {
             pom {
                 name.set("Novu Kotlin")
                 packaging = "jar"
-                description.set("Kotlin SDK for Novu - The open-source notification infrastructure for engineers")
+                description.set("Kotlin SDK for Novu - The open-source notification infrastructure for developers")
                 url.set("https://github.com/novuhq/novu-kotlin")
                 licenses {
                     license {
