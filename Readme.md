@@ -1,3 +1,12 @@
+<div align="center">
+  <a href="https://novu.co" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/2233092/213641039-220ac15f-f367-4d13-9eaf-56e79433b8c1.png">
+    <img src="https://user-images.githubusercontent.com/2233092/213641043-3bbb3f21-3c53-4e67-afe5-755aeb222159.png" width="280" alt="Logo"/>
+  </picture>
+  </a>
+</div>
+
 # Novu Kotlin SDK
 
 > The [Novu Kotlin](https://novu.co) SDK provides a fluent and expressive interface for interacting with [Novu's API](https://api.novu.co/api) and managing notifications.
@@ -7,22 +16,11 @@
 **Maven users:**
 
 ```xml
-//Add sonatype release repositories
-<repositories>
-    ...
-    <repository>
-        <id>sonatype</id>
-        <url>https://s01.oss.sonatype.org/content/repositories/releases/</url> // for release
-        or 
-        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url> // for snapshot
-    </repository>
-</repositories>
-
-// add dependency
+<!--add dependency-->
 <dependency>
-    <groupId>io.github.crashiv</groupId>
+    <groupId>co.novu</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 Then run `mnv install`.
@@ -30,15 +28,16 @@ Then run `mnv install`.
 
 **Gradle users:**
 
-```gradle
-//Add sonatype release repositories
-repositories {
-    ...
-    maven { url "https://s01.oss.sonatype.org/content/repositories/releases/" }
-}
+```kotlin
+//Kotlin
+//add dependency
+implementation("co.novu:novu-kotlin:1.0.0")
+```
 
-// add dependency
-implementation("io.github.crashiv:novu-kotlin:0.1.1-SNAPSHOT")
+```groovy
+//Groovy
+//add dependency
+implementation 'co.novu:novu-kotlin:1.0.0'
 ```
 then run `gradlew build`
 
@@ -198,4 +197,19 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/novuhq/novu-kotlin
+Feature requests, bug reports and pull requests are welcome. Please create an [issue](https://github.com/novuhq/novu-kotlin/issues).
+
+## Support and Feedback
+
+Be sure to visit the Novu official [documentation website](https://docs.novu.co/docs) for additional information about our API.
+If you need additional assistance, join our Discord server [here](https://discord.novu.co).
+
+## License
+
+Novu Kotlin SDK is licensed under the MIT License - see the [LICENSE](https://github.com/novuhq/novu-kotlin/blob/main/LICENSE.md) file for details.
+
+## Contributors
+
+<a href="https://github.com/novuhq/novu-kotlin/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=novuhq/novu-kotlin&max=500&columns=20" alt="Contributors"/>
+</a>
