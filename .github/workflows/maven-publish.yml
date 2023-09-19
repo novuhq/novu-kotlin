@@ -37,3 +37,9 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           MAVEN_GPG_PRIVATE_KEY: ${{ secrets.OSSRH_GPG_PRIVATE_KEY }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSPHRASE }}
+
+      - name: Release artifacts
+        run: ./gradlew closeAndReleaseRepository
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}

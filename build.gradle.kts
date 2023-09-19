@@ -3,10 +3,11 @@ plugins {
     `maven-publish`
     signing
     id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
-
+    id("io.codearte.nexus-staging") version "0.30.0"
     id("java-library")
     kotlin("jvm") version "1.8.0"
 }
+
 group = "co.novu"
 version = "1.0.0"
 
@@ -42,16 +43,15 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.36")
     implementation("org.slf4j:slf4j-simple:1.7.36")
 }
+
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(8)
 }
-// extensions.findByName("buildScan")?.withGroovyBuilder {
-//    setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
-//    setProperty("termsOfServiceAgree", "yes")
-// }
+
 publishing {
     repositories {
         maven {
@@ -114,14 +114,22 @@ publishing {
         }
     }
 }
+
 signing {
     val signingKey = System.getenv("MAVEN_GPG_PRIVATE_KEY")
     val signingPassword = System.getenv("MAVEN_GPG_PASSPHRASE")
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
+
 tasks.javadoc {
     if (JavaVersion.current().isJava8Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
+}
+
+nexusStaging {
+    serverUrl = "https://s01.oss.sonatype.org/service/local/"
+    username = System.getenv("MAVEN_USERNAME")
+    password = System.getenv("MAVEN_PASSWORD")
 }
