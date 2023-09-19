@@ -77,10 +77,12 @@ class EventsApiTest {
         )
         val requestBody = TriggerEventRequest(
             name = "test",
-            to = listOf(Topic(
-                type = "Topic",
-                topicKey = "posts:comment:12345"
-            )),
+            to = listOf(
+                Topic(
+                    type = "Topic",
+                    topicKey = "posts:comment:12345"
+                )
+            ),
             payload = mapOf("customVariables" to "Hello"),
             transactionId = "transactionId"
         )
