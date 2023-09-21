@@ -7,5 +7,6 @@ data class SubscriberRequest(
     val email: String? = null,
     val phone: String? = null,
     val avatar: String? = null,
+    val locale: String? = null,
     val data: Any? = null
 )
