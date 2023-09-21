@@ -1,12 +1,14 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.BulkSubscriberRequest
 import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
 import co.novu.dto.request.UpdateSubscriberOnlineStatusRequest
 import co.novu.dto.request.UpdateSubscriberRequest
+import co.novu.dto.response.CreateBulkSubscriberResponse
 import co.novu.dto.response.UpdateSubscriberPreferencesRequest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -27,6 +29,15 @@ fun Novu.createSubscriber(subscriberRequest: SubscriberRequest) = runBlocking {
     val response = subscribersApi.createSubscriber(subscriberRequest)
     if (response.isSuccessful) {
         response.body().apply { logger.debug { this } }
+    } else {
+        throw Exception(response.errorBody()?.string())
+    }
+}
+
+suspend fun Novu.createSubscriberBulk(request: BulkSubscriberRequest): CreateBulkSubscriberResponse? {
+    val response = subscribersApi.createSubscriberBulk(request)
+    if (response.isSuccessful) {
+        return response.body().apply { logger.debug { this } }
     } else {
         throw Exception(response.errorBody()?.string())
     }

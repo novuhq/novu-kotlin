@@ -1,11 +1,13 @@
 package co.novu.api
 
+import co.novu.dto.request.BulkSubscriberRequest
 import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
 import co.novu.dto.request.UpdateSubscriberOnlineStatusRequest
 import co.novu.dto.request.UpdateSubscriberRequest
+import co.novu.dto.response.CreateBulkSubscriberResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SubscriberDeleteResponse
@@ -32,6 +34,9 @@ interface SubscribersApi {
 
     @POST("subscribers")
     suspend fun createSubscriber(@Body subscriberRequest: SubscriberRequest): Response<ResponseWrapper<SubscriberResponse>>
+
+    @POST("subscribers/bulk")
+    suspend fun createSubscriberBulk(@Body request: BulkSubscriberRequest): Response<CreateBulkSubscriberResponse>
 
     @GET("subscribers/{subscriberId}")
     suspend fun getSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<SubscriberResponse>>

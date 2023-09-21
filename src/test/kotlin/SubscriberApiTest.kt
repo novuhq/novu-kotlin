@@ -4,12 +4,14 @@ import co.novu.dto.Channel
 import co.novu.dto.ChannelCredentials
 import co.novu.dto.Preference
 import co.novu.dto.Template
+import co.novu.dto.request.BulkSubscriberRequest
 import co.novu.dto.request.Mark
 import co.novu.dto.request.MarkMessageActionAsSeenRequest
 import co.novu.dto.request.MarkSubscriberFeedAsRequest
 import co.novu.dto.request.SubscriberRequest
 import co.novu.dto.request.UpdateSubscriberCredentialsRequest
 import co.novu.dto.request.UpdateSubscriberRequest
+import co.novu.dto.response.CreateBulkSubscriberResponse
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SubscriberDeleteResponse
@@ -19,6 +21,7 @@ import co.novu.dto.response.SubscriberResponse
 import co.novu.dto.response.UnseenNotificationsCountResponse
 import co.novu.dto.response.UpdateSubscriberPreferencesRequest
 import co.novu.extensions.createSubscriber
+import co.novu.extensions.createSubscriberBulk
 import co.novu.extensions.deleteSubscriber
 import co.novu.extensions.markMessageActionSeen
 import co.novu.extensions.markSubscriberFeed
@@ -128,11 +131,37 @@ class SubscriberApiTest {
             avatar = "123",
             subscriberId = "123"
         )
-        JsonParser().parse(Gson().toJson(requestBody)).toString()
 
         val result = mockNovu.createSubscriber(requestBody)
         val request = mockWebServer.takeRequest()
         assert(request.path == "/subscribers")
+        assert(request.method == "POST")
+        assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
+        assert(Gson().toJson(result) == Gson().toJson(responseBody))
+    }
+
+    @Test
+    fun testCreateSubscriberBulk() = runTest {
+        val responseBody = CreateBulkSubscriberResponse(
+            created = listOf("sId")
+        )
+        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+        val subscriber = SubscriberRequest(
+            firstName = "123",
+            lastName = "123",
+            email = "123",
+            phone = "123",
+            avatar = "123",
+            subscriberId = "sId"
+        )
+        val requestBody = BulkSubscriberRequest(
+            subscribers = listOf(subscriber)
+        )
+
+        val result = mockNovu.createSubscriberBulk(requestBody)
+        val request = mockWebServer.takeRequest()
+
+        assert(request.path == "/subscribers/bulk")
         assert(request.method == "POST")
         assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
         assert(Gson().toJson(result) == Gson().toJson(responseBody))
