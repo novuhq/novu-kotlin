@@ -51,7 +51,7 @@ interface SubscribersApi {
     @GET("subscribers/{subscriberId}/preferences")
     suspend fun getSubscriberPreferences(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<List<SubscriberPreferenceResponse>>>
 
-    @PUT("subscribers/{subscriberId}/preferences/{templateId}")
+    @PATCH("subscribers/{subscriberId}/preferences/{templateId}")
     suspend fun updateSubscriberPreferences(
         @Path("subscriberId") subscriberId: String,
         @Path("templateId") templateId: String,

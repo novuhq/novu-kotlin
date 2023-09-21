@@ -384,7 +384,7 @@ class SubscriberApiTest {
         val request = mockWebServer.takeRequest()
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(request.path == "/subscribers/$susbcriberId/preferences/$templateId")
-        assert(request.method == "PUT")
+        assert(request.method == "PATCH")
         assert(result == responseBody)
     }
 
