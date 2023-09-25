@@ -1,5 +1,6 @@
 package co.novu
 
+import co.novu.api.BlueprintsApi
 import co.novu.api.ChangesApi
 import co.novu.api.EnvironmentsApi
 import co.novu.api.EventsApi
@@ -56,4 +57,6 @@ class Novu(
     internal val notificationGroupsApi by lazy { retrofitInstance.create(NotificationGroupsApi::class.java) }
 
     internal val inboundParseApi by lazy { retrofitInstance.create(InboundParseApi::class.java) }
+
+    internal val blueprintsApi by lazy { retrofitInstance.create(BlueprintsApi::class.java) }
 }
