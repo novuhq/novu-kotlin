@@ -23,8 +23,6 @@
     <version>1.0.0</version>
 </dependency>
 ```
-Then run `mnv install`.
-
 
 **Gradle users:**
 
@@ -39,8 +37,8 @@ implementation("co.novu:novu-kotlin:1.0.0")
 //add dependency
 implementation 'co.novu:novu-kotlin:1.0.0'
 ```
-then run `gradlew build`
 
+Sync your project, and you should have the artifacts downloaded.
 
 ## Usage
 
@@ -49,7 +47,7 @@ To use the library, first initialize the client with your API token:
 ```kotlin
 // without changing the backend URL
 import co.novu.Novu
-import co.novu.extentions.environments
+import co.novu.extensions.environments
 
 fun main() {
     val novu = Novu(apiKey = "API_KEY")
@@ -62,10 +60,10 @@ fun main() {
 // with config param
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.extentions.environments
+import co.novu.extensions.environments
 
 fun main() {
-    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/", apiKey = "API_KEY")
+    val config = NovuConfig(backendUrl = "URL", apiKey = "API_KEY")
     val novu = Novu(config)
     val environment = novu.environments()
     println(environment)
