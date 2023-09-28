@@ -170,6 +170,7 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 
 - `subscribers(query = {}) `
 - `createSubscriber(body)`
+- `createSubscriberBulk(body)`
 - `subscriber(subscriberId)`
 - `updateSubscriber(subscriberId, body)`
 - `deleteSubscriber(subscriberId)`
@@ -185,11 +186,18 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 ### Topics
 
 - `createTopic(body)`
-- `topics(query = {})`
+- `filterTopics(page, pageSize, key)`
 - `addSubscribers(topicKey, body)`
 - `removeSubscribers(topicKey, body)`
+- `checkSubscriber(topicKey, externalSubscriberId)`
 - `topic(topicKey)`
 - `renameTopic(topicKey, body)`
+- `deleteTopic(topicKey)`
+
+### Blueprints
+
+- `getBlueprintsByCategory()`
+- `getBlueprint(templateId)`
 
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
 
