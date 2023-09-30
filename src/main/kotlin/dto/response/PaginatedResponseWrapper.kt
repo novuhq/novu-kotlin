@@ -4,7 +4,8 @@ import java.math.BigInteger
 
 data class PaginatedResponseWrapper<T>(
     var page: BigInteger? = BigInteger.ONE,
-    var totalCount: BigInteger? = BigInteger.TEN,
+    var totalCount: BigInteger? = null,
     var pageSize: BigInteger? = BigInteger.TEN,
-    var data: List<T>? = null
+    var data: List<T>? = null,
+    var hasMore: Boolean? = null
 )
