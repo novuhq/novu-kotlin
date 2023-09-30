@@ -11,18 +11,22 @@ private val logger = KotlinLogging.logger {}
 
 suspend fun Novu.getBlueprintsByCategory(): ResponseWrapper<BlueprintsResponse>? {
     val response = blueprintsApi.getBlueprintsByCategory()
-    if (response.isSuccessful) {
-        return response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
+    response.apply {
+        return if (isSuccessful) {
+            body().apply { logger.debug { this } }
+        } else {
+            throw Exception(errorBody()?.string())
+        }
     }
 }
 
 suspend fun Novu.getBlueprint(templateId: String): Blueprint? {
     val response = blueprintsApi.getBlueprint(templateId)
-    if (response.isSuccessful) {
-        return response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
+    response.apply {
+        return if (isSuccessful) {
+            body().apply { logger.debug { this } }
+        } else {
+            throw Exception(errorBody()?.string())
+        }
     }
 }
