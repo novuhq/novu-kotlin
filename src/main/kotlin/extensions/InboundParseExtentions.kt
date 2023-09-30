@@ -1,4 +1,4 @@
-package co.novu.extentions
+package co.novu.extensions
 
 import co.novu.Novu
 import kotlinx.coroutines.runBlocking

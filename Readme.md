@@ -23,8 +23,6 @@
     <version>1.0.0</version>
 </dependency>
 ```
-Then run `mnv install`.
-
 
 **Gradle users:**
 
@@ -39,8 +37,8 @@ implementation("co.novu:novu-kotlin:1.0.0")
 //add dependency
 implementation 'co.novu:novu-kotlin:1.0.0'
 ```
-then run `gradlew build`
 
+Sync your project, and you should have the artifacts downloaded.
 
 ## Usage
 
@@ -49,7 +47,7 @@ To use the library, first initialize the client with your API token:
 ```kotlin
 // without changing the backend URL
 import co.novu.Novu
-import co.novu.extentions.environments
+import co.novu.extensions.environments
 
 fun main() {
     val novu = Novu(apiKey = "API_KEY")
@@ -62,10 +60,10 @@ fun main() {
 // with config param
 import co.novu.Novu
 import co.novu.NovuConfig
-import co.novu.extentions.environments
+import co.novu.extensions.environments
 
 fun main() {
-    val config = NovuConfig(backendUrl = "http://localhost:8080/v1/", apiKey = "API_KEY")
+    val config = NovuConfig(backendUrl = "URL", apiKey = "API_KEY")
     val novu = Novu(config)
     val environment = novu.environments()
     println(environment)
@@ -172,6 +170,7 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 
 - `subscribers(query = {}) `
 - `createSubscriber(body)`
+- `createSubscriberBulk(body)`
 - `subscriber(subscriberId)`
 - `updateSubscriber(subscriberId, body)`
 - `deleteSubscriber(subscriberId)`
@@ -187,11 +186,18 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 ### Topics
 
 - `createTopic(body)`
-- `topics(query = {})`
+- `filterTopics(page, pageSize, key)`
 - `addSubscribers(topicKey, body)`
 - `removeSubscribers(topicKey, body)`
+- `checkSubscriber(topicKey, externalSubscriberId)`
 - `topic(topicKey)`
 - `renameTopic(topicKey, body)`
+- `deleteTopic(topicKey)`
+
+### Blueprints
+
+- `getBlueprintsByCategory()`
+- `getBlueprint(templateId)`
 
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
 

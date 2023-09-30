@@ -1,4 +1,4 @@
-package co.novu.dto
+package co.novu.dto.blueprints
 
 data class Step(
     val _id: String? = null,
@@ -8,8 +8,8 @@ data class Step(
     val active: Boolean? = null,
     val shouldStopOnFail: Boolean? = null,
     val template: Any? = null,
-    val filters: List<Filters>? = null,
+    val filters: Any? = null,
     val _parentId: String? = null,
-    val metadata: Metadata? = null,
+    val metadata: Any? = null,
     val replyCallback: Any? = null
 )

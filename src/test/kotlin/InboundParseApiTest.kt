@@ -1,7 +1,7 @@
 import co.novu.Novu
 import co.novu.NovuConfig
 import co.novu.dto.ValidateMxRecordSetupForInboundParseResponse
-import co.novu.extentions.validateMxRecordSetupForInboundParse
+import co.novu.extensions.validateMxRecordSetupForInboundParse
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
