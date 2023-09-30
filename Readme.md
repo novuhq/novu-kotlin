@@ -199,6 +199,14 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 - `getBlueprintsByCategory()`
 - `getBlueprint(templateId)`
 
+### Tenants
+
+- `getTenants(page, limit)`
+- `createTenant(body)`
+- `getTenant(identifier)`
+- `updateTenant(identifier)`
+- `deleteTenant(identifier)`
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
 
 ## Contributing

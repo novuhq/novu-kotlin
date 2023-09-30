@@ -12,3 +12,13 @@ fun <T> Response<T>.extractResponse(logger: KLogger): T? {
         }
     }
 }
+
+fun <T, R> Response<T>.extractResponse(logger: KLogger, body: R): R {
+    this.apply {
+        return if (isSuccessful) {
+            body.apply { logger.debug { this } }
+        } else {
+            throw Exception(errorBody()?.string())
+        }
+    }
+}
