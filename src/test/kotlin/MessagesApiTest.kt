@@ -31,7 +31,7 @@ class MessagesApiTest {
     )
 
     @Test
-    fun testGetMessages() {
+    fun testGetMessages() = runTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 Message(

@@ -2,72 +2,35 @@ package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.CreateByNameRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.DeleteWorkflowGroupResponse
+import co.novu.dto.response.NotificationGroupsResponse
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-@Deprecated("Use getWorkflowGroups()")
-fun Novu.notificationGroups() = runBlocking {
+suspend fun Novu.getWorkflowGroups(): ResponseWrapper<List<NotificationGroupsResponse>>? {
     val response = notificationGroupsApi.getNotificationGroups()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.getWorkflowGroups() = runBlocking {
-    val response = notificationGroupsApi.getNotificationGroups()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
-}
-
-@Deprecated("Use createWorkflowGroup(request: CreateByNameRequest)")
-fun Novu.createNotificationGroup(request: CreateByNameRequest) = runBlocking {
+suspend fun Novu.createWorkflowGroup(request: CreateByNameRequest): ResponseWrapper<NotificationGroupsResponse>? {
     val response = notificationGroupsApi.createNotificationGroup(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createWorkflowGroup(request: CreateByNameRequest) = runBlocking {
-    val response = notificationGroupsApi.createNotificationGroup(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
-}
-
-fun Novu.getWorkflowGroup(id: String) = runBlocking {
+suspend fun Novu.getWorkflowGroup(id: String): ResponseWrapper<NotificationGroupsResponse>? {
     val response = notificationGroupsApi.getWorkflowGroup(id)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateWorkflowGroup(id: String, request: CreateByNameRequest) = runBlocking {
+suspend fun Novu.updateWorkflowGroup(id: String, request: CreateByNameRequest): ResponseWrapper<NotificationGroupsResponse>? {
     val response = notificationGroupsApi.updateWorkflowGroup(id, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteWorkflowGroup(id: String) = runBlocking {
+suspend fun Novu.deleteWorkflowGroup(id: String): ResponseWrapper<DeleteWorkflowGroupResponse>? {
     val response = notificationGroupsApi.deleteWorkflowGroup(id)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

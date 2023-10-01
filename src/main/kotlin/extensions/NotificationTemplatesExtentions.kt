@@ -1,63 +1,42 @@
-package co.novu.extentions
+package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.request.UpdateNotificationTemplateStatusRequest
 import co.novu.dto.response.NotificationTemplates
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.notificationTemplates(page: BigInteger, limit: BigInteger) = runBlocking {
+suspend fun Novu.notificationTemplates(page: BigInteger, limit: BigInteger): PaginatedResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.getNotificationTemplates(page, limit)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createNotificationTemplates(request: NotificationTemplates) = runBlocking {
+suspend fun Novu.createNotificationTemplates(request: NotificationTemplates): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.createNotificationTemplates(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTemplates) = runBlocking {
+suspend fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTemplates): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.updateNotificationTemplates(templateId, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteNotificationTemplate(templateId: String) = runBlocking {
+suspend fun Novu.deleteNotificationTemplate(templateId: String): ResponseWrapper<Boolean>? {
     val response = notificationTemplatesApi.deleteNotificationTemplate(templateId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.notificationTemplate(templateId: String) = runBlocking {
+suspend fun Novu.notificationTemplate(templateId: String): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.getNotificationTemplate(templateId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateNotificationTemplateStatus(templateId: String, request: co.novu.dto.request.UpdateNotificationTemplateStatusRequest) = runBlocking {
+suspend fun Novu.updateNotificationTemplateStatus(templateId: String, request: UpdateNotificationTemplateStatusRequest): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.updateNotificationTemplateStatus(templateId, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

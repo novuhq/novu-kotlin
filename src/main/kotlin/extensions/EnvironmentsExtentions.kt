@@ -1,73 +1,48 @@
-package co.novu.extentions
+package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.ApiKeys
 import co.novu.dto.Widget
 import co.novu.dto.request.CreateEnvironmentRequest
 import co.novu.dto.request.UpdateEnvironmentRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.GetEnvironmentResponse
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.currentEnvironment() = runBlocking {
+suspend fun Novu.currentEnvironment(): ResponseWrapper<GetEnvironmentResponse>? {
     val response = environmentsApi.getCurrentEnvironment()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createEnvironment(request: CreateEnvironmentRequest) = runBlocking {
+suspend fun Novu.createEnvironment(request: CreateEnvironmentRequest): ResponseWrapper<GetEnvironmentResponse>? {
     val response = environmentsApi.createEnvironment(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.environments() = runBlocking {
+suspend fun Novu.environments(): ResponseWrapper<List<GetEnvironmentResponse>>? {
     val response = environmentsApi.getEnvironments()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequest) = runBlocking {
+suspend fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequest): ResponseWrapper<GetEnvironmentResponse>? {
     val response = environmentsApi.updateEnvironment(environmentId, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.apiKeys() = runBlocking {
+suspend fun Novu.apiKeys(): ResponseWrapper<List<ApiKeys>>? {
     val response = environmentsApi.getApiKeys()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.regenrateApiKey() = runBlocking {
+suspend fun Novu.regenrateApiKey(): ResponseWrapper<List<ApiKeys>>? {
     val response = environmentsApi.regenerateApiKey()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateWidgetSettings(request: Widget) = runBlocking {
+suspend fun Novu.updateWidgetSettings(request: Widget): ResponseWrapper<GetEnvironmentResponse>? {
     val response = environmentsApi.updateWidgetSettings(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

@@ -4,43 +4,29 @@ import co.novu.Novu
 import co.novu.dto.request.BroadcastEventRequest
 import co.novu.dto.request.BulkTriggerEventRequest
 import co.novu.dto.request.TriggerEventRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.ResponseWrapper
+import co.novu.dto.response.TriggerResponse
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.trigger(body: TriggerEventRequest) = runBlocking {
+suspend fun Novu.trigger(body: TriggerEventRequest): ResponseWrapper<TriggerResponse>? {
     val response = eventsApi.triggerEvent(body)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.bulkTrigger(body: BulkTriggerEventRequest) = runBlocking {
+suspend fun Novu.bulkTrigger(body: BulkTriggerEventRequest): ResponseWrapper<TriggerResponse>? {
     val response = eventsApi.bulkTriggerEvent(body)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.broadcast(body: BroadcastEventRequest) = runBlocking {
+suspend fun Novu.broadcast(body: BroadcastEventRequest): ResponseWrapper<TriggerResponse>? {
     val response = eventsApi.broadcastEvent(body)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.cancelTriggerEvent(transactionId: String) = runBlocking {
+suspend fun Novu.cancelTriggerEvent(transactionId: String): ResponseWrapper<Boolean>? {
     val response = eventsApi.cancelTriggerEvent(transactionId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

@@ -1,24 +1,18 @@
 package co.novu.extensions
 
 import co.novu.Novu
+import co.novu.dto.Notification
 import co.novu.dto.request.NotificationRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.NotificationGraphStatsResponse
+import co.novu.dto.response.NotificationStatsResponse
+import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
-import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-@Deprecated("Use notifications(notificationRequest: NotificationRequest)")
-fun Novu.notifications(channels: List<String>? = null, templates: List<String>? = null, emails: List<String>? = null, search: String? = null, page: String? = null, transactionId: String? = null) = runBlocking {
-    val response = notificationsApi.getNotifications(channels, templates, emails, search, page?.let { BigInteger(it) }, transactionId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
-}
-
-fun Novu.notifications(notificationRequest: NotificationRequest) = runBlocking {
+suspend fun Novu.notifications(notificationRequest: NotificationRequest): PaginatedResponseWrapper<Notification>? {
     val response = notificationsApi.getNotifications(
         channels = notificationRequest.channels,
         templates = notificationRequest.templates,
@@ -27,36 +21,20 @@ fun Novu.notifications(notificationRequest: NotificationRequest) = runBlocking {
         page = notificationRequest.page,
         transactionId = notificationRequest.transactionId
     )
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.notificationsStats() = runBlocking {
+suspend fun Novu.notificationsStats(): ResponseWrapper<NotificationStatsResponse>? {
     val response = notificationsApi.getNotificationsStats()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.notificationGraphStats() = runBlocking {
+suspend fun Novu.notificationGraphStats(): ResponseWrapper<List<NotificationGraphStatsResponse>>? {
     val response = notificationsApi.getNotificationGraphStats()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.notification(notificationId: String) = runBlocking {
+suspend fun Novu.notification(notificationId: String): ResponseWrapper<Notification>? {
     val response = notificationsApi.getNotification(notificationId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

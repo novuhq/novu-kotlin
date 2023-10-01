@@ -3,84 +3,57 @@ package co.novu.extensions
 import co.novu.Novu
 import co.novu.dto.request.CreateByNameRequest
 import co.novu.dto.request.CreateTopicRequest
+import co.novu.dto.response.AddSubscribersResponse
+import co.novu.dto.response.CheckTopicSubscriberResponse
+import co.novu.dto.response.CreateTopicResponse
 import co.novu.dto.response.DeleteTopicResponse
+import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.RemoveSubscriberResponse
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SubscriberList
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.TopicResponse
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
-import java.lang.Exception
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.filterTopics(page: BigInteger? = null, pageSize: BigInteger? = null, key: String? = null) = runBlocking {
+suspend fun Novu.filterTopics(page: BigInteger? = null, pageSize: BigInteger? = null, key: String? = null): PaginatedResponseWrapper<TopicResponse>? {
     val response = topicsApi.filterTopics(page, pageSize, key)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createTopic(request: CreateTopicRequest) = runBlocking {
+suspend fun Novu.createTopic(request: CreateTopicRequest): ResponseWrapper<CreateTopicResponse>? {
     val response = topicsApi.createTopic(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.addSubscribers(topicKey: String, request: SubscriberList) = runBlocking {
+suspend fun Novu.addSubscribers(topicKey: String, request: SubscriberList): ResponseWrapper<AddSubscribersResponse>? {
     val response = topicsApi.addSubscriber(topicKey, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.removeSubscriber(topicKey: String, request: SubscriberList) = runBlocking {
+suspend fun Novu.removeSubscriber(topicKey: String, request: SubscriberList): RemoveSubscriberResponse {
     val response = topicsApi.removeSubscribers(topicKey, request)
-    if (response.isSuccessful) {
-        RemoveSubscriberResponse().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger, RemoveSubscriberResponse())
 }
 
-fun Novu.checkSubscriber(topicKey: String, externalSubscriberId: String) = runBlocking {
+suspend fun Novu.checkSubscriber(topicKey: String, externalSubscriberId: String): CheckTopicSubscriberResponse? {
     val response = topicsApi.checkSubscriber(topicKey, externalSubscriberId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.topic(topicKey: String) = runBlocking {
+suspend fun Novu.topic(topicKey: String): ResponseWrapper<TopicResponse>? {
     val response = topicsApi.getTopic(topicKey)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.renameTopic(topicKey: String, request: CreateByNameRequest) = runBlocking {
+suspend fun Novu.renameTopic(topicKey: String, request: CreateByNameRequest): ResponseWrapper<TopicResponse>? {
     val response = topicsApi.renameTopic(topicKey, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteTopic(topicKey: String) = runBlocking {
+suspend fun Novu.deleteTopic(topicKey: String): DeleteTopicResponse {
     val response = topicsApi.deleteTopic(topicKey)
-    if (response.isSuccessful) {
-        DeleteTopicResponse().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger, DeleteTopicResponse())
 }
