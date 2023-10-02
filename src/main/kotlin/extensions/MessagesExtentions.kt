@@ -1,26 +1,28 @@
 package co.novu.extensions
 
 import co.novu.Novu
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.Message
+import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
+import co.novu.dto.response.TriggerResponse
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.messages(channel: String? = null, subscriberId: String? = null, limit: BigInteger? = null, page: BigInteger? = null, transactionId: String? = null) = runBlocking {
+suspend fun Novu.messages(
+    channel: String? = null,
+    subscriberId: String? = null,
+    limit: BigInteger? = null,
+    page: BigInteger? = null,
+    transactionId: String? = null
+): PaginatedResponseWrapper<Message>? {
     val response = messagesApi.getMessages(channel, subscriberId, limit, page, transactionId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteMessage(messageId: String) = runBlocking {
+suspend fun Novu.deleteMessage(messageId: String): ResponseWrapper<TriggerResponse>? {
     val response = messagesApi.deleteMessage(messageId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

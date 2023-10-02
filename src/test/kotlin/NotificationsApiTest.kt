@@ -76,36 +76,6 @@ class NotificationsApiTest {
     }
 
     @Test
-    fun testGetNotifications() = runTest {
-        val responseBody = PaginatedResponseWrapper<Notification>(
-            data = emptyList(),
-            page = BigInteger.ONE,
-            pageSize = BigInteger.TEN,
-            totalCount = BigInteger.TEN
-        )
-        val response = MockResponse()
-            .setResponseCode(200)
-            .setBody(Gson().toJson(responseBody))
-
-        mockWebServer.enqueue(response)
-        val channels = listOf("channel")
-        val template = listOf("template")
-        val emails = listOf("emails")
-        val search = "search"
-        val result = mockNovu.notifications(channels, template, emails, "search")
-        val request = mockWebServer.takeRequest()
-        val sb = StringBuilder()
-        sb.append("?")
-        channels.forEach { sb.append("channels=").append(it).append("&") }
-        template.forEach { sb.append("templates=").append(it).append("&") }
-        emails.forEach { sb.append("emails=").append(it).append("&") }
-        sb.append("search=").append(search)
-        assert(request.path == "/notifications$sb")
-        assert(request.method == "GET")
-        assert(responseBody == result)
-    }
-
-    @Test
     fun testGetNotificationsWithNotificationRequest() = runTest {
         val responseBody = PaginatedResponseWrapper<Notification>(
             data = emptyList(),

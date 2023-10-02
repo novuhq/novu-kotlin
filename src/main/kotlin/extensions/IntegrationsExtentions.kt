@@ -2,60 +2,39 @@ package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.IntegrationRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.IntegrationReponse
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
-fun Novu.integrations() = runBlocking {
+
+suspend fun Novu.integrations(): ResponseWrapper<List<IntegrationReponse>>? {
     val response = integrationsApi.getIntegrations()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createIntegration(request: IntegrationRequest) = runBlocking {
+suspend fun Novu.createIntegration(request: IntegrationRequest): ResponseWrapper<IntegrationReponse>? {
     val response = integrationsApi.createIntegration(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.activeIntegrations() = runBlocking {
+suspend fun Novu.activeIntegrations(): ResponseWrapper<List<IntegrationReponse>>? {
     val response = integrationsApi.getActiveIntegrations()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.providerWebhook(providerId: String) = runBlocking {
+suspend fun Novu.providerWebhook(providerId: String): ResponseWrapper<Boolean>? {
     val response = integrationsApi.getProviderWebhook(providerId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest) = runBlocking {
+suspend fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest): ResponseWrapper<IntegrationReponse>? {
     val response = integrationsApi.updateIntegration(integrationId, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteIntegration(integrationId: String) = runBlocking {
+suspend fun Novu.deleteIntegration(integrationId: String): ResponseWrapper<List<IntegrationReponse>>? {
     val response = integrationsApi.deleteIntegration(integrationId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

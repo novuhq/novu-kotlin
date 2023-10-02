@@ -1,65 +1,45 @@
-package co.novu.extentions
+package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.CreateLayoutRequest
+import co.novu.dto.response.CreateLayoutResponse
 import co.novu.dto.response.DeleteLayoutResponse
+import co.novu.dto.response.GetLayoutsResponse
+import co.novu.dto.response.PaginatedResponseWrapper
+import co.novu.dto.response.ResponseWrapper
 import co.novu.dto.response.SetDefaultLayoutResponse
-import kotlinx.coroutines.runBlocking
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String) = runBlocking {
+suspend fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String): PaginatedResponseWrapper<GetLayoutsResponse>? {
     val response = layoutsApi.filterLayouts(page, pageSize, sortBy, orderBy)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.createLayout(request: CreateLayoutRequest) = runBlocking {
+suspend fun Novu.createLayout(request: CreateLayoutRequest): ResponseWrapper<CreateLayoutResponse>? {
     val response = layoutsApi.createLayout(request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.layout(layoutId: String) = runBlocking {
+suspend fun Novu.layout(layoutId: String): ResponseWrapper<GetLayoutsResponse>? {
     val response = layoutsApi.getLayout(layoutId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteLayout(layoutId: String) = runBlocking {
+suspend fun Novu.deleteLayout(layoutId: String): DeleteLayoutResponse {
     val response = layoutsApi.deleteLayout(layoutId)
-    if (response.isSuccessful) {
-        DeleteLayoutResponse().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger, DeleteLayoutResponse())
 }
 
-fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest) = runBlocking {
+suspend fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest): ResponseWrapper<GetLayoutsResponse>? {
     val response = layoutsApi.updateLayout(layoutId, request)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.setDefaultLayout(layoutId: String) = runBlocking {
+suspend fun Novu.setDefaultLayout(layoutId: String): SetDefaultLayoutResponse {
     val response = layoutsApi.setDefaultLayout(layoutId)
-    if (response.isSuccessful) {
-        SetDefaultLayoutResponse().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger, SetDefaultLayoutResponse())
 }

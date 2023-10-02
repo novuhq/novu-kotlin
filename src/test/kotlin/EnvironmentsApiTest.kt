@@ -7,13 +7,13 @@ import co.novu.dto.request.CreateEnvironmentRequest
 import co.novu.dto.request.UpdateEnvironmentRequest
 import co.novu.dto.response.GetEnvironmentResponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.extentions.apiKeys
-import co.novu.extentions.createEnvironment
-import co.novu.extentions.currentEnvironment
-import co.novu.extentions.environments
-import co.novu.extentions.regenrateApiKey
-import co.novu.extentions.updateEnvironment
-import co.novu.extentions.updateWidgetSettings
+import co.novu.extensions.apiKeys
+import co.novu.extensions.createEnvironment
+import co.novu.extensions.currentEnvironment
+import co.novu.extensions.environments
+import co.novu.extensions.regenrateApiKey
+import co.novu.extensions.updateEnvironment
+import co.novu.extensions.updateWidgetSettings
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -29,7 +29,7 @@ class EnvironmentsApiTest {
     )
 
     @Test
-    fun testGetEnvironments() {
+    fun testGetEnvironments() = runTest {
         val responseBody = ResponseWrapper(
             GetEnvironmentResponse(
                 _id = "1234",

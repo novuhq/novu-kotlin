@@ -1,16 +1,13 @@
 package co.novu.extensions
 
 import co.novu.Novu
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.ValidateMxRecordSetupForInboundParseResponse
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-fun Novu.validateMxRecordSetupForInboundParse() = runBlocking {
+suspend fun Novu.validateMxRecordSetupForInboundParse(): ValidateMxRecordSetupForInboundParseResponse? {
     val response = inboundParseApi.validateMxRecordSetupForInboundParse()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }

@@ -2,33 +2,24 @@ package co.novu.extensions
 
 import co.novu.Novu
 import co.novu.dto.request.CreateByNameRequest
-import kotlinx.coroutines.runBlocking
+import co.novu.dto.response.FeedResponse
+import co.novu.dto.response.ResponseWrapper
+import co.novu.helpers.extractResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
-fun Novu.createFeed(body: CreateByNameRequest) = runBlocking {
+
+suspend fun Novu.createFeed(body: CreateByNameRequest): ResponseWrapper<FeedResponse>? {
     val response = feedsApi.createFeed(body)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.feeds() = runBlocking {
+suspend fun Novu.feeds(): ResponseWrapper<List<FeedResponse>>? {
     val response = feedsApi.getFeeds()
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
 
-fun Novu.deleteFeed(feedId: String) = runBlocking {
+suspend fun Novu.deleteFeed(feedId: String): ResponseWrapper<FeedResponse>? {
     val response = feedsApi.deleteFeed(feedId)
-    if (response.isSuccessful) {
-        response.body().apply { logger.debug { this } }
-    } else {
-        throw Exception(response.errorBody()?.string())
-    }
+    return response.extractResponse(logger)
 }
