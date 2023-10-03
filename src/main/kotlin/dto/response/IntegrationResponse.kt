@@ -9,9 +9,9 @@ data class IntegrationResponse(
     var providerId: String? = null,
     var channel: String? = null,
     var credentials: Credential? = null,
-    var active: Boolean = false,
-    var deleted: Boolean = false,
+    var active: Boolean? = null,
+    var deleted: Boolean? = null,
     var deletedAt: String? = null,
     var deletedBy: String? = null,
-    var primary: Boolean = false
+    var primary: Boolean? = null
 )

@@ -39,5 +39,7 @@ suspend fun Novu.deleteIntegration(integrationId: String): ResponseWrapper<List<
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.setPrimaryIntegration(integrationId: String): ResponseWrapper<IntegrationResponse>? =
-    integrationsApi.setPrimaryIntegration(integrationId).extractResponse(logger)
+suspend fun Novu.setPrimaryIntegration(integrationId: String): ResponseWrapper<IntegrationResponse>? {
+    val response = integrationsApi.setPrimaryIntegration(integrationId)
+    return response.extractResponse(logger)
+}

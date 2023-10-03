@@ -4,7 +4,13 @@ import co.novu.dto.Credential
 import co.novu.dto.request.IntegrationRequest
 import co.novu.dto.response.IntegrationResponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.extensions.*
+import co.novu.extensions.activeIntegrations
+import co.novu.extensions.createIntegration
+import co.novu.extensions.deleteIntegration
+import co.novu.extensions.integrations
+import co.novu.extensions.providerWebhook
+import co.novu.extensions.updateIntegration
+import co.novu.extensions.setPrimaryIntegration
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
