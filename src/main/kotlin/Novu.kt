@@ -16,6 +16,7 @@ import co.novu.api.NotificationsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TenantsApi
 import co.novu.api.TopicsApi
+import co.novu.api.WorkflowsApi
 import co.novu.helpers.RetrofitHelper
 
 data class NovuConfig(
@@ -54,6 +55,8 @@ class Novu(
     internal val layoutsApi by lazy { retrofitInstance.create(LayoutsApi::class.java) }
 
     internal val notificationTemplatesApi by lazy { retrofitInstance.create(NotificationTemplatesApi::class.java) }
+
+    internal val workflowsApi by lazy { retrofitInstance.create(WorkflowsApi::class.java) }
 
     internal val notificationGroupsApi by lazy { retrofitInstance.create(NotificationGroupsApi::class.java) }
 
