@@ -389,12 +389,12 @@ class WorkflowsApiTest {
                 )
             )
         )
-        val templateId = "_id"
-        val result = mockNovu.updateWorkflow(templateId, requestBody)
+        val workflowId = "_id"
+        val result = mockNovu.updateWorkflow(workflowId, requestBody)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "PUT")
-        assert(request.path == "/workflows/$templateId")
+        assert(request.path == "/workflows/$workflowId")
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(Gson().toJson(responseBody) == Gson().toJson(result))
     }
@@ -404,12 +404,12 @@ class WorkflowsApiTest {
         val responseBody = ResponseWrapper(true)
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        val templateId = "_id"
-        val result = mockNovu.deleteWorkflow(templateId)
+        val workflowId = "_id"
+        val result = mockNovu.deleteWorkflow(workflowId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "DELETE")
-        assert(request.path == "/workflows/$templateId")
+        assert(request.path == "/workflows/$workflowId")
         assert(Gson().toJson(responseBody) == Gson().toJson(result))
     }
 
@@ -500,12 +500,12 @@ class WorkflowsApiTest {
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        val templateId = "_id"
-        val result = mockNovu.getWorkflow(templateId)
+        val workflowId = "_id"
+        val result = mockNovu.getWorkflow(workflowId)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "GET")
-        assert(request.path == "/workflows/$templateId")
+        assert(request.path == "/workflows/$workflowId")
         assert(Gson().toJson(responseBody) == Gson().toJson(result))
     }
 
@@ -597,16 +597,16 @@ class WorkflowsApiTest {
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        val templateId = "_id"
+        val workflowId = "_id"
         val requestBody = UpdateWorkflowStatusRequest(
             active = true
         )
 
-        val result = mockNovu.updateWorkflowStatus(templateId, requestBody)
+        val result = mockNovu.updateWorkflowStatus(workflowId, requestBody)
         val request = mockWebServer.takeRequest()
 
         assert(request.method == "PUT")
-        assert(request.path == "/workflows/$templateId/status")
+        assert(request.path == "/workflows/$workflowId/status")
         assert(request.body.readUtf8() == Gson().toJson(requestBody))
         assert(Gson().toJson(responseBody) == Gson().toJson(result))
     }

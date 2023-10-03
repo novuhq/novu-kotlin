@@ -23,15 +23,15 @@ interface WorkflowsApi {
     @POST("workflows")
     suspend fun createWorkflow(@Body request: WorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
 
-    @PUT("workflows/{templateId}")
-    suspend fun updateWorkflow(@Path("templateId") templateId: String, @Body request: UpdateWorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
+    @PUT("workflows/{workflowId}")
+    suspend fun updateWorkflow(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
 
-    @DELETE("workflows/{templateId}")
-    suspend fun deleteWorkflow(@Path("templateId") templateId: String): Response<ResponseWrapper<Boolean>>
+    @DELETE("workflows/{workflowId}")
+    suspend fun deleteWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<Boolean>>
 
-    @GET("workflows/{templateId}")
-    suspend fun getWorkflow(@Path("templateId") templateId: String): Response<ResponseWrapper<WorkflowResponse>>
+    @GET("workflows/{workflowId}")
+    suspend fun getWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<WorkflowResponse>>
 
-    @PUT("workflows/{templateId}/status")
-    suspend fun updateWorkflowStatus(@Path("templateId") templateId: String, @Body request: UpdateWorkflowStatusRequest): Response<ResponseWrapper<WorkflowResponse>>
+    @PUT("workflows/{workflowId}/status")
+    suspend fun updateWorkflowStatus(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowStatusRequest): Response<ResponseWrapper<WorkflowResponse>>
 }

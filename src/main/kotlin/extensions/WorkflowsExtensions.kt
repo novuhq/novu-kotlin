@@ -22,22 +22,22 @@ suspend fun Novu.createWorkflow(request: WorkflowRequest): ResponseWrapper<Workf
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.updateWorkflow(templateId: String, request: UpdateWorkflowRequest): ResponseWrapper<WorkflowResponse>? {
-    val response = workflowsApi.updateWorkflow(templateId, request)
+suspend fun Novu.updateWorkflow(workflowId: String, request: UpdateWorkflowRequest): ResponseWrapper<WorkflowResponse>? {
+    val response = workflowsApi.updateWorkflow(workflowId, request)
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.deleteWorkflow(templateId: String): ResponseWrapper<Boolean>? {
-    val response = workflowsApi.deleteWorkflow(templateId)
+suspend fun Novu.deleteWorkflow(workflowId: String): ResponseWrapper<Boolean>? {
+    val response = workflowsApi.deleteWorkflow(workflowId)
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.getWorkflow(templateId: String): ResponseWrapper<WorkflowResponse>? {
-    val response = workflowsApi.getWorkflow(templateId)
+suspend fun Novu.getWorkflow(workflowId: String): ResponseWrapper<WorkflowResponse>? {
+    val response = workflowsApi.getWorkflow(workflowId)
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.updateWorkflowStatus(templateId: String, request: UpdateWorkflowStatusRequest): ResponseWrapper<WorkflowResponse>? {
-    val response = workflowsApi.updateWorkflowStatus(templateId, request)
+suspend fun Novu.updateWorkflowStatus(workflowId: String, request: UpdateWorkflowStatusRequest): ResponseWrapper<WorkflowResponse>? {
+    val response = workflowsApi.updateWorkflowStatus(workflowId, request)
     return response.extractResponse(logger)
 }
