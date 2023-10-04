@@ -9,8 +9,8 @@ import co.novu.extensions.createIntegration
 import co.novu.extensions.deleteIntegration
 import co.novu.extensions.integrations
 import co.novu.extensions.providerWebhook
+import co.novu.extensions.setIntegrationAsPrimary
 import co.novu.extensions.updateIntegration
-import co.novu.extensions.setPrimaryIntegration
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -198,7 +198,7 @@ class IntegrationsApiTest {
 
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
         val integrationId = "integrationId"
-        val result = mockNovu.setPrimaryIntegration(integrationId)
+        val result = mockNovu.setIntegrationAsPrimary(integrationId)
         val request = mockWebServer.takeRequest()
 
         assert(request.path == "/integrations/$integrationId/set-primary")
