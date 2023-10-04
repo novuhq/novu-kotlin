@@ -20,7 +20,7 @@
 <dependency>
     <groupId>co.novu</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -29,13 +29,13 @@
 ```kotlin
 //Kotlin
 //add dependency
-implementation("co.novu:novu-kotlin:1.0.0")
+implementation("co.novu:novu-kotlin:1.1.0")
 ```
 
 ```groovy
 //Groovy
 //add dependency
-implementation 'co.novu:novu-kotlin:1.0.0'
+implementation 'co.novu:novu-kotlin:1.1.0'
 ```
 
 Sync your project, and you should have the artifacts downloaded.
