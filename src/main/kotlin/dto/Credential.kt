@@ -17,5 +17,13 @@ data class Credential(
     var senderName: String? = null,
     var projectName: String? = null,
     var applicationId: String? = null,
-    var clientId: String? = null
+    var clientId: String? = null,
+    var requireTls: Boolean? = null,
+    var ignoreTls: Boolean? = null,
+    var baseUrl: String? = null,
+    var webhookUrl: String? = null,
+    var redirectUrl: String? = null,
+    var hmac: Boolean? = null,
+    var serviceAccount: String? = null,
+    var ipPoolName: String? = null
 )
