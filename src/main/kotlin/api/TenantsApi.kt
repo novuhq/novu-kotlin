@@ -1,9 +1,9 @@
 package co.novu.api
 
+import co.novu.dto.Tenant
 import co.novu.dto.request.TenantRequest
 import co.novu.dto.response.PaginatedResponseWrapper
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.Tenant
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

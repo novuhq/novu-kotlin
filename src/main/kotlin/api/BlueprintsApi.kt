@@ -1,8 +1,8 @@
 package co.novu.api
 
+import co.novu.dto.blueprints.Blueprint
 import co.novu.dto.blueprints.BlueprintsResponse
 import co.novu.dto.response.ResponseWrapper
-import co.novu.dto.blueprints.Blueprint
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
