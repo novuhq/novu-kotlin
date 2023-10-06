@@ -1,4 +1,4 @@
-name: Workflow for running unit tests
+name: Run Checks on Codebase
 
 on:
   push:
@@ -8,9 +8,8 @@ on:
     branches:
       - main
 
-  
 jobs:
-  tests:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,6 +20,8 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Install dependencies and run unit test
-        run: |
-            ./gradlew clean test
+      - name: Run Unit tests
+        run: ./gradlew clean test
+
+      - name: Run Ktlint check
+        run: ./gradlew ktlintCheck
