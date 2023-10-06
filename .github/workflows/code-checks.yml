@@ -23,5 +23,5 @@ jobs:
       - name: Run Unit tests
         run: ./gradlew clean test
 
-      - name: Run Ktlint Check
-        uses: ./gradlew ktlintCheck
+      - name: Run Ktlint check
+        run: ./gradlew ktlintCheck
