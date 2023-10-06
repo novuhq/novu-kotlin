@@ -15,8 +15,8 @@ import co.novu.api.NotificationTemplatesApi
 import co.novu.api.NotificationsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TenantsApi
-import co.novu.api.WorkflowsApi
 import co.novu.api.TopicsApi
+import co.novu.api.WorkflowsApi
 import co.novu.helpers.RetrofitHelper
 
 data class NovuConfig(
