@@ -23,8 +23,5 @@ jobs:
       - name: Run Unit tests
         run: ./gradlew clean test
 
-      - name: Run Ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
+      - name: Run Ktlint Check
+        uses: ./gradlew ktlintCheck
