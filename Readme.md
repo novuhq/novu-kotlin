@@ -78,7 +78,7 @@ novu.subscribers()
 
 ## List of all methods
 
-The client methods map directly to the Novu API endpoints. Here is a list of all the available methods. Check [the API docs](https://docs.novu.co/api/overview) for list of available `methods`.
+The client methods map directly to the Novu API endpoints. Here is a list of all the available methods. Check [the API docs](https://docs.novu.co/api-reference/overview) for list of available `methods`.
 
 ### Changes
 
@@ -207,7 +207,7 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 - `updateTenant(identifier)`
 - `deleteTenant(identifier)`
 
-### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
+### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference/overview).
 
 ## Contributing
 
