@@ -13,7 +13,11 @@ import java.math.BigInteger
 
 interface NotificationsApi {
 
-    @GET("notifications")
+    companion object {
+        const val ENDPOINT = "notifications"
+    }
+
+    @GET(ENDPOINT)
     suspend fun getNotifications(
         @Query("channels") channels: List<String>?,
         @Query("templates") templates: List<String>?,
@@ -23,12 +27,12 @@ interface NotificationsApi {
         @Query("transactionId") transactionId: String?
     ): Response<PaginatedResponseWrapper<Notification>>
 
-    @GET("notifications/stats")
+    @GET("$ENDPOINT/stats")
     suspend fun getNotificationsStats(): Response<ResponseWrapper<NotificationStatsResponse>>
 
-    @GET("notifications/graph/stats")
+    @GET("$ENDPOINT/graph/stats")
     suspend fun getNotificationGraphStats(): Response<ResponseWrapper<List<NotificationGraphStatsResponse>>>
 
-    @GET("notifications/{notificationId}")
+    @GET("$ENDPOINT/{notificationId}")
     suspend fun getNotification(@Path("notificationId") notificationId: String): Response<ResponseWrapper<Notification>>
 }

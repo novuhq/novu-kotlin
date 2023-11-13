@@ -17,21 +17,25 @@ import java.math.BigInteger
 
 interface LayoutsApi {
 
-    @POST("layouts")
+    companion object {
+        const val ENDPOINT = "layouts"
+    }
+
+    @POST(ENDPOINT)
     suspend fun createLayout(@Body request: CreateLayoutRequest): Response<ResponseWrapper<CreateLayoutResponse>>
 
-    @GET("layouts")
+    @GET(ENDPOINT)
     suspend fun filterLayouts(@Query("page") page: BigInteger, @Query("pageSize") pageSize: BigInteger, @Query("sortBy") sortBy: String, @Query("orderBy") orderBy: BigInteger): Response<PaginatedResponseWrapper<GetLayoutsResponse>>
 
-    @GET("layouts/{layoutId}")
+    @GET("$ENDPOINT/{layoutId}")
     suspend fun getLayout(@Path("layoutId") layoutId: String): Response<ResponseWrapper<GetLayoutsResponse>>
 
-    @DELETE("layouts/{layoutId}")
+    @DELETE("$ENDPOINT/{layoutId}")
     suspend fun deleteLayout(@Path("layoutId") layoutId: String): Response<Unit>
 
-    @PATCH("layouts/{layoutId}")
+    @PATCH("$ENDPOINT/{layoutId}")
     suspend fun updateLayout(@Path("layoutId") layoutId: String, @Body request: CreateLayoutRequest): Response<ResponseWrapper<GetLayoutsResponse>>
 
-    @POST("layouts/{layoutId}/default")
+    @POST("$ENDPOINT/{layoutId}/default")
     suspend fun setDefaultLayout(@Path("layoutId") layoutId: String): Response<Unit>
 }

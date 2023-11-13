@@ -16,21 +16,25 @@ import java.math.BigInteger
 
 interface NotificationTemplatesApi {
 
-    @GET("notification-templates")
+    companion object {
+        const val ENDPOINT = "notification-templates"
+    }
+
+    @GET(ENDPOINT)
     suspend fun getNotificationTemplates(@Query("page") page: BigInteger? = BigInteger.valueOf(1), @Query("limit") limit: BigInteger? = BigInteger.valueOf(10)): Response<PaginatedResponseWrapper<NotificationTemplates>>
 
-    @POST("notification-templates")
+    @POST(ENDPOINT)
     suspend fun createNotificationTemplates(@Body request: NotificationTemplates): Response<ResponseWrapper<NotificationTemplates>>
 
-    @PUT("notification-templates/{templateId}")
+    @PUT("$ENDPOINT/{templateId}")
     suspend fun updateNotificationTemplates(@Path("templateId") templateId: String, @Body request: NotificationTemplates): Response<ResponseWrapper<NotificationTemplates>>
 
-    @DELETE("notification-templates/{templateId}")
+    @DELETE("$ENDPOINT/{templateId}")
     suspend fun deleteNotificationTemplate(@Path("templateId") templateId: String): Response<ResponseWrapper<Boolean>>
 
-    @GET("notification-templates/{templateId}")
+    @GET("$ENDPOINT/{templateId}")
     suspend fun getNotificationTemplate(@Path("templateId") templateId: String): Response<ResponseWrapper<NotificationTemplates>>
 
-    @PUT("notification-templates/{templateId}/status")
+    @PUT("$ENDPOINT/{templateId}/status")
     suspend fun updateNotificationTemplateStatus(@Path("templateId") templateId: String, @Body request: UpdateNotificationTemplateStatusRequest): Response<ResponseWrapper<NotificationTemplates>>
 }

@@ -13,15 +13,19 @@ import retrofit2.http.Path
 
 interface EventsApi {
 
-    @POST("events/trigger")
+    companion object {
+        const val ENDPOINT = "events"
+    }
+
+    @POST("$ENDPOINT/trigger")
     suspend fun triggerEvent(@Body body: TriggerEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
-    @POST("events/trigger/bulk")
+    @POST("$ENDPOINT/trigger/bulk")
     suspend fun bulkTriggerEvent(@Body body: BulkTriggerEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
-    @POST("events/trigger/broadcast")
+    @POST("$ENDPOINT/trigger/broadcast")
     suspend fun broadcastEvent(@Body body: BroadcastEventRequest): Response<ResponseWrapper<TriggerResponse>>
 
-    @DELETE("events/trigger/{transactionId}")
+    @DELETE("$ENDPOINT/trigger/{transactionId}")
     suspend fun cancelTriggerEvent(@Path("transactionId") transactionId: String): Response<ResponseWrapper<Boolean>>
 }
