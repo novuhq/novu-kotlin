@@ -13,6 +13,7 @@ import co.novu.api.MessagesApi
 import co.novu.api.NotificationGroupsApi
 import co.novu.api.NotificationTemplatesApi
 import co.novu.api.NotificationsApi
+import co.novu.api.OrganizationsApi
 import co.novu.api.SubscribersApi
 import co.novu.api.TenantsApi
 import co.novu.api.TopicsApi
@@ -65,4 +66,6 @@ class Novu(
     internal val blueprintsApi by lazy { retrofitInstance.create(BlueprintsApi::class.java) }
 
     internal val tenantsApi by lazy { retrofitInstance.create(TenantsApi::class.java) }
+
+    internal val organizationsApi by lazy { retrofitInstance.create(OrganizationsApi::class.java) }
 }
