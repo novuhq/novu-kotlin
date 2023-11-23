@@ -21,31 +21,35 @@ import java.math.BigInteger
 
 interface TopicsApi {
 
-    @GET("topics")
+    companion object {
+        const val ENDPOINT = "topics"
+    }
+
+    @GET(ENDPOINT)
     suspend fun filterTopics(
         @Query("page") page: BigInteger? = null,
         @Query("pageSize")pageSize: BigInteger? = null,
         @Query("key") key: String? = null
     ): Response<PaginatedResponseWrapper<TopicResponse>>
 
-    @POST("topics")
+    @POST(ENDPOINT)
     suspend fun createTopic(@Body request: CreateTopicRequest): Response<ResponseWrapper<CreateTopicResponse>>
 
-    @POST("topics/{topicKey}/subscribers")
+    @POST("$ENDPOINT/{topicKey}/subscribers")
     suspend fun addSubscriber(@Path("topicKey") topicKey: String, @Body request: SubscriberList): Response<ResponseWrapper<AddSubscribersResponse>>
 
-    @POST("topics/{topicKey}/subscribers/removal")
+    @POST("$ENDPOINT/{topicKey}/subscribers/removal")
     suspend fun removeSubscribers(@Path("topicKey") topicKey: String, @Body request: SubscriberList): Response<Unit>
 
-    @GET("topics/{topicKey}/subscribers/{externalSubscriberId}")
+    @GET("$ENDPOINT/{topicKey}/subscribers/{externalSubscriberId}")
     suspend fun checkSubscriber(@Path("topicKey") topicKey: String, @Path("externalSubscriberId") externalSubscriberId: String): Response<CheckTopicSubscriberResponse>
 
-    @GET("topics/{topicKey}")
+    @GET("$ENDPOINT/{topicKey}")
     suspend fun getTopic(@Path("topicKey") topicKey: String): Response<ResponseWrapper<TopicResponse>>
 
-    @PATCH("topics/{topicKey}")
+    @PATCH("$ENDPOINT/{topicKey}")
     suspend fun renameTopic(@Path("topicKey") topicKey: String, @Body request: CreateByNameRequest): Response<ResponseWrapper<TopicResponse>>
 
-    @DELETE("topics/{topicKey}")
+    @DELETE("$ENDPOINT/{topicKey}")
     suspend fun deleteTopic(@Path("topicKey") topicKey: String): Response<Unit>
 }

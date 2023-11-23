@@ -15,24 +15,28 @@ import retrofit2.http.Path
 
 interface EnvironmentsApi {
 
-    @GET("environments/me")
+    companion object {
+        const val ENDPOINT = "environments"
+    }
+
+    @GET("$ENDPOINT/me")
     suspend fun getCurrentEnvironment(): Response<ResponseWrapper<GetEnvironmentResponse>>
 
-    @POST("environments")
+    @POST(ENDPOINT)
     suspend fun createEnvironment(@Body request: CreateEnvironmentRequest): Response<ResponseWrapper<GetEnvironmentResponse>>
 
-    @GET("environments")
+    @GET(ENDPOINT)
     suspend fun getEnvironments(): Response<ResponseWrapper<List<GetEnvironmentResponse>>>
 
-    @PUT("environments/{environmentId}")
+    @PUT("$ENDPOINT/{environmentId}")
     suspend fun updateEnvironment(@Path("environmentId") environmentId: String, @Body request: UpdateEnvironmentRequest): Response<ResponseWrapper<GetEnvironmentResponse>>
 
-    @GET("environments/api-keys")
+    @GET("$ENDPOINT/api-keys")
     suspend fun getApiKeys(): Response<ResponseWrapper<List<ApiKeys>>>
 
-    @POST("environments/api-keys/regenerate")
+    @POST("$ENDPOINT/api-keys/regenerate")
     suspend fun regenerateApiKey(): Response<ResponseWrapper<List<ApiKeys>>>
 
-    @PUT("environments/api-keys/widget/settings")
+    @PUT("$ENDPOINT/api-keys/widget/settings")
     suspend fun updateWidgetSettings(@Body request: Widget): Response<ResponseWrapper<GetEnvironmentResponse>>
 }

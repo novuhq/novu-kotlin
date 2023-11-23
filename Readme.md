@@ -207,6 +207,17 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 - `updateTenant(identifier)`
 - `deleteTenant(identifier)`
 
+### Organizations
+
+- `createOrganization(body)`
+- `fetchAllOrganizations()`
+- `updateOrganizationName(body)`
+- `fetchCurrentOrganization()`
+- `removeMemberWithId(identifier)`
+- `updateMemberRole(identifier, body)`
+- `fetchMembersOfOrganization()`
+- `updateOrganizationBrand(body)`
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference/overview).
 
 ## Contributing

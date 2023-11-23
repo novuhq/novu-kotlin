@@ -6,6 +6,10 @@ import retrofit2.http.GET
 
 interface InboundParseApi {
 
-    @GET("inbound-parse/mx/status")
+    companion object {
+        const val ENDPOINT = "inbound-parse"
+    }
+
+    @GET("$ENDPOINT/mx/status")
     suspend fun validateMxRecordSetupForInboundParse(): Response<ValidateMxRecordSetupForInboundParseResponse>
 }

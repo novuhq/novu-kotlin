@@ -17,21 +17,25 @@ import retrofit2.http.Query
 
 interface WorkflowsApi {
 
-    @GET("workflows")
+    companion object {
+        const val ENDPOINT = "workflows"
+    }
+
+    @GET(ENDPOINT)
     suspend fun getWorkflows(@Query("page") page: Int? = null, @Query("limit") limit: Int? = null): Response<PaginatedResponseWrapper<WorkflowResponse>>
 
-    @POST("workflows")
+    @POST(ENDPOINT)
     suspend fun createWorkflow(@Body request: WorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
 
-    @PUT("workflows/{workflowId}")
+    @PUT("$ENDPOINT/{workflowId}")
     suspend fun updateWorkflow(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
 
-    @DELETE("workflows/{workflowId}")
+    @DELETE("$ENDPOINT/{workflowId}")
     suspend fun deleteWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<Boolean>>
 
-    @GET("workflows/{workflowId}")
+    @GET("$ENDPOINT/{workflowId}")
     suspend fun getWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<WorkflowResponse>>
 
-    @PUT("workflows/{workflowId}/status")
+    @PUT("$ENDPOINT/{workflowId}/status")
     suspend fun updateWorkflowStatus(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowStatusRequest): Response<ResponseWrapper<WorkflowResponse>>
 }

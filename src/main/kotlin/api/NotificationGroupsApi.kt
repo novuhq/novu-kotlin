@@ -13,18 +13,23 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface NotificationGroupsApi {
-    @GET("notification-groups")
+
+    companion object {
+        const val ENDPOINT = "notification-groups"
+    }
+
+    @GET(ENDPOINT)
     suspend fun getNotificationGroups(): Response<ResponseWrapper<List<NotificationGroupsResponse>>>
 
-    @POST("notification-groups")
+    @POST(ENDPOINT)
     suspend fun createNotificationGroup(@Body request: CreateByNameRequest): Response<ResponseWrapper<NotificationGroupsResponse>>
 
-    @GET("notification-groups/{id}")
+    @GET("$ENDPOINT/{id}")
     suspend fun getWorkflowGroup(@Path("id") id: String): Response<ResponseWrapper<NotificationGroupsResponse>>
 
-    @PATCH("notification-groups/{id}")
+    @PATCH("$ENDPOINT/{id}")
     suspend fun updateWorkflowGroup(@Path("id") id: String, @Body request: CreateByNameRequest): Response<ResponseWrapper<NotificationGroupsResponse>>
 
-    @DELETE("notification-groups/{id}")
+    @DELETE("$ENDPOINT/{id}")
     suspend fun deleteWorkflowGroup(@Path("id") id: String): Response<ResponseWrapper<DeleteWorkflowGroupResponse>>
 }
