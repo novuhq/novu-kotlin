@@ -1,7 +1,7 @@
 repo_name: novuhq/novu-kotlin
-report_id: dc0bc37b342774d9a8ac66d79e5ac803
+report_id: d9fa296ec5f39ac932ffaa4260e269cd
 repo_type: Public
-timestamp: '2023-11-09T15:12:26+00:00'
+timestamp: '2023-12-14T09:32:46+00:00'
 requested_by: Cliftonz
 provider: github
 branch: main
@@ -33,7 +33,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
-  detection_source: ".github/workflows/maven-publish.yml"
+  detection_source: ".github/workflows/code-checks.yml"
   last_updated_by: darktang3nt69
   last_updated_on: 2023-10-04 12:59:42.000000000 Z
 - name: Gradle
@@ -45,6 +45,6 @@ tools:
   category: Build, Test, Deploy
   sub_category: Java Build Tools
   image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
-  detection_source: gradlew.bat
+  detection_source: gradlew
   last_updated_by: Shivam Shah
   last_updated_on: 2023-03-03 11:40:49.000000000 Z
