@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     `java-library`
     `maven-publish`
@@ -132,4 +134,25 @@ nexusStaging {
     serverUrl = "https://s01.oss.sonatype.org/service/local/"
     username = System.getenv("MAVEN_USERNAME")
     password = System.getenv("MAVEN_PASSWORD")
+}
+
+val propsDir = "$buildDir/props"
+sourceSets {
+    main {
+        kotlin {
+            output.dir(propsDir)
+        }
+    }
+}
+
+tasks.register("generateVersionProperty") {
+    val propertiesFile = file("$propsDir/version.properties")
+    propertiesFile.parentFile.mkdirs()
+    val properties = Properties()
+    properties.setProperty("version", "$version")
+    propertiesFile.writer().use { properties.store(it, null) }
+}
+
+tasks.named("processResources") {
+    dependsOn("generateVersionProperty")
 }
