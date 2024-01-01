@@ -22,12 +22,12 @@ class RetrofitHelper(
 
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
-                val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "ApiKey ${config.apiKey}")
-                    .addHeader("User-Agent", "novu/Kotlin@${retrieveProjectVersion()}")
-                    .build()
-                chain.proceed(request)
-            }
+            val request = chain.request().newBuilder()
+                .addHeader("Authorization", "ApiKey ${config.apiKey}")
+                .addHeader("User-Agent", "novu/Kotlin@${retrieveProjectVersion()}")
+                .build()
+            chain.proceed(request)
+        }
             .addInterceptor(HttpLoggingInterceptor().setLevel(loggerLevel))
         val gson = GsonBuilder().setLenient().create()
         retrofit = Retrofit.Builder()
