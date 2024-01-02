@@ -44,6 +44,8 @@ class BlueprintsApiTest {
 
         assert(request.path == "/blueprints/group-by-category")
         assert(request.method == "GET")
+        assert(request.headers["Authorization"] != null)
+        assert(request.headers["User-Agent"] != null)
         assert(result == responseBody)
     }
 
