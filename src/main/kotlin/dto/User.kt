@@ -1,9 +1,11 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
 data class User(
-    var _id: String? = null,
+    @SerializedName("_id")
+    var id: String? = null,
     var firstName: String? = null,
     var lastName: String? = null,
     var email: String? = null,
@@ -12,6 +14,7 @@ data class User(
     var token: List<Token>,
     var createdAt: String? = null,
     var updatedAt: String? = null,
-    var __v: BigDecimal? = null
+    @SerializedName("__v")
+    var version: BigDecimal? = null
 
 )

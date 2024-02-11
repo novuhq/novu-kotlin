@@ -1,13 +1,22 @@
 package co.novu.dto.response
 
+import com.google.gson.annotations.SerializedName
+
 data class SubscriberNotificationResponse(
-    var _id: String? = null,
-    var _templateId: String? = null,
-    var _environmentId: String? = null,
-    var _messageTemplateId: String? = null,
-    var _organizationId: String? = null,
-    var _notificationId: String? = null,
-    var _subscriberId: String? = null,
+    @SerializedName("_id")
+    var id: String? = null,
+    @SerializedName("_templateId")
+    var templateId: String? = null,
+    @SerializedName("_environmentId")
+    var environmentId: String? = null,
+    @SerializedName("_messageTemplateId")
+    var messageTemplateId: String? = null,
+    @SerializedName("_organizationId")
+    var organizationId: String? = null,
+    @SerializedName("_notificationId")
+    var notificationId: String? = null,
+    @SerializedName("_subscriberId")
+    var subscriberId: String? = null,
     var subscriber: Any? = null,
     var template: Any? = null,
     var templateIdentifier: String? = null,
@@ -24,7 +33,8 @@ data class SubscriberNotificationResponse(
     var title: String? = null,
     var lastSeenDate: String? = null,
     var cta: Any? = null,
-    var _feedId: String? = null,
+    @SerializedName("_feedId")
+    var feedId: String? = null,
     var status: String? = null,
     var errorId: String? = null,
     var errorText: String? = null,

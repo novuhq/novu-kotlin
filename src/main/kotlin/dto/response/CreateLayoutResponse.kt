@@ -1,5 +1,8 @@
 package co.novu.dto.response
 
+import com.google.gson.annotations.SerializedName
+
 data class CreateLayoutResponse(
-    var _id: String? = null
+    @SerializedName("_id")
+    var id: String? = null
 )

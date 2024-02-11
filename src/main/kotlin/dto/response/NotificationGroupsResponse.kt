@@ -1,14 +1,20 @@
 package co.novu.dto.response
 
+import com.google.gson.annotations.SerializedName
 import java.math.BigInteger
 
 data class NotificationGroupsResponse(
-    var _id: String? = null,
+    @SerializedName("_id")
+    var id: String? = null,
     var name: String? = null,
-    var _environmentId: String? = null,
-    var _organizationId: String? = null,
-    var _parentId: String? = null,
+    @SerializedName("_environmentId")
+    var environmentId: String? = null,
+    @SerializedName("_organizationId")
+    var organizationId: String? = null,
+    @SerializedName("_parentId")
+    var parentId: String? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null,
-    var __v: BigInteger? = null
+    @SerializedName("__v")
+    var version: BigInteger? = null
 )

@@ -7,8 +7,10 @@ class BroadcastEventRequest private constructor() : BaseEventRequest() {
             name: String,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
         ) =
-            BroadcastEventRequest().apply { init(name, payload, overrides, transactionId) }
+            BroadcastEventRequest().apply { init(name, payload, overrides, transactionId, actor, tenant) }
     }
 }

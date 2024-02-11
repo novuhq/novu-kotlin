@@ -32,20 +32,20 @@ class EnvironmentsApiTest {
     fun testGetEnvironments() = runTest {
         val responseBody = ResponseWrapper(
             GetEnvironmentResponse(
-                _id = "1234",
+                id = "1234",
                 name = "name",
-                _organizationId = "orgId",
+                organizationId = "orgId",
                 identifier = "identifier",
                 apiKeys = listOf(
                     ApiKeys(
                         key = "key",
-                        _userId = "userId"
+                        userId = "userId"
                     )
                 ),
                 widget = Widget(
                     notificationCenterEncryption = true
                 ),
-                _parentId = "parentId"
+                parentId = "parentId"
 
             )
         )
@@ -62,20 +62,20 @@ class EnvironmentsApiTest {
     fun testCreateEnvironment() = runTest {
         val responseBody = ResponseWrapper(
             GetEnvironmentResponse(
-                _id = "1234",
+                id = "1234",
                 name = "name",
-                _organizationId = "orgId",
+                organizationId = "orgId",
                 identifier = "identifier",
                 apiKeys = listOf(
                     ApiKeys(
                         key = "key",
-                        _userId = "userId"
+                        userId = "userId"
                     )
                 ),
                 widget = Widget(
                     notificationCenterEncryption = true
                 ),
-                _parentId = "parentId"
+                parentId = "parentId"
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
@@ -97,20 +97,20 @@ class EnvironmentsApiTest {
         val responseBody = ResponseWrapper(
             listOf(
                 GetEnvironmentResponse(
-                    _id = "1234",
+                    id = "1234",
                     name = "name",
-                    _organizationId = "orgId",
+                    organizationId = "orgId",
                     identifier = "identifier",
                     apiKeys = listOf(
                         ApiKeys(
                             key = "key",
-                            _userId = "userId"
+                            userId = "userId"
                         )
                     ),
                     widget = Widget(
                         notificationCenterEncryption = true
                     ),
-                    _parentId = "parentId"
+                    parentId = "parentId"
 
                 )
             )
@@ -128,20 +128,20 @@ class EnvironmentsApiTest {
     fun testUpdateEnvironment() = runTest {
         val responseBody = ResponseWrapper(
             GetEnvironmentResponse(
-                _id = "1234",
+                id = "1234",
                 name = "name",
-                _organizationId = "orgId",
+                organizationId = "orgId",
                 identifier = "identifier",
                 apiKeys = listOf(
                     ApiKeys(
                         key = "key",
-                        _userId = "userId"
+                        userId = "userId"
                     )
                 ),
                 widget = Widget(
                     notificationCenterEncryption = true
                 ),
-                _parentId = "parentId"
+                parentId = "parentId"
 
             )
         )
@@ -171,7 +171,7 @@ class EnvironmentsApiTest {
             listOf(
                 ApiKeys(
                     key = "key",
-                    _userId = "userId"
+                    userId = "userId"
                 )
             )
         )
@@ -190,7 +190,7 @@ class EnvironmentsApiTest {
             listOf(
                 ApiKeys(
                     key = "key",
-                    _userId = "userId"
+                    userId = "userId"
                 )
             )
         )
@@ -207,20 +207,20 @@ class EnvironmentsApiTest {
     fun testUpdateWidgetSettings() = runTest {
         val responseBody = ResponseWrapper(
             GetEnvironmentResponse(
-                _id = "1234",
+                id = "1234",
                 name = "name",
-                _organizationId = "orgId",
+                organizationId = "orgId",
                 identifier = "identifier",
                 apiKeys = listOf(
                     ApiKeys(
                         key = "key",
-                        _userId = "userId"
+                        userId = "userId"
                     )
                 ),
                 widget = Widget(
                     notificationCenterEncryption = true
                 ),
-                _parentId = "parentId"
+                parentId = "parentId"
 
             )
         )

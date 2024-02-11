@@ -28,11 +28,11 @@ class NotificationGroupsApiTest {
         val responseBody = ResponseWrapper(
             listOf(
                 NotificationGroupsResponse(
-                    _id = "1234",
+                    id = "1234",
                     name = "test",
-                    _environmentId = "environmentId",
-                    _organizationId = "organizationId",
-                    _parentId = "parentId"
+                    environmentId = "environmentId",
+                    organizationId = "organizationId",
+                    parentId = "parentId"
                 )
             )
         )
@@ -49,11 +49,11 @@ class NotificationGroupsApiTest {
     fun testCreateNotificationGroup() = runTest {
         val responseBody = ResponseWrapper(
             NotificationGroupsResponse(
-                _id = "1234",
+                id = "1234",
                 name = "test",
-                _environmentId = "environmentId",
-                _organizationId = "organizationId",
-                _parentId = "parentId"
+                environmentId = "environmentId",
+                organizationId = "organizationId",
+                parentId = "parentId"
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
@@ -71,11 +71,11 @@ class NotificationGroupsApiTest {
     fun testGetWorkflowGroup() = runTest {
         val responseBody = ResponseWrapper(
             NotificationGroupsResponse(
-                _id = "1234",
+                id = "1234",
                 name = "test",
-                _environmentId = "environmentId",
-                _organizationId = "organizationId",
-                _parentId = "parentId"
+                environmentId = "environmentId",
+                organizationId = "organizationId",
+                parentId = "parentId"
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
@@ -92,11 +92,11 @@ class NotificationGroupsApiTest {
     fun testUpdateWorkflowGroup() = runTest {
         val responseBody = ResponseWrapper(
             NotificationGroupsResponse(
-                _id = "1234",
+                id = "1234",
                 name = "test",
-                _environmentId = "environmentId",
-                _organizationId = "organizationId",
-                _parentId = "parentId"
+                environmentId = "environmentId",
+                organizationId = "organizationId",
+                parentId = "parentId"
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))

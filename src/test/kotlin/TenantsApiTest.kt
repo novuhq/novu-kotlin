@@ -29,8 +29,8 @@ class TenantsApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 Tenant(
-                    _id = "_id",
-                    _environmentId = "_environmentId",
+                    id = "_id",
+                    environmentId = "_environmentId",
                     name = "name",
                     identifier = "identifier"
                 )
@@ -56,8 +56,8 @@ class TenantsApiTest {
     fun testCreateTenant() = runTest {
         val responseBody = ResponseWrapper(
             Tenant(
-                _id = "_id",
-                _environmentId = "_environmentId",
+                id = "_id",
+                environmentId = "_environmentId",
                 name = "name",
                 identifier = "identifier"
             )
@@ -85,8 +85,8 @@ class TenantsApiTest {
     fun testGetTenant() = runTest {
         val responseBody = ResponseWrapper(
             data = Tenant(
-                _id = "_id",
-                _environmentId = "_environmentId",
+                id = "_id",
+                environmentId = "_environmentId",
                 name = "name",
                 identifier = "identifier"
             )
@@ -109,8 +109,8 @@ class TenantsApiTest {
     fun testUpdateTenant() = runTest {
         val responseBody = ResponseWrapper(
             data = Tenant(
-                _id = "_id",
-                _environmentId = "_environmentId",
+                id = "_id",
+                environmentId = "_environmentId",
                 name = "name",
                 identifier = "identifier"
             )

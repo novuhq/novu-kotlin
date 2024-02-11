@@ -22,8 +22,8 @@ class ExecutionDetailsApiTest {
         val responseBody = ResponseWrapper(
             listOf(
                 ExecutionDetails(
-                    _id = "_id",
-                    _jobId = "_jobId",
+                    id = "_id",
+                    jobId = "_jobId",
                     status = "status",
                     detail = "detail",
                     isRetry = true,
@@ -33,12 +33,12 @@ class ExecutionDetailsApiTest {
                     source = "source",
                     transactionId = "transactionId",
                     createdAt = "createdAt",
-                    _organizationId = "_organizationId",
-                    _environmentId = "_environmentId",
-                    _notificationId = "_notificationId",
-                    _subscriberId = "_subscriberId",
-                    _notificationTemplateId = "_notificationTemplateId",
-                    _messageId = "_messageId"
+                    organizationId = "_organizationId",
+                    environmentId = "_environmentId",
+                    notificationId = "_notificationId",
+                    subscriberId = "_subscriberId",
+                    notificationTemplateId = "_notificationTemplateId",
+                    messageId = "_messageId"
                 )
             )
         )

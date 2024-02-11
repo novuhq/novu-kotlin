@@ -40,7 +40,7 @@ class WorkflowsApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 WorkflowResponse(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
                     description = "description",
                     active = true,
@@ -56,8 +56,8 @@ class WorkflowsApiTest {
                     tags = listOf("tag1", "tag2"),
                     steps = listOf(
                         Step(
-                            _id = "_id",
-                            _templateId = "_templateId",
+                            id = "_id",
+                            templateId = "_templateId",
                             active = true,
                             shouldStopOnFail = true,
                             template = "template",
@@ -86,13 +86,13 @@ class WorkflowsApiTest {
                                 backoffAmount = BigInteger.valueOf(10),
                                 updateMode = true
                             ),
-                            _parentId = "_parentId",
+                            parentId = "_parentId",
                             replyCallback = "replyCallback"
                         )
                     ),
-                    _organizationId = "_organizationId",
-                    _creatorId = "_creatorId",
-                    _environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    creatorId = "_creatorId",
+                    environmentId = "_environmentId",
                     triggers = listOf(
                         Trigger(
                             type = "type",
@@ -113,11 +113,11 @@ class WorkflowsApiTest {
                     deleted = true,
                     deletedBy = "deletedBy",
                     notificationGroup = NotificationGroup(
-                        _id = "_id",
+                        id = "_id",
                         name = "name",
-                        _environmentId = "_environmentId",
-                        _organizationId = "_organizationId",
-                        _parentId = "_parentId"
+                        environmentId = "_environmentId",
+                        organizationId = "_organizationId",
+                        parentId = "_parentId"
                     )
                 )
             )
@@ -139,7 +139,7 @@ class WorkflowsApiTest {
     fun testCreateWorkflow() = runTest {
         val responseBody = ResponseWrapper(
             WorkflowResponse(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -155,8 +155,8 @@ class WorkflowsApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -185,13 +185,13 @@ class WorkflowsApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -212,11 +212,11 @@ class WorkflowsApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -270,7 +270,7 @@ class WorkflowsApiTest {
     fun testUpdateWorkflow() = runTest {
         val responseBody = ResponseWrapper(
             WorkflowResponse(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -286,8 +286,8 @@ class WorkflowsApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -316,13 +316,13 @@ class WorkflowsApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -343,11 +343,11 @@ class WorkflowsApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -417,7 +417,7 @@ class WorkflowsApiTest {
     fun testGetWorkflow() = runTest {
         val responseBody = ResponseWrapper(
             WorkflowResponse(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -433,8 +433,8 @@ class WorkflowsApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -463,13 +463,13 @@ class WorkflowsApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -490,11 +490,11 @@ class WorkflowsApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -513,7 +513,7 @@ class WorkflowsApiTest {
     fun testUpdateWorkflowStatus() = runTest {
         val responseBody = ResponseWrapper(
             WorkflowResponse(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -529,8 +529,8 @@ class WorkflowsApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -559,13 +559,13 @@ class WorkflowsApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -586,11 +586,11 @@ class WorkflowsApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )

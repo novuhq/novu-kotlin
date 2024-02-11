@@ -2,6 +2,7 @@ package co.novu.dto.response
 
 import co.novu.dto.Channel
 import co.novu.dto.Subscriber
+import com.google.gson.annotations.SerializedName
 import java.math.BigInteger
 
 class SubscriberResponse(
@@ -11,18 +12,22 @@ class SubscriberResponse(
     email: String? = null,
     phone: String? = null,
     avatar: String? = null,
-    var _id: String? = null,
-    var _organizationId: String? = null,
-    var _environmentId: String? = null,
+    id: String? = null,
+    @SerializedName("_organizationId")
+    var organizationId: String? = null,
+    @SerializedName("_environmentId")
+    var environmentId: String? = null,
     var deleted: Boolean? = null,
     var createdAt: String? = null,
     var updatedAt: String? = null,
     var channels: List<Channel>? = null,
     var locale: Any? = null,
-    var __v: BigInteger? = null,
+    @SerializedName("__v")
+    var version: BigInteger? = null,
     var isOnline: Boolean? = null,
     var lastOnlineAt: String? = null
 ) : Subscriber(
+    id,
     subscriberId,
     firstName,
     lastName,

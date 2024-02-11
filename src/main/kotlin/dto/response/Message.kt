@@ -3,17 +3,25 @@ package co.novu.dto.response
 import co.novu.dto.Job
 import co.novu.dto.Subscriber
 import co.novu.dto.Template
+import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
 
 data class Message(
-    val _id: String? = null,
-    val _templateId: String? = null,
-    val _environmentId: String? = null,
-    val _messageTemplateId: String? = null,
+    @SerializedName("_id")
+    val id: String? = null,
+    @SerializedName("_templateId")
+    val templateId: String? = null,
+    @SerializedName("_environmentId")
+    val environmentId: String? = null,
+    @SerializedName("_messageTemplateId")
+    val messageTemplateId: String? = null,
     val notificationId: String? = null,
-    val _organizationId: String? = null,
-    val _subscriberId: String? = null,
-    val _jobId: String? = null,
+    @SerializedName("_organizationId")
+    val organizationId: String? = null,
+    @SerializedName("_subscriberId")
+    val subscriberId: String? = null,
+    @SerializedName("_jobId")
+    val jobId: String? = null,
     val templateIdentifier: String? = null,
     val email: String? = null,
     val subject: String? = null,
@@ -30,7 +38,8 @@ data class Message(
     val deleted: Boolean? = null,
     val createdAt: String? = null,
     val updatedAt: String? = null,
-    val __v: BigDecimal? = null,
+    @SerializedName("__v")
+    val version: BigDecimal? = null,
     val identifier: String? = null,
     val subscriber: Subscriber? = null,
     val template: Template? = null,

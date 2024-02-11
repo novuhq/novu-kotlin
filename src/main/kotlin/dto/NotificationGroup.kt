@@ -1,12 +1,19 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class NotificationGroup(
-    val _id: String? = null,
+    @SerializedName("_id")
+    val id: String? = null,
     val name: String? = null,
-    val _organizationId: String? = null,
-    val _environmentId: String? = null,
-    val _parentId: String? = null,
+    @SerializedName("_organizationId")
+    val organizationId: String? = null,
+    @SerializedName("_environmentId")
+    val environmentId: String? = null,
+    @SerializedName("_parentId")
+    val parentId: String? = null,
     val createdAt: String? = null,
     val updatedAt: String? = null,
-    val __v: String? = null
+    @SerializedName("__v")
+    val version: String? = null
 )

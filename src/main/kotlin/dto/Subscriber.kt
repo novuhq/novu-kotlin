@@ -1,6 +1,9 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
+
 open class Subscriber(
+    @SerializedName("_id")
     var id: String? = null,
     var subscriberId: String? = null,
     var firstName: String? = null,

@@ -38,7 +38,7 @@ class NotificationTemplatesApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 NotificationTemplates(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
                     description = "description",
                     active = true,
@@ -54,8 +54,8 @@ class NotificationTemplatesApiTest {
                     tags = listOf("tag1", "tag2"),
                     steps = listOf(
                         Step(
-                            _id = "_id",
-                            _templateId = "_templateId",
+                            id = "_id",
+                            templateId = "_templateId",
                             active = true,
                             shouldStopOnFail = true,
                             template = "template",
@@ -84,13 +84,13 @@ class NotificationTemplatesApiTest {
                                 backoffAmount = BigInteger.valueOf(10),
                                 updateMode = true
                             ),
-                            _parentId = "_parentId",
+                            parentId = "_parentId",
                             replyCallback = "replyCallback"
                         )
                     ),
-                    _organizationId = "_organizationId",
-                    _creatorId = "_creatorId",
-                    _environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    creatorId = "_creatorId",
+                    environmentId = "_environmentId",
                     triggers = listOf(
                         Trigger(
                             type = "type",
@@ -111,11 +111,11 @@ class NotificationTemplatesApiTest {
                     deleted = true,
                     deletedBy = "deletedBy",
                     notificationGroup = NotificationGroup(
-                        _id = "_id",
+                        id = "_id",
                         name = "name",
-                        _environmentId = "_environmentId",
-                        _organizationId = "_organizationId",
-                        _parentId = "_parentId"
+                        environmentId = "_environmentId",
+                        organizationId = "_organizationId",
+                        parentId = "_parentId"
                     )
                 )
             )
@@ -137,7 +137,7 @@ class NotificationTemplatesApiTest {
     fun testCreateNotification() = runTest {
         val responseBody = ResponseWrapper(
             NotificationTemplates(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -153,8 +153,8 @@ class NotificationTemplatesApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -183,13 +183,13 @@ class NotificationTemplatesApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -210,11 +210,11 @@ class NotificationTemplatesApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -269,7 +269,7 @@ class NotificationTemplatesApiTest {
     fun testUpdateNotificationTemplates() = runTest {
         val responseBody = ResponseWrapper(
             NotificationTemplates(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -285,8 +285,8 @@ class NotificationTemplatesApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -315,13 +315,13 @@ class NotificationTemplatesApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -342,11 +342,11 @@ class NotificationTemplatesApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -367,8 +367,8 @@ class NotificationTemplatesApiTest {
             tags = listOf("tag1", "tag2"),
             steps = listOf(
                 Step(
-                    _id = "_id",
-                    _templateId = "_templateId",
+                    id = "_id",
+                    templateId = "_templateId",
                     active = true,
                     template = "template",
                     filters = listOf(
@@ -396,7 +396,7 @@ class NotificationTemplatesApiTest {
                         backoffAmount = BigInteger.valueOf(10),
                         updateMode = true
                     ),
-                    _parentId = "_parentId",
+                    parentId = "_parentId",
                     replyCallback = "replyCallback"
                 )
             ),
@@ -430,7 +430,7 @@ class NotificationTemplatesApiTest {
     fun testGetNotificationTemplate() = runTest {
         val responseBody = ResponseWrapper(
             NotificationTemplates(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -446,8 +446,8 @@ class NotificationTemplatesApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -476,13 +476,13 @@ class NotificationTemplatesApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -503,11 +503,11 @@ class NotificationTemplatesApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
@@ -526,7 +526,7 @@ class NotificationTemplatesApiTest {
     fun testUpdateNotificationTemplateStatus() = runTest {
         val responseBody = ResponseWrapper(
             NotificationTemplates(
-                _id = "_id",
+                id = "_id",
                 name = "name",
                 description = "description",
                 active = true,
@@ -542,8 +542,8 @@ class NotificationTemplatesApiTest {
                 tags = listOf("tag1", "tag2"),
                 steps = listOf(
                     Step(
-                        _id = "_id",
-                        _templateId = "_templateId",
+                        id = "_id",
+                        templateId = "_templateId",
                         active = true,
                         shouldStopOnFail = true,
                         template = "template",
@@ -572,13 +572,13 @@ class NotificationTemplatesApiTest {
                             backoffAmount = BigInteger.valueOf(10),
                             updateMode = true
                         ),
-                        _parentId = "_parentId",
+                        parentId = "_parentId",
                         replyCallback = "replyCallback"
                     )
                 ),
-                _organizationId = "_organizationId",
-                _creatorId = "_creatorId",
-                _environmentId = "_environmentId",
+                organizationId = "_organizationId",
+                creatorId = "_creatorId",
+                environmentId = "_environmentId",
                 triggers = listOf(
                     Trigger(
                         type = "type",
@@ -599,11 +599,11 @@ class NotificationTemplatesApiTest {
                 deleted = true,
                 deletedBy = "deletedBy",
                 notificationGroup = NotificationGroup(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
-                    _environmentId = "_environmentId",
-                    _organizationId = "_organizationId",
-                    _parentId = "_parentId"
+                    environmentId = "_environmentId",
+                    organizationId = "_organizationId",
+                    parentId = "_parentId"
                 )
             )
         )
