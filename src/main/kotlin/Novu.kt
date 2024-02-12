@@ -1,5 +1,6 @@
 package co.novu
 
+import api.WorkflowOverrideApi
 import co.novu.api.BlueprintsApi
 import co.novu.api.ChangesApi
 import co.novu.api.EnvironmentsApi
@@ -68,4 +69,6 @@ class Novu(
     internal val tenantsApi by lazy { retrofitInstance.create(TenantsApi::class.java) }
 
     internal val organizationsApi by lazy { retrofitInstance.create(OrganizationsApi::class.java) }
+
+    internal val workflowOverrideApi by lazy { retrofitInstance.create(WorkflowOverrideApi::class.java) }
 }

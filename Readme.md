@@ -218,6 +218,16 @@ The client methods map directly to the Novu API endpoints. Here is a list of all
 - `fetchMembersOfOrganization()`
 - `updateOrganizationBrand(body)`
 
+### Workflow Override
+
+- `createWorkflowOverride(createWorkflowOverrideRequest)`
+- `getWorkflowOverrides(getWorkflowOverrideRequest)`
+- `getWorkflowOverride(workflowId, tenantId)`
+- `getWorkflowOverrideById(overrideId)`
+- `updateWorkflowOverride(workflowId, tenantId)`
+- `updateWorkflowOverrideById(overrideId)`
+- `deleteWorkflowOverride(overrideId)`
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference/overview).
 
 ## Contributing
