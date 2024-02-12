@@ -30,7 +30,7 @@ class LayoutsApiTest {
     fun testCreateLayout() = runTest {
         val responseBody = ResponseWrapper(
             CreateLayoutResponse(
-                _id = "_id"
+                id = "_id"
             )
         )
         mockWebServer.enqueue(
@@ -60,7 +60,7 @@ class LayoutsApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 GetLayoutsResponse(
-                    _id = "_id",
+                    id = "_id",
                     name = "name",
                     description = "description",
                     content = "content",
@@ -91,10 +91,10 @@ class LayoutsApiTest {
     fun testGetLayout() = runTest {
         val responseBody = ResponseWrapper(
             GetLayoutsResponse(
-                _id = "_id",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
-                _creatorId = "_creatorId",
+                id = "_id",
+                organizationId = "_organizationId",
+                environmentId = "_environmentId",
+                creatorId = "_creatorId",
                 name = "name",
                 description = "description",
                 channel = "channel",
@@ -104,7 +104,7 @@ class LayoutsApiTest {
                 isDeleted = true,
                 createdAt = "createdAt",
                 updatedAt = "updatedAt",
-                _parentId = "_parentId"
+                parentId = "_parentId"
             )
         )
 
@@ -133,10 +133,10 @@ class LayoutsApiTest {
     fun testUpdateLayout() = runTest {
         val responseBody = ResponseWrapper(
             GetLayoutsResponse(
-                _id = "_id",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
-                _creatorId = "_creatorId",
+                id = "_id",
+                organizationId = "_organizationId",
+                environmentId = "_environmentId",
+                creatorId = "_creatorId",
                 name = "name",
                 description = "description",
                 channel = "channel",
@@ -146,7 +146,7 @@ class LayoutsApiTest {
                 isDeleted = true,
                 createdAt = "createdAt",
                 updatedAt = "updatedAt",
-                _parentId = "_parentId"
+                parentId = "_parentId"
             )
         )
 

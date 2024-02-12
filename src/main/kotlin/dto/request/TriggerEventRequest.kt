@@ -11,11 +11,13 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: Any,
             payload: Map<String, Any>,
             overrides: Map<String, Any>?,
-            transactionId: String?
+            transactionId: String?,
+            actor: String? = null,
+            tenant: String? = null
         ) =
             TriggerEventRequest()
                 .apply {
-                    init(name, payload, overrides, transactionId)
+                    init(name, payload, overrides, transactionId, actor, tenant)
                     this.to = to
                 }
 
@@ -25,8 +27,10 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: String,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
-        ) = initFields(name, to, payload, overrides, transactionId)
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfString")
         operator fun invoke(
@@ -34,8 +38,10 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: List<String>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
-        ) = initFields(name, to, payload, overrides, transactionId)
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfSubscribers")
         operator fun invoke(
@@ -43,8 +49,10 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: List<SubscriberRequest>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
-        ) = initFields(name, to, payload, overrides, transactionId)
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromSubscriber")
         operator fun invoke(
@@ -52,8 +60,10 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: SubscriberRequest,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
-        ) = initFields(name, to, payload, overrides, transactionId)
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfTopics")
         operator fun invoke(
@@ -61,7 +71,9 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             to: List<Topic>,
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
-            transactionId: String? = null
-        ) = initFields(name, to, payload, overrides, transactionId)
+            transactionId: String? = null,
+            actor: String? = null,
+            tenant: String? = null
+        ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
     }
 }

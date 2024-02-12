@@ -4,9 +4,11 @@ import co.novu.dto.NotificationGroup
 import co.novu.dto.PreferenceSettings
 import co.novu.dto.Step
 import co.novu.dto.Trigger
+import com.google.gson.annotations.SerializedName
 
 data class NotificationTemplates(
-    val _id: String? = null,
+    @SerializedName("_id")
+    val id: String? = null,
     val description: String? = null,
     val active: Boolean? = null,
     val name: String? = null,
@@ -15,9 +17,12 @@ data class NotificationTemplates(
     val critical: Boolean? = null,
     val tags: List<String>? = null,
     val steps: List<Step>? = null,
-    val _organizationId: String? = null,
-    val _creatorId: String? = null,
-    val _environmentId: String? = null,
+    @SerializedName("_organizationId")
+    val organizationId: String? = null,
+    @SerializedName("_creatorId")
+    val creatorId: String? = null,
+    @SerializedName("_environmentId")
+    val environmentId: String? = null,
     val triggers: List<Trigger>? = null,
     val notificationGroupId: String? = null,
     val deleted: Boolean? = null,

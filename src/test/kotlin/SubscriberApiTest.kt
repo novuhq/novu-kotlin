@@ -55,14 +55,14 @@ class SubscriberApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 SubscriberResponse(
-                    _id = "123",
-                    _organizationId = "123",
-                    _environmentId = "123",
+                    id = "123",
+                    organizationId = "123",
+                    environmentId = "123",
                     deleted = false,
                     createdAt = "123",
                     updatedAt = "123",
                     locale = "123",
-                    __v = BigInteger.TEN,
+                    version = BigInteger.TEN,
                     isOnline = false,
                     lastOnlineAt = "123",
                     firstName = "123",
@@ -96,14 +96,14 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberResponse(
                 subscriberId = "123",
-                _id = "123",
-                _organizationId = "123",
-                _environmentId = "123",
+                id = "123",
+                organizationId = "123",
+                environmentId = "123",
                 deleted = false,
                 createdAt = "123",
                 updatedAt = "123",
                 locale = "123",
-                __v = BigInteger.TEN,
+                version = BigInteger.TEN,
                 isOnline = false,
                 lastOnlineAt = "123",
                 firstName = "123",
@@ -172,14 +172,14 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberResponse(
                 subscriberId = "123",
-                _id = "123",
-                _organizationId = "123",
-                _environmentId = "123",
+                id = "123",
+                organizationId = "123",
+                environmentId = "123",
                 deleted = false,
                 createdAt = "123",
                 updatedAt = "123",
                 locale = "123",
-                __v = BigInteger.TEN,
+                version = BigInteger.TEN,
                 isOnline = false,
                 lastOnlineAt = "123",
                 firstName = "123",
@@ -220,14 +220,14 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberResponse(
                 subscriberId = "123",
-                _id = "123",
-                _organizationId = "123",
-                _environmentId = "123",
+                id = "123",
+                organizationId = "123",
+                environmentId = "123",
                 deleted = false,
                 createdAt = "123",
                 updatedAt = "123",
                 locale = "123",
-                __v = BigInteger.TEN,
+                version = BigInteger.TEN,
                 isOnline = false,
                 lastOnlineAt = "123",
                 firstName = "123",
@@ -276,14 +276,14 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberResponse(
                 subscriberId = "123",
-                _id = "123",
-                _organizationId = "123",
-                _environmentId = "123",
+                id = "123",
+                organizationId = "123",
+                environmentId = "123",
                 deleted = false,
                 createdAt = "123",
                 updatedAt = "123",
                 locale = "123",
-                __v = BigInteger.TEN,
+                version = BigInteger.TEN,
                 isOnline = false,
                 lastOnlineAt = "123",
                 firstName = "123",
@@ -325,14 +325,14 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberResponse(
                 subscriberId = "123",
-                _id = "123",
-                _organizationId = "123",
-                _environmentId = "123",
+                id = "123",
+                organizationId = "123",
+                environmentId = "123",
                 deleted = false,
                 createdAt = "123",
                 updatedAt = "123",
                 locale = "123",
-                __v = BigInteger.TEN,
+                version = BigInteger.TEN,
                 isOnline = false,
                 lastOnlineAt = "123",
                 firstName = "123",
@@ -366,7 +366,7 @@ class SubscriberApiTest {
             listOf(
                 SubscriberPreferenceResponse(
                     template = Template(
-                        _id = "123",
+                        id = "123",
                         name = "name",
                         critical = true
                     ),
@@ -391,7 +391,7 @@ class SubscriberApiTest {
         val responseBody = ResponseWrapper(
             SubscriberPreferenceResponse(
                 template = Template(
-                    _id = "123",
+                    id = "123",
                     name = "name",
                     critical = true
                 ),
@@ -422,11 +422,11 @@ class SubscriberApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 SubscriberNotificationResponse(
-                    _id = "123",
-                    _organizationId = "_organizationId",
-                    _environmentId = "_environmentId",
-                    _messageTemplateId = "_messageTemplateId",
-                    _subscriberId = "_subscriberId",
+                    id = "123",
+                    organizationId = "_organizationId",
+                    environmentId = "_environmentId",
+                    messageTemplateId = "_messageTemplateId",
+                    subscriberId = "_subscriberId",
                     subscriber = "subscriber",
                     template = "template",
                     templateIdentifier = "templateIdentifier",
@@ -444,14 +444,14 @@ class SubscriberApiTest {
                     title = "title",
                     lastSeenDate = "lastSeenDate",
                     cta = "cta",
-                    _feedId = "_feedId",
+                    feedId = "_feedId",
                     errorId = "errorId",
                     errorText = "errorText",
                     payload = "payload",
                     overrides = "overrides",
                     subject = "subject",
-                    _notificationId = "_notificationId",
-                    _templateId = "_templateId"
+                    notificationId = "_notificationId",
+                    templateId = "_templateId"
                 )
             ),
             totalCount = BigInteger.TEN
@@ -485,42 +485,44 @@ class SubscriberApiTest {
     @Test
     fun testMarkSubscriberFeedAs() = runTest {
         val responseBody = ResponseWrapper(
-            SubscriberNotificationResponse(
-                _id = "123",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
-                _messageTemplateId = "_messageTemplateId",
-                _subscriberId = "_subscriberId",
-                subscriber = "subscriber",
-                template = "template",
-                templateIdentifier = "templateIdentifier",
-                createdAt = "createdAt",
-                content = "content",
-                transactionId = "transactionId",
-                channel = "channel",
-                seen = true,
-                email = "email@email.com",
-                phone = "phone",
-                status = "status",
-                directWebhookUrl = "directWebhookUrl",
-                providerId = "providerId",
-                deviceTokens = listOf("deviceTokens"),
-                title = "title",
-                lastSeenDate = "lastSeenDate",
-                cta = "cta",
-                _feedId = "_feedId",
-                errorId = "errorId",
-                errorText = "errorText",
-                payload = "payload",
-                overrides = "overrides",
-                subject = "subject",
-                _notificationId = "_notificationId",
-                _templateId = "_templateId"
+            listOf(
+                SubscriberNotificationResponse(
+                    id = "123",
+                    organizationId = "_organizationId",
+                    environmentId = "_environmentId",
+                    messageTemplateId = "_messageTemplateId",
+                    subscriberId = "_subscriberId",
+                    subscriber = "subscriber",
+                    template = "template",
+                    templateIdentifier = "templateIdentifier",
+                    createdAt = "createdAt",
+                    content = "content",
+                    transactionId = "transactionId",
+                    channel = "channel",
+                    seen = true,
+                    email = "email@email.com",
+                    phone = "phone",
+                    status = "status",
+                    directWebhookUrl = "directWebhookUrl",
+                    providerId = "providerId",
+                    deviceTokens = listOf("deviceTokens"),
+                    title = "title",
+                    lastSeenDate = "lastSeenDate",
+                    cta = "cta",
+                    feedId = "_feedId",
+                    errorId = "errorId",
+                    errorText = "errorText",
+                    payload = "payload",
+                    overrides = "overrides",
+                    subject = "subject",
+                    notificationId = "_notificationId",
+                    templateId = "_templateId"
+                )
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
         val requestBody = MarkSubscriberFeedAsRequest(
-            messageId = listOf("123"),
+            messageId = "mId",
             mark = Mark(
                 read = true,
                 seen = true
@@ -539,11 +541,11 @@ class SubscriberApiTest {
     fun testMarkMessageActionAsSeen() = runTest {
         val responseBody = ResponseWrapper(
             SubscriberNotificationResponse(
-                _id = "123",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
-                _messageTemplateId = "_messageTemplateId",
-                _subscriberId = "_subscriberId",
+                id = "123",
+                organizationId = "_organizationId",
+                environmentId = "_environmentId",
+                messageTemplateId = "_messageTemplateId",
+                subscriberId = "_subscriberId",
                 subscriber = "subscriber",
                 template = "template",
                 templateIdentifier = "templateIdentifier",
@@ -561,14 +563,14 @@ class SubscriberApiTest {
                 title = "title",
                 lastSeenDate = "lastSeenDate",
                 cta = "cta",
-                _feedId = "_feedId",
+                feedId = "_feedId",
                 errorId = "errorId",
                 errorText = "errorText",
                 payload = "payload",
                 overrides = "overrides",
                 subject = "subject",
-                _notificationId = "_notificationId",
-                _templateId = "_templateId"
+                notificationId = "_notificationId",
+                templateId = "_templateId"
             )
         )
         mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))

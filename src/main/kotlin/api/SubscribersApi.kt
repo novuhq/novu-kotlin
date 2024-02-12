@@ -77,7 +77,7 @@ interface SubscribersApi {
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
         @Body request: MarkSubscriberFeedAsRequest
-    ): Response<ResponseWrapper<SubscriberNotificationResponse>>
+    ): Response<ResponseWrapper<List<SubscriberNotificationResponse>>>
 
     @POST("$ENDPOINT/{subscriberId}/messages/{messageId}/actions/{type}")
     suspend fun markMessageActionAsSeen(

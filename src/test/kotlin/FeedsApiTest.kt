@@ -24,10 +24,10 @@ class FeedsApiTest {
     fun testCreateFeed() = runTest {
         val responseBody = ResponseWrapper(
             FeedResponse(
-                _id = "123",
+                id = "123",
                 name = "test",
-                _environmentId = "enviromentId",
-                _organizationId = "organizationId",
+                environmentId = "enviromentId",
+                organizationId = "organizationId",
                 identifier = "identifier",
                 deleted = false,
                 createdAt = "createdAt",
@@ -52,10 +52,10 @@ class FeedsApiTest {
         val responseBody = ResponseWrapper(
             listOf(
                 FeedResponse(
-                    _id = "123",
+                    id = "123",
                     name = "test",
-                    _environmentId = "enviromentId",
-                    _organizationId = "organizationId",
+                    environmentId = "enviromentId",
+                    organizationId = "organizationId",
                     identifier = "identifier"
                 )
             )
@@ -73,10 +73,10 @@ class FeedsApiTest {
     fun testDeleteFeed() = runTest {
         val responseBody = ResponseWrapper(
             FeedResponse(
-                _id = "123",
+                id = "123",
                 name = "test",
-                _environmentId = "enviromentId",
-                _organizationId = "organizationId",
+                environmentId = "enviromentId",
+                organizationId = "organizationId",
                 identifier = "identifier",
                 deleted = true
             )

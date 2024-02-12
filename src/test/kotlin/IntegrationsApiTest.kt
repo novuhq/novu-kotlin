@@ -25,9 +25,9 @@ class IntegrationsApiTest {
         NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
     )
     private val integrationResponseStub = IntegrationResponse(
-        _id = "123",
-        _environmentId = "enviromentId",
-        _organizationId = "organizationId",
+        id = "123",
+        environmentId = "enviromentId",
+        organizationId = "organizationId",
         providerId = "providerId",
         channel = "channel",
         credentials = Credential(

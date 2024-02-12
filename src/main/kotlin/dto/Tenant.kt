@@ -1,8 +1,12 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Tenant(
-    private var _environmentId: String? = null,
-    private var _id: String? = null,
+    @SerializedName("_environmentId")
+    private var environmentId: String? = null,
+    @SerializedName("_id")
+    private var id: String? = null,
     private var createdAt: String? = null,
     private var data: Any? = null,
     private var identifier: String? = null,

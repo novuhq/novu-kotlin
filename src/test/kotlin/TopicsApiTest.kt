@@ -37,9 +37,9 @@ class TopicsApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 TopicResponse(
-                    _id = "_id",
-                    _organizationId = "_organizationId",
-                    _environmentId = "_environmentId",
+                    id = "_id",
+                    organizationId = "_organizationId",
+                    environmentId = "_environmentId",
                     key = "key",
                     name = "name",
                     subscribers = listOf("subscriber")
@@ -67,7 +67,7 @@ class TopicsApiTest {
     fun testCreateTopic() = runTest {
         val responseBody = ResponseWrapper(
             CreateTopicResponse(
-                _id = "_id",
+                id = "_id",
                 key = "key"
             )
         )
@@ -136,8 +136,8 @@ class TopicsApiTest {
     fun testCheckSubscriber() = runTest {
         val responseBody = CheckTopicSubscriberResponse(
             topicKey = "key",
-            _topicId = "id",
-            _subscriberId = "sId"
+            topicId = "id",
+            subscriberId = "sId"
         )
 
         mockWebServer.enqueue(
@@ -159,9 +159,9 @@ class TopicsApiTest {
     fun testGetTopic() = runTest {
         val responseBody = ResponseWrapper(
             data = TopicResponse(
-                _id = "64059e4de5d10c2178aa8078",
-                _organizationId = "63f71b3cf067290fa6691032",
-                _environmentId = "63f71b3cf067290fa6691038",
+                id = "64059e4de5d10c2178aa8078",
+                organizationId = "63f71b3cf067290fa6691032",
+                environmentId = "63f71b3cf067290fa6691038",
                 key = "test-topics",
                 name = "yooo",
                 subscribers = listOf("test_shivam")
@@ -185,9 +185,9 @@ class TopicsApiTest {
     fun testRenameTopic() = runTest {
         val responseBody = ResponseWrapper(
             data = TopicResponse(
-                _id = "_id",
-                _organizationId = "_organizationId",
-                _environmentId = "_environmentId",
+                id = "_id",
+                organizationId = "_organizationId",
+                environmentId = "_environmentId",
                 key = "key",
                 name = "name",
                 subscribers = listOf("subscriber")

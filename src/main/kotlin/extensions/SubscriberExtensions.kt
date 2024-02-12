@@ -83,7 +83,7 @@ suspend fun Novu.subscriberUnseenNotificationsCount(subscriberId: String): Respo
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest): ResponseWrapper<SubscriberNotificationResponse>? {
+suspend fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest): ResponseWrapper<List<SubscriberNotificationResponse>>? {
     val response = subscribersApi.markSubscriberMessageFeedAs(subscriberId, request)
     return response.extractResponse(logger)
 }

@@ -35,9 +35,9 @@ class MessagesApiTest {
         val responseBody = PaginatedResponseWrapper(
             data = listOf(
                 Message(
-                    _id = "123",
-                    _environmentId = "environmentId",
-                    _organizationId = "organizationId",
+                    id = "123",
+                    environmentId = "environmentId",
+                    organizationId = "organizationId",
                     transactionId = "transactionId",
                     createdAt = "createdAt",
                     subscriber = Subscriber(
@@ -49,7 +49,7 @@ class MessagesApiTest {
                         avatar = "avatar"
                     ),
                     template = Template(
-                        _id = "templateId",
+                        id = "templateId",
                         name = "name",
                         triggers = listOf(
                             Trigger(
@@ -71,14 +71,14 @@ class MessagesApiTest {
                     ),
                     jobs = listOf(
                         Job(
-                            _id = "jobId",
+                            id = "jobId",
                             type = "type",
                             digest = "digest",
                             executionDetails = listOf(
                                 ExecutionDetails(
-                                    _id = "executionDetailsId",
+                                    id = "executionDetailsId",
                                     status = "status",
-                                    _jobId = "jobId",
+                                    jobId = "jobId",
                                     detail = "detail",
                                     isRetry = true,
                                     isTest = true,
@@ -88,7 +88,7 @@ class MessagesApiTest {
                                 )
                             ),
                             step = Step(
-                                _id = "stepId",
+                                id = "stepId",
                                 active = true,
                                 filters = listOf(
                                     Filters(

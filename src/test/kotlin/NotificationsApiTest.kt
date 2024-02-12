@@ -57,7 +57,7 @@ class NotificationsApiTest {
         val responseBody = ResponseWrapper(
             data = listOf(
                 NotificationGraphStatsResponse(
-                    _id = UUID.randomUUID().toString(),
+                    id = UUID.randomUUID().toString(),
                     count = BigInteger.TEN,
                     templates = listOf("email"),
                     channels = emptyList()

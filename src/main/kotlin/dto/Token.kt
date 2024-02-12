@@ -1,7 +1,10 @@
 package co.novu.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Token(
-    var _id: String? = null,
+    @SerializedName("_id")
+    var id: String? = null,
     var providerId: String? = null,
     var provider: String? = null,
     var accessToken: String? = null,
