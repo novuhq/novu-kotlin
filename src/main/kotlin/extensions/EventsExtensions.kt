@@ -16,7 +16,7 @@ suspend fun Novu.trigger(body: TriggerEventRequest): ResponseWrapper<TriggerResp
     return response.extractResponse(logger)
 }
 
-suspend fun Novu.bulkTrigger(body: BulkTriggerEventRequest): ResponseWrapper<TriggerResponse>? {
+suspend fun Novu.bulkTrigger(body: BulkTriggerEventRequest): ResponseWrapper<List<TriggerResponse>>? {
     val response = eventsApi.bulkTriggerEvent(body)
     return response.extractResponse(logger)
 }
