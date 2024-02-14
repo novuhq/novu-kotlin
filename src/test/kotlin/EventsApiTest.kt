@@ -99,10 +99,10 @@ class EventsApiTest {
         val responseBody = ResponseWrapper(
             listOf(
                 TriggerResponse(
-                acknowledged = true,
-                status = "status",
-                transactionId = "transactionId",
-                error = listOf("error")
+                    acknowledged = true,
+                    status = "status",
+                    transactionId = "transactionId",
+                    error = listOf("error")
                 )
             )
         )
