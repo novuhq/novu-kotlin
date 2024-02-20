@@ -8,6 +8,8 @@
 </div>
 
 # Novu Kotlin SDK
+[![License](https://poser.pugx.org/unicodeveloper/novu/license.svg)](LICENSE.md)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/novuhq/novu-kotlin?label=SDK&link=https%3A%2F%2Fgithub.com%2Fnovuhq%2Fnovu-kotlin%2Freleases%2Flatest)](https://github.com/novuhq/novu-kotlin/releases/latest)
 
 > The [Novu Kotlin](https://novu.co) SDK provides a fluent and expressive interface for interacting with [Novu's API](https://api.novu.co/api) and managing notifications.
 
@@ -20,7 +22,7 @@
 <dependency>
     <groupId>co.novu</groupId>
     <artifactId>novu-kotlin</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -29,7 +31,7 @@
 ```kotlin
 //Kotlin
 //add dependency
-implementation("co.novu:novu-kotlin:1.1.0")
+implementation("co.novu:novu-kotlin:1.2.0")
 ```
 
 ```groovy
