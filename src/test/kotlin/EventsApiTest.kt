@@ -97,11 +97,13 @@ class EventsApiTest {
     @Test
     fun testBulkTriggerEvent() = runTest {
         val responseBody = ResponseWrapper(
-            TriggerResponse(
-                acknowledged = true,
-                status = "status",
-                transactionId = "transactionId",
-                error = listOf("error")
+            listOf(
+                TriggerResponse(
+                    acknowledged = true,
+                    status = "status",
+                    transactionId = "transactionId",
+                    error = listOf("error")
+                )
             )
         )
         mockWebServer.enqueue(
