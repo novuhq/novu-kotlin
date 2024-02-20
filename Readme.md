@@ -37,7 +37,7 @@ implementation("co.novu:novu-kotlin:1.2.0")
 ```groovy
 //Groovy
 //add dependency
-implementation 'co.novu:novu-kotlin:1.1.0'
+implementation 'co.novu:novu-kotlin:1.2.0'
 ```
 
 Sync your project, and you should have the artifacts downloaded.
