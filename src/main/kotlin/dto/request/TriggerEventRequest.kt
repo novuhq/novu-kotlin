@@ -3,6 +3,9 @@ package co.novu.dto.request
 import co.novu.dto.Topic
 
 class TriggerEventRequest private constructor() : BaseEventRequest() {
+    /**
+     * Possible types this field accepts are; [SubscriberRequest], list of [SubscriberRequest], [Topic] or list of [Topic]
+     */
     private var to: Any? = null
 
     companion object {
@@ -12,8 +15,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any>,
             overrides: Map<String, Any>?,
             transactionId: String?,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) =
             TriggerEventRequest()
                 .apply {
@@ -28,8 +31,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfString")
@@ -39,8 +42,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfSubscribers")
@@ -50,8 +53,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromSubscriber")
@@ -61,8 +64,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
 
         @JvmName("fromListOfTopics")
@@ -72,8 +75,8 @@ class TriggerEventRequest private constructor() : BaseEventRequest() {
             payload: Map<String, Any> = mapOf(),
             overrides: Map<String, Any>? = null,
             transactionId: String? = null,
-            actor: String? = null,
-            tenant: String? = null
+            actor: Any? = null,
+            tenant: Any? = null
         ) = initFields(name, to, payload, overrides, transactionId, actor, tenant)
     }
 }
