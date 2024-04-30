@@ -1,5 +1,6 @@
 import co.novu.Novu
 import co.novu.NovuConfig
+import co.novu.dto.Tenant
 import co.novu.dto.Topic
 import co.novu.dto.request.BroadcastEventRequest
 import co.novu.dto.request.BulkTriggerEventRequest
@@ -50,7 +51,14 @@ class EventsApiTest {
                 lastName = "Doe"
             ),
             payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId"
+            transactionId = "transactionId",
+            actor = mapOf(
+                "subscriberId" to "sId",
+                "email" to "email@mail.com",
+                "firstName" to "fName",
+                "lastName" to "lName",
+                "phone" to "phoneNo"
+            )
         )
         val result = mockNovu.trigger(requestBody)
         val request = mockWebServer.takeRequest()
@@ -84,7 +92,12 @@ class EventsApiTest {
                 )
             ),
             payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId"
+            transactionId = "transactionId",
+            tenant = Tenant(
+                identifier = "identifier",
+                name = "name",
+                data = Any()
+            )
         )
         val result = mockNovu.trigger(requestBody)
         val request = mockWebServer.takeRequest()
