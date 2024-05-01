@@ -13,20 +13,20 @@ private val logger = KotlinLogging.logger {}
 
 suspend fun Novu.changes(page: BigInteger? = null, limit: BigInteger? = null, promoted: String? = null): PaginatedResponseWrapper<ChangesResponse>? {
     val response = changesApi.getChanges(page, limit, promoted)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.changesCount(): ResponseWrapper<BigInteger>? {
     val response = changesApi.getChangesCount()
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.applyBulkChanges(request: ChangesRequest): ResponseWrapper<List<ChangesResponse>>? {
     val response = changesApi.applyBulkChanges(request)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.applyChange(changeId: String): ResponseWrapper<List<ChangesResponse>>? {
     val response = changesApi.applyChange(changedId = changeId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }

@@ -19,10 +19,10 @@ suspend fun Novu.messages(
     transactionId: String? = null
 ): PaginatedResponseWrapper<Message>? {
     val response = messagesApi.getMessages(channel, subscriberId, limit, page, transactionId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.deleteMessage(messageId: String): ResponseWrapper<TriggerResponse>? {
     val response = messagesApi.deleteMessage(messageId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
