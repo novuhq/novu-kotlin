@@ -21,20 +21,20 @@ suspend fun Novu.notifications(notificationRequest: NotificationRequest): Pagina
         page = notificationRequest.page,
         transactionId = notificationRequest.transactionId
     )
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.notificationsStats(): ResponseWrapper<NotificationStatsResponse>? {
     val response = notificationsApi.getNotificationsStats()
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.notificationGraphStats(): ResponseWrapper<List<NotificationGraphStatsResponse>>? {
     val response = notificationsApi.getNotificationGraphStats()
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.notification(notificationId: String): ResponseWrapper<Notification>? {
     val response = notificationsApi.getNotification(notificationId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }

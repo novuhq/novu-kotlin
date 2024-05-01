@@ -13,20 +13,20 @@ private val logger = KotlinLogging.logger {}
 
 suspend fun Novu.trigger(body: TriggerEventRequest): ResponseWrapper<TriggerResponse>? {
     val response = eventsApi.triggerEvent(body)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.bulkTrigger(body: BulkTriggerEventRequest): ResponseWrapper<List<TriggerResponse>>? {
     val response = eventsApi.bulkTriggerEvent(body)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.broadcast(body: BroadcastEventRequest): ResponseWrapper<TriggerResponse>? {
     val response = eventsApi.broadcastEvent(body)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.cancelTriggerEvent(transactionId: String): ResponseWrapper<Boolean>? {
     val response = eventsApi.cancelTriggerEvent(transactionId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }

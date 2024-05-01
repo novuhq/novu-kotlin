@@ -11,10 +11,10 @@ private val logger = KotlinLogging.logger {}
 
 suspend fun Novu.getBlueprintsByCategory(): ResponseWrapper<BlueprintsResponse>? {
     val response = blueprintsApi.getBlueprintsByCategory()
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }
 
 suspend fun Novu.getBlueprint(templateId: String): Blueprint? {
     val response = blueprintsApi.getBlueprint(templateId)
-    return response.extractResponse(logger)
+    return response.extractResponse(logger, config.enableLogging)
 }

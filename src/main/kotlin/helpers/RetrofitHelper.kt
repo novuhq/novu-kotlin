@@ -9,8 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Properties
 
 class RetrofitHelper(
-    private val config: NovuConfig,
-    private val loggerLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
+    private val config: NovuConfig
 ) {
 
     private lateinit var retrofit: Retrofit
@@ -27,12 +26,13 @@ class RetrofitHelper(
                 .addHeader("User-Agent", "novu/Kotlin@${retrieveProjectVersion()}")
                 .build()
             chain.proceed(request)
+        }.also {
+            if (config.enableLogging) it.addInterceptor(HttpLoggingInterceptor().setLevel(config.apiLogLevel))
         }
-            .addInterceptor(HttpLoggingInterceptor().setLevel(loggerLevel))
         val gson = GsonBuilder().setLenient().create()
         retrofit = Retrofit.Builder()
             .client(httpClient.build())
-            .baseUrl(config.backendUrl)
+            .baseUrl(if (config.enableEuVersion) config.euBackendUrl else config.backendUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         return retrofit

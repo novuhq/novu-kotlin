@@ -20,14 +20,19 @@ import co.novu.api.TenantsApi
 import co.novu.api.TopicsApi
 import co.novu.api.WorkflowsApi
 import co.novu.helpers.RetrofitHelper
+import okhttp3.logging.HttpLoggingInterceptor
 
 data class NovuConfig(
+    var apiKey: String = "",
     var backendUrl: String = "https://api.novu.co/v1/",
-    var apiKey: String = ""
+    var euBackendUrl: String = "https://eu.api.novu.co/v1/",
+    var enableEuVersion: Boolean = false,
+    var enableLogging: Boolean = true,
+    var apiLogLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
 )
 
 class Novu(
-    config: NovuConfig
+    val config: NovuConfig
 ) {
 
     constructor(apiKey: String) : this(NovuConfig(apiKey = apiKey))
