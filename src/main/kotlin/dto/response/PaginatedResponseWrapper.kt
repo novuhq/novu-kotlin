@@ -7,5 +7,5 @@ data class PaginatedResponseWrapper<T>(
     var totalCount: BigInteger? = null,
     var pageSize: BigInteger? = BigInteger.TEN,
     var data: List<T>? = null,
-    var hasMore: Boolean? = null
+    var hasMore: Boolean? = null,
 )

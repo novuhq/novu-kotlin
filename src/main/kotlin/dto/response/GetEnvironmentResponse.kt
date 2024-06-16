@@ -19,6 +19,5 @@ data class GetEnvironmentResponse(
     @SerializedName("_parentId")
     var parentId: String? = null,
     @SerializedName("__v")
-    var version: BigDecimal? = null
-
+    var version: BigDecimal? = null,
 )

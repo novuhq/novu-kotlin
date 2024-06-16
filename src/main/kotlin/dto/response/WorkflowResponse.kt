@@ -31,5 +31,5 @@ data class WorkflowResponse(
     val deletedBy: String? = null,
     val notificationGroup: NotificationGroup? = null,
     val isBlueprint: Boolean? = null,
-    val workflowIntegrationStatus: WorkflowIntegrationStatus? = null
+    val workflowIntegrationStatus: WorkflowIntegrationStatus? = null,
 )

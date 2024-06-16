@@ -5,5 +5,5 @@ data class PartnerConfigurations(
     var accessToken: String? = null,
     var configurationId: String? = null,
     var teamId: String? = null,
-    var partnerType: String? = null
+    var partnerType: String? = null,
 )

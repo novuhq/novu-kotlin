@@ -15,6 +15,5 @@ data class User(
     var createdAt: String? = null,
     var updatedAt: String? = null,
     @SerializedName("__v")
-    var version: BigDecimal? = null
-
+    var version: BigDecimal? = null,
 )

@@ -28,5 +28,5 @@ data class ExecutionDetails(
     val raw: Any? = null,
     val source: String? = null,
     val createdAt: String? = null,
-    var updatedAt: String? = null
+    var updatedAt: String? = null,
 )

@@ -7,5 +7,5 @@ data class UpdateSubscriberRequest(
     var phone: String? = null,
     var avatar: String? = null,
     var locale: String? = null,
-    var data: Any? = null
+    var data: Any? = null,
 )

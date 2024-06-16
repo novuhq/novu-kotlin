@@ -8,5 +8,5 @@ data class NotificationRequest(
     var emails: List<String>?,
     var search: String?,
     var page: BigInteger? = null,
-    var transactionId: String? = null
+    var transactionId: String? = null,
 )

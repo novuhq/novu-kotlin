@@ -8,7 +8,10 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.executionDetails(notificationId: String, subscriberId: String): ResponseWrapper<List<ExecutionDetails>>? {
+suspend fun Novu.executionDetails(
+    notificationId: String,
+    subscriberId: String,
+): ResponseWrapper<List<ExecutionDetails>>? {
     val response = executionDetailsApi.getExecutionDetails(notificationId, subscriberId)
     return response.extractResponse(logger, config.enableLogging)
 }

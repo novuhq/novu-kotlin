@@ -34,5 +34,5 @@ data class Blueprint(
     private var updatedAt: String? = null,
     @SerializedName("__v")
     private var version: Long? = null,
-    private var notificationGroup: NotificationGroup? = null
+    private var notificationGroup: NotificationGroup? = null,
 )

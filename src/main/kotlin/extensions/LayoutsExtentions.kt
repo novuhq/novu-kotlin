@@ -14,7 +14,12 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.filterLayouts(page: BigInteger, pageSize: BigInteger, orderBy: BigInteger, sortBy: String): PaginatedResponseWrapper<GetLayoutsResponse>? {
+suspend fun Novu.filterLayouts(
+    page: BigInteger,
+    pageSize: BigInteger,
+    orderBy: BigInteger,
+    sortBy: String,
+): PaginatedResponseWrapper<GetLayoutsResponse>? {
     val response = layoutsApi.filterLayouts(page, pageSize, sortBy, orderBy)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -34,7 +39,10 @@ suspend fun Novu.deleteLayout(layoutId: String): DeleteLayoutResponse {
     return response.extractResponse(logger, config.enableLogging, DeleteLayoutResponse())
 }
 
-suspend fun Novu.updateLayout(layoutId: String, request: CreateLayoutRequest): ResponseWrapper<GetLayoutsResponse>? {
+suspend fun Novu.updateLayout(
+    layoutId: String,
+    request: CreateLayoutRequest,
+): ResponseWrapper<GetLayoutsResponse>? {
     val response = layoutsApi.updateLayout(layoutId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

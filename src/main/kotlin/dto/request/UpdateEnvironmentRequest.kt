@@ -6,5 +6,5 @@ data class UpdateEnvironmentRequest(
     var name: String? = null,
     var identifier: String? = null,
     var parentId: String? = null,
-    var dns: DNS? = null
+    var dns: DNS? = null,
 )

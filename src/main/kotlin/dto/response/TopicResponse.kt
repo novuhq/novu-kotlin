@@ -11,5 +11,5 @@ data class TopicResponse(
     var environmentId: String? = null,
     var key: String? = null,
     var name: String? = null,
-    var subscribers: List<String>? = null
+    var subscribers: List<String>? = null,
 )

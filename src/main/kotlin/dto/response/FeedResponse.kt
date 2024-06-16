@@ -16,5 +16,5 @@ data class FeedResponse(
     var createdAt: String? = null,
     @SerializedName("__v")
     var version: BigDecimal? = null,
-    var deleted: Boolean? = null
+    var deleted: Boolean? = null,
 )

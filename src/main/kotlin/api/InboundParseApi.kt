@@ -5,7 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface InboundParseApi {
-
     companion object {
         const val ENDPOINT = "inbound-parse"
     }

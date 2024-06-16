@@ -16,79 +16,87 @@ import org.junit.jupiter.api.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class FeedsApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNovu = Novu(
-        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
-    )
-
-    @Test
-    fun testCreateFeed() = runTest {
-        val responseBody = ResponseWrapper(
-            FeedResponse(
-                id = "123",
-                name = "test",
-                environmentId = "enviromentId",
-                organizationId = "organizationId",
-                identifier = "identifier",
-                deleted = false,
-                createdAt = "createdAt",
-                updatedAt = "updatedAt"
-            )
+    private val mockNovu =
+        Novu(
+            NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString()),
         )
 
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val requestBody = CreateByNameRequest(
-            name = "test"
-        )
-        val result = mockNovu.createFeed(requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(request.path == "/feeds")
-        assert(request.method == "POST")
-        assert(result == responseBody)
-    }
-
     @Test
-    fun testGetFeeds() = runTest {
-        val responseBody = ResponseWrapper(
-            listOf(
-                FeedResponse(
-                    id = "123",
-                    name = "test",
-                    environmentId = "enviromentId",
-                    organizationId = "organizationId",
-                    identifier = "identifier"
+    fun testCreateFeed() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    FeedResponse(
+                        id = "123",
+                        name = "test",
+                        environmentId = "enviromentId",
+                        organizationId = "organizationId",
+                        identifier = "identifier",
+                        deleted = false,
+                        createdAt = "createdAt",
+                        updatedAt = "updatedAt",
+                    ),
                 )
-            )
-        )
 
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.feeds()
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/feeds")
-        assert(request.method == "GET")
-        assert(result == responseBody)
-    }
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                CreateByNameRequest(
+                    name = "test",
+                )
+            val result = mockNovu.createFeed(requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(request.path == "/feeds")
+            assert(request.method == "POST")
+            assert(result == responseBody)
+        }
 
     @Test
-    fun testDeleteFeed() = runTest {
-        val responseBody = ResponseWrapper(
-            FeedResponse(
-                id = "123",
-                name = "test",
-                environmentId = "enviromentId",
-                organizationId = "organizationId",
-                identifier = "identifier",
-                deleted = true
-            )
-        )
+    fun testGetFeeds() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    listOf(
+                        FeedResponse(
+                            id = "123",
+                            name = "test",
+                            environmentId = "enviromentId",
+                            organizationId = "organizationId",
+                            identifier = "identifier",
+                        ),
+                    ),
+                )
 
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val feedId = "123"
-        val result = mockNovu.deleteFeed(feedId)
-        val request = mockWebServer.takeRequest()
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.feeds()
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/feeds")
+            assert(request.method == "GET")
+            assert(result == responseBody)
+        }
 
-        assert(request.path == "/feeds/$feedId")
-        assert(request.method == "DELETE")
-        assert(result == responseBody)
-    }
+    @Test
+    fun testDeleteFeed() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    FeedResponse(
+                        id = "123",
+                        name = "test",
+                        environmentId = "enviromentId",
+                        organizationId = "organizationId",
+                        identifier = "identifier",
+                        deleted = true,
+                    ),
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val feedId = "123"
+            val result = mockNovu.deleteFeed(feedId)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.path == "/feeds/$feedId")
+            assert(request.method == "DELETE")
+            assert(result == responseBody)
+        }
 }

@@ -19,32 +19,42 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface OrganizationsApi {
-
     companion object {
         const val ENDPOINT = "organizations"
     }
 
     @POST(ENDPOINT)
-    suspend fun createOrganization(@Body request: CreateOrganizationRequest): Response<ResponseWrapper<OrganizationResponse>>
+    suspend fun createOrganization(
+        @Body request: CreateOrganizationRequest,
+    ): Response<ResponseWrapper<OrganizationResponse>>
 
     @GET(ENDPOINT)
     suspend fun fetchAllOrganizations(): Response<ResponseWrapper<List<OrganizationResponse>>>
 
     @PATCH(ENDPOINT)
-    suspend fun updateOrganizationName(@Body request: UpdateOrganizationNameRequest): Response<ResponseWrapper<UpdateOrganizationNameResponse>>
+    suspend fun updateOrganizationName(
+        @Body request: UpdateOrganizationNameRequest,
+    ): Response<ResponseWrapper<UpdateOrganizationNameResponse>>
 
     @GET("$ENDPOINT/me")
     suspend fun fetchCurrentOrganization(): Response<ResponseWrapper<OrganizationResponse>>
 
     @DELETE("$ENDPOINT/members/{memberId}")
-    suspend fun removeMemberWithId(@Path("memberId") memberId: String): Response<ResponseWrapper<MemberResponse>>
+    suspend fun removeMemberWithId(
+        @Path("memberId") memberId: String,
+    ): Response<ResponseWrapper<MemberResponse>>
 
     @PUT("$ENDPOINT/members/{memberId}/roles")
-    suspend fun updateMemberRole(@Path("memberId") memberId: String, @Body request: UpdateMemberRoleRequest): Response<ResponseWrapper<MemberResponse>>
+    suspend fun updateMemberRole(
+        @Path("memberId") memberId: String,
+        @Body request: UpdateMemberRoleRequest,
+    ): Response<ResponseWrapper<MemberResponse>>
 
     @GET("$ENDPOINT/members")
     suspend fun fetchMembersOfOrganization(): Response<ResponseWrapper<List<MemberResponse>>>
 
     @PUT("$ENDPOINT/branding")
-    suspend fun updateOrganizationBrand(@Body request: UpdateOrganizationBrandRequest): Response<ResponseWrapper<Branding>>
+    suspend fun updateOrganizationBrand(
+        @Body request: UpdateOrganizationBrandRequest,
+    ): Response<ResponseWrapper<Branding>>
 }

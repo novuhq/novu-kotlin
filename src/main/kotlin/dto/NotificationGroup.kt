@@ -15,5 +15,5 @@ data class NotificationGroup(
     val createdAt: String? = null,
     val updatedAt: String? = null,
     @SerializedName("__v")
-    val version: String? = null
+    val version: String? = null,
 )

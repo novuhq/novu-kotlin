@@ -11,17 +11,20 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface FeedsApi {
-
     companion object {
         const val ENDPOINT = "feeds"
     }
 
     @POST(ENDPOINT)
-    suspend fun createFeed(@Body body: CreateByNameRequest): Response<ResponseWrapper<FeedResponse>>
+    suspend fun createFeed(
+        @Body body: CreateByNameRequest,
+    ): Response<ResponseWrapper<FeedResponse>>
 
     @GET(ENDPOINT)
     suspend fun getFeeds(): Response<ResponseWrapper<List<FeedResponse>>>
 
     @DELETE("$ENDPOINT/{feedId}")
-    suspend fun deleteFeed(@Path("feedId") feedId: String): Response<ResponseWrapper<FeedResponse>>
+    suspend fun deleteFeed(
+        @Path("feedId") feedId: String,
+    ): Response<ResponseWrapper<FeedResponse>>
 }

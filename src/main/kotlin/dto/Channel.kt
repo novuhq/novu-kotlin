@@ -6,5 +6,5 @@ data class Channel(
     val credentials: ChannelCredentials? = null,
     val providerId: String? = null,
     @SerializedName("_integrationId")
-    val integrationId: String? = null
+    val integrationId: String? = null,
 )

@@ -3,7 +3,10 @@ package co.novu.helpers
 import mu.KLogger
 import retrofit2.Response
 
-fun <T> Response<T>.extractResponse(logger: KLogger, enableLogging: Boolean): T? {
+fun <T> Response<T>.extractResponse(
+    logger: KLogger,
+    enableLogging: Boolean,
+): T? {
     this.apply {
         return if (isSuccessful) {
             body().apply { if (enableLogging) logger.debug { this } }
@@ -13,7 +16,11 @@ fun <T> Response<T>.extractResponse(logger: KLogger, enableLogging: Boolean): T?
     }
 }
 
-fun <T, R> Response<T>.extractResponse(logger: KLogger, enableLogging: Boolean, body: R): R {
+fun <T, R> Response<T>.extractResponse(
+    logger: KLogger,
+    enableLogging: Boolean,
+    body: R,
+): R {
     this.apply {
         return if (isSuccessful) {
             body.apply { if (enableLogging) logger.debug { this } }

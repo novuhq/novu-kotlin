@@ -4,7 +4,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("io.codearte.nexus-staging") version "0.30.0"
     id("java-library")
     kotlin("jvm") version "1.8.0"

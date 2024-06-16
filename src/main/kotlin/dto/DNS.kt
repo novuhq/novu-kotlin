@@ -1,5 +1,5 @@
 package co.novu.dto
 
 data class DNS(
-    var inboundParseDomain: String? = null
+    var inboundParseDomain: String? = null,
 )

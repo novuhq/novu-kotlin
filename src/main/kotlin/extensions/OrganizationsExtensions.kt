@@ -40,7 +40,10 @@ suspend fun Novu.removeMemberWithId(memberId: String): ResponseWrapper<MemberRes
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateMemberRole(memberId: String, request: UpdateMemberRoleRequest): ResponseWrapper<MemberResponse>? {
+suspend fun Novu.updateMemberRole(
+    memberId: String,
+    request: UpdateMemberRoleRequest,
+): ResponseWrapper<MemberResponse>? {
     val response = organizationsApi.updateMemberRole(memberId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

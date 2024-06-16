@@ -7,5 +7,5 @@ data class Template(
     var id: String? = null,
     var name: String? = null,
     var critical: Boolean? = null,
-    var triggers: List<Trigger>? = null
+    var triggers: List<Trigger>? = null,
 )

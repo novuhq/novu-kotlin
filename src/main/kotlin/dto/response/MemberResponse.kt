@@ -14,5 +14,5 @@ data class MemberResponse(
     var invite: InviteDetails? = null,
     var memberStatus: String? = null,
     @SerializedName("_organizationId")
-    var organizationId: String? = null
+    var organizationId: String? = null,
 )

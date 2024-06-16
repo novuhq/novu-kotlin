@@ -1,5 +1,5 @@
 package dto.blueprints
 
 data class Styles(
-    private val textAlign: String? = null
+    private val textAlign: String? = null,
 )

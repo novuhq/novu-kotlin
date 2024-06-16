@@ -12,7 +12,10 @@ import java.math.BigInteger
 private val logger = KotlinLogging.logger {}
 
 @Deprecated("Use getWorkflows(): this will be removed in a future release")
-suspend fun Novu.notificationTemplates(page: BigInteger, limit: BigInteger): PaginatedResponseWrapper<NotificationTemplates>? {
+suspend fun Novu.notificationTemplates(
+    page: BigInteger,
+    limit: BigInteger,
+): PaginatedResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.getNotificationTemplates(page, limit)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -24,7 +27,10 @@ suspend fun Novu.createNotificationTemplates(request: NotificationTemplates): Re
 }
 
 @Deprecated("Use updateWorkflow(): this will be removed in a future release")
-suspend fun Novu.updateNotificationTemplates(templateId: String, request: NotificationTemplates): ResponseWrapper<NotificationTemplates>? {
+suspend fun Novu.updateNotificationTemplates(
+    templateId: String,
+    request: NotificationTemplates,
+): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.updateNotificationTemplates(templateId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -42,7 +48,10 @@ suspend fun Novu.notificationTemplate(templateId: String): ResponseWrapper<Notif
 }
 
 @Deprecated("Use updateWorkflowStatus(): this will be removed in a future release")
-suspend fun Novu.updateNotificationTemplateStatus(templateId: String, request: UpdateNotificationTemplateStatusRequest): ResponseWrapper<NotificationTemplates>? {
+suspend fun Novu.updateNotificationTemplateStatus(
+    templateId: String,
+    request: UpdateNotificationTemplateStatusRequest,
+): ResponseWrapper<NotificationTemplates>? {
     val response = notificationTemplatesApi.updateNotificationTemplateStatus(templateId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

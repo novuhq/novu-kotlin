@@ -9,9 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Properties
 
 class RetrofitHelper(
-    private val config: NovuConfig
+    private val config: NovuConfig,
 ) {
-
     private lateinit var retrofit: Retrofit
 
     fun getInstance(): Retrofit {
@@ -21,20 +20,22 @@ class RetrofitHelper(
 
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Authorization", "ApiKey ${config.apiKey}")
-                .addHeader("User-Agent", "novu/Kotlin@${retrieveProjectVersion()}")
-                .build()
+            val request =
+                chain.request().newBuilder()
+                    .addHeader("Authorization", "ApiKey ${config.apiKey}")
+                    .addHeader("User-Agent", "novu/Kotlin@${retrieveProjectVersion()}")
+                    .build()
             chain.proceed(request)
         }.also {
             if (config.enableLogging) it.addInterceptor(HttpLoggingInterceptor().setLevel(config.apiLogLevel))
         }
         val gson = GsonBuilder().setLenient().create()
-        retrofit = Retrofit.Builder()
-            .client(httpClient.build())
-            .baseUrl(if (config.enableEuVersion) config.euBackendUrl else config.backendUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+        retrofit =
+            Retrofit.Builder()
+                .client(httpClient.build())
+                .baseUrl(if (config.enableEuVersion) config.euBackendUrl else config.backendUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
         return retrofit
     }
 

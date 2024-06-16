@@ -21,5 +21,5 @@ data class Notification(
     val updatedAt: String? = null,
     val template: Template? = null,
     val subscriber: Subscriber? = null,
-    val jobs: List<Job>? = null
+    val jobs: List<Job>? = null,
 )

@@ -40,5 +40,5 @@ data class SubscriberNotificationResponse(
     var errorText: String? = null,
     var payload: Any? = null,
     var overrides: Any? = null,
-    var subject: Any? = null
+    var subject: Any? = null,
 )

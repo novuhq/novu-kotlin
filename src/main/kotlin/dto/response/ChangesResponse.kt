@@ -24,5 +24,5 @@ data class ChangesResponse(
     var templateName: String? = null,
     var createdAt: String? = null,
     @SerializedName("_parentId")
-    var parentId: String? = null
+    var parentId: String? = null,
 )

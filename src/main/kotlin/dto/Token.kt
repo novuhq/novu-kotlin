@@ -8,5 +8,5 @@ data class Token(
     var providerId: String? = null,
     var provider: String? = null,
     var accessToken: String? = null,
-    var valid: Boolean? = null
+    var valid: Boolean? = null,
 )

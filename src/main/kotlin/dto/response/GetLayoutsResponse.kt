@@ -22,5 +22,5 @@ data class GetLayoutsResponse(
     val createdAt: String? = null,
     val updatedAt: String? = null,
     @SerializedName("_parentId")
-    val parentId: String? = null
+    val parentId: String? = null,
 )

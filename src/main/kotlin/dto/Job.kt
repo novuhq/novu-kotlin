@@ -15,5 +15,5 @@ data class Job(
     var createdAt: String? = null,
     var updatedAt: String? = null,
     var executionDetails: List<ExecutionDetails>? = null,
-    var providerId: String? = null
+    var providerId: String? = null,
 )

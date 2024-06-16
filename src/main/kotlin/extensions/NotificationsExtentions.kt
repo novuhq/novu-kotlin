@@ -13,14 +13,15 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 suspend fun Novu.notifications(notificationRequest: NotificationRequest): PaginatedResponseWrapper<Notification>? {
-    val response = notificationsApi.getNotifications(
-        channels = notificationRequest.channels,
-        templates = notificationRequest.templates,
-        emails = notificationRequest.emails,
-        search = notificationRequest.search,
-        page = notificationRequest.page,
-        transactionId = notificationRequest.transactionId
-    )
+    val response =
+        notificationsApi.getNotifications(
+            channels = notificationRequest.channels,
+            templates = notificationRequest.templates,
+            emails = notificationRequest.emails,
+            search = notificationRequest.search,
+            page = notificationRequest.page,
+            transactionId = notificationRequest.transactionId,
+        )
     return response.extractResponse(logger, config.enableLogging)
 }
 
