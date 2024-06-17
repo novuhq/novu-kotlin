@@ -43,7 +43,10 @@ suspend fun Novu.subscriber(subscriberId: String): ResponseWrapper<SubscriberRes
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateSubscriber(subscriberId: String, request: UpdateSubscriberRequest): ResponseWrapper<SubscriberResponse>? {
+suspend fun Novu.updateSubscriber(
+    subscriberId: String,
+    request: UpdateSubscriberRequest,
+): ResponseWrapper<SubscriberResponse>? {
     val response = subscribersApi.updateSubscriber(subscriberId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -53,12 +56,18 @@ suspend fun Novu.deleteSubscriber(subscriberId: String): ResponseWrapper<Subscri
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateSubscriberCredentials(subscriberId: String, request: UpdateSubscriberCredentialsRequest): ResponseWrapper<SubscriberResponse>? {
+suspend fun Novu.updateSubscriberCredentials(
+    subscriberId: String,
+    request: UpdateSubscriberCredentialsRequest,
+): ResponseWrapper<SubscriberResponse>? {
     val response = subscribersApi.updateSubscriberCredentials(subscriberId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateSubscriberOnlineStatus(subscriberId: String, isOnline: Boolean): ResponseWrapper<SubscriberResponse>? {
+suspend fun Novu.updateSubscriberOnlineStatus(
+    subscriberId: String,
+    isOnline: Boolean,
+): ResponseWrapper<SubscriberResponse>? {
     val response = subscribersApi.updateSubscriberOnlineStatus(subscriberId, UpdateSubscriberOnlineStatusRequest(isOnline))
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -68,7 +77,11 @@ suspend fun Novu.subscriberPreferences(subscriberId: String): ResponseWrapper<Li
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateSubscriberPreferences(subscriberId: String, templateId: String, body: UpdateSubscriberPreferencesRequest): ResponseWrapper<SubscriberPreferenceResponse>? {
+suspend fun Novu.updateSubscriberPreferences(
+    subscriberId: String,
+    templateId: String,
+    body: UpdateSubscriberPreferencesRequest,
+): ResponseWrapper<SubscriberPreferenceResponse>? {
     val response = subscribersApi.updateSubscriberPreferences(subscriberId, templateId, body)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -83,12 +96,20 @@ suspend fun Novu.subscriberUnseenNotificationsCount(subscriberId: String): Respo
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.markSubscriberFeed(subscriberId: String, request: MarkSubscriberFeedAsRequest): ResponseWrapper<List<SubscriberNotificationResponse>>? {
+suspend fun Novu.markSubscriberFeed(
+    subscriberId: String,
+    request: MarkSubscriberFeedAsRequest,
+): ResponseWrapper<List<SubscriberNotificationResponse>>? {
     val response = subscribersApi.markSubscriberMessageFeedAs(subscriberId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.markMessageActionSeen(subscriberId: String, messageId: String, type: String, request: MarkMessageActionAsSeenRequest): ResponseWrapper<SubscriberNotificationResponse>? {
+suspend fun Novu.markMessageActionSeen(
+    subscriberId: String,
+    messageId: String,
+    type: String,
+    request: MarkMessageActionAsSeenRequest,
+): ResponseWrapper<SubscriberNotificationResponse>? {
     val response = subscribersApi.markMessageActionAsSeen(subscriberId, messageId, type, request)
     return response.extractResponse(logger, config.enableLogging)
 }

@@ -11,7 +11,11 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.changes(page: BigInteger? = null, limit: BigInteger? = null, promoted: String? = null): PaginatedResponseWrapper<ChangesResponse>? {
+suspend fun Novu.changes(
+    page: BigInteger? = null,
+    limit: BigInteger? = null,
+    promoted: String? = null,
+): PaginatedResponseWrapper<ChangesResponse>? {
     val response = changesApi.getChanges(page, limit, promoted)
     return response.extractResponse(logger, config.enableLogging)
 }

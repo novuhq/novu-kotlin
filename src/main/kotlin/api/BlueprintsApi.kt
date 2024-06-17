@@ -8,7 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface BlueprintsApi {
-
     companion object {
         const val ENDPOINT = "blueprints"
     }
@@ -17,5 +16,7 @@ interface BlueprintsApi {
     suspend fun getBlueprintsByCategory(): Response<ResponseWrapper<BlueprintsResponse>>
 
     @GET("$ENDPOINT/{templateId}")
-    suspend fun getBlueprint(@Path("templateId") templateId: String): Response<Blueprint>
+    suspend fun getBlueprint(
+        @Path("templateId") templateId: String,
+    ): Response<Blueprint>
 }

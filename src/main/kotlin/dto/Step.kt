@@ -16,5 +16,5 @@ data class Step(
     @SerializedName("_parentId")
     val parentId: String? = null,
     val metadata: Metadata? = null,
-    val replyCallback: Any? = null
+    val replyCallback: Any? = null,
 )

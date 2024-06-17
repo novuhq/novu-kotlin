@@ -25,7 +25,10 @@ suspend fun Novu.getWorkflowOverrides(request: GetWorkflowOverrideRequest): Pagi
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.getWorkflowOverride(workflowId: String, tenantId: String): ResponseWrapper<WorkflowOverride>? {
+suspend fun Novu.getWorkflowOverride(
+    workflowId: String,
+    tenantId: String,
+): ResponseWrapper<WorkflowOverride>? {
     val response = workflowOverrideApi.getWorkflowOverride(workflowId, tenantId)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -35,12 +38,19 @@ suspend fun Novu.getWorkflowOverrideById(overrideId: String): ResponseWrapper<Wo
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateWorkflowOverrideById(overrideId: String, request: UpdateWorkflowOverrideRequest): ResponseWrapper<WorkflowOverride>? {
+suspend fun Novu.updateWorkflowOverrideById(
+    overrideId: String,
+    request: UpdateWorkflowOverrideRequest,
+): ResponseWrapper<WorkflowOverride>? {
     val response = workflowOverrideApi.updateWorkflowOverrideById(overrideId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateWorkflowOverride(workflowId: String, tenantId: String, request: UpdateWorkflowOverrideRequest): ResponseWrapper<WorkflowOverride>? {
+suspend fun Novu.updateWorkflowOverride(
+    workflowId: String,
+    tenantId: String,
+    request: UpdateWorkflowOverrideRequest,
+): ResponseWrapper<WorkflowOverride>? {
     val response = workflowOverrideApi.updateWorkflowOverride(workflowId, tenantId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

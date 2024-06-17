@@ -16,5 +16,5 @@ data class NotificationGroupsResponse(
     var createdAt: String? = null,
     var updatedAt: String? = null,
     @SerializedName("__v")
-    var version: BigInteger? = null
+    var version: BigInteger? = null,
 )

@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ExecutionDetailsApi {
-
     companion object {
         const val ENDPOINT = "execution-details"
     }
@@ -15,6 +14,6 @@ interface ExecutionDetailsApi {
     @GET(ENDPOINT)
     suspend fun getExecutionDetails(
         @Query("notificationId") notificationId: String,
-        @Query("subscriberId") subscriberId: String
+        @Query("subscriberId") subscriberId: String,
     ): Response<ResponseWrapper<List<ExecutionDetails>>>
 }

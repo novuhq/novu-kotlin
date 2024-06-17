@@ -43,5 +43,5 @@ data class Message(
     val identifier: String? = null,
     val subscriber: Subscriber? = null,
     val template: Template? = null,
-    val jobs: List<Job>? = null
+    val jobs: List<Job>? = null,
 )

@@ -46,546 +46,601 @@ import java.math.BigInteger
 @OptIn(ExperimentalCoroutinesApi::class)
 class SubscriberApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNovu = Novu(
-        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
-    )
+    private val mockNovu =
+        Novu(
+            NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString()),
+        )
 
     @Test
-    fun testGetSubscribers() = runTest {
-        val responseBody = PaginatedResponseWrapper(
-            data = listOf(
-                SubscriberResponse(
-                    id = "123",
-                    organizationId = "123",
-                    environmentId = "123",
-                    deleted = false,
-                    createdAt = "123",
-                    updatedAt = "123",
-                    locale = "123",
-                    version = BigInteger.TEN,
-                    isOnline = false,
-                    lastOnlineAt = "123",
+    fun testGetSubscribers() =
+        runTest {
+            val responseBody =
+                PaginatedResponseWrapper(
+                    data =
+                        listOf(
+                            SubscriberResponse(
+                                id = "123",
+                                organizationId = "123",
+                                environmentId = "123",
+                                deleted = false,
+                                createdAt = "123",
+                                updatedAt = "123",
+                                locale = "123",
+                                version = BigInteger.TEN,
+                                isOnline = false,
+                                lastOnlineAt = "123",
+                                firstName = "123",
+                                lastName = "123",
+                                email = "123",
+                                phone = "123",
+                                avatar = "123",
+                                subscriberId = "123",
+                                channels =
+                                    listOf(
+                                        Channel(
+                                            credentials =
+                                                ChannelCredentials(
+                                                    webhookUrl = "webhookUrl",
+                                                    deviceTokens = listOf("deviceTokens"),
+                                                ),
+                                        ),
+                                    ),
+                            ),
+                        ),
+                    totalCount = BigInteger.TEN,
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.subscribers(BigInteger.TEN)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers?page=10")
+            assert(request.method == "GET")
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
+
+    @Test
+    fun testCreateSubscriber() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberResponse(
+                        subscriberId = "123",
+                        id = "123",
+                        organizationId = "123",
+                        environmentId = "123",
+                        deleted = false,
+                        createdAt = "123",
+                        updatedAt = "123",
+                        locale = "123",
+                        version = BigInteger.TEN,
+                        isOnline = false,
+                        lastOnlineAt = "123",
+                        firstName = "123",
+                        lastName = "123",
+                        email = "123",
+                        phone = "123",
+                        avatar = "123",
+                        channels =
+                            listOf(
+                                Channel(
+                                    credentials =
+                                        ChannelCredentials(
+                                            webhookUrl = "webhookUrl",
+                                            deviceTokens = listOf("deviceTokens"),
+                                        ),
+                                ),
+                            ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                SubscriberRequest(
                     firstName = "123",
                     lastName = "123",
                     email = "123",
                     phone = "123",
                     avatar = "123",
                     subscriberId = "123",
-                    channels = listOf(
-                        Channel(
-                            credentials = ChannelCredentials(
-                                webhookUrl = "webhookUrl",
-                                deviceTokens = listOf("deviceTokens")
-                            )
-                        )
-                    )
                 )
-            ),
-            totalCount = BigInteger.TEN
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.subscribers(BigInteger.TEN)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers?page=10")
-        assert(request.method == "GET")
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
+
+            val result = mockNovu.createSubscriber(requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers")
+            assert(request.method == "POST")
+            assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
 
     @Test
-    fun testCreateSubscriber() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberResponse(
-                subscriberId = "123",
-                id = "123",
-                organizationId = "123",
-                environmentId = "123",
-                deleted = false,
-                createdAt = "123",
-                updatedAt = "123",
-                locale = "123",
-                version = BigInteger.TEN,
-                isOnline = false,
-                lastOnlineAt = "123",
-                firstName = "123",
-                lastName = "123",
-                email = "123",
-                phone = "123",
-                avatar = "123",
-                channels = listOf(
-                    Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens")
-                        )
-                    )
+    fun testCreateSubscriberBulk() =
+        runTest {
+            val responseBody =
+                CreateBulkSubscriberResponse(
+                    created = listOf("sId"),
                 )
-            )
-
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val requestBody = SubscriberRequest(
-            firstName = "123",
-            lastName = "123",
-            email = "123",
-            phone = "123",
-            avatar = "123",
-            subscriberId = "123"
-        )
-
-        val result = mockNovu.createSubscriber(requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers")
-        assert(request.method == "POST")
-        assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
-
-    @Test
-    fun testCreateSubscriberBulk() = runTest {
-        val responseBody = CreateBulkSubscriberResponse(
-            created = listOf("sId")
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val subscriber = SubscriberRequest(
-            firstName = "123",
-            lastName = "123",
-            email = "123",
-            phone = "123",
-            avatar = "123",
-            subscriberId = "sId"
-        )
-        val requestBody = BulkSubscriberRequest(
-            subscribers = listOf(subscriber)
-        )
-
-        val result = mockNovu.createSubscriberBulk(requestBody)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.path == "/subscribers/bulk")
-        assert(request.method == "POST")
-        assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
-
-    @Test
-    fun testUpdateSubscriber() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberResponse(
-                subscriberId = "123",
-                id = "123",
-                organizationId = "123",
-                environmentId = "123",
-                deleted = false,
-                createdAt = "123",
-                updatedAt = "123",
-                locale = "123",
-                version = BigInteger.TEN,
-                isOnline = false,
-                lastOnlineAt = "123",
-                firstName = "123",
-                lastName = "123",
-                email = "123",
-                phone = "123",
-                avatar = "123",
-                channels = listOf(
-                    Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens")
-                        )
-                    )
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val subscriber =
+                SubscriberRequest(
+                    firstName = "123",
+                    lastName = "123",
+                    email = "123",
+                    phone = "123",
+                    avatar = "123",
+                    subscriberId = "sId",
                 )
-            )
-
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val requestBody = UpdateSubscriberRequest(
-            firstName = "123",
-            lastName = "123",
-            email = "123",
-            phone = "123",
-            avatar = "123"
-        )
-        val subscriberId = "123"
-        val result = mockNovu.updateSubscriber(subscriberId, requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$subscriberId")
-        assert(request.method == "PUT")
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-        assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
-    }
-
-    @Test
-    fun testGetSubscriber() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberResponse(
-                subscriberId = "123",
-                id = "123",
-                organizationId = "123",
-                environmentId = "123",
-                deleted = false,
-                createdAt = "123",
-                updatedAt = "123",
-                locale = "123",
-                version = BigInteger.TEN,
-                isOnline = false,
-                lastOnlineAt = "123",
-                firstName = "123",
-                lastName = "123",
-                email = "123",
-                phone = "123",
-                avatar = "123",
-                channels = listOf(
-                    Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens")
-                        )
-                    )
+            val requestBody =
+                BulkSubscriberRequest(
+                    subscribers = listOf(subscriber),
                 )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val subscriberId = "123"
-        val result = mockNovu.subscriber(subscriberId)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$subscriberId")
-        assert(request.method == "GET")
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
+
+            val result = mockNovu.createSubscriberBulk(requestBody)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.path == "/subscribers/bulk")
+            assert(request.method == "POST")
+            assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
 
     @Test
-    fun testDeleteSubscriber() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberDeleteResponse(
-                acknowledged = true,
-                status = "status"
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val subscriberId = "123"
-        val result = mockNovu.deleteSubscriber(subscriberId)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$subscriberId")
-        assert(request.method == "DELETE")
-        assert(result == responseBody)
-    }
-
-    @Test
-    fun testUpdateSubscriberCredentials() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberResponse(
-                subscriberId = "123",
-                id = "123",
-                organizationId = "123",
-                environmentId = "123",
-                deleted = false,
-                createdAt = "123",
-                updatedAt = "123",
-                locale = "123",
-                version = BigInteger.TEN,
-                isOnline = false,
-                lastOnlineAt = "123",
-                firstName = "123",
-                lastName = "123",
-                email = "123",
-                phone = "123",
-                avatar = "123",
-                channels = listOf(
-                    Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens")
-                        )
-                    )
-                )
-            )
-        )
-
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val requestBody = UpdateSubscriberCredentialsRequest(
-            providerId = "123",
-            credentials = ChannelCredentials(
-                webhookUrl = "webhookUrl",
-                deviceTokens = listOf("deviceTokens")
-            )
-        )
-
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.updateSubscriberCredentials("123", requestBody)
-        val request = mockWebServer.takeRequest()
-        val subscriberId = "123"
-        assert(request.path == "/subscribers/$subscriberId/credentials")
-        assert(request.method == "PUT")
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
-
-    @Test
-    fun testUpdateSubscriberOnlineStatus() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberResponse(
-                subscriberId = "123",
-                id = "123",
-                organizationId = "123",
-                environmentId = "123",
-                deleted = false,
-                createdAt = "123",
-                updatedAt = "123",
-                locale = "123",
-                version = BigInteger.TEN,
-                isOnline = false,
-                lastOnlineAt = "123",
-                firstName = "123",
-                lastName = "123",
-                email = "123",
-                phone = "123",
-                avatar = "123",
-                channels = listOf(
-                    Channel(
-                        credentials = ChannelCredentials(
-                            webhookUrl = "webhookUrl",
-                            deviceTokens = listOf("deviceTokens")
-                        )
-                    )
-                )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val subscriberId = "123"
-        val isOnline = false
-        val result = mockNovu.updateSubscriberOnlineStatus(subscriberId, isOnline)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$subscriberId/online-status")
-        assert(request.method == "PATCH")
-        assert(Gson().toJson(result) == Gson().toJson(responseBody))
-    }
-
-    @Test
-    fun testGetSubscriberPreferences() = runTest {
-        val responseBody = ResponseWrapper(
-            listOf(
-                SubscriberPreferenceResponse(
-                    template = Template(
+    fun testUpdateSubscriber() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberResponse(
+                        subscriberId = "123",
                         id = "123",
-                        name = "name",
-                        critical = true
+                        organizationId = "123",
+                        environmentId = "123",
+                        deleted = false,
+                        createdAt = "123",
+                        updatedAt = "123",
+                        locale = "123",
+                        version = BigInteger.TEN,
+                        isOnline = false,
+                        lastOnlineAt = "123",
+                        firstName = "123",
+                        lastName = "123",
+                        email = "123",
+                        phone = "123",
+                        avatar = "123",
+                        channels =
+                            listOf(
+                                Channel(
+                                    credentials =
+                                        ChannelCredentials(
+                                            webhookUrl = "webhookUrl",
+                                            deviceTokens = listOf("deviceTokens"),
+                                        ),
+                                ),
+                            ),
                     ),
-                    preference = Preference(
-                        enabled = true,
-                        channels = "channels"
-                    )
                 )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.subscriberPreferences("123")
-        val request = mockWebServer.takeRequest()
-        val susbcriberId = "123"
-        assert(request.path == "/subscribers/$susbcriberId/preferences")
-        assert(request.method == "GET")
-        assert(result == responseBody)
-    }
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                UpdateSubscriberRequest(
+                    firstName = "123",
+                    lastName = "123",
+                    email = "123",
+                    phone = "123",
+                    avatar = "123",
+                )
+            val subscriberId = "123"
+            val result = mockNovu.updateSubscriber(subscriberId, requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers/$subscriberId")
+            assert(request.method == "PUT")
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+            assert(JsonParser().parse(Gson().toJson(requestBody)) == JsonParser().parse(request.body.readUtf8()))
+        }
 
     @Test
-    fun testUpdateSubscriberPreferences() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberPreferenceResponse(
-                template = Template(
-                    id = "123",
-                    name = "name",
-                    critical = true
-                ),
-                preference = Preference(
+    fun testGetSubscriber() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberResponse(
+                        subscriberId = "123",
+                        id = "123",
+                        organizationId = "123",
+                        environmentId = "123",
+                        deleted = false,
+                        createdAt = "123",
+                        updatedAt = "123",
+                        locale = "123",
+                        version = BigInteger.TEN,
+                        isOnline = false,
+                        lastOnlineAt = "123",
+                        firstName = "123",
+                        lastName = "123",
+                        email = "123",
+                        phone = "123",
+                        avatar = "123",
+                        channels =
+                            listOf(
+                                Channel(
+                                    credentials =
+                                        ChannelCredentials(
+                                            webhookUrl = "webhookUrl",
+                                            deviceTokens = listOf("deviceTokens"),
+                                        ),
+                                ),
+                            ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val subscriberId = "123"
+            val result = mockNovu.subscriber(subscriberId)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers/$subscriberId")
+            assert(request.method == "GET")
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
+
+    @Test
+    fun testDeleteSubscriber() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberDeleteResponse(
+                        acknowledged = true,
+                        status = "status",
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val subscriberId = "123"
+            val result = mockNovu.deleteSubscriber(subscriberId)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers/$subscriberId")
+            assert(request.method == "DELETE")
+            assert(result == responseBody)
+        }
+
+    @Test
+    fun testUpdateSubscriberCredentials() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberResponse(
+                        subscriberId = "123",
+                        id = "123",
+                        organizationId = "123",
+                        environmentId = "123",
+                        deleted = false,
+                        createdAt = "123",
+                        updatedAt = "123",
+                        locale = "123",
+                        version = BigInteger.TEN,
+                        isOnline = false,
+                        lastOnlineAt = "123",
+                        firstName = "123",
+                        lastName = "123",
+                        email = "123",
+                        phone = "123",
+                        avatar = "123",
+                        channels =
+                            listOf(
+                                Channel(
+                                    credentials =
+                                        ChannelCredentials(
+                                            webhookUrl = "webhookUrl",
+                                            deviceTokens = listOf("deviceTokens"),
+                                        ),
+                                ),
+                            ),
+                    ),
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                UpdateSubscriberCredentialsRequest(
+                    providerId = "123",
+                    credentials =
+                        ChannelCredentials(
+                            webhookUrl = "webhookUrl",
+                            deviceTokens = listOf("deviceTokens"),
+                        ),
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.updateSubscriberCredentials("123", requestBody)
+            val request = mockWebServer.takeRequest()
+            val subscriberId = "123"
+            assert(request.path == "/subscribers/$subscriberId/credentials")
+            assert(request.method == "PUT")
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
+
+    @Test
+    fun testUpdateSubscriberOnlineStatus() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberResponse(
+                        subscriberId = "123",
+                        id = "123",
+                        organizationId = "123",
+                        environmentId = "123",
+                        deleted = false,
+                        createdAt = "123",
+                        updatedAt = "123",
+                        locale = "123",
+                        version = BigInteger.TEN,
+                        isOnline = false,
+                        lastOnlineAt = "123",
+                        firstName = "123",
+                        lastName = "123",
+                        email = "123",
+                        phone = "123",
+                        avatar = "123",
+                        channels =
+                            listOf(
+                                Channel(
+                                    credentials =
+                                        ChannelCredentials(
+                                            webhookUrl = "webhookUrl",
+                                            deviceTokens = listOf("deviceTokens"),
+                                        ),
+                                ),
+                            ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val subscriberId = "123"
+            val isOnline = false
+            val result = mockNovu.updateSubscriberOnlineStatus(subscriberId, isOnline)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers/$subscriberId/online-status")
+            assert(request.method == "PATCH")
+            assert(Gson().toJson(result) == Gson().toJson(responseBody))
+        }
+
+    @Test
+    fun testGetSubscriberPreferences() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    listOf(
+                        SubscriberPreferenceResponse(
+                            template =
+                                Template(
+                                    id = "123",
+                                    name = "name",
+                                    critical = true,
+                                ),
+                            preference =
+                                Preference(
+                                    enabled = true,
+                                    channels = "channels",
+                                ),
+                        ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.subscriberPreferences("123")
+            val request = mockWebServer.takeRequest()
+            val susbcriberId = "123"
+            assert(request.path == "/subscribers/$susbcriberId/preferences")
+            assert(request.method == "GET")
+            assert(result == responseBody)
+        }
+
+    @Test
+    fun testUpdateSubscriberPreferences() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberPreferenceResponse(
+                        template =
+                            Template(
+                                id = "123",
+                                name = "name",
+                                critical = true,
+                            ),
+                        preference =
+                            Preference(
+                                enabled = true,
+                                channels = "channels",
+                            ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                UpdateSubscriberPreferencesRequest(
+                    channel = "channel",
                     enabled = true,
-                    channels = "channels"
                 )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val requestBody = UpdateSubscriberPreferencesRequest(
-            channel = "channel",
-            enabled = true
-        )
-        val susbcriberId = "123"
-        val templateId = "123"
+            val susbcriberId = "123"
+            val templateId = "123"
 
-        val result = mockNovu.updateSubscriberPreferences(susbcriberId, templateId, requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(request.path == "/subscribers/$susbcriberId/preferences/$templateId")
-        assert(request.method == "PATCH")
-        assert(result == responseBody)
-    }
+            val result = mockNovu.updateSubscriberPreferences(susbcriberId, templateId, requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(request.path == "/subscribers/$susbcriberId/preferences/$templateId")
+            assert(request.method == "PATCH")
+            assert(result == responseBody)
+        }
 
     @Test
-    fun testGetNotificationFeedForSubscribers() = runTest {
-        val responseBody = PaginatedResponseWrapper(
-            data = listOf(
-                SubscriberNotificationResponse(
-                    id = "123",
-                    organizationId = "_organizationId",
-                    environmentId = "_environmentId",
-                    messageTemplateId = "_messageTemplateId",
-                    subscriberId = "_subscriberId",
-                    subscriber = "subscriber",
-                    template = "template",
-                    templateIdentifier = "templateIdentifier",
-                    createdAt = "createdAt",
-                    content = "content",
-                    transactionId = "transactionId",
-                    channel = "channel",
-                    seen = true,
-                    email = "email@email.com",
-                    phone = "phone",
+    fun testGetNotificationFeedForSubscribers() =
+        runTest {
+            val responseBody =
+                PaginatedResponseWrapper(
+                    data =
+                        listOf(
+                            SubscriberNotificationResponse(
+                                id = "123",
+                                organizationId = "_organizationId",
+                                environmentId = "_environmentId",
+                                messageTemplateId = "_messageTemplateId",
+                                subscriberId = "_subscriberId",
+                                subscriber = "subscriber",
+                                template = "template",
+                                templateIdentifier = "templateIdentifier",
+                                createdAt = "createdAt",
+                                content = "content",
+                                transactionId = "transactionId",
+                                channel = "channel",
+                                seen = true,
+                                email = "email@email.com",
+                                phone = "phone",
+                                status = "status",
+                                directWebhookUrl = "directWebhookUrl",
+                                providerId = "providerId",
+                                deviceTokens = listOf("deviceTokens"),
+                                title = "title",
+                                lastSeenDate = "lastSeenDate",
+                                cta = "cta",
+                                feedId = "_feedId",
+                                errorId = "errorId",
+                                errorText = "errorText",
+                                payload = "payload",
+                                overrides = "overrides",
+                                subject = "subject",
+                                notificationId = "_notificationId",
+                                templateId = "_templateId",
+                            ),
+                        ),
+                    totalCount = BigInteger.TEN,
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val susbcriberId = "123"
+            val result = mockNovu.subscriberNotificationsFeed(subscriberId = susbcriberId)
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/subscribers/$susbcriberId/notifications/feed")
+            assert(request.method == "GET")
+            assert(result == responseBody)
+        }
+
+    @Test
+    fun testGetSubscriberUnseenNotificationsCount() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    UnseenNotificationsCountResponse(
+                        count = BigInteger.TEN,
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.subscriberUnseenNotificationsCount("123")
+            val request = mockWebServer.takeRequest()
+            val subscriberId = "123"
+            assert(request.path == "/subscribers/$subscriberId/notifications/unseen")
+            assert(request.method == "GET")
+            assert(result == responseBody)
+        }
+
+    @Test
+    fun testMarkSubscriberFeedAs() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    listOf(
+                        SubscriberNotificationResponse(
+                            id = "123",
+                            organizationId = "_organizationId",
+                            environmentId = "_environmentId",
+                            messageTemplateId = "_messageTemplateId",
+                            subscriberId = "_subscriberId",
+                            subscriber = "subscriber",
+                            template = "template",
+                            templateIdentifier = "templateIdentifier",
+                            createdAt = "createdAt",
+                            content = "content",
+                            transactionId = "transactionId",
+                            channel = "channel",
+                            seen = true,
+                            email = "email@email.com",
+                            phone = "phone",
+                            status = "status",
+                            directWebhookUrl = "directWebhookUrl",
+                            providerId = "providerId",
+                            deviceTokens = listOf("deviceTokens"),
+                            title = "title",
+                            lastSeenDate = "lastSeenDate",
+                            cta = "cta",
+                            feedId = "_feedId",
+                            errorId = "errorId",
+                            errorText = "errorText",
+                            payload = "payload",
+                            overrides = "overrides",
+                            subject = "subject",
+                            notificationId = "_notificationId",
+                            templateId = "_templateId",
+                        ),
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                MarkSubscriberFeedAsRequest(
+                    messageId = "mId",
+                    mark =
+                        Mark(
+                            read = true,
+                            seen = true,
+                        ),
+                )
+            val result = mockNovu.markSubscriberFeed("123", requestBody)
+            val request = mockWebServer.takeRequest()
+            val subscriberId = "123"
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(request.path == "/subscribers/$subscriberId/messages/markAs")
+            assert(request.method == "POST")
+            assert(result == responseBody)
+        }
+
+    @Test
+    fun testMarkMessageActionAsSeen() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    SubscriberNotificationResponse(
+                        id = "123",
+                        organizationId = "_organizationId",
+                        environmentId = "_environmentId",
+                        messageTemplateId = "_messageTemplateId",
+                        subscriberId = "_subscriberId",
+                        subscriber = "subscriber",
+                        template = "template",
+                        templateIdentifier = "templateIdentifier",
+                        createdAt = "createdAt",
+                        content = "content",
+                        transactionId = "transactionId",
+                        channel = "channel",
+                        seen = true,
+                        email = "email@email.com",
+                        phone = "phone",
+                        status = "status",
+                        directWebhookUrl = "directWebhookUrl",
+                        providerId = "providerId",
+                        deviceTokens = listOf("deviceTokens"),
+                        title = "title",
+                        lastSeenDate = "lastSeenDate",
+                        cta = "cta",
+                        feedId = "_feedId",
+                        errorId = "errorId",
+                        errorText = "errorText",
+                        payload = "payload",
+                        overrides = "overrides",
+                        subject = "subject",
+                        notificationId = "_notificationId",
+                        templateId = "_templateId",
+                    ),
+                )
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val subscriberId = "123"
+            val messageId = "123"
+            val type = "type"
+            val requestBody =
+                MarkMessageActionAsSeenRequest(
                     status = "status",
-                    directWebhookUrl = "directWebhookUrl",
-                    providerId = "providerId",
-                    deviceTokens = listOf("deviceTokens"),
-                    title = "title",
-                    lastSeenDate = "lastSeenDate",
-                    cta = "cta",
-                    feedId = "_feedId",
-                    errorId = "errorId",
-                    errorText = "errorText",
-                    payload = "payload",
-                    overrides = "overrides",
-                    subject = "subject",
-                    notificationId = "_notificationId",
-                    templateId = "_templateId"
                 )
-            ),
-            totalCount = BigInteger.TEN
-        )
+            val result = mockNovu.markMessageActionSeen(subscriberId, messageId, type, requestBody)
+            val request = mockWebServer.takeRequest()
 
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val susbcriberId = "123"
-        val result = mockNovu.subscriberNotificationsFeed(subscriberId = susbcriberId)
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/subscribers/$susbcriberId/notifications/feed")
-        assert(request.method == "GET")
-        assert(result == responseBody)
-    }
-
-    @Test
-    fun testGetSubscriberUnseenNotificationsCount() = runTest {
-        val responseBody = ResponseWrapper(
-            UnseenNotificationsCountResponse(
-                count = BigInteger.TEN
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val result = mockNovu.subscriberUnseenNotificationsCount("123")
-        val request = mockWebServer.takeRequest()
-        val subscriberId = "123"
-        assert(request.path == "/subscribers/$subscriberId/notifications/unseen")
-        assert(request.method == "GET")
-        assert(result == responseBody)
-    }
-
-    @Test
-    fun testMarkSubscriberFeedAs() = runTest {
-        val responseBody = ResponseWrapper(
-            listOf(
-                SubscriberNotificationResponse(
-                    id = "123",
-                    organizationId = "_organizationId",
-                    environmentId = "_environmentId",
-                    messageTemplateId = "_messageTemplateId",
-                    subscriberId = "_subscriberId",
-                    subscriber = "subscriber",
-                    template = "template",
-                    templateIdentifier = "templateIdentifier",
-                    createdAt = "createdAt",
-                    content = "content",
-                    transactionId = "transactionId",
-                    channel = "channel",
-                    seen = true,
-                    email = "email@email.com",
-                    phone = "phone",
-                    status = "status",
-                    directWebhookUrl = "directWebhookUrl",
-                    providerId = "providerId",
-                    deviceTokens = listOf("deviceTokens"),
-                    title = "title",
-                    lastSeenDate = "lastSeenDate",
-                    cta = "cta",
-                    feedId = "_feedId",
-                    errorId = "errorId",
-                    errorText = "errorText",
-                    payload = "payload",
-                    overrides = "overrides",
-                    subject = "subject",
-                    notificationId = "_notificationId",
-                    templateId = "_templateId"
-                )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val requestBody = MarkSubscriberFeedAsRequest(
-            messageId = "mId",
-            mark = Mark(
-                read = true,
-                seen = true
-            )
-        )
-        val result = mockNovu.markSubscriberFeed("123", requestBody)
-        val request = mockWebServer.takeRequest()
-        val subscriberId = "123"
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(request.path == "/subscribers/$subscriberId/messages/markAs")
-        assert(request.method == "POST")
-        assert(result == responseBody)
-    }
-
-    @Test
-    fun testMarkMessageActionAsSeen() = runTest {
-        val responseBody = ResponseWrapper(
-            SubscriberNotificationResponse(
-                id = "123",
-                organizationId = "_organizationId",
-                environmentId = "_environmentId",
-                messageTemplateId = "_messageTemplateId",
-                subscriberId = "_subscriberId",
-                subscriber = "subscriber",
-                template = "template",
-                templateIdentifier = "templateIdentifier",
-                createdAt = "createdAt",
-                content = "content",
-                transactionId = "transactionId",
-                channel = "channel",
-                seen = true,
-                email = "email@email.com",
-                phone = "phone",
-                status = "status",
-                directWebhookUrl = "directWebhookUrl",
-                providerId = "providerId",
-                deviceTokens = listOf("deviceTokens"),
-                title = "title",
-                lastSeenDate = "lastSeenDate",
-                cta = "cta",
-                feedId = "_feedId",
-                errorId = "errorId",
-                errorText = "errorText",
-                payload = "payload",
-                overrides = "overrides",
-                subject = "subject",
-                notificationId = "_notificationId",
-                templateId = "_templateId"
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val subscriberId = "123"
-        val messageId = "123"
-        val type = "type"
-        val requestBody = MarkMessageActionAsSeenRequest(
-            status = "status"
-        )
-        val result = mockNovu.markMessageActionSeen(subscriberId, messageId, type, requestBody)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(request.path == "/subscribers/$subscriberId/messages/$messageId/actions/$type")
-        assert(request.method == "POST")
-        assert(result == responseBody)
-    }
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(request.path == "/subscribers/$subscriberId/messages/$messageId/actions/$type")
+            assert(request.method == "POST")
+            assert(result == responseBody)
+        }
 }

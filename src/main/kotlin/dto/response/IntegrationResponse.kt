@@ -17,5 +17,5 @@ data class IntegrationResponse(
     var deleted: Boolean? = null,
     var deletedAt: String? = null,
     var deletedBy: String? = null,
-    var primary: Boolean? = null
+    var primary: Boolean? = null,
 )

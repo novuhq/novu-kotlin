@@ -16,7 +16,7 @@ suspend fun Novu.messages(
     subscriberId: String? = null,
     limit: BigInteger? = null,
     page: BigInteger? = null,
-    transactionId: String? = null
+    transactionId: String? = null,
 ): PaginatedResponseWrapper<Message>? {
     val response = messagesApi.getMessages(channel, subscriberId, limit, page, transactionId)
     return response.extractResponse(logger, config.enableLogging)

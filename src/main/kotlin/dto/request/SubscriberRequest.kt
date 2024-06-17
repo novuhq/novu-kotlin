@@ -8,5 +8,5 @@ data class SubscriberRequest(
     val phone: String? = null,
     val avatar: String? = null,
     val locale: String? = null,
-    val data: Any? = null
+    val data: Any? = null,
 )

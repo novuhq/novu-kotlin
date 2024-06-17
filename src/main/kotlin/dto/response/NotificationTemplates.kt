@@ -29,5 +29,5 @@ data class NotificationTemplates(
     val deletedAt: String? = null,
     val deletedBy: String? = null,
     val notificationGroup: NotificationGroup? = null,
-    val isBlueprint: Boolean? = null
+    val isBlueprint: Boolean? = null,
 )

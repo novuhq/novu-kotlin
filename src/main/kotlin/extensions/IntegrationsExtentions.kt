@@ -29,7 +29,10 @@ suspend fun Novu.providerWebhook(providerId: String): ResponseWrapper<Boolean>? 
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateIntegration(integrationId: String, request: IntegrationRequest): ResponseWrapper<IntegrationResponse>? {
+suspend fun Novu.updateIntegration(
+    integrationId: String,
+    request: IntegrationRequest,
+): ResponseWrapper<IntegrationResponse>? {
     val response = integrationsApi.updateIntegration(integrationId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

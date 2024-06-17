@@ -8,5 +8,5 @@ data class PreferenceSettings(
     @SerializedName("in_app")
     val inApp: Boolean? = null,
     val chat: Boolean? = null,
-    val push: Boolean? = null
+    val push: Boolean? = null,
 )

@@ -16,26 +16,40 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WorkflowsApi {
-
     companion object {
         const val ENDPOINT = "workflows"
     }
 
     @GET(ENDPOINT)
-    suspend fun getWorkflows(@Query("page") page: Int? = null, @Query("limit") limit: Int? = null): Response<PaginatedResponseWrapper<WorkflowResponse>>
+    suspend fun getWorkflows(
+        @Query("page") page: Int? = null,
+        @Query("limit") limit: Int? = null,
+    ): Response<PaginatedResponseWrapper<WorkflowResponse>>
 
     @POST(ENDPOINT)
-    suspend fun createWorkflow(@Body request: WorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
+    suspend fun createWorkflow(
+        @Body request: WorkflowRequest,
+    ): Response<ResponseWrapper<WorkflowResponse>>
 
     @PUT("$ENDPOINT/{workflowId}")
-    suspend fun updateWorkflow(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowRequest): Response<ResponseWrapper<WorkflowResponse>>
+    suspend fun updateWorkflow(
+        @Path("workflowId") workflowId: String,
+        @Body request: UpdateWorkflowRequest,
+    ): Response<ResponseWrapper<WorkflowResponse>>
 
     @DELETE("$ENDPOINT/{workflowId}")
-    suspend fun deleteWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<Boolean>>
+    suspend fun deleteWorkflow(
+        @Path("workflowId") workflowId: String,
+    ): Response<ResponseWrapper<Boolean>>
 
     @GET("$ENDPOINT/{workflowId}")
-    suspend fun getWorkflow(@Path("workflowId") workflowId: String): Response<ResponseWrapper<WorkflowResponse>>
+    suspend fun getWorkflow(
+        @Path("workflowId") workflowId: String,
+    ): Response<ResponseWrapper<WorkflowResponse>>
 
     @PUT("$ENDPOINT/{workflowId}/status")
-    suspend fun updateWorkflowStatus(@Path("workflowId") workflowId: String, @Body request: UpdateWorkflowStatusRequest): Response<ResponseWrapper<WorkflowResponse>>
+    suspend fun updateWorkflowStatus(
+        @Path("workflowId") workflowId: String,
+        @Body request: UpdateWorkflowStatusRequest,
+    ): Response<ResponseWrapper<WorkflowResponse>>
 }

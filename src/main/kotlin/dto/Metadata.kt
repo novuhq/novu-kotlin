@@ -10,5 +10,5 @@ data class Metadata(
     val type: String? = null,
     val backoffUnit: String? = null,
     val backoffAmount: BigInteger? = null,
-    val updateMode: Boolean? = null
+    val updateMode: Boolean? = null,
 )

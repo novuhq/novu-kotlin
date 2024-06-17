@@ -11,5 +11,5 @@ data class Tenant(
     private var data: Any? = null,
     private var identifier: String? = null,
     private var name: String? = null,
-    private var updatedAt: String? = null
+    private var updatedAt: String? = null,
 )

@@ -25,5 +25,5 @@ data class Credential(
     var redirectUrl: String? = null,
     var hmac: Boolean? = null,
     var serviceAccount: String? = null,
-    var ipPoolName: String? = null
+    var ipPoolName: String? = null,
 )

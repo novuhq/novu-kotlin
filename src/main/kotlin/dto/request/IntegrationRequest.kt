@@ -7,5 +7,5 @@ data class IntegrationRequest(
     var channel: String,
     var credentials: Credential,
     var active: Boolean,
-    var check: Boolean
+    var check: Boolean,
 )

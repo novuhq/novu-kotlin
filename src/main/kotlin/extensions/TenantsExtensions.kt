@@ -11,7 +11,10 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.getTenants(page: Int? = null, limit: Int? = null): PaginatedResponseWrapper<Tenant>? {
+suspend fun Novu.getTenants(
+    page: Int? = null,
+    limit: Int? = null,
+): PaginatedResponseWrapper<Tenant>? {
     val response = tenantsApi.getTenants(page, limit)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -26,7 +29,10 @@ suspend fun Novu.getTenant(identifier: String): ResponseWrapper<Tenant>? {
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateTenant(identifier: String, request: TenantRequest): ResponseWrapper<Tenant>? {
+suspend fun Novu.updateTenant(
+    identifier: String,
+    request: TenantRequest,
+): ResponseWrapper<Tenant>? {
     val response = tenantsApi.updateTenant(identifier, request)
     return response.extractResponse(logger, config.enableLogging)
 }

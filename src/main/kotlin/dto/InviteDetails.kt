@@ -8,5 +8,5 @@ data class InviteDetails(
     var invitationDate: String? = null,
     var answerDate: String? = null,
     @SerializedName("_inviterId")
-    var inviterId: String? = null
+    var inviterId: String? = null,
 )

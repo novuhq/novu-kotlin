@@ -18,7 +18,11 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.filterTopics(page: BigInteger? = null, pageSize: BigInteger? = null, key: String? = null): PaginatedResponseWrapper<TopicResponse>? {
+suspend fun Novu.filterTopics(
+    page: BigInteger? = null,
+    pageSize: BigInteger? = null,
+    key: String? = null,
+): PaginatedResponseWrapper<TopicResponse>? {
     val response = topicsApi.filterTopics(page, pageSize, key)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -28,17 +32,26 @@ suspend fun Novu.createTopic(request: CreateTopicRequest): ResponseWrapper<Creat
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.addSubscribers(topicKey: String, request: SubscriberList): ResponseWrapper<AddSubscribersResponse>? {
+suspend fun Novu.addSubscribers(
+    topicKey: String,
+    request: SubscriberList,
+): ResponseWrapper<AddSubscribersResponse>? {
     val response = topicsApi.addSubscriber(topicKey, request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.removeSubscriber(topicKey: String, request: SubscriberList): RemoveSubscriberResponse {
+suspend fun Novu.removeSubscriber(
+    topicKey: String,
+    request: SubscriberList,
+): RemoveSubscriberResponse {
     val response = topicsApi.removeSubscribers(topicKey, request)
     return response.extractResponse(logger, config.enableLogging, RemoveSubscriberResponse())
 }
 
-suspend fun Novu.checkSubscriber(topicKey: String, externalSubscriberId: String): CheckTopicSubscriberResponse? {
+suspend fun Novu.checkSubscriber(
+    topicKey: String,
+    externalSubscriberId: String,
+): CheckTopicSubscriberResponse? {
     val response = topicsApi.checkSubscriber(topicKey, externalSubscriberId)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -48,7 +61,10 @@ suspend fun Novu.topic(topicKey: String): ResponseWrapper<TopicResponse>? {
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.renameTopic(topicKey: String, request: CreateByNameRequest): ResponseWrapper<TopicResponse>? {
+suspend fun Novu.renameTopic(
+    topicKey: String,
+    request: CreateByNameRequest,
+): ResponseWrapper<TopicResponse>? {
     val response = topicsApi.renameTopic(topicKey, request)
     return response.extractResponse(logger, config.enableLogging)
 }

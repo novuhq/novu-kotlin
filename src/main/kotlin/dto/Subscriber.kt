@@ -10,5 +10,5 @@ open class Subscriber(
     var lastName: String? = null,
     var email: String? = null,
     var phone: String? = null,
-    var avatar: String? = null
+    var avatar: String? = null,
 )

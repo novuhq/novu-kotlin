@@ -25,113 +25,126 @@ import java.util.UUID
 @OptIn(ExperimentalCoroutinesApi::class)
 class NotificationsApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNovu = Novu(
-        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
-    )
+    private val mockNovu =
+        Novu(
+            NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString()),
+        )
 
     @Test
     @DisplayName("Get Notification Stats")
-    fun testGetNotificationStats() = runTest {
-        val responseBody = ResponseWrapper(
-            NotificationStatsResponse(
-                BigInteger.ONE,
-                BigInteger.ONE,
-                BigInteger.ONE
-            )
-        )
-        mockWebServer.enqueue(
-            MockResponse()
-                .setBody(Gson().toJson(responseBody))
-                .setResponseCode(200)
-        )
-
-        val result = mockNovu.notificationsStats()
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/notifications/stats")
-        assert(request.method == "GET")
-        assert(responseBody == result)
-    }
-
-    @Test
-    fun testGetNotificationGraphStats() = runTest {
-        val responseBody = ResponseWrapper(
-            data = listOf(
-                NotificationGraphStatsResponse(
-                    id = UUID.randomUUID().toString(),
-                    count = BigInteger.TEN,
-                    templates = listOf("email"),
-                    channels = emptyList()
+    fun testGetNotificationStats() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    NotificationStatsResponse(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                    ),
                 )
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setBody(Gson().toJson(responseBody))
+                    .setResponseCode(200),
             )
-        )
-        val response = MockResponse()
-            .setResponseCode(200)
-            .setBody(Gson().toJson(responseBody))
-        mockWebServer.enqueue(response)
-        val result = mockNovu.notificationGraphStats()
-        val request = mockWebServer.takeRequest()
-        assert(request.path == "/notifications/graph/stats")
-        assert(request.method == "GET")
-        assert(responseBody == result)
-    }
+
+            val result = mockNovu.notificationsStats()
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/notifications/stats")
+            assert(request.method == "GET")
+            assert(responseBody == result)
+        }
 
     @Test
-    fun testGetNotificationsWithNotificationRequest() = runTest {
-        val responseBody = PaginatedResponseWrapper<Notification>(
-            data = emptyList(),
-            page = BigInteger.ONE,
-            pageSize = BigInteger.TEN,
-            totalCount = BigInteger.TEN
-        )
-        val response = MockResponse()
-            .setResponseCode(200)
-            .setBody(Gson().toJson(responseBody))
-
-        mockWebServer.enqueue(response)
-        val channels = listOf("channel")
-        val template = listOf("template")
-        val emails = listOf("emails")
-        val search = "search"
-        val page = BigInteger.ONE
-        val transactionId = "transactionId"
-        val notificationRequest = NotificationRequest(
-            channels = channels,
-            templates = template,
-            emails = emails,
-            search = search,
-            page = page,
-            transactionId = transactionId
-        )
-
-        val result = mockNovu.notifications(notificationRequest)
-        val request = mockWebServer.takeRequest()
-
-        val sb = StringBuilder("?")
-        channels.forEach { sb.append("channels=").append(it).append("&") }
-        template.forEach { sb.append("templates=").append(it).append("&") }
-        emails.forEach { sb.append("emails=").append(it).append("&") }
-        sb.append("search=").append(search).append("&")
-        sb.append("page=").append(page).append("&")
-        sb.append("transactionId=").append(transactionId)
-        assert(request.path == "/notifications$sb")
-        assert(request.method == "GET")
-        assert(responseBody == result)
-    }
+    fun testGetNotificationGraphStats() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    data =
+                        listOf(
+                            NotificationGraphStatsResponse(
+                                id = UUID.randomUUID().toString(),
+                                count = BigInteger.TEN,
+                                templates = listOf("email"),
+                                channels = emptyList(),
+                            ),
+                        ),
+                )
+            val response =
+                MockResponse()
+                    .setResponseCode(200)
+                    .setBody(Gson().toJson(responseBody))
+            mockWebServer.enqueue(response)
+            val result = mockNovu.notificationGraphStats()
+            val request = mockWebServer.takeRequest()
+            assert(request.path == "/notifications/graph/stats")
+            assert(request.method == "GET")
+            assert(responseBody == result)
+        }
 
     @Test
-    fun testGetNotification() = runTest {
-        val responseBody = ResponseWrapper(
-            Notification()
-        )
+    fun testGetNotificationsWithNotificationRequest() =
+        runTest {
+            val responseBody =
+                PaginatedResponseWrapper<Notification>(
+                    data = emptyList(),
+                    page = BigInteger.ONE,
+                    pageSize = BigInteger.TEN,
+                    totalCount = BigInteger.TEN,
+                )
+            val response =
+                MockResponse()
+                    .setResponseCode(200)
+                    .setBody(Gson().toJson(responseBody))
 
-        mockWebServer.enqueue(MockResponse().setBody(Gson().toJson(responseBody)).setResponseCode(200))
+            mockWebServer.enqueue(response)
+            val channels = listOf("channel")
+            val template = listOf("template")
+            val emails = listOf("emails")
+            val search = "search"
+            val page = BigInteger.ONE
+            val transactionId = "transactionId"
+            val notificationRequest =
+                NotificationRequest(
+                    channels = channels,
+                    templates = template,
+                    emails = emails,
+                    search = search,
+                    page = page,
+                    transactionId = transactionId,
+                )
 
-        val notificationId = UUID.randomUUID().toString()
-        val result = mockNovu.notification(notificationId)
-        val request = mockWebServer.takeRequest()
+            val result = mockNovu.notifications(notificationRequest)
+            val request = mockWebServer.takeRequest()
 
-        assert(request.path == "/notifications/$notificationId")
-        assert(request.method == "GET")
-        assert(result == responseBody)
-    }
+            val sb = StringBuilder("?")
+            channels.forEach { sb.append("channels=").append(it).append("&") }
+            template.forEach { sb.append("templates=").append(it).append("&") }
+            emails.forEach { sb.append("emails=").append(it).append("&") }
+            sb.append("search=").append(search).append("&")
+            sb.append("page=").append(page).append("&")
+            sb.append("transactionId=").append(transactionId)
+            assert(request.path == "/notifications$sb")
+            assert(request.method == "GET")
+            assert(responseBody == result)
+        }
+
+    @Test
+    fun testGetNotification() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    Notification(),
+                )
+
+            mockWebServer.enqueue(MockResponse().setBody(Gson().toJson(responseBody)).setResponseCode(200))
+
+            val notificationId = UUID.randomUUID().toString()
+            val result = mockNovu.notification(notificationId)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.path == "/notifications/$notificationId")
+            assert(request.method == "GET")
+            assert(result == responseBody)
+        }
 }

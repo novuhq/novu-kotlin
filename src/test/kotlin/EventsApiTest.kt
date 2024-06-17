@@ -23,170 +23,189 @@ import org.junit.jupiter.api.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class EventsApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNovu = Novu(
-        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
-    )
+    private val mockNovu =
+        Novu(
+            NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString()),
+        )
 
     @Test
-    fun testTriggerEvent() = runTest {
-        val responseBody = ResponseWrapper(
-            TriggerResponse(
-                acknowledged = true,
-                status = "status",
-                transactionId = "transactionId",
-                error = listOf("error")
-            )
-        )
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody))
-        )
-        val requestBody = TriggerEventRequest(
-            name = "test",
-            to = SubscriberRequest(
-                subscriberId = "subscriberId",
-                email = "email@email.com",
-                firstName = "John",
-                lastName = "Doe"
-            ),
-            payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId",
-            actor = mapOf(
-                "subscriberId" to "sId",
-                "email" to "email@mail.com",
-                "firstName" to "fName",
-                "lastName" to "lName",
-                "phone" to "phoneNo"
-            )
-        )
-        val result = mockNovu.trigger(requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(result == responseBody)
-        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
-        assert(request.method == "POST")
-        assert(request.path == "/events/trigger")
-    }
-
-    @Test
-    fun testTriggerEventToTopic() = runTest {
-        val responseBody = ResponseWrapper(
-            TriggerResponse(
-                acknowledged = true,
-                status = "status",
-                transactionId = "transactionId",
-                error = listOf("error")
-            )
-        )
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody))
-        )
-        val requestBody = TriggerEventRequest(
-            name = "test",
-            to = listOf(
-                Topic(
-                    type = "Topic",
-                    topicKey = "posts:comment:12345"
+    fun testTriggerEvent() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    TriggerResponse(
+                        acknowledged = true,
+                        status = "status",
+                        transactionId = "transactionId",
+                        error = listOf("error"),
+                    ),
                 )
-            ),
-            payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId",
-            tenant = Tenant(
-                identifier = "identifier",
-                name = "name",
-                data = Any()
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setResponseCode(201)
+                    .setBody(Gson().toJson(responseBody)),
             )
-        )
-        val result = mockNovu.trigger(requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(result == responseBody)
-        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
-        assert(request.method == "POST")
-        assert(request.path == "/events/trigger")
-    }
-
-    @Test
-    fun testBulkTriggerEvent() = runTest {
-        val responseBody = ResponseWrapper(
-            listOf(
-                TriggerResponse(
-                    acknowledged = true,
-                    status = "status",
+            val requestBody =
+                TriggerEventRequest(
+                    name = "test",
+                    to =
+                        SubscriberRequest(
+                            subscriberId = "subscriberId",
+                            email = "email@email.com",
+                            firstName = "John",
+                            lastName = "Doe",
+                        ),
+                    payload = mapOf("customVariables" to "Hello"),
                     transactionId = "transactionId",
-                    error = listOf("error")
+                    actor =
+                        mapOf(
+                            "subscriberId" to "sId",
+                            "email" to "email@mail.com",
+                            "firstName" to "fName",
+                            "lastName" to "lName",
+                            "phone" to "phoneNo",
+                        ),
                 )
-            )
-        )
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody))
-        )
-        val requestBody = listOf(
-            TriggerEventRequest(
-                name = "test",
-                to = SubscriberRequest(
-                    subscriberId = "subscriberId",
-                    email = "email@email.com",
-                    firstName = "John",
-                    lastName = "Doe"
-                ),
-                payload = mapOf("customVariables" to "Hello"),
-                transactionId = "transactionId"
-            )
-        )
-        val body = BulkTriggerEventRequest(requestBody)
-        val result = mockNovu.bulkTrigger(body)
-        val request = mockWebServer.takeRequest()
-        assert(result == responseBody)
-        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(body).toString())
-        assert(request.method == "POST")
-        assert(request.path == "/events/trigger/bulk")
-    }
+            val result = mockNovu.trigger(requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(result == responseBody)
+            assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
+            assert(request.method == "POST")
+            assert(request.path == "/events/trigger")
+        }
 
     @Test
-    fun testBroadcastEvent() = runTest {
-        val responseBody = ResponseWrapper(
-            TriggerResponse(
-                acknowledged = true,
-                status = "status",
-                transactionId = "transactionId",
-                error = listOf("error")
+    fun testTriggerEventToTopic() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    TriggerResponse(
+                        acknowledged = true,
+                        status = "status",
+                        transactionId = "transactionId",
+                        error = listOf("error"),
+                    ),
+                )
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setResponseCode(201)
+                    .setBody(Gson().toJson(responseBody)),
             )
-        )
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody))
-        )
-        val requestBody = BroadcastEventRequest(
-            name = "test",
-            payload = mapOf("customVariables" to "Hello"),
-            transactionId = "transactionId"
-        )
-        val result = mockNovu.broadcast(requestBody)
-        val request = mockWebServer.takeRequest()
-        assert(result == responseBody)
-        assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
-        assert(request.method == "POST")
-        assert(request.path == "/events/trigger/broadcast")
-    }
+            val requestBody =
+                TriggerEventRequest(
+                    name = "test",
+                    to =
+                        listOf(
+                            Topic(
+                                type = "Topic",
+                                topicKey = "posts:comment:12345",
+                            ),
+                        ),
+                    payload = mapOf("customVariables" to "Hello"),
+                    transactionId = "transactionId",
+                    tenant =
+                        Tenant(
+                            identifier = "identifier",
+                            name = "name",
+                            data = Any(),
+                        ),
+                )
+            val result = mockNovu.trigger(requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(result == responseBody)
+            assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
+            assert(request.method == "POST")
+            assert(request.path == "/events/trigger")
+        }
 
     @Test
-    fun testCancelTriggerEvent() = runTest {
-        val responseBody = ResponseWrapper(true)
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(201)
-                .setBody(Gson().toJson(responseBody))
-        )
-        val transactionId = "transactionId"
-        val result = mockNovu.cancelTriggerEvent(transactionId)
-        val request = mockWebServer.takeRequest()
-        assert(result == responseBody)
-        assert(request.method == "DELETE")
-        assert(request.path == "/events/trigger/$transactionId")
-    }
+    fun testBulkTriggerEvent() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    listOf(
+                        TriggerResponse(
+                            acknowledged = true,
+                            status = "status",
+                            transactionId = "transactionId",
+                            error = listOf("error"),
+                        ),
+                    ),
+                )
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setResponseCode(201)
+                    .setBody(Gson().toJson(responseBody)),
+            )
+            val requestBody =
+                listOf(
+                    TriggerEventRequest(
+                        name = "test",
+                        to =
+                            SubscriberRequest(
+                                subscriberId = "subscriberId",
+                                email = "email@email.com",
+                                firstName = "John",
+                                lastName = "Doe",
+                            ),
+                        payload = mapOf("customVariables" to "Hello"),
+                        transactionId = "transactionId",
+                    ),
+                )
+            val body = BulkTriggerEventRequest(requestBody)
+            val result = mockNovu.bulkTrigger(body)
+            val request = mockWebServer.takeRequest()
+            assert(result == responseBody)
+            assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(body).toString())
+            assert(request.method == "POST")
+            assert(request.path == "/events/trigger/bulk")
+        }
+
+    @Test
+    fun testBroadcastEvent() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    TriggerResponse(
+                        acknowledged = true,
+                        status = "status",
+                        transactionId = "transactionId",
+                        error = listOf("error"),
+                    ),
+                )
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setResponseCode(201)
+                    .setBody(Gson().toJson(responseBody)),
+            )
+            val requestBody =
+                BroadcastEventRequest(
+                    name = "test",
+                    payload = mapOf("customVariables" to "Hello"),
+                    transactionId = "transactionId",
+                )
+            val result = mockNovu.broadcast(requestBody)
+            val request = mockWebServer.takeRequest()
+            assert(result == responseBody)
+            assert(JsonParser().parse(request.body.readUtf8()).toString() == Gson().toJson(requestBody).toString())
+            assert(request.method == "POST")
+            assert(request.path == "/events/trigger/broadcast")
+        }
+
+    @Test
+    fun testCancelTriggerEvent() =
+        runTest {
+            val responseBody = ResponseWrapper(true)
+            mockWebServer.enqueue(
+                MockResponse()
+                    .setResponseCode(201)
+                    .setBody(Gson().toJson(responseBody)),
+            )
+            val transactionId = "transactionId"
+            val result = mockNovu.cancelTriggerEvent(transactionId)
+            val request = mockWebServer.takeRequest()
+            assert(result == responseBody)
+            assert(request.method == "DELETE")
+            assert(request.path == "/events/trigger/$transactionId")
+        }
 }

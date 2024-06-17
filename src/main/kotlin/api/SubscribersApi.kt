@@ -28,55 +28,79 @@ import retrofit2.http.Query
 import java.math.BigInteger
 
 interface SubscribersApi {
-
     companion object {
         const val ENDPOINT = "subscribers"
     }
 
     @GET(ENDPOINT)
-    suspend fun getSubscribers(@Query("page") page: BigInteger?): Response<PaginatedResponseWrapper<SubscriberResponse>>
+    suspend fun getSubscribers(
+        @Query("page") page: BigInteger?,
+    ): Response<PaginatedResponseWrapper<SubscriberResponse>>
 
     @POST(ENDPOINT)
-    suspend fun createSubscriber(@Body subscriberRequest: SubscriberRequest): Response<ResponseWrapper<SubscriberResponse>>
+    suspend fun createSubscriber(
+        @Body subscriberRequest: SubscriberRequest,
+    ): Response<ResponseWrapper<SubscriberResponse>>
 
     @POST("$ENDPOINT/bulk")
-    suspend fun createSubscriberBulk(@Body request: BulkSubscriberRequest): Response<CreateBulkSubscriberResponse>
+    suspend fun createSubscriberBulk(
+        @Body request: BulkSubscriberRequest,
+    ): Response<CreateBulkSubscriberResponse>
 
     @GET("$ENDPOINT/{subscriberId}")
-    suspend fun getSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<SubscriberResponse>>
+    suspend fun getSubscriber(
+        @Path("subscriberId") subscriberId: String,
+    ): Response<ResponseWrapper<SubscriberResponse>>
 
     @PUT("$ENDPOINT/{subscriberId}")
-    suspend fun updateSubscriber(@Path("subscriberId") subscriberId: String, @Body request: UpdateSubscriberRequest): Response<ResponseWrapper<SubscriberResponse>>
+    suspend fun updateSubscriber(
+        @Path("subscriberId") subscriberId: String,
+        @Body request: UpdateSubscriberRequest,
+    ): Response<ResponseWrapper<SubscriberResponse>>
 
     @DELETE("$ENDPOINT/{subscriberId}")
-    suspend fun deleteSubscriber(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<SubscriberDeleteResponse>>
+    suspend fun deleteSubscriber(
+        @Path("subscriberId") subscriberId: String,
+    ): Response<ResponseWrapper<SubscriberDeleteResponse>>
 
     @PUT("$ENDPOINT/{subscriberId}/credentials")
-    suspend fun updateSubscriberCredentials(@Path("subscriberId") subscriberId: String, @Body request: UpdateSubscriberCredentialsRequest): Response<ResponseWrapper<SubscriberResponse>>
+    suspend fun updateSubscriberCredentials(
+        @Path("subscriberId") subscriberId: String,
+        @Body request: UpdateSubscriberCredentialsRequest,
+    ): Response<ResponseWrapper<SubscriberResponse>>
 
     @PATCH("$ENDPOINT/{subscriberId}/online-status")
-    suspend fun updateSubscriberOnlineStatus(@Path("subscriberId")subscriberId: String, @Body request: UpdateSubscriberOnlineStatusRequest): Response<ResponseWrapper<SubscriberResponse>>
+    suspend fun updateSubscriberOnlineStatus(
+        @Path("subscriberId")subscriberId: String,
+        @Body request: UpdateSubscriberOnlineStatusRequest,
+    ): Response<ResponseWrapper<SubscriberResponse>>
 
     @GET("$ENDPOINT/{subscriberId}/preferences")
-    suspend fun getSubscriberPreferences(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<List<SubscriberPreferenceResponse>>>
+    suspend fun getSubscriberPreferences(
+        @Path("subscriberId") subscriberId: String,
+    ): Response<ResponseWrapper<List<SubscriberPreferenceResponse>>>
 
     @PATCH("$ENDPOINT/{subscriberId}/preferences/{templateId}")
     suspend fun updateSubscriberPreferences(
         @Path("subscriberId") subscriberId: String,
         @Path("templateId") templateId: String,
-        @Body request: UpdateSubscriberPreferencesRequest
+        @Body request: UpdateSubscriberPreferencesRequest,
     ): Response<ResponseWrapper<SubscriberPreferenceResponse>>
 
     @GET("$ENDPOINT/{subscriberId}/notifications/feed")
-    suspend fun getSubscriberNotificationsFeed(@Path("subscriberId") subscriberId: String): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
+    suspend fun getSubscriberNotificationsFeed(
+        @Path("subscriberId") subscriberId: String,
+    ): Response<PaginatedResponseWrapper<SubscriberNotificationResponse>>
 
     @GET("$ENDPOINT/{subscriberId}/notifications/unseen")
-    suspend fun getSubscriberUnseenNotificationsCount(@Path("subscriberId") subscriberId: String): Response<ResponseWrapper<UnseenNotificationsCountResponse>>
+    suspend fun getSubscriberUnseenNotificationsCount(
+        @Path("subscriberId") subscriberId: String,
+    ): Response<ResponseWrapper<UnseenNotificationsCountResponse>>
 
     @POST("$ENDPOINT/{subscriberId}/messages/markAs")
     suspend fun markSubscriberMessageFeedAs(
         @Path("subscriberId") subscriberId: String,
-        @Body request: MarkSubscriberFeedAsRequest
+        @Body request: MarkSubscriberFeedAsRequest,
     ): Response<ResponseWrapper<List<SubscriberNotificationResponse>>>
 
     @POST("$ENDPOINT/{subscriberId}/messages/{messageId}/actions/{type}")
@@ -84,6 +108,6 @@ interface SubscribersApi {
         @Path("subscriberId") subscriberId: String,
         @Path("messageId") messageId: String,
         @Path("type") type: String,
-        @Body request: MarkMessageActionAsSeenRequest
+        @Body request: MarkMessageActionAsSeenRequest,
     ): Response<ResponseWrapper<SubscriberNotificationResponse>>
 }

@@ -12,7 +12,6 @@ import retrofit2.http.Query
 import java.math.BigInteger
 
 interface MessagesApi {
-
     companion object {
         const val ENDPOINT = "messages"
     }
@@ -23,9 +22,11 @@ interface MessagesApi {
         @Query("subscriberId") subscriberId: String? = null,
         @Query("limit") limit: BigInteger? = null,
         @Query("page") page: BigInteger? = null,
-        @Query("transactionId") transactionId: String? = null
+        @Query("transactionId") transactionId: String? = null,
     ): Response<PaginatedResponseWrapper<Message>>
 
     @DELETE("$ENDPOINT/{messageId}")
-    suspend fun deleteMessage(@Path("messageId") messageId: String): Response<ResponseWrapper<TriggerResponse>>
+    suspend fun deleteMessage(
+        @Path("messageId") messageId: String,
+    ): Response<ResponseWrapper<TriggerResponse>>
 }

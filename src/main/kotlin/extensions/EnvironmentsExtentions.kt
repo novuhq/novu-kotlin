@@ -27,7 +27,10 @@ suspend fun Novu.environments(): ResponseWrapper<List<GetEnvironmentResponse>>? 
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateEnvironment(environmentId: String, request: UpdateEnvironmentRequest): ResponseWrapper<GetEnvironmentResponse>? {
+suspend fun Novu.updateEnvironment(
+    environmentId: String,
+    request: UpdateEnvironmentRequest,
+): ResponseWrapper<GetEnvironmentResponse>? {
     val response = environmentsApi.updateEnvironment(environmentId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

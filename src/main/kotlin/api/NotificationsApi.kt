@@ -12,7 +12,6 @@ import retrofit2.http.Query
 import java.math.BigInteger
 
 interface NotificationsApi {
-
     companion object {
         const val ENDPOINT = "notifications"
     }
@@ -24,7 +23,7 @@ interface NotificationsApi {
         @Query("emails") emails: List<String>?,
         @Query("search") search: String?,
         @Query("page") page: BigInteger?,
-        @Query("transactionId") transactionId: String?
+        @Query("transactionId") transactionId: String?,
     ): Response<PaginatedResponseWrapper<Notification>>
 
     @GET("$ENDPOINT/stats")
@@ -34,5 +33,7 @@ interface NotificationsApi {
     suspend fun getNotificationGraphStats(): Response<ResponseWrapper<List<NotificationGraphStatsResponse>>>
 
     @GET("$ENDPOINT/{notificationId}")
-    suspend fun getNotification(@Path("notificationId") notificationId: String): Response<ResponseWrapper<Notification>>
+    suspend fun getNotification(
+        @Path("notificationId") notificationId: String,
+    ): Response<ResponseWrapper<Notification>>
 }

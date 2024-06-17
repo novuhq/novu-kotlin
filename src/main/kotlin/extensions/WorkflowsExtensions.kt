@@ -12,7 +12,10 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-suspend fun Novu.getWorkflows(page: Int?, limit: Int?): PaginatedResponseWrapper<WorkflowResponse>? {
+suspend fun Novu.getWorkflows(
+    page: Int?,
+    limit: Int?,
+): PaginatedResponseWrapper<WorkflowResponse>? {
     val response = workflowsApi.getWorkflows(page, limit)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -22,7 +25,10 @@ suspend fun Novu.createWorkflow(request: WorkflowRequest): ResponseWrapper<Workf
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateWorkflow(workflowId: String, request: UpdateWorkflowRequest): ResponseWrapper<WorkflowResponse>? {
+suspend fun Novu.updateWorkflow(
+    workflowId: String,
+    request: UpdateWorkflowRequest,
+): ResponseWrapper<WorkflowResponse>? {
     val response = workflowsApi.updateWorkflow(workflowId, request)
     return response.extractResponse(logger, config.enableLogging)
 }
@@ -37,7 +43,10 @@ suspend fun Novu.getWorkflow(workflowId: String): ResponseWrapper<WorkflowRespon
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateWorkflowStatus(workflowId: String, request: UpdateWorkflowStatusRequest): ResponseWrapper<WorkflowResponse>? {
+suspend fun Novu.updateWorkflowStatus(
+    workflowId: String,
+    request: UpdateWorkflowStatusRequest,
+): ResponseWrapper<WorkflowResponse>? {
     val response = workflowsApi.updateWorkflowStatus(workflowId, request)
     return response.extractResponse(logger, config.enableLogging)
 }

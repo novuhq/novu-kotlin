@@ -28,13 +28,12 @@ data class NovuConfig(
     var euBackendUrl: String = "https://eu.api.novu.co/v1/",
     var enableEuVersion: Boolean = false,
     var enableLogging: Boolean = true,
-    var apiLogLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
+    var apiLogLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
 )
 
 class Novu(
-    val config: NovuConfig
+    val config: NovuConfig,
 ) {
-
     constructor(apiKey: String) : this(NovuConfig(apiKey = apiKey))
 
     private val retrofitInstance by lazy { RetrofitHelper(config).getInstance() }

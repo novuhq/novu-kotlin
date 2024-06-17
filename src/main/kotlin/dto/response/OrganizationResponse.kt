@@ -14,5 +14,5 @@ data class OrganizationResponse(
     var createdAt: String? = null,
     var updatedAt: String? = null,
     @SerializedName("__v")
-    var version: Long? = null
+    var version: Long? = null,
 )

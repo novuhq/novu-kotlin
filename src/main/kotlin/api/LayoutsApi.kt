@@ -16,26 +16,41 @@ import retrofit2.http.Query
 import java.math.BigInteger
 
 interface LayoutsApi {
-
     companion object {
         const val ENDPOINT = "layouts"
     }
 
     @POST(ENDPOINT)
-    suspend fun createLayout(@Body request: CreateLayoutRequest): Response<ResponseWrapper<CreateLayoutResponse>>
+    suspend fun createLayout(
+        @Body request: CreateLayoutRequest,
+    ): Response<ResponseWrapper<CreateLayoutResponse>>
 
     @GET(ENDPOINT)
-    suspend fun filterLayouts(@Query("page") page: BigInteger, @Query("pageSize") pageSize: BigInteger, @Query("sortBy") sortBy: String, @Query("orderBy") orderBy: BigInteger): Response<PaginatedResponseWrapper<GetLayoutsResponse>>
+    suspend fun filterLayouts(
+        @Query("page") page: BigInteger,
+        @Query("pageSize") pageSize: BigInteger,
+        @Query("sortBy") sortBy: String,
+        @Query("orderBy") orderBy: BigInteger,
+    ): Response<PaginatedResponseWrapper<GetLayoutsResponse>>
 
     @GET("$ENDPOINT/{layoutId}")
-    suspend fun getLayout(@Path("layoutId") layoutId: String): Response<ResponseWrapper<GetLayoutsResponse>>
+    suspend fun getLayout(
+        @Path("layoutId") layoutId: String,
+    ): Response<ResponseWrapper<GetLayoutsResponse>>
 
     @DELETE("$ENDPOINT/{layoutId}")
-    suspend fun deleteLayout(@Path("layoutId") layoutId: String): Response<Unit>
+    suspend fun deleteLayout(
+        @Path("layoutId") layoutId: String,
+    ): Response<Unit>
 
     @PATCH("$ENDPOINT/{layoutId}")
-    suspend fun updateLayout(@Path("layoutId") layoutId: String, @Body request: CreateLayoutRequest): Response<ResponseWrapper<GetLayoutsResponse>>
+    suspend fun updateLayout(
+        @Path("layoutId") layoutId: String,
+        @Body request: CreateLayoutRequest,
+    ): Response<ResponseWrapper<GetLayoutsResponse>>
 
     @POST("$ENDPOINT/{layoutId}/default")
-    suspend fun setDefaultLayout(@Path("layoutId") layoutId: String): Response<Unit>
+    suspend fun setDefaultLayout(
+        @Path("layoutId") layoutId: String,
+    ): Response<Unit>
 }

@@ -25,13 +25,13 @@ class SubscriberResponse(
     @SerializedName("__v")
     var version: BigInteger? = null,
     var isOnline: Boolean? = null,
-    var lastOnlineAt: String? = null
+    var lastOnlineAt: String? = null,
 ) : Subscriber(
-    id,
-    subscriberId,
-    firstName,
-    lastName,
-    email,
-    phone,
-    avatar
-)
+        id,
+        subscriberId,
+        firstName,
+        lastName,
+        email,
+        phone,
+        avatar,
+    )

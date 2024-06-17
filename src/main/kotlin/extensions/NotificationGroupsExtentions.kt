@@ -25,7 +25,10 @@ suspend fun Novu.getWorkflowGroup(id: String): ResponseWrapper<NotificationGroup
     return response.extractResponse(logger, config.enableLogging)
 }
 
-suspend fun Novu.updateWorkflowGroup(id: String, request: CreateByNameRequest): ResponseWrapper<NotificationGroupsResponse>? {
+suspend fun Novu.updateWorkflowGroup(
+    id: String,
+    request: CreateByNameRequest,
+): ResponseWrapper<NotificationGroupsResponse>? {
     val response = notificationGroupsApi.updateWorkflowGroup(id, request)
     return response.extractResponse(logger, config.enableLogging)
 }

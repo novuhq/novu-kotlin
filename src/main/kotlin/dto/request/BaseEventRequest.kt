@@ -3,7 +3,6 @@ package co.novu.dto.request
 import co.novu.dto.Tenant
 
 abstract class BaseEventRequest {
-
     // Mandatory fields
     private lateinit var name: String
     private var payload: Map<String, Any> = mapOf()
@@ -44,7 +43,7 @@ abstract class BaseEventRequest {
         overrides: Map<String, Any>? = null,
         transactionId: String? = null,
         actor: Any? = null,
-        tenant: Any? = null
+        tenant: Any? = null,
     ): BaseEventRequest {
         return this.apply {
             this.name = name

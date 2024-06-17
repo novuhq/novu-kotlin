@@ -20,5 +20,5 @@ data class WorkflowOverride(
     var deletedAt: String? = null,
     var deletedBy: String? = null,
     var createdAt: String? = null,
-    var updatedAt: String? = null
+    var updatedAt: String? = null,
 )

@@ -12,5 +12,5 @@ data class CheckTopicSubscriberResponse(
     @SerializedName("_topicId")
     var topicId: String? = null,
     var topicKey: String? = null,
-    var externalSubscriberId: String? = null
+    var externalSubscriberId: String? = null,
 )

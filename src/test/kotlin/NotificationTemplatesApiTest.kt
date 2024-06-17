@@ -29,598 +29,667 @@ import java.math.BigInteger
 @OptIn(ExperimentalCoroutinesApi::class)
 class NotificationTemplatesApiTest {
     private val mockWebServer = MockWebServer()
-    private val mockNovu = Novu(
-        NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString())
-    )
+    private val mockNovu =
+        Novu(
+            NovuConfig(apiKey = "1245", backendUrl = mockWebServer.url("").toString()),
+        )
 
     @Test
-    fun testGetNotificationTemplates() = runTest {
-        val responseBody = PaginatedResponseWrapper(
-            data = listOf(
+    fun testGetNotificationTemplates() =
+        runTest {
+            val responseBody =
+                PaginatedResponseWrapper(
+                    data =
+                        listOf(
+                            NotificationTemplates(
+                                id = "_id",
+                                name = "name",
+                                description = "description",
+                                active = true,
+                                draft = true,
+                                preferenceSettings =
+                                    PreferenceSettings(
+                                        email = true,
+                                        sms = true,
+                                        push = true,
+                                        inApp = true,
+                                        chat = true,
+                                    ),
+                                critical = true,
+                                tags = listOf("tag1", "tag2"),
+                                steps =
+                                    listOf(
+                                        Step(
+                                            id = "_id",
+                                            templateId = "_templateId",
+                                            active = true,
+                                            shouldStopOnFail = true,
+                                            template = "template",
+                                            filters =
+                                                listOf(
+                                                    Filters(
+                                                        isNegated = true,
+                                                        type = "type",
+                                                        value = "value",
+                                                        children =
+                                                            listOf(
+                                                                Children(
+                                                                    field = "field",
+                                                                    value = "value",
+                                                                    operator = "operator",
+                                                                    on = "subscriber",
+                                                                ),
+                                                            ),
+                                                    ),
+                                                ),
+                                            metadata =
+                                                Metadata(
+                                                    amount = BigInteger.valueOf(10),
+                                                    unit = "unit",
+                                                    digestKey = "digestKey",
+                                                    delayPath = "delayPath",
+                                                    type = "type",
+                                                    backoffUnit = "backoffUnit",
+                                                    backoffAmount = BigInteger.valueOf(10),
+                                                    updateMode = true,
+                                                ),
+                                            parentId = "_parentId",
+                                            replyCallback = "replyCallback",
+                                        ),
+                                    ),
+                                organizationId = "_organizationId",
+                                creatorId = "_creatorId",
+                                environmentId = "_environmentId",
+                                triggers =
+                                    listOf(
+                                        Trigger(
+                                            type = "type",
+                                            identifier = "identifier",
+                                            variables =
+                                                listOf(
+                                                    Variables(
+                                                        name = "name",
+                                                    ),
+                                                ),
+                                            subscriberVariables =
+                                                listOf(
+                                                    Variables(
+                                                        name = "name",
+                                                    ),
+                                                ),
+                                        ),
+                                    ),
+                                notificationGroupId = "_notificationGroupId",
+                                deleted = true,
+                                deletedBy = "deletedBy",
+                                notificationGroup =
+                                    NotificationGroup(
+                                        id = "_id",
+                                        name = "name",
+                                        environmentId = "_environmentId",
+                                        organizationId = "_organizationId",
+                                        parentId = "_parentId",
+                                    ),
+                            ),
+                        ),
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val page = BigInteger.valueOf(1)
+            val limit = BigInteger.valueOf(10)
+            val result = mockNovu.notificationTemplates(page, limit)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.method == "GET")
+            assert(request.path == "/notification-templates?page=$page&limit=$limit")
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
+
+    @Test
+    fun testCreateNotification() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    NotificationTemplates(
+                        id = "_id",
+                        name = "name",
+                        description = "description",
+                        active = true,
+                        draft = true,
+                        preferenceSettings =
+                            PreferenceSettings(
+                                email = true,
+                                sms = true,
+                                push = true,
+                                inApp = true,
+                                chat = true,
+                            ),
+                        critical = true,
+                        tags = listOf("tag1", "tag2"),
+                        steps =
+                            listOf(
+                                Step(
+                                    id = "_id",
+                                    templateId = "_templateId",
+                                    active = true,
+                                    shouldStopOnFail = true,
+                                    template = "template",
+                                    filters =
+                                        listOf(
+                                            Filters(
+                                                isNegated = true,
+                                                type = "type",
+                                                value = "value",
+                                                children =
+                                                    listOf(
+                                                        Children(
+                                                            field = "field",
+                                                            value = "value",
+                                                            operator = "operator",
+                                                            on = "subscriber",
+                                                        ),
+                                                    ),
+                                            ),
+                                        ),
+                                    metadata =
+                                        Metadata(
+                                            amount = BigInteger.valueOf(10),
+                                            unit = "unit",
+                                            digestKey = "digestKey",
+                                            delayPath = "delayPath",
+                                            type = "type",
+                                            backoffUnit = "backoffUnit",
+                                            backoffAmount = BigInteger.valueOf(10),
+                                            updateMode = true,
+                                        ),
+                                    parentId = "_parentId",
+                                    replyCallback = "replyCallback",
+                                ),
+                            ),
+                        organizationId = "_organizationId",
+                        creatorId = "_creatorId",
+                        environmentId = "_environmentId",
+                        triggers =
+                            listOf(
+                                Trigger(
+                                    type = "type",
+                                    identifier = "identifier",
+                                    variables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                    subscriberVariables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        notificationGroupId = "_notificationGroupId",
+                        deleted = true,
+                        deletedBy = "deletedBy",
+                        notificationGroup =
+                            NotificationGroup(
+                                id = "_id",
+                                name = "name",
+                                environmentId = "_environmentId",
+                                organizationId = "_organizationId",
+                                parentId = "_parentId",
+                            ),
+                    ),
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
+            val requestBody =
                 NotificationTemplates(
-                    id = "_id",
                     name = "name",
                     description = "description",
                     active = true,
                     draft = true,
-                    preferenceSettings = PreferenceSettings(
-                        email = true,
-                        sms = true,
-                        push = true,
-                        inApp = true,
-                        chat = true
-                    ),
+                    preferenceSettings =
+                        PreferenceSettings(
+                            email = true,
+                            sms = true,
+                            push = true,
+                            inApp = true,
+                            chat = true,
+                        ),
                     critical = true,
                     tags = listOf("tag1", "tag2"),
-                    steps = listOf(
-                        Step(
-                            id = "_id",
-                            templateId = "_templateId",
-                            active = true,
-                            shouldStopOnFail = true,
-                            template = "template",
-                            filters = listOf(
-                                Filters(
-                                    isNegated = true,
-                                    type = "type",
-                                    value = "value",
-                                    children = listOf(
-                                        Children(
-                                            field = "field",
+                    steps =
+                        listOf(
+                            Step(
+                                active = true,
+                                template = "template",
+                                filters =
+                                    listOf(
+                                        Filters(
+                                            isNegated = true,
+                                            type = "type",
                                             value = "value",
-                                            operator = "operator",
-                                            on = "subscriber"
-                                        )
-                                    )
-                                )
+                                            children =
+                                                listOf(
+                                                    Children(
+                                                        field = "field",
+                                                        value = "value",
+                                                        operator = "operator",
+                                                        on = "subscriber",
+                                                    ),
+                                                ),
+                                        ),
+                                    ),
                             ),
-                            metadata = Metadata(
-                                amount = BigInteger.valueOf(10),
-                                unit = "unit",
-                                digestKey = "digestKey",
-                                delayPath = "delayPath",
-                                type = "type",
-                                backoffUnit = "backoffUnit",
-                                backoffAmount = BigInteger.valueOf(10),
-                                updateMode = true
-                            ),
-                            parentId = "_parentId",
-                            replyCallback = "replyCallback"
-                        )
-                    ),
-                    organizationId = "_organizationId",
-                    creatorId = "_creatorId",
-                    environmentId = "_environmentId",
-                    triggers = listOf(
-                        Trigger(
-                            type = "type",
-                            identifier = "identifier",
-                            variables = listOf(
-                                Variables(
-                                    name = "name"
-                                )
-                            ),
-                            subscriberVariables = listOf(
-                                Variables(
-                                    name = "name"
-                                )
-                            )
-                        )
-                    ),
-                    notificationGroupId = "_notificationGroupId",
-                    deleted = true,
-                    deletedBy = "deletedBy",
-                    notificationGroup = NotificationGroup(
+                        ),
+                )
+            val result = mockNovu.createNotificationTemplates(requestBody)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.method == "POST")
+            assert(request.path == "/notification-templates")
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
+
+    @Test
+    fun testUpdateNotificationTemplates() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    NotificationTemplates(
                         id = "_id",
                         name = "name",
-                        environmentId = "_environmentId",
+                        description = "description",
+                        active = true,
+                        draft = true,
+                        preferenceSettings =
+                            PreferenceSettings(
+                                email = true,
+                                sms = true,
+                                push = true,
+                                inApp = true,
+                                chat = true,
+                            ),
+                        critical = true,
+                        tags = listOf("tag1", "tag2"),
+                        steps =
+                            listOf(
+                                Step(
+                                    id = "_id",
+                                    templateId = "_templateId",
+                                    active = true,
+                                    shouldStopOnFail = true,
+                                    template = "template",
+                                    filters =
+                                        listOf(
+                                            Filters(
+                                                isNegated = true,
+                                                type = "type",
+                                                value = "value",
+                                                children =
+                                                    listOf(
+                                                        Children(
+                                                            field = "field",
+                                                            value = "value",
+                                                            operator = "operator",
+                                                            on = "subscriber",
+                                                        ),
+                                                    ),
+                                            ),
+                                        ),
+                                    metadata =
+                                        Metadata(
+                                            amount = BigInteger.valueOf(10),
+                                            unit = "unit",
+                                            digestKey = "digestKey",
+                                            delayPath = "delayPath",
+                                            type = "type",
+                                            backoffUnit = "backoffUnit",
+                                            backoffAmount = BigInteger.valueOf(10),
+                                            updateMode = true,
+                                        ),
+                                    parentId = "_parentId",
+                                    replyCallback = "replyCallback",
+                                ),
+                            ),
                         organizationId = "_organizationId",
-                        parentId = "_parentId"
-                    )
-                )
-            )
-
-        )
-
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val page = BigInteger.valueOf(1)
-        val limit = BigInteger.valueOf(10)
-        val result = mockNovu.notificationTemplates(page, limit)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.method == "GET")
-        assert(request.path == "/notification-templates?page=$page&limit=$limit")
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
-
-    @Test
-    fun testCreateNotification() = runTest {
-        val responseBody = ResponseWrapper(
-            NotificationTemplates(
-                id = "_id",
-                name = "name",
-                description = "description",
-                active = true,
-                draft = true,
-                preferenceSettings = PreferenceSettings(
-                    email = true,
-                    sms = true,
-                    push = true,
-                    inApp = true,
-                    chat = true
-                ),
-                critical = true,
-                tags = listOf("tag1", "tag2"),
-                steps = listOf(
-                    Step(
-                        id = "_id",
-                        templateId = "_templateId",
-                        active = true,
-                        shouldStopOnFail = true,
-                        template = "template",
-                        filters = listOf(
-                            Filters(
-                                isNegated = true,
-                                type = "type",
-                                value = "value",
-                                children = listOf(
-                                    Children(
-                                        field = "field",
-                                        value = "value",
-                                        operator = "operator",
-                                        on = "subscriber"
-                                    )
-                                )
-                            )
-                        ),
-                        metadata = Metadata(
-                            amount = BigInteger.valueOf(10),
-                            unit = "unit",
-                            digestKey = "digestKey",
-                            delayPath = "delayPath",
-                            type = "type",
-                            backoffUnit = "backoffUnit",
-                            backoffAmount = BigInteger.valueOf(10),
-                            updateMode = true
-                        ),
-                        parentId = "_parentId",
-                        replyCallback = "replyCallback"
-                    )
-                ),
-                organizationId = "_organizationId",
-                creatorId = "_creatorId",
-                environmentId = "_environmentId",
-                triggers = listOf(
-                    Trigger(
-                        type = "type",
-                        identifier = "identifier",
-                        variables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        ),
-                        subscriberVariables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        )
-                    )
-                ),
-                notificationGroupId = "_notificationGroupId",
-                deleted = true,
-                deletedBy = "deletedBy",
-                notificationGroup = NotificationGroup(
-                    id = "_id",
-                    name = "name",
-                    environmentId = "_environmentId",
-                    organizationId = "_organizationId",
-                    parentId = "_parentId"
-                )
-            )
-        )
-
-        mockWebServer.enqueue(MockResponse().setResponseCode(201).setBody(Gson().toJson(responseBody)))
-        val requestBody = NotificationTemplates(
-            name = "name",
-            description = "description",
-            active = true,
-            draft = true,
-            preferenceSettings = PreferenceSettings(
-                email = true,
-                sms = true,
-                push = true,
-                inApp = true,
-                chat = true
-            ),
-            critical = true,
-            tags = listOf("tag1", "tag2"),
-            steps = listOf(
-                Step(
-                    active = true,
-                    template = "template",
-                    filters = listOf(
-                        Filters(
-                            isNegated = true,
-                            type = "type",
-                            value = "value",
-                            children = listOf(
-                                Children(
-                                    field = "field",
-                                    value = "value",
-                                    operator = "operator",
-                                    on = "subscriber"
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
-        val result = mockNovu.createNotificationTemplates(requestBody)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.method == "POST")
-        assert(request.path == "/notification-templates")
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
-
-    @Test
-    fun testUpdateNotificationTemplates() = runTest {
-        val responseBody = ResponseWrapper(
-            NotificationTemplates(
-                id = "_id",
-                name = "name",
-                description = "description",
-                active = true,
-                draft = true,
-                preferenceSettings = PreferenceSettings(
-                    email = true,
-                    sms = true,
-                    push = true,
-                    inApp = true,
-                    chat = true
-                ),
-                critical = true,
-                tags = listOf("tag1", "tag2"),
-                steps = listOf(
-                    Step(
-                        id = "_id",
-                        templateId = "_templateId",
-                        active = true,
-                        shouldStopOnFail = true,
-                        template = "template",
-                        filters = listOf(
-                            Filters(
-                                isNegated = true,
-                                type = "type",
-                                value = "value",
-                                children = listOf(
-                                    Children(
-                                        field = "field",
-                                        value = "value",
-                                        operator = "operator",
-                                        on = "subscriber"
-                                    )
-                                )
-                            )
-                        ),
-                        metadata = Metadata(
-                            amount = BigInteger.valueOf(10),
-                            unit = "unit",
-                            digestKey = "digestKey",
-                            delayPath = "delayPath",
-                            type = "type",
-                            backoffUnit = "backoffUnit",
-                            backoffAmount = BigInteger.valueOf(10),
-                            updateMode = true
-                        ),
-                        parentId = "_parentId",
-                        replyCallback = "replyCallback"
-                    )
-                ),
-                organizationId = "_organizationId",
-                creatorId = "_creatorId",
-                environmentId = "_environmentId",
-                triggers = listOf(
-                    Trigger(
-                        type = "type",
-                        identifier = "identifier",
-                        variables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        ),
-                        subscriberVariables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        )
-                    )
-                ),
-                notificationGroupId = "_notificationGroupId",
-                deleted = true,
-                deletedBy = "deletedBy",
-                notificationGroup = NotificationGroup(
-                    id = "_id",
-                    name = "name",
-                    environmentId = "_environmentId",
-                    organizationId = "_organizationId",
-                    parentId = "_parentId"
-                )
-            )
-        )
-
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-        val requestBody = NotificationTemplates(
-            name = "name",
-            description = "description",
-            active = true,
-            preferenceSettings = PreferenceSettings(
-                email = true,
-                sms = true,
-                push = true,
-                inApp = true,
-                chat = true
-            ),
-            critical = true,
-            tags = listOf("tag1", "tag2"),
-            steps = listOf(
-                Step(
-                    id = "_id",
-                    templateId = "_templateId",
-                    active = true,
-                    template = "template",
-                    filters = listOf(
-                        Filters(
-                            isNegated = true,
-                            type = "type",
-                            value = "value",
-                            children = listOf(
-                                Children(
-                                    field = "field",
-                                    value = "value",
-                                    operator = "operator",
-                                    on = "subscriber"
-                                )
-                            )
-                        )
+                        creatorId = "_creatorId",
+                        environmentId = "_environmentId",
+                        triggers =
+                            listOf(
+                                Trigger(
+                                    type = "type",
+                                    identifier = "identifier",
+                                    variables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                    subscriberVariables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        notificationGroupId = "_notificationGroupId",
+                        deleted = true,
+                        deletedBy = "deletedBy",
+                        notificationGroup =
+                            NotificationGroup(
+                                id = "_id",
+                                name = "name",
+                                environmentId = "_environmentId",
+                                organizationId = "_organizationId",
+                                parentId = "_parentId",
+                            ),
                     ),
-                    metadata = Metadata(
-                        amount = BigInteger.valueOf(10),
-                        unit = "unit",
-                        digestKey = "digestKey",
-                        delayPath = "delayPath",
-                        type = "type",
-                        backoffUnit = "backoffUnit",
-                        backoffAmount = BigInteger.valueOf(10),
-                        updateMode = true
+                )
+
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val requestBody =
+                NotificationTemplates(
+                    name = "name",
+                    description = "description",
+                    active = true,
+                    preferenceSettings =
+                        PreferenceSettings(
+                            email = true,
+                            sms = true,
+                            push = true,
+                            inApp = true,
+                            chat = true,
+                        ),
+                    critical = true,
+                    tags = listOf("tag1", "tag2"),
+                    steps =
+                        listOf(
+                            Step(
+                                id = "_id",
+                                templateId = "_templateId",
+                                active = true,
+                                template = "template",
+                                filters =
+                                    listOf(
+                                        Filters(
+                                            isNegated = true,
+                                            type = "type",
+                                            value = "value",
+                                            children =
+                                                listOf(
+                                                    Children(
+                                                        field = "field",
+                                                        value = "value",
+                                                        operator = "operator",
+                                                        on = "subscriber",
+                                                    ),
+                                                ),
+                                        ),
+                                    ),
+                                metadata =
+                                    Metadata(
+                                        amount = BigInteger.valueOf(10),
+                                        unit = "unit",
+                                        digestKey = "digestKey",
+                                        delayPath = "delayPath",
+                                        type = "type",
+                                        backoffUnit = "backoffUnit",
+                                        backoffAmount = BigInteger.valueOf(10),
+                                        updateMode = true,
+                                    ),
+                                parentId = "_parentId",
+                                replyCallback = "replyCallback",
+                            ),
+                        ),
+                    notificationGroupId = "_notificationGroupId",
+                )
+            val templateId = "_id"
+            val result = mockNovu.updateNotificationTemplates(templateId, requestBody)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.method == "PUT")
+            assert(request.path == "/notification-templates/$templateId")
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
+
+    @Test
+    fun testDeleteNotificationTemplate() =
+        runTest {
+            val responseBody = ResponseWrapper(true)
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+
+            val templateId = "_id"
+            val result = mockNovu.deleteNotificationTemplate(templateId)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.method == "DELETE")
+            assert(request.path == "/notification-templates/$templateId")
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
+
+    @Test
+    fun testGetNotificationTemplate() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    NotificationTemplates(
+                        id = "_id",
+                        name = "name",
+                        description = "description",
+                        active = true,
+                        draft = true,
+                        preferenceSettings =
+                            PreferenceSettings(
+                                email = true,
+                                sms = true,
+                                push = true,
+                                inApp = true,
+                                chat = true,
+                            ),
+                        critical = true,
+                        tags = listOf("tag1", "tag2"),
+                        steps =
+                            listOf(
+                                Step(
+                                    id = "_id",
+                                    templateId = "_templateId",
+                                    active = true,
+                                    shouldStopOnFail = true,
+                                    template = "template",
+                                    filters =
+                                        listOf(
+                                            Filters(
+                                                isNegated = true,
+                                                type = "type",
+                                                value = "value",
+                                                children =
+                                                    listOf(
+                                                        Children(
+                                                            field = "field",
+                                                            value = "value",
+                                                            operator = "operator",
+                                                            on = "subscriber",
+                                                        ),
+                                                    ),
+                                            ),
+                                        ),
+                                    metadata =
+                                        Metadata(
+                                            amount = BigInteger.valueOf(10),
+                                            unit = "unit",
+                                            digestKey = "digestKey",
+                                            delayPath = "delayPath",
+                                            type = "type",
+                                            backoffUnit = "backoffUnit",
+                                            backoffAmount = BigInteger.valueOf(10),
+                                            updateMode = true,
+                                        ),
+                                    parentId = "_parentId",
+                                    replyCallback = "replyCallback",
+                                ),
+                            ),
+                        organizationId = "_organizationId",
+                        creatorId = "_creatorId",
+                        environmentId = "_environmentId",
+                        triggers =
+                            listOf(
+                                Trigger(
+                                    type = "type",
+                                    identifier = "identifier",
+                                    variables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                    subscriberVariables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        notificationGroupId = "_notificationGroupId",
+                        deleted = true,
+                        deletedBy = "deletedBy",
+                        notificationGroup =
+                            NotificationGroup(
+                                id = "_id",
+                                name = "name",
+                                environmentId = "_environmentId",
+                                organizationId = "_organizationId",
+                                parentId = "_parentId",
+                            ),
                     ),
-                    parentId = "_parentId",
-                    replyCallback = "replyCallback"
                 )
-            ),
-            notificationGroupId = "_notificationGroupId"
-        )
-        val templateId = "_id"
-        val result = mockNovu.updateNotificationTemplates(templateId, requestBody)
-        val request = mockWebServer.takeRequest()
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        assert(request.method == "PUT")
-        assert(request.path == "/notification-templates/$templateId")
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
+            val templateId = "_id"
+            val result = mockNovu.notificationTemplate(templateId)
+            val request = mockWebServer.takeRequest()
+
+            assert(request.method == "GET")
+            assert(request.path == "/notification-templates/$templateId")
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
 
     @Test
-    fun testDeleteNotificationTemplate() = runTest {
-        val responseBody = ResponseWrapper(true)
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
-
-        val templateId = "_id"
-        val result = mockNovu.deleteNotificationTemplate(templateId)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.method == "DELETE")
-        assert(request.path == "/notification-templates/$templateId")
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
-
-    @Test
-    fun testGetNotificationTemplate() = runTest {
-        val responseBody = ResponseWrapper(
-            NotificationTemplates(
-                id = "_id",
-                name = "name",
-                description = "description",
-                active = true,
-                draft = true,
-                preferenceSettings = PreferenceSettings(
-                    email = true,
-                    sms = true,
-                    push = true,
-                    inApp = true,
-                    chat = true
-                ),
-                critical = true,
-                tags = listOf("tag1", "tag2"),
-                steps = listOf(
-                    Step(
+    fun testUpdateNotificationTemplateStatus() =
+        runTest {
+            val responseBody =
+                ResponseWrapper(
+                    NotificationTemplates(
                         id = "_id",
-                        templateId = "_templateId",
+                        name = "name",
+                        description = "description",
                         active = true,
-                        shouldStopOnFail = true,
-                        template = "template",
-                        filters = listOf(
-                            Filters(
-                                isNegated = true,
-                                type = "type",
-                                value = "value",
-                                children = listOf(
-                                    Children(
-                                        field = "field",
-                                        value = "value",
-                                        operator = "operator",
-                                        on = "subscriber"
-                                    )
-                                )
-                            )
-                        ),
-                        metadata = Metadata(
-                            amount = BigInteger.valueOf(10),
-                            unit = "unit",
-                            digestKey = "digestKey",
-                            delayPath = "delayPath",
-                            type = "type",
-                            backoffUnit = "backoffUnit",
-                            backoffAmount = BigInteger.valueOf(10),
-                            updateMode = true
-                        ),
-                        parentId = "_parentId",
-                        replyCallback = "replyCallback"
-                    )
-                ),
-                organizationId = "_organizationId",
-                creatorId = "_creatorId",
-                environmentId = "_environmentId",
-                triggers = listOf(
-                    Trigger(
-                        type = "type",
-                        identifier = "identifier",
-                        variables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        ),
-                        subscriberVariables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        )
-                    )
-                ),
-                notificationGroupId = "_notificationGroupId",
-                deleted = true,
-                deletedBy = "deletedBy",
-                notificationGroup = NotificationGroup(
-                    id = "_id",
-                    name = "name",
-                    environmentId = "_environmentId",
-                    organizationId = "_organizationId",
-                    parentId = "_parentId"
+                        draft = true,
+                        preferenceSettings =
+                            PreferenceSettings(
+                                email = true,
+                                sms = true,
+                                push = true,
+                                inApp = true,
+                                chat = true,
+                            ),
+                        critical = true,
+                        tags = listOf("tag1", "tag2"),
+                        steps =
+                            listOf(
+                                Step(
+                                    id = "_id",
+                                    templateId = "_templateId",
+                                    active = true,
+                                    shouldStopOnFail = true,
+                                    template = "template",
+                                    filters =
+                                        listOf(
+                                            Filters(
+                                                isNegated = true,
+                                                type = "type",
+                                                value = "value",
+                                                children =
+                                                    listOf(
+                                                        Children(
+                                                            field = "field",
+                                                            value = "value",
+                                                            operator = "operator",
+                                                            on = "subscriber",
+                                                        ),
+                                                    ),
+                                            ),
+                                        ),
+                                    metadata =
+                                        Metadata(
+                                            amount = BigInteger.valueOf(10),
+                                            unit = "unit",
+                                            digestKey = "digestKey",
+                                            delayPath = "delayPath",
+                                            type = "type",
+                                            backoffUnit = "backoffUnit",
+                                            backoffAmount = BigInteger.valueOf(10),
+                                            updateMode = true,
+                                        ),
+                                    parentId = "_parentId",
+                                    replyCallback = "replyCallback",
+                                ),
+                            ),
+                        organizationId = "_organizationId",
+                        creatorId = "_creatorId",
+                        environmentId = "_environmentId",
+                        triggers =
+                            listOf(
+                                Trigger(
+                                    type = "type",
+                                    identifier = "identifier",
+                                    variables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                    subscriberVariables =
+                                        listOf(
+                                            Variables(
+                                                name = "name",
+                                            ),
+                                        ),
+                                ),
+                            ),
+                        notificationGroupId = "_notificationGroupId",
+                        deleted = true,
+                        deletedBy = "deletedBy",
+                        notificationGroup =
+                            NotificationGroup(
+                                id = "_id",
+                                name = "name",
+                                environmentId = "_environmentId",
+                                organizationId = "_organizationId",
+                                parentId = "_parentId",
+                            ),
+                    ),
                 )
-            )
-        )
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        val templateId = "_id"
-        val result = mockNovu.notificationTemplate(templateId)
-        val request = mockWebServer.takeRequest()
+            mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
 
-        assert(request.method == "GET")
-        assert(request.path == "/notification-templates/$templateId")
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
-
-    @Test
-    fun testUpdateNotificationTemplateStatus() = runTest {
-        val responseBody = ResponseWrapper(
-            NotificationTemplates(
-                id = "_id",
-                name = "name",
-                description = "description",
-                active = true,
-                draft = true,
-                preferenceSettings = PreferenceSettings(
-                    email = true,
-                    sms = true,
-                    push = true,
-                    inApp = true,
-                    chat = true
-                ),
-                critical = true,
-                tags = listOf("tag1", "tag2"),
-                steps = listOf(
-                    Step(
-                        id = "_id",
-                        templateId = "_templateId",
-                        active = true,
-                        shouldStopOnFail = true,
-                        template = "template",
-                        filters = listOf(
-                            Filters(
-                                isNegated = true,
-                                type = "type",
-                                value = "value",
-                                children = listOf(
-                                    Children(
-                                        field = "field",
-                                        value = "value",
-                                        operator = "operator",
-                                        on = "subscriber"
-                                    )
-                                )
-                            )
-                        ),
-                        metadata = Metadata(
-                            amount = BigInteger.valueOf(10),
-                            unit = "unit",
-                            digestKey = "digestKey",
-                            delayPath = "delayPath",
-                            type = "type",
-                            backoffUnit = "backoffUnit",
-                            backoffAmount = BigInteger.valueOf(10),
-                            updateMode = true
-                        ),
-                        parentId = "_parentId",
-                        replyCallback = "replyCallback"
-                    )
-                ),
-                organizationId = "_organizationId",
-                creatorId = "_creatorId",
-                environmentId = "_environmentId",
-                triggers = listOf(
-                    Trigger(
-                        type = "type",
-                        identifier = "identifier",
-                        variables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        ),
-                        subscriberVariables = listOf(
-                            Variables(
-                                name = "name"
-                            )
-                        )
-                    )
-                ),
-                notificationGroupId = "_notificationGroupId",
-                deleted = true,
-                deletedBy = "deletedBy",
-                notificationGroup = NotificationGroup(
-                    id = "_id",
-                    name = "name",
-                    environmentId = "_environmentId",
-                    organizationId = "_organizationId",
-                    parentId = "_parentId"
+            val templateId = "_id"
+            val requestBody =
+                UpdateNotificationTemplateStatusRequest(
+                    active = true,
                 )
-            )
-        )
 
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(Gson().toJson(responseBody)))
+            val result = mockNovu.updateNotificationTemplateStatus(templateId, requestBody)
+            val request = mockWebServer.takeRequest()
 
-        val templateId = "_id"
-        val requestBody = UpdateNotificationTemplateStatusRequest(
-            active = true
-        )
-
-        val result = mockNovu.updateNotificationTemplateStatus(templateId, requestBody)
-        val request = mockWebServer.takeRequest()
-
-        assert(request.method == "PUT")
-        assert(request.path == "/notification-templates/$templateId/status")
-        assert(request.body.readUtf8() == Gson().toJson(requestBody))
-        assert(Gson().toJson(responseBody) == Gson().toJson(result))
-    }
+            assert(request.method == "PUT")
+            assert(request.path == "/notification-templates/$templateId/status")
+            assert(request.body.readUtf8() == Gson().toJson(requestBody))
+            assert(Gson().toJson(responseBody) == Gson().toJson(result))
+        }
 }

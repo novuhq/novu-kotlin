@@ -1,5 +1,5 @@
 package co.novu.dto.request
 
 data class BulkTriggerEventRequest(
-    val events: List<TriggerEventRequest>
+    val events: List<TriggerEventRequest>,
 )

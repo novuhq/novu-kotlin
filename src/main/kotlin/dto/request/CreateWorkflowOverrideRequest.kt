@@ -6,5 +6,5 @@ data class CreateWorkflowOverrideRequest(
     var workflowId: String,
     var tenantId: String,
     var active: Boolean? = null,
-    var preferenceSettings: PreferenceSettings? = null
+    var preferenceSettings: PreferenceSettings? = null,
 )

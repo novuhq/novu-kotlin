@@ -20,7 +20,6 @@ import retrofit2.http.Query
 import java.math.BigInteger
 
 interface TopicsApi {
-
     companion object {
         const val ENDPOINT = "topics"
     }
@@ -29,27 +28,45 @@ interface TopicsApi {
     suspend fun filterTopics(
         @Query("page") page: BigInteger? = null,
         @Query("pageSize")pageSize: BigInteger? = null,
-        @Query("key") key: String? = null
+        @Query("key") key: String? = null,
     ): Response<PaginatedResponseWrapper<TopicResponse>>
 
     @POST(ENDPOINT)
-    suspend fun createTopic(@Body request: CreateTopicRequest): Response<ResponseWrapper<CreateTopicResponse>>
+    suspend fun createTopic(
+        @Body request: CreateTopicRequest,
+    ): Response<ResponseWrapper<CreateTopicResponse>>
 
     @POST("$ENDPOINT/{topicKey}/subscribers")
-    suspend fun addSubscriber(@Path("topicKey") topicKey: String, @Body request: SubscriberList): Response<ResponseWrapper<AddSubscribersResponse>>
+    suspend fun addSubscriber(
+        @Path("topicKey") topicKey: String,
+        @Body request: SubscriberList,
+    ): Response<ResponseWrapper<AddSubscribersResponse>>
 
     @POST("$ENDPOINT/{topicKey}/subscribers/removal")
-    suspend fun removeSubscribers(@Path("topicKey") topicKey: String, @Body request: SubscriberList): Response<Unit>
+    suspend fun removeSubscribers(
+        @Path("topicKey") topicKey: String,
+        @Body request: SubscriberList,
+    ): Response<Unit>
 
     @GET("$ENDPOINT/{topicKey}/subscribers/{externalSubscriberId}")
-    suspend fun checkSubscriber(@Path("topicKey") topicKey: String, @Path("externalSubscriberId") externalSubscriberId: String): Response<CheckTopicSubscriberResponse>
+    suspend fun checkSubscriber(
+        @Path("topicKey") topicKey: String,
+        @Path("externalSubscriberId") externalSubscriberId: String,
+    ): Response<CheckTopicSubscriberResponse>
 
     @GET("$ENDPOINT/{topicKey}")
-    suspend fun getTopic(@Path("topicKey") topicKey: String): Response<ResponseWrapper<TopicResponse>>
+    suspend fun getTopic(
+        @Path("topicKey") topicKey: String,
+    ): Response<ResponseWrapper<TopicResponse>>
 
     @PATCH("$ENDPOINT/{topicKey}")
-    suspend fun renameTopic(@Path("topicKey") topicKey: String, @Body request: CreateByNameRequest): Response<ResponseWrapper<TopicResponse>>
+    suspend fun renameTopic(
+        @Path("topicKey") topicKey: String,
+        @Body request: CreateByNameRequest,
+    ): Response<ResponseWrapper<TopicResponse>>
 
     @DELETE("$ENDPOINT/{topicKey}")
-    suspend fun deleteTopic(@Path("topicKey") topicKey: String): Response<Unit>
+    suspend fun deleteTopic(
+        @Path("topicKey") topicKey: String,
+    ): Response<Unit>
 }
