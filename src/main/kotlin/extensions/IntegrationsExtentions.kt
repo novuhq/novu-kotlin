@@ -68,7 +68,7 @@ suspend fun Novu.updateIntegration(
 
 /**
  * Delete an Integration.
- * @param integrationId the ID of the Integration to be updated
+ * @param integrationId the ID of the Integration to be deleted
  * @return [ResponseWrapper] with a list of [IntegrationResponse] as the response data
  * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
  */
