@@ -35,7 +35,7 @@ suspend fun Novu.messages(
 /**
  * Delete a Message.
  * @param messageId the ID of the Message to be deleted
- * @return [ResponseWrapper] with a list of [TriggerResponse] as the response data
+ * @return [ResponseWrapper] with [TriggerResponse] as the response data
  * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
  */
 suspend fun Novu.deleteMessage(messageId: String): ResponseWrapper<TriggerResponse>? {
