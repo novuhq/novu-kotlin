@@ -15,7 +15,7 @@ import java.math.BigInteger
 private val logger = KotlinLogging.logger {}
 
 /**
- * Retrieve a list of Layouts This function supports pagination.
+ * Retrieve a list of Layouts. This function supports pagination.
  * @param page the page number to be retrieved
  * @param pageSize the size of the page to be retrieved
  * @param orderBy direction of the sorting query param. Either ascending (1) or descending (-1)
