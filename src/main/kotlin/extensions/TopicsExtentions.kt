@@ -18,6 +18,14 @@ import java.math.BigInteger
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * Retrieve a list of Topics filtered by a Topic key. This function supports pagination.
+ * @param page the page number to be retrieved
+ * @param pageSize the size of the page to be retrieved
+ * @param key the key of the Topics to be retrieved
+ * @return [PaginatedResponseWrapper] with a list of [TopicResponse] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.filterTopics(
     page: BigInteger? = null,
     pageSize: BigInteger? = null,
@@ -27,11 +35,24 @@ suspend fun Novu.filterTopics(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Create a Topic.
+ * @param request an instance of [CreateTopicRequest]
+ * @return [ResponseWrapper] with [CreateTopicResponse] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.createTopic(request: CreateTopicRequest): ResponseWrapper<CreateTopicResponse>? {
     val response = topicsApi.createTopic(request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Add Subscribers to a Topic.
+ * @param topicKey the key of the Topic which the Subscriber should be added to
+ * @param request an instance of [SubscriberList]
+ * @return [ResponseWrapper] with [AddSubscribersResponse] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.addSubscribers(
     topicKey: String,
     request: SubscriberList,
@@ -40,6 +61,13 @@ suspend fun Novu.addSubscribers(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Remove Subscribers from a Topic.
+ * @param topicKey the key of the Topic which the Subscriber should be removed from
+ * @param request an instance of [SubscriberList]
+ * @return [RemoveSubscriberResponse]
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.removeSubscriber(
     topicKey: String,
     request: SubscriberList,
@@ -48,6 +76,13 @@ suspend fun Novu.removeSubscriber(
     return response.extractResponse(logger, config.enableLogging, RemoveSubscriberResponse())
 }
 
+/**
+ * Check if a Subscriber belongs to a Topic.
+ * @param topicKey the key of the Topic to be checked
+ * @param externalSubscriberId the ID of the Subscriber
+ * @return [CheckTopicSubscriberResponse]
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.checkSubscriber(
     topicKey: String,
     externalSubscriberId: String,
@@ -56,11 +91,24 @@ suspend fun Novu.checkSubscriber(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Retrieve a Topic.
+ * @param topicKey the key of the Topic to be retrieved
+ * @return [ResponseWrapper] with [TopicResponse] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.topic(topicKey: String): ResponseWrapper<TopicResponse>? {
     val response = topicsApi.getTopic(topicKey)
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Rename a Topic.
+ * @param topicKey the key of the Topic to be renamed
+ * @param request an instance of [CreateByNameRequest]
+ * @return [ResponseWrapper] with [TopicResponse] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.renameTopic(
     topicKey: String,
     request: CreateByNameRequest,
@@ -69,6 +117,12 @@ suspend fun Novu.renameTopic(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Delete a Topic.
+ * @param topicKey the key of the Topic to be deleted
+ * @return [DeleteTopicResponse]
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.deleteTopic(topicKey: String): DeleteTopicResponse {
     val response = topicsApi.deleteTopic(topicKey)
     return response.extractResponse(logger, config.enableLogging, DeleteTopicResponse())

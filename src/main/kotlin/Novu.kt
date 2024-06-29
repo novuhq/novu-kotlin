@@ -22,6 +22,12 @@ import co.novu.api.WorkflowsApi
 import co.novu.helpers.RetrofitHelper
 import okhttp3.logging.HttpLoggingInterceptor
 
+/**
+ * A set of configurations used to construct Novu, these configurations ultimately control the way the SDK behaves.
+ *
+ * @author Shivam Shah <a href="https://github.com/nulllvoid">link</a>
+ * @author Joseph Olugbohunmi <a href="https://github.com/mayorJAY">link</a>
+ */
 data class NovuConfig(
     var apiKey: String = "",
     var backendUrl: String = "https://api.novu.co/v1/",
@@ -31,6 +37,27 @@ data class NovuConfig(
     var apiLogLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
 )
 
+/**
+ * Main entry point for initialising and accessing the functionalities provided in the SDK.
+ * This class provides two constructors. It can be constructed either by providing an API key
+ * (gotten from [the web portal](https://web.novu.co/settings)) or by providing
+ * an instance of [NovuConfig].
+ *
+ * For example:
+ *
+ * ```
+ * // Using an API key only
+ * val novu = Novu("apiKey")
+ *
+ *
+ * // Using NovuConfig
+ * val novuConfig = NovuConfig("apiKey")
+ * val novu = Novu(novuConfig)
+ * ```
+ *
+ * @author Shivam Shah <a href="https://github.com/nulllvoid">link</a>
+ * @author Joseph Olugbohunmi <a href="https://github.com/mayorJAY">link</a>
+ */
 class Novu(
     val config: NovuConfig,
 ) {
