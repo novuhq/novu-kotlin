@@ -12,11 +12,23 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * Create a Workflow override.
+ * @param request an instance of [CreateWorkflowOverrideRequest]
+ * @return [ResponseWrapper] with [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.createWorkflowOverride(request: CreateWorkflowOverrideRequest): ResponseWrapper<WorkflowOverride>? {
     val response = workflowOverrideApi.createWorkflowOverride(request)
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Retrieve a list of Workflow override. This function supports pagination.
+ * @param request an instance of [GetWorkflowOverrideRequest]
+ * @return [PaginatedResponseWrapper] with a list of [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.getWorkflowOverrides(request: GetWorkflowOverrideRequest): PaginatedResponseWrapper<WorkflowOverride>? {
     val params: MutableMap<String, Any> = HashMap()
     request.page?.let { params["page"] = it }
@@ -25,6 +37,13 @@ suspend fun Novu.getWorkflowOverrides(request: GetWorkflowOverrideRequest): Pagi
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Retrieve a Workflow override associated with a Tenant.
+ * @param workflowId the ID of the Workflow override to be retrieved
+ * @param tenantId the ID of the Tenant
+ * @return [ResponseWrapper] with [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.getWorkflowOverride(
     workflowId: String,
     tenantId: String,
@@ -33,11 +52,24 @@ suspend fun Novu.getWorkflowOverride(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Retrieve a Workflow override.
+ * @param overrideId the ID of the Workflow override to be retrieved
+ * @return [ResponseWrapper] with [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.getWorkflowOverrideById(overrideId: String): ResponseWrapper<WorkflowOverride>? {
     val response = workflowOverrideApi.getWorkflowOverrideById(overrideId)
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Update a Workflow override.
+ * @param overrideId the ID of the Workflow override to be updated
+ * @param request an instance of [UpdateWorkflowOverrideRequest]
+ * @return [ResponseWrapper] with [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.updateWorkflowOverrideById(
     overrideId: String,
     request: UpdateWorkflowOverrideRequest,
@@ -46,6 +78,14 @@ suspend fun Novu.updateWorkflowOverrideById(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Update a Workflow override associated with a Tenant.
+ * @param workflowId the ID of the Workflow override to be updated
+ * @param tenantId the ID of the Tenant
+ * @param request an instance of [UpdateWorkflowOverrideRequest]
+ * @return [ResponseWrapper] with [WorkflowOverride] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.updateWorkflowOverride(
     workflowId: String,
     tenantId: String,
@@ -55,6 +95,12 @@ suspend fun Novu.updateWorkflowOverride(
     return response.extractResponse(logger, config.enableLogging)
 }
 
+/**
+ * Delete a Workflow override.
+ * @param overrideId the ID of the Workflow override to be deleted
+ * @return [ResponseWrapper] with [Boolean] as the response data
+ * @throws [Exception] if a problem occurred talking to the server or if there is a connection error
+ */
 suspend fun Novu.deleteWorkflowOverride(overrideId: String): ResponseWrapper<Boolean>? {
     val response = workflowOverrideApi.deleteWorkflowOverride(overrideId)
     return response.extractResponse(logger, config.enableLogging)
